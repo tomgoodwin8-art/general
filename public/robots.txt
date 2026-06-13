@@ -1,4 +1,4 @@
-# tomgoodwin.ai — AI crawlers explicitly welcomed (brief §10.4)
+# tomgoodwin.london — AI crawlers explicitly welcomed (brief §10.4)
 User-agent: *
 Allow: /
 
@@ -14,4 +14,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://tomgoodwin.ai/sitemap-index.xml
+Sitemap: https://tomgoodwin.london/sitemap-index.xml

@@ -1,4 +1,4 @@
-# tomgoodwin.ai
+# tomgoodwin.london
 
 Personal site for **Tom Goodwin, Founder of GAMEPLAN.** — performance marketing and AI consultant, London.
 
@@ -30,7 +30,7 @@ points, nav and offer definitions. Edit copy there, not in components.
 ### Netlify (git-connected) — recommended
 1. In Netlify, "Add new site" → "Import an existing project" → connect this repo.
 2. Build settings are read from `netlify.toml` (command `npm run build`, publish `dist`).
-3. Add the custom domain `tomgoodwin.ai`.
+3. Add the custom domain `tomgoodwin.london`.
 
 ### Netlify (drag-and-drop) — fallback
 Drag `dist.zip` (or the unzipped `dist/` folder) onto the Netlify "Sites" drop zone.

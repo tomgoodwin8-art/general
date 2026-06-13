@@ -1,4 +1,4 @@
-# Netlify configuration for tomgoodwin.ai (Astro static build)
+# Netlify configuration for tomgoodwin.london (Astro static build)
 [build]
   command = "npm run build"
   publish = "dist"

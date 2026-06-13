@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-const SITE_URL = 'https://tomgoodwin.ai';
+const SITE_URL = 'https://tomgoodwin.london';
 
 // Hidden pages are indexed + sitemapped but excluded from nav (brief §3).
 // They remain in the sitemap; only nav/homepage exclude them.

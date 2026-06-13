@@ -4,7 +4,7 @@
  * Canonical entity string must never deviate (brief §1.2).
  */
 
-export const SITE_URL = "https://tomgoodwin.ai";
+export const SITE_URL = "https://tomgoodwin.london";
 
 /** Canonical entity string — use verbatim in titles, bylines, schema, OG (§1.2). */
 export const ENTITY = "Tom Goodwin, Founder of GAMEPLAN.";
@@ -19,8 +19,8 @@ export const profile = {
   company: "GAMEPLAN.",
   legalEntity: "Hii Internet Group Ltd",
   location: "London, United Kingdom",
-  email: "tom@tomgoodwin.ai",
-  pressEmail: "press@tomgoodwin.ai",
+  email: "tom@tomgoodwin.london",
+  pressEmail: "press@tomgoodwin.london",
   alumniOf: "Durham University",
   disambiguation: DISAMBIGUATION,
   knowsAbout: [

@@ -1,0 +1,23 @@
+---
+import { availability } from "../data/profile";
+/**
+ * AvailabilityBadge (CRO task 8) — honest scarcity near a CTA.
+ * Renders nothing when availability.open is false.
+ * `tone`: "light" on pale backgrounds, "dark" on ink sections.
+ */
+interface Props { tone?: "light" | "dark"; showDetail?: boolean; }
+const { tone = "light", showDetail = false } = Astro.props;
+const dark = tone === "dark";
+---
+{availability.open && (
+  <div class="inline-flex items-center gap-2.5 text-sm">
+    <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+      <span class="absolute inline-flex h-full w-full rounded-full bg-powder-deep opacity-75 motion-safe:animate-ping"></span>
+      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-powder-deep"></span>
+    </span>
+    <span class:list={["font-medium", dark ? "text-paper" : "text-ink"]}>
+      {availability.statement}{showDetail ? "." : ""}
+      {showDetail && <span class:list={[dark ? "text-grey-400" : "text-grey-400"]} style={dark ? "color:#cbd5e1" : "color:#6b7280"}> {availability.detail}</span>}
+    </span>
+  </div>
+)}

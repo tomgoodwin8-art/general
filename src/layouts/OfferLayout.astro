@@ -47,6 +47,9 @@ const serviceNode = {
   <Breadcrumb items={breadcrumb} />
   <PageHeader {eyebrow} {title} {lead} />
 
+  <!-- Optional full-width proof band above the article (CRO task 10). -->
+  <slot name="proof" />
+
   <div class="container-tg pb-10">
     <article class="prose-tg">
       <slot />

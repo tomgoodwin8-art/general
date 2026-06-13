@@ -4,7 +4,6 @@ import Hero from "../components/Hero.astro";
 import LogoWall from "../components/LogoWall.astro";
 import ProofStack from "../components/ProofStack.astro";
 import Timeline from "../components/Timeline.astro";
-import OfferCard from "../components/OfferCard.astro";
 import CaseStudyCard from "../components/CaseStudyCard.astro";
 import BlogCard from "../components/BlogCard.astro";
 import TestimonialBlock from "../components/TestimonialBlock.astro";
@@ -58,13 +57,24 @@ const faqs = [
   <ProofStack />
   <Timeline />
 
-  <!-- Work with me: four offer cards (§4.5) -->
+  <!-- Work with me: four offer cards (§4.5). Exploratory tier, subordinate to
+       the primary book/brief actions (CRO task 9). -->
   <section class="container-tg py-16 md:py-24" aria-labelledby="offers-heading">
-    <p class="eyebrow mb-3">Work with me</p>
-    <h2 id="offers-heading" class="max-w-2xl mb-12">Four ways to put me to work.</h2>
-    <div class="grid gap-6 md:grid-cols-2">
-      {navOffers.map((o, i) => (
-        <OfferCard title={o.title} slug={o.slug} summary={o.summary} index={i} />
+    <p class="eyebrow mb-3">Still scoping?</p>
+    <h2 id="offers-heading" class="max-w-2xl mb-3">Explore the four ways I help.</h2>
+    <p class="max-w-2xl mb-10 text-grey-400" style="color:#4b5563">
+      Researching your options? Start with the work below. Already know what you need?
+      <a href="/contact" class="text-powder-deep underline underline-offset-4 font-medium">Book a call instead</a>.
+    </p>
+    <div class="grid gap-5 sm:grid-cols-2">
+      {navOffers.map((o) => (
+        <a href={o.slug} class="group flex items-start justify-between gap-4 bg-paper border border-grey-100 px-5 py-4 hover:border-powder-deep transition-colors">
+          <span>
+            <span class="display font-medium group-hover:text-powder-deep transition-colors">{o.title}</span>
+            <span class="block text-sm text-grey-400 mt-1" style="color:#6b7280">{o.summary}</span>
+          </span>
+          <span class="text-powder-deep mt-0.5" aria-hidden="true">→</span>
+        </a>
       ))}
     </div>
   </section>
@@ -88,6 +98,8 @@ const faqs = [
               result={cs.data.result}
               description={cs.data.description}
               sector={cs.data.sector}
+              quote={cs.data.quote}
+              quoteAuthor={cs.data.quoteAuthor}
               href={`/case-studies/${cs.id}`}
             />
           ))}
@@ -96,29 +108,31 @@ const faqs = [
     </section>
   )}
 
-  <!-- Blog teaser + newsletter (§4.7) -->
+  <!-- Blog teaser (§4.7). Newsletter moved off the conversion path (CRO task 7). -->
   <section class="container-tg py-16 md:py-24" aria-labelledby="blog-heading">
-    <div class="grid lg:grid-cols-[1.4fr_1fr] gap-12">
-      <div>
-        <p class="eyebrow mb-3">Writing</p>
-        <h2 id="blog-heading" class="mb-6">Latest from the blog.</h2>
-        <div>
-          {posts.map((p) => (
-            <BlogCard title={p.data.title} description={p.data.description} pubDate={p.data.pubDate} href={`/blog/${p.id}`} />
-          ))}
-        </div>
-        <a href="/blog" class="inline-block mt-6 text-powder-deep font-medium underline underline-offset-4">All posts →</a>
-      </div>
-      <div class="bg-ink text-paper p-8 self-start">
-        <h3 class="display font-medium mb-3 text-paper">Get the notes.</h3>
-        <p class="text-grey-400 mb-6" style="color:#cbd5e1">Performance and AI marketing, occasionally, no filler.</p>
-        <NewsletterForm compact />
-      </div>
+    <p class="eyebrow mb-3">Writing</p>
+    <h2 id="blog-heading" class="mb-8">Latest from the blog.</h2>
+    <div class="max-w-3xl border-t border-grey-100">
+      {posts.map((p) => (
+        <BlogCard title={p.data.title} description={p.data.description} pubDate={p.data.pubDate} href={`/blog/${p.id}`} />
+      ))}
     </div>
+    <a href="/blog" class="inline-block mt-6 text-powder-deep font-medium underline underline-offset-4">All posts →</a>
   </section>
 
   <SpeakingStrip />
   <TestimonialBlock />
   <ContactPaths />
   <FAQ items={faqs} heading="Common questions" />
+
+  <!-- Newsletter: subordinate, footer-adjacent, off the primary path (CRO task 7). -->
+  <section class="border-t border-grey-100" aria-labelledby="nl-heading">
+    <div class="container-tg py-12 grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <h2 id="nl-heading" class="display text-xl font-medium">Prefer to read first?</h2>
+        <p class="text-grey-400 text-sm mt-1" style="color:#6b7280">Performance and AI marketing notes, occasionally, no filler.</p>
+      </div>
+      <NewsletterForm compact />
+    </div>
+  </section>
 </BaseLayout>

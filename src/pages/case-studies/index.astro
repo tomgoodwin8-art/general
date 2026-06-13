@@ -30,6 +30,8 @@ const caseStudies = (await getCollection("caseStudies")).sort(
           result={cs.data.result}
           description={cs.data.description}
           sector={cs.data.sector}
+          quote={cs.data.quote}
+          quoteAuthor={cs.data.quoteAuthor}
           href={`/case-studies/${cs.id}`}
         />
       ))}

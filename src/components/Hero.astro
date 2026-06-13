@@ -1,20 +1,24 @@
 ---
-/** Homepage hero (§4.1). */
+/** Homepage hero (§4.1; CRO tasks 1, 2, 8). */
+import AvailabilityBadge from "./AvailabilityBadge.astro";
 ---
 <section class="container-tg pt-16 pb-12 md:pt-24 md:pb-20">
   <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
     <div>
       <p class="eyebrow mb-5">Founder · GAMEPLAN. · Performance, Media, Technology</p>
       <h1 class="text-balance">
-        I help founders and fast-growth businesses win customers with performance marketing and AI.
+        More profitable customer acquisition, run by a senior operator, not an account team.
       </h1>
       <p class="mt-7 text-xl max-w-xl" style="color:#374151">
-        15 years across Google, Meta and TikTok. £20m+ in paid media managed. Now building
-        AI-first marketing systems through my consultancy, GAMEPLAN.
+        15 years across Google, Meta and TikTok. £20m+ in paid media managed. AI-first
+        marketing systems through my consultancy, GAMEPLAN. No agency overhead, no handover risk.
       </p>
-      <div class="mt-9 flex flex-wrap gap-4">
-        <a href="/work-with-me" class="btn btn-ink">Work with me</a>
-        <a href="/speaking" class="btn btn-powder">Book me to speak</a>
+      <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <a href="/contact" class="btn btn-ink text-base !px-7 !py-3.5">Work with me</a>
+        <a href="/speaking" class="text-powder-deep font-medium underline underline-offset-4 hover:text-ink transition-colors">Or book me to speak →</a>
+      </div>
+      <div class="mt-6">
+        <AvailabilityBadge showDetail />
       </div>
     </div>
 

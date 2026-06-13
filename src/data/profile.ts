@@ -12,6 +12,17 @@ export const ENTITY = "Tom Goodwin, Founder of GAMEPLAN.";
 export const DISAMBIGUATION =
   "Performance marketing and AI consultant, founder of GAMEPLAN., based in London. Not the author of Digital Darwinism.";
 
+/**
+ * Availability (CRO task 8) — honest scarcity. OWNER-EDITABLE.
+ * Set `open: false` to hide every availability indicator site-wide.
+ * Keep `statement` true: only state capacity that genuinely exists.
+ */
+export const availability = {
+  open: true,
+  statement: "Taking 1 new fractional client for the next quarter",
+  detail: "Next start window: within 1–2 weeks of a first call.",
+} as const;
+
 export const profile = {
   name: "Tom Goodwin",
   entity: ENTITY,

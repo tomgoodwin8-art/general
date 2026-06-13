@@ -1,13 +1,26 @@
 ---
 import { getCollection } from "astro:content";
+/**
+ * Testimonials (§4.9; CRO task 3) — named first-person endorsement.
+ * Real quotes only: drop JSON files into src/content/testimonials/ with
+ * { quote, author, role, order }. Until then, explicit content slots render
+ * so the section exists in the layout and the gap is obvious. Never invented.
+ */
 const testimonials = (await getCollection("testimonials")).sort(
   (a, b) => a.data.order - b.data.order
 );
+const hasReal = testimonials.length > 0;
+const slots = [
+  "Fractional / brand client",
+  "Agency client",
+  "Founder / CMO",
+];
 ---
-{testimonials.length > 0 && (
-  <section class="container-tg py-16 md:py-24" aria-labelledby="testimonials-heading">
-    <p class="eyebrow mb-3">In their words</p>
-    <h2 id="testimonials-heading" class="mb-12">What clients say.</h2>
+<section class="container-tg py-16 md:py-24" aria-labelledby="testimonials-heading">
+  <p class="eyebrow mb-3">In their words</p>
+  <h2 id="testimonials-heading" class="mb-12">What clients say.</h2>
+
+  {hasReal ? (
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {testimonials.map((t) => (
         <figure class="border-l-2 border-powder pl-6">
@@ -19,5 +32,17 @@ const testimonials = (await getCollection("testimonials")).sort(
         </figure>
       ))}
     </div>
-  </section>
-)}
+  ) : (
+    <div class="grid gap-8 md:grid-cols-3">
+      {slots.map((label) => (
+        <figure class="border-l-2 border-dashed border-grey-400 pl-6">
+          <blockquote class="text-lg text-grey-400" style="color:#9ca3af">"[TOM TO SUPPLY: client quote]"</blockquote>
+          <figcaption class="mt-4 text-sm">
+            <span class="display font-medium text-grey-400" style="color:#9ca3af">[Name]</span>
+            <span class="block text-grey-400" style="color:#9ca3af">[Role, Company] · {label}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  )}
+</section>

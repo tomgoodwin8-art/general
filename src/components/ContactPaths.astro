@@ -1,21 +1,30 @@
 ---
 import { profile } from "../data/profile";
-/** Contact paths (§4.10) — book a call + send a brief form. */
+import AvailabilityBadge from "./AvailabilityBadge.astro";
+/** Contact paths (§4.10; CRO tasks 4, 5, 8) — book a call + send a brief form. */
 ---
 <section class="container-tg py-16 md:py-24" aria-labelledby="contact-heading">
   <p class="eyebrow mb-3">Start here</p>
-  <h2 id="contact-heading" class="mb-12">Two ways in.</h2>
+  <h2 id="contact-heading" class="mb-4">Book a call, or send a brief.</h2>
+  <div class="mb-12"><AvailabilityBadge showDetail /></div>
   <div class="grid gap-10 lg:grid-cols-2">
     <div class="bg-grey-100 p-8">
       <h3 class="display font-medium mb-3">Book a call</h3>
-      <p class="text-grey-400 mb-6" style="color:#4b5563">
-        Twenty minutes to work out whether I can help and how. No pitch.
+      <p class="text-grey-400 mb-5" style="color:#4b5563">
+        Twenty minutes to work out whether I can help and how.
       </p>
+      <!-- Risk reversal (CRO task 5): what happens, no obligation, honest steer -->
+      <ul class="mb-6 space-y-2.5 text-sm" style="color:#374151">
+        <li class="flex gap-2.5"><span class="text-powder-deep font-bold" aria-hidden="true">✓</span><span>20 minutes, no pitch, no obligation.</span></li>
+        <li class="flex gap-2.5"><span class="text-powder-deep font-bold" aria-hidden="true">✓</span><span>I'll tell you honestly whether fractional, project or advisory is the right shape, even if it isn't with me.</span></li>
+        <li class="flex gap-2.5"><span class="text-powder-deep font-bold" aria-hidden="true">✓</span><span>You leave with a clear next step either way.</span></li>
+      </ul>
       <a href="https://cal.com/tomgoodwin" class="btn btn-ink">Book a call →</a>
     </div>
 
     <div class="bg-paper border border-grey-100 p-8">
-      <h3 class="display font-medium mb-5">Send a brief</h3>
+      <h3 class="display font-medium mb-2">Send a brief</h3>
+      <p class="text-grey-400 text-sm mb-5" style="color:#6b7280">Only name, email and a message are required. The rest helps me prepare, but skip anything you'd rather not share.</p>
       <form action="https://formspree.io/f/your-id" method="POST" class="grid gap-4">
         <div class="grid sm:grid-cols-2 gap-4">
           <div>
@@ -28,13 +37,14 @@ import { profile } from "../data/profile";
           </div>
         </div>
         <div>
-          <label for="c-company" class="block text-sm font-medium mb-1">Company</label>
+          <label for="c-company" class="block text-sm font-medium mb-1">Company <span class="text-grey-400 font-normal" style="color:#9ca3af">(optional)</span></label>
           <input id="c-company" name="company" class="w-full border border-grey-400 px-3 py-2 rounded-[2px] focus:border-powder-deep outline-none" />
         </div>
         <div class="grid sm:grid-cols-2 gap-4">
           <div>
-            <label for="c-type" class="block text-sm font-medium mb-1">Engagement type</label>
+            <label for="c-type" class="block text-sm font-medium mb-1">Engagement type <span class="text-grey-400 font-normal" style="color:#9ca3af">(optional)</span></label>
             <select id="c-type" name="engagement_type" class="w-full border border-grey-400 px-3 py-2 rounded-[2px] focus:border-powder-deep outline-none bg-paper">
+              <option value="">Not sure yet</option>
               <option>Fractional leadership</option>
               <option>AI marketing operations</option>
               <option>AI search &amp; AEO</option>
@@ -45,13 +55,13 @@ import { profile } from "../data/profile";
             </select>
           </div>
           <div>
-            <label for="c-budget" class="block text-sm font-medium mb-1">Budget band</label>
+            <label for="c-budget" class="block text-sm font-medium mb-1">Budget band <span class="text-grey-400 font-normal" style="color:#9ca3af">(optional)</span></label>
             <select id="c-budget" name="budget" class="w-full border border-grey-400 px-3 py-2 rounded-[2px] focus:border-powder-deep outline-none bg-paper">
+              <option value="">Prefer not to say</option>
               <option>Under £5k</option>
               <option>£5k–£15k</option>
               <option>£15k–£40k</option>
               <option>£40k+</option>
-              <option>Not sure yet</option>
             </select>
           </div>
         </div>

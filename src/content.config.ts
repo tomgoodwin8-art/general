@@ -26,6 +26,9 @@ const caseStudies = defineCollection({
     description: z.string(),
     result: z.string(),
     sector: z.string().optional(),
+    // CRO task 6: optional client quote + attribution, rendered when present.
+    quote: z.string().optional(),
+    quoteAuthor: z.string().optional(),
     order: z.number().default(0),
   }),
 });

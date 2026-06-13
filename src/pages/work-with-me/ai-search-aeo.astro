@@ -27,10 +27,38 @@ const faqs = [
   ctaHeading="Want to be the answer, not the tenth link?"
   ctaBody="Send a brief and I'll tell you how visible you currently are in AI search, and what it takes to fix it."
 >
-  <p><strong>I make service businesses citable in AI search.</strong> When your customer asks ChatGPT, Perplexity or Gemini for a recommendation, you want to be the name it returns. That is built, not bought: entity strategy, schema, llms.txt and answer-first content.</p>
+  <!-- Live-demo proof band, full width, leads the page (CRO task 10) -->
+  <div slot="proof" class="bg-ink text-paper">
+    <div class="container-tg py-14 md:py-20">
+      <p class="eyebrow !text-powder mb-3">Proof by demonstration</p>
+      <h2 class="text-paper max-w-3xl mb-5">This site is the live demo. You are reading the proof.</h2>
+      <p class="max-w-2xl text-lg" style="color:#cbd5e1">
+        tomgoodwin.london is built to be cited by AI search. Every technique I sell is running on the page you are on right now:
+      </p>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 max-w-3xl text-sm" style="color:#e5e7eb">
+        <li class="flex gap-2.5"><span class="text-powder font-bold" aria-hidden="true">✓</span><span>A canonical entity definition and Person + Organization <a href="/llms.txt" class="underline text-powder">schema graph</a></span></li>
+        <li class="flex gap-2.5"><span class="text-powder font-bold" aria-hidden="true">✓</span><span>An <a href="/llms.txt" class="underline text-powder">llms.txt</a> that tells models exactly who I am</span></li>
+        <li class="flex gap-2.5"><span class="text-powder font-bold" aria-hidden="true">✓</span><span>Answer-first FAQ blocks with FAQPage markup on every page</span></li>
+        <li class="flex gap-2.5"><span class="text-powder font-bold" aria-hidden="true">✓</span><span>A robots policy that welcomes GPTBot, ClaudeBot and PerplexityBot</span></li>
+      </ul>
 
-  <h2>This site is the live demo</h2>
-  <p>You are reading the proof. tomgoodwin.london is built to be cited. It carries a canonical entity definition, a Person and Organization schema graph, an <a href="/llms.txt">llms.txt</a> that tells models exactly who I am, answer-first FAQ blocks on every page, and a robots policy that welcomes GPTBot, ClaudeBot and PerplexityBot. Entity disambiguation is part of the strategy too: the schema and llms.txt make clear I am the performance and AI operator, not the marketing commentator who shares my name. I will walk your team through every decision on this page and why it works.</p>
+      <!-- Citation evidence: real screenshots to be supplied (CRO task 10) -->
+      <p class="eyebrow !text-powder mt-12 mb-4">Cited in the wild</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {["ChatGPT", "Perplexity", "Gemini", "AI Overviews"].map((engine) => (
+          <figure class="bg-white/5 border border-white/10 aspect-[4/3] flex flex-col items-center justify-center text-center p-4">
+            <span class="display font-medium text-paper">{engine}</span>
+            <span class="text-xs mt-2" style="color:#9ca3af">[TOM TO SUPPLY: citation screenshot]</span>
+          </figure>
+        ))}
+      </div>
+      <p class="text-sm mt-4 max-w-2xl" style="color:#9ca3af">
+        Screenshots of this entity being cited by each engine drop in here as they land. I'll walk your team through every decision on this page and why it works.
+      </p>
+    </div>
+  </div>
+
+  <p><strong>I make service businesses citable in AI search.</strong> When your customer asks ChatGPT, Perplexity or Gemini for a recommendation, you want to be the name it returns. That is built, not bought: entity strategy, schema, llms.txt and answer-first content. Entity disambiguation is part of it too: the schema and llms.txt make clear I am the performance and AI operator, not the marketing commentator who shares my name.</p>
 
   <h2>What you get</h2>
   <ul>

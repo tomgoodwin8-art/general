@@ -1,5 +1,6 @@
 ---
 import { mainNav } from "../data/profile";
+import Brandmark from "./Brandmark.astro";
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
@@ -7,8 +8,8 @@ const isActive = (href: string) =>
 
 <header class="border-b border-grey-100 bg-paper sticky top-0 z-50">
   <nav class="container-tg flex items-center justify-between h-16" aria-label="Primary">
-    <a href="/" class="display text-lg font-bold tracking-tight" aria-label="Tom Goodwin home">
-      TOM&nbsp;GOODWIN<span class="text-powder-deep">.london</span>
+    <a href="/" aria-label="Tom Goodwin, London — home">
+      <Brandmark variant="light" />
     </a>
 
     <ul class="hidden md:flex items-center gap-6 text-[0.95rem]">

@@ -1,5 +1,6 @@
 ---
 import { navOffers, mainNav, profile, ENTITY } from "../data/profile";
+import Brandmark from "./Brandmark.astro";
 const year = new Date().getFullYear();
 ---
 
@@ -7,10 +8,10 @@ const year = new Date().getFullYear();
   <div class="container-tg py-16">
     <div class="grid gap-10 md:grid-cols-4">
       <div class="md:col-span-1">
-        <a href="/" class="display text-xl font-bold">
-          TOM&nbsp;GOODWIN<span class="text-powder">.london</span>
+        <a href="/" aria-label="Tom Goodwin, London — home">
+          <Brandmark variant="dark" />
         </a>
-        <p class="mt-4 text-grey-400 text-sm max-w-xs">{ENTITY}</p>
+        <p class="mt-5 text-grey-400 text-sm max-w-xs">{ENTITY}</p>
         <p class="mt-2 text-grey-400 text-sm">London, UK</p>
       </div>
 

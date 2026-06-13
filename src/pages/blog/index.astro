@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import NewsletterForm from "../../components/NewsletterForm.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("posts"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout
+  title="Blog"
+  description="Notes on performance marketing, measurement, paid media and AI search from Tom Goodwin, Founder of GAMEPLAN."
+  path="/blog"
+>
+  <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }]} />
+  <PageHeader
+    eyebrow="Writing"
+    title="Performance, measurement and AI."
+    lead="Practical notes for founders, marketers and agency leaders. Answer-first, evidence-led, no filler."
+  />
+  <section class="container-tg pb-12">
+    {posts.length === 0 ? (
+      <p class="text-grey-400">Posts publishing shortly.</p>
+    ) : (
+      <div class="max-w-3xl border-t border-grey-100">
+        {posts.map((p) => (
+          <BlogCard title={p.data.title} description={p.data.description} pubDate={p.data.pubDate} href={`/blog/${p.id}`} />
+        ))}
+      </div>
+    )}
+  </section>
+  <section class="container-tg pb-20">
+    <div class="bg-grey-100 p-8 max-w-3xl">
+      <h2 class="display text-xl font-medium mb-3">Get new posts by email</h2>
+      <NewsletterForm />
+    </div>
+  </section>
+</BaseLayout>

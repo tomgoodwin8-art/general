@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  client: string;
+  result: string;
+  description: string;
+  href: string;
+  sector?: string;
+}
+const { title, client, result, description, href, sector } = Astro.props;
+---
+<a href={href} class="group block bg-paper border border-grey-100 p-7 hover:border-powder-deep transition-colors">
+  <div class="flex items-center justify-between gap-3">
+    <span class="eyebrow">{client}</span>
+    {sector && <span class="text-grey-400 text-xs" style="color:#9ca3af">{sector}</span>}
+  </div>
+  <p class="display text-3xl font-bold text-powder-deep mt-4 leading-none">{result}</p>
+  <h3 class="mt-3 display font-medium group-hover:text-powder-deep transition-colors">{title}</h3>
+  <p class="mt-2 text-sm text-grey-400" style="color:#4b5563">{description}</p>
+</a>

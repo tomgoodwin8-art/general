@@ -1,0 +1,50 @@
+---
+import OfferLayout from "../layouts/OfferLayout.astro";
+const path = "/agency-pitch-doctor";
+const breadcrumb = [
+  { label: "Home", href: "/" },
+  { label: "Agency Pitch Doctor", href: path },
+];
+const faqs = [
+  { q: "What is pitch consulting for agencies?", a: "Outside senior help to win new business: pitch strategy, deck surgery, rehearsal and war-gaming the procurement process. I work alongside your team in the run-up to a pitch to sharpen the story and the delivery." },
+  { q: "How do you help win a pitch?", a: "I find the through-line that makes the pitch coherent, cut the slides that dilute it, pressure-test the numbers, and rehearse the room until the team can hold their nerve. Most pitches are lost on clarity and conviction, not on capability." },
+  { q: "When should we bring you in?", a: "As early as possible, ideally at the strategy stage rather than the week before. I can still help with late-stage deck surgery and rehearsal, but the biggest gains come from shaping the narrative before the deck exists." },
+  { q: "What's your track record?", a: "I led the strategy and pitch that won a 13-market Gucci account at Assembly, and led major pitches at Medialab. I have sat on the agency side of enterprise pitching and know how procurement actually decides." },
+  { q: "Do you work with agencies that compete with each other?", a: "I take one agency per live pitch to avoid conflicts, and I am explicit about it. Your strategy stays yours." },
+];
+---
+<OfferLayout
+  title="Agency Pitch Doctor"
+  eyebrow="For agencies"
+  lead="New-business and pitch consulting for agencies: pitch strategy, deck surgery, rehearsal and war-gaming procurement. I have won the big ones."
+  description="Pitch consulting for agencies: strategy, deck surgery, rehearsal and procurement war-gaming, from someone who led a winning 13-market Gucci pitch. Tom Goodwin, Founder of GAMEPLAN."
+  {path}
+  serviceName="Agency Pitch Consulting"
+  breadcrumb={breadcrumb}
+  faqs={faqs}
+  ctaHeading="Got a pitch you can't afford to lose?"
+  ctaBody="Tell me what you're pitching for and when. I'll tell you honestly whether I can help you win it."
+>
+  <p><strong>I help agencies win the pitches that matter.</strong> Pitch strategy, deck surgery, rehearsal and war-gaming the procurement process, from someone who has led winning pitches at the enterprise tier. When the brief is worth a year of revenue, the margin between winning and losing is preparation.</p>
+
+  <h2>Who this is for</h2>
+  <p>Agency leaders and new-business teams heading into a pitch they need to win: a defence, a major prospect, a competitive review. Especially useful when your team is strong on craft but the story is not landing, or when procurement is part of the decision and nobody has war-gamed it.</p>
+
+  <h2>What you get</h2>
+  <ul>
+    <li>A pitch narrative with a clear through-line, not a feature list</li>
+    <li>Deck surgery: cut what dilutes, sharpen what convinces</li>
+    <li>Rehearsal until the team can hold the room under pressure</li>
+    <li>Procurement war-gaming: the questions and the numbers, anticipated</li>
+  </ul>
+
+  <h2>Proof anchor</h2>
+  <p>I led the strategy and pitch that won a 13-market Gucci account at Assembly, and led major pitches as Search Director at Medialab. This is a category with almost no specialist competition, because few people have actually won at this level and will sit with your team to do it again.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>Read.</strong> The brief, the incumbent, the panel, the real decision criteria.</li>
+    <li><strong>Sharpen.</strong> Narrative, deck and numbers, cut to what wins.</li>
+    <li><strong>Rehearse.</strong> War-game the room until delivery is second nature.</li>
+  </ol>
+</OfferLayout>

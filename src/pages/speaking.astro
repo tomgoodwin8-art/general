@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import PageHeader from "../components/PageHeader.astro";
+import FAQ from "../components/FAQ.astro";
+import CTASection from "../components/CTASection.astro";
+import { getCollection } from "astro:content";
+
+const talks = (await getCollection("talks")).sort((a, b) => a.data.order - b.data.order);
+
+const faqs = [
+  { q: "What are your speaking fees?", a: "Fees depend on the event, the format and the audience. I speak at a commercial rate for corporate events and flex for community and non-profit events. Send the details and I'll come back with a figure." },
+  { q: "Will you travel?", a: "Yes, within the UK and internationally for the right event. Travel and accommodation are arranged on top of the fee for events outside London." },
+  { q: "Do you speak virtually?", a: "Yes. I do virtual keynotes and panels, and they work well for the AI and measurement topics in particular." },
+  { q: "What do you need from the AV team?", a: "A confidence monitor, a reliable clicker, and the ability to show slides at 16:9. For demos I need stable internet. I'll send a tech rider once we're booked." },
+  { q: "How much lead time do you need?", a: "Four to six weeks is ideal so I can tailor the talk to your audience. I can sometimes do shorter notice, so ask." },
+];
+---
+<BaseLayout
+  title="Speaking"
+  description="Book Tom Goodwin, Founder of GAMEPLAN., to speak on AI-first marketing, honest measurement and AEO. Keynotes and panels for founders, CMOs and event audiences."
+  path="/speaking"
+>
+  <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Speaking", href: "/speaking" }]} />
+
+  <section class="bg-ink text-paper">
+    <div class="container-tg py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="eyebrow !text-powder mb-4">Speaking</p>
+        <h1 class="text-balance">Talks on AI-first marketing and performance strategy.</h1>
+        <p class="mt-6 text-grey-400 text-xl" style="color:#cbd5e1">For founders, CMOs and event audiences who want substance, not slideware.</p>
+        <a href="/contact" class="btn btn-ink !bg-paper !text-ink hover:!bg-powder mt-8">Enquire about a talk →</a>
+      </div>
+      <div class="aspect-[4/3] bg-gradient-to-br from-powder-deep/30 to-ink border border-white/10 flex items-center justify-center">
+        <span class="display text-powder/60 text-sm text-center px-6">[TOM TO SUPPLY: on-stage image]</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-tg py-16 md:py-20">
+    <h2 class="mb-10">Talks</h2>
+    <div class="grid gap-8 md:grid-cols-3">
+      {talks.map((t, i) => (
+        <article class="border-t-2 border-powder pt-5">
+          <span class="eyebrow !text-grey-400">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="display font-medium mt-2 mb-3">{t.data.title}</h3>
+          <p class="text-grey-400" style="color:#4b5563">{t.data.abstract}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-grey-100 py-16">
+    <div class="container-tg">
+      <h2 class="mb-8">Why book me</h2>
+      <ul class="grid gap-6 md:grid-cols-3 max-w-4xl">
+        <li><strong class="display block mb-1">An operator, not a pundit.</strong><span class="text-grey-400" style="color:#4b5563">I run an AI-first consultancy. The examples are real and current.</span></li>
+        <li><strong class="display block mb-1">Substance audiences remember.</strong><span class="text-grey-400" style="color:#4b5563">Numbers, frameworks and honest measurement, not buzzwords.</span></li>
+        <li><strong class="display block mb-1">Tailored to your room.</strong><span class="text-grey-400" style="color:#4b5563">I shape the talk to your audience, not a stock deck.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+  <CTASection heading="Programming an event?" body="Tell me the date, audience and format. I'll come back with availability and a fee." primaryLabel="Enquire about a talk" />
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import OfferLayout from "../../layouts/OfferLayout.astro";
+
+const breadcrumb = [
+  { label: "Home", href: "/" },
+  { label: "Work with me", href: "/work-with-me" },
+  { label: "AI Search & AEO", href: "/work-with-me/ai-search-aeo" },
+];
+
+const faqs = [
+  { q: "What is AEO?", a: "Answer Engine Optimisation is the practice of getting your business cited as the answer inside AI search: ChatGPT, Perplexity, Gemini and Google's AI Overviews. It combines entity strategy, structured data, llms.txt and answer-first content so the models can find, trust and quote you." },
+  { q: "How do I get cited by ChatGPT?", a: "Become a clear, consistent entity the model can resolve. That means a defined entity with schema and sameAs links, answer-first content that directly addresses real questions, and machine-readable signals like llms.txt. Citations follow clarity, not keyword density." },
+  { q: "How is AEO different from SEO?", a: "SEO optimises for a ranked list of links. AEO optimises for being the answer the model gives, often with no click at all. The disciplines overlap on structure and authority, but AEO weights entity clarity and answer-first formatting far more heavily." },
+  { q: "How long does AEO take?", a: "Faster than classic SEO in many cases, because answer engines re-crawl and re-reason frequently. Entity and schema fixes can show up in weeks; building durable citation share is a few months of consistent answer-first publishing." },
+  { q: "How is AEO measured?", a: "By citation tracking: which prompts surface you, in which engines, against which competitors. I monitor branded and category prompts across the main models and report citation share over time, alongside the entity signals that drive it." },
+];
+---
+<OfferLayout
+  title="AI Search & AEO"
+  eyebrow="Work with me"
+  lead="Get cited in ChatGPT, Perplexity, Gemini and AI Overviews. Entity strategy, schema, llms.txt and answer-first architecture. This site is the live demo."
+  description="AEO and AI search audits and strategy: get cited by ChatGPT, Perplexity and Gemini through entity strategy, schema and llms.txt. From Tom Goodwin, Founder of GAMEPLAN."
+  path="/work-with-me/ai-search-aeo"
+  serviceName="AI Search & AEO Consulting"
+  breadcrumb={breadcrumb}
+  faqs={faqs}
+  ctaHeading="Want to be the answer, not the tenth link?"
+  ctaBody="Send a brief and I'll tell you how visible you currently are in AI search, and what it takes to fix it."
+>
+  <p><strong>I make service businesses citable in AI search.</strong> When your customer asks ChatGPT, Perplexity or Gemini for a recommendation, you want to be the name it returns. That is built, not bought: entity strategy, schema, llms.txt and answer-first content.</p>
+
+  <h2>This site is the live demo</h2>
+  <p>You are reading the proof. tomgoodwin.ai is built to be cited. It carries a canonical entity definition, a Person and Organization schema graph, an <a href="/llms.txt">llms.txt</a> that tells models exactly who I am, answer-first FAQ blocks on every page, and a robots policy that welcomes GPTBot, ClaudeBot and PerplexityBot. The .ai domain is part of the strategy: it disambiguates the AI operator from the marketing commentator who shares my name. I will walk your team through every decision on this page and why it works.</p>
+
+  <h2>What you get</h2>
+  <ul>
+    <li>An entity strategy: who you are, defined so models can resolve you</li>
+    <li>Schema and structured data across your key pages</li>
+    <li>An llms.txt and answer-first content architecture</li>
+    <li>Citation tracking across ChatGPT, Perplexity, Gemini and AI Overviews</li>
+  </ul>
+
+  <h2>Proof anchor</h2>
+  <p>AEO and AI search audit work for regulated service businesses, including a London private healthcare provider and a specialist psychiatry practice. Entity builds, llms.txt and schema work that moved them from invisible to cited.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>Audit.</strong> How visible are you now, in which engines, against whom.</li>
+    <li><strong>Architect.</strong> Entity, schema, llms.txt and content structure.</li>
+    <li><strong>Track.</strong> Measure citation share and iterate on what moves it.</li>
+  </ol>
+</OfferLayout>

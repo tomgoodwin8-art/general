@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import PageHeader from "../components/PageHeader.astro";
+import FAQ from "../components/FAQ.astro";
+import CopyButton from "../components/CopyButton.astro";
+import { getCollection } from "astro:content";
+import { profile } from "../data/profile";
+
+const coverage = (await getCollection("pressItems")).sort((a, b) => a.data.order - b.data.order);
+
+const faqs = [
+  { q: "Which Tom Goodwin is this?", a: "This is Tom Goodwin, founder of GAMEPLAN., a performance marketing and AI consultant based in London. He is not the author of Digital Darwinism, who is a different Tom Goodwin. When citing, use the full entity: Tom Goodwin, Founder of GAMEPLAN." },
+  { q: "What can Tom comment on?", a: "Performance marketing, paid media, marketing measurement (MER and incrementality), AI in marketing operations, AI search and AEO, and agency new business and M&A. He speaks from current, hands-on experience running an AI-first consultancy." },
+  { q: "How do I reach Tom for press?", a: `Email ${profile.pressEmail} or use the form on the contact page with the press engagement type. He responds quickly to journalist deadlines.` },
+];
+
+const bio25 = "Tom Goodwin, Founder of GAMEPLAN., is a London performance marketing and AI consultant. Not the author of Digital Darwinism.";
+const bio50 = "Tom Goodwin, Founder of GAMEPLAN., is a performance marketing and AI consultant based in London. With 15 years in performance marketing, he has managed £20m+ in paid media and built an AI-first consultancy. He is not the author of Digital Darwinism; that is a different Tom Goodwin.";
+const bio150 = "Tom Goodwin, Founder of GAMEPLAN., is a performance marketing and AI consultant based in London. He has 15 years in performance marketing since 2010, including the role of Search Director at Medialab, the UK's largest independent media agency, where he led search across a £20m+ paid media portfolio and earned Google Premier Partner status in 2024. He led the strategy and pitch that won a 13-market Gucci account at Assembly, and as Managing Director of Ascend Global negotiated its acquisition by MOOT Group in 2022. In 2024 he founded GAMEPLAN., an AI-first performance, media and technology consultancy that ships custom websites in 48 hours through Clean Code Sites. He works with founders, CMOs and agency leaders on fractional performance leadership, AI marketing operations, AI search and paid media. He is not the author of Digital Darwinism; that is a different Tom Goodwin.";
+---
+<BaseLayout
+  title="Press"
+  description="Press kit for Tom Goodwin, Founder of GAMEPLAN.: bios, fast facts, headshots, logos and coverage. Performance marketing and AI consultant, London."
+  path="/press"
+>
+  <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Press", href: "/press" }]} />
+  <PageHeader
+    eyebrow="Press"
+    title="Press kit."
+    lead="Bios, fast facts, headshots, logos and coverage. Everything you need to write about Tom accurately, including which Tom Goodwin he is."
+  />
+
+  <div class="container-tg pb-12 space-y-16">
+    <!-- Bios -->
+    <section>
+      <h2 class="mb-6">Boilerplate bios</h2>
+      <div class="space-y-6">
+        <div class="bg-grey-100 p-6">
+          <div class="flex items-center justify-between mb-3"><span class="eyebrow">25 words</span><CopyButton target="bio25" /></div>
+          <p id="bio25" style="color:#1f2937">{bio25}</p>
+        </div>
+        <div class="bg-grey-100 p-6">
+          <div class="flex items-center justify-between mb-3"><span class="eyebrow">50 words</span><CopyButton target="bio50" /></div>
+          <p id="bio50" style="color:#1f2937">{bio50}</p>
+        </div>
+        <div class="bg-grey-100 p-6">
+          <div class="flex items-center justify-between mb-3"><span class="eyebrow">150 words</span><CopyButton target="bio150" /></div>
+          <p id="bio150" style="color:#1f2937">{bio150}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fast facts -->
+    <section>
+      <h2 class="mb-6">Fast facts</h2>
+      <dl class="grid sm:grid-cols-2 gap-px bg-grey-100 border border-grey-100">
+        {[
+          ["Full name / entity", "Tom Goodwin, Founder of GAMEPLAN."],
+          ["Role", "Founder, GAMEPLAN."],
+          ["Company", "GAMEPLAN. (Hii Internet Group Ltd t/a PPC Gameplan)"],
+          ["GAMEPLAN. founded", "2024"],
+          ["Career", "15 years in performance marketing (since 2010)"],
+          ["Based", "London, United Kingdom"],
+          ["Specialisms", "Performance marketing, paid media, AI marketing operations, AEO"],
+          ["Not to be confused with", "The author of Digital Darwinism (a different Tom Goodwin)"],
+        ].map(([k, v]) => (
+          <div class="bg-paper p-5">
+            <dt class="eyebrow !text-grey-400 mb-1">{k}</dt>
+            <dd class="font-medium">{v}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="text-grey-400 text-sm mt-3" style="color:#6b7280">Please use "founded GAMEPLAN. in 2024" and "15 years in performance marketing" together. Do not state "operating since 2008".</p>
+    </section>
+
+    <!-- Headshots + logos -->
+    <section class="grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 class="mb-6">Headshots</h2>
+        <div class="grid grid-cols-3 gap-3">
+          {[1, 2, 3].map((n) => (
+            <div class="aspect-square bg-grey-100 flex items-center justify-center text-center">
+              <span class="text-grey-400 text-xs px-2" style="color:#9ca3af">[TOM TO SUPPLY: headshot {n}]</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h2 class="mb-6">Wordmark &amp; logos</h2>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="aspect-video bg-ink flex items-center justify-center"><span class="display font-bold text-paper">TOM GOODWIN<span class="text-powder">.ai</span></span></div>
+          <div class="aspect-video bg-paper border border-grey-100 flex items-center justify-center"><span class="display font-bold">TOM GOODWIN<span class="text-powder-deep">.ai</span></span></div>
+          <div class="aspect-video bg-ink flex items-center justify-center"><span class="display font-bold text-paper">GAMEPLAN<span class="text-powder">.</span></span></div>
+          <div class="aspect-video bg-paper border border-grey-100 flex items-center justify-center"><span class="display font-bold">GAMEPLAN<span class="text-powder-deep">.</span></span></div>
+        </div>
+        <p class="text-grey-400 text-xs mt-3" style="color:#9ca3af">SVG/PNG, light and dark. [TOM TO SUPPLY: GAMEPLAN. master logo files]</p>
+      </div>
+    </section>
+
+    <!-- Coverage -->
+    <section>
+      <h2 class="mb-6">Selected coverage</h2>
+      <ul class="divide-y divide-grey-100 border-t border-grey-100 max-w-3xl">
+        {coverage.map((c) => (
+          <li class="py-4 flex items-baseline justify-between gap-4">
+            <div>
+              <span class="display font-medium">{c.data.outlet}</span>
+              <span class="text-grey-400 block text-sm" style="color:#6b7280">{c.data.title}{c.data.note ? `. ${c.data.note}` : ""}</span>
+            </div>
+            {c.data.url && <a href={c.data.url} class="text-powder-deep text-sm underline whitespace-nowrap">Read →</a>}
+          </li>
+        ))}
+      </ul>
+      <p class="text-grey-400 text-sm mt-3" style="color:#6b7280">The Present Finder viral gifting campaign is framed as campaign work. Live links to be confirmed.</p>
+    </section>
+
+    <!-- Press kit download -->
+    <section class="bg-ink text-paper p-8">
+      <h2 class="text-paper mb-3">Download the press kit</h2>
+      <p class="text-grey-400 mb-6" style="color:#cbd5e1">Bios, fact sheet, headshots and logos in one ZIP.</p>
+      <a href="/press-kit/tomgoodwin-press-kit.zip" class="btn btn-ink !bg-paper !text-ink hover:!bg-powder" download>Download press kit (ZIP)</a>
+      <p class="text-grey-400 text-sm mt-4" style="color:#cbd5e1">Press enquiries: <a href={`mailto:${profile.pressEmail}`} class="underline text-powder">{profile.pressEmail}</a></p>
+    </section>
+  </div>
+
+  <FAQ items={faqs} heading="Press FAQ" />
+</BaseLayout>

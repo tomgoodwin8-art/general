@@ -1,0 +1,31 @@
+---
+import { SITE_URL } from "../data/profile";
+interface Props { items: { label: string; href: string }[]; }
+const { items } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((it, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: it.label,
+    item: new URL(it.href, SITE_URL).href,
+  })),
+};
+---
+<nav aria-label="Breadcrumb" class="container-tg pt-8">
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-grey-400" style="color:#9ca3af">
+    {items.map((it, i) => (
+      <li class="flex items-center gap-2">
+        {i > 0 && <span aria-hidden="true">/</span>}
+        {i < items.length - 1 ? (
+          <a href={it.href} class="hover:text-powder-deep">{it.label}</a>
+        ) : (
+          <span class="text-ink" style="color:#0a0a0a">{it.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />

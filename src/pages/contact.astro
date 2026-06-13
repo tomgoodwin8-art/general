@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import PageHeader from "../components/PageHeader.astro";
+import ContactPaths from "../components/ContactPaths.astro";
+---
+<BaseLayout
+  title="Contact"
+  description="Work with Tom Goodwin, Founder of GAMEPLAN. Book a call or send a brief: fractional leadership, AI marketing operations, AEO, paid media, speaking or press."
+  path="/contact"
+>
+  <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Contact", href: "/contact" }]} />
+  <PageHeader
+    eyebrow="Contact"
+    title="Tell me what you're trying to fix."
+    lead="Book a call or send a brief. I'll tell you honestly whether I can help, and which engagement fits, even if the answer is no."
+  />
+  <ContactPaths />
+</BaseLayout>

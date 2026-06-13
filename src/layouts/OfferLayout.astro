@@ -1,0 +1,59 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import PageHeader from "../components/PageHeader.astro";
+import FAQ from "../components/FAQ.astro";
+import CTASection from "../components/CTASection.astro";
+import { SITE_URL } from "../data/profile";
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  lead: string;
+  /** Meta description. */
+  description: string;
+  path: string;
+  serviceName: string;
+  breadcrumb: { label: string; href: string }[];
+  faqs: { q: string; a: string }[];
+  ctaHeading: string;
+  ctaBody?: string;
+  noindex?: boolean;
+}
+
+const {
+  title, eyebrow, lead, description, path, serviceName,
+  breadcrumb, faqs, ctaHeading, ctaBody, noindex = false,
+} = Astro.props;
+
+const serviceNode = {
+  "@type": "ProfessionalService",
+  "@id": `${SITE_URL}${path}#service`,
+  name: serviceName,
+  url: new URL(path, SITE_URL).href,
+  description,
+  provider: { "@id": `${SITE_URL}/#person` },
+  areaServed: "GB",
+  brand: { "@id": `${SITE_URL}/#gameplan` },
+};
+---
+<BaseLayout
+  {title}
+  {description}
+  {path}
+  {noindex}
+  schemaNodes={[serviceNode]}
+>
+  <Breadcrumb items={breadcrumb} />
+  <PageHeader {eyebrow} {title} {lead} />
+
+  <div class="container-tg pb-10">
+    <article class="prose-tg">
+      <slot />
+    </article>
+  </div>
+
+  {faqs.length > 0 && <FAQ items={faqs} />}
+
+  <CTASection heading={ctaHeading} body={ctaBody} />
+</BaseLayout>

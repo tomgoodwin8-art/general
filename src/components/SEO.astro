@@ -1,0 +1,48 @@
+---
+import { SITE_URL, ENTITY, DISAMBIGUATION } from "../data/profile";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path-relative canonical, e.g. "/about". Defaults to current. */
+  path?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  type?: "website" | "article";
+}
+
+const {
+  title,
+  description,
+  path,
+  ogImage = "/images/og-default.png",
+  noindex = false,
+  type = "website",
+} = Astro.props;
+
+// Title pattern always carries the canonical entity string (§1.2, §10).
+const fullTitle = `${title} | ${ENTITY}`;
+const canonicalPath = path ?? Astro.url.pathname;
+const canonical = new URL(canonicalPath, SITE_URL).href.replace(/\/$/, "") || SITE_URL;
+const ogUrl = new URL(ogImage, SITE_URL).href;
+const ogDescription = description || DISAMBIGUATION;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content="tomgoodwin.ai" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={ogDescription} />
+<meta name="twitter:image" content={ogUrl} />

@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import OfferCard from "../../../components/OfferCard.astro";
+import FAQ from "../../../components/FAQ.astro";
+import CTASection from "../../../components/CTASection.astro";
+import { SITE_URL, subOffers } from "../../../data/profile";
+
+const path = "/work-with-me/paid-media-strategy";
+const breadcrumb = [
+  { label: "Home", href: "/" },
+  { label: "Work with me", href: "/work-with-me" },
+  { label: "Paid Media Strategy", href: path },
+];
+const description = "Google, Meta and TikTok paid media strategy built on MER-led measurement. £20m+ managed. From Tom Goodwin, Founder of GAMEPLAN.";
+const faqs = [
+  { q: "What channels do you cover?", a: "Google, Meta and TikTok primarily, with the measurement and tagging layer underneath them. The strategy is channel-agnostic: spend follows incremental return, not channel loyalty." },
+  { q: "Do you run the accounts or advise on them?", a: "Both shapes exist. I can own the strategy and direct your team, or run hands-on for a defined period. The fractional leadership engagement is the route for ongoing ownership." },
+  { q: "What is MER-led measurement?", a: "Media Efficiency Ratio looks at total revenue against total media spend, rather than trusting each platform's self-reported ROAS. It is the honest top-line number, corrected with incrementality testing. It stops you scaling channels that only look efficient because they claim the credit." },
+  { q: "How big does my budget need to be?", a: "The discipline matters more than the number. I have worked on £20m+ portfolios and on lean challenger budgets. If spend is large enough that waste is expensive, strategy pays for itself." },
+  { q: "Where do I start?", a: "Often with an audit. A Google Ads audit or a measurement audit gives a fast, fixed-fee read on what is working before any ongoing commitment." },
+];
+
+const serviceNode = {
+  "@type": "ProfessionalService",
+  "@id": `${SITE_URL}${path}#service`,
+  name: "Paid Media Strategy",
+  url: new URL(path, SITE_URL).href,
+  description,
+  provider: { "@id": `${SITE_URL}/#person` },
+  areaServed: "GB",
+  brand: { "@id": `${SITE_URL}/#gameplan` },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Paid media services",
+    itemListElement: subOffers.map((s) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: s.title, url: new URL(s.slug, SITE_URL).href },
+    })),
+  },
+};
+---
+<BaseLayout title="Paid Media Strategy" {description} {path} schemaNodes={[serviceNode]}>
+  <Breadcrumb items={breadcrumb} />
+  <PageHeader
+    eyebrow="Work with me"
+    title="Paid Media Strategy"
+    lead="Google, Meta and TikTok strategy built on honest measurement. £20m+ managed, Premier Partner growth, a MER-led doctrine your finance director will trust."
+  />
+
+  <div class="container-tg pb-10">
+    <article class="prose-tg">
+      <p><strong>I build paid media strategy that spends where it returns, measured honestly.</strong> Most accounts are not under-optimised, they are mis-measured: scaling channels that claim credit they did not earn. I fix the measurement first, then the media.</p>
+
+      <h2>What you get</h2>
+      <ul>
+        <li>A channel strategy across Google, Meta and TikTok led by incremental return</li>
+        <li>A MER-led measurement spine, corrected with incrementality testing</li>
+        <li>Account architecture built for broad match and Smart Bidding where it earns its place</li>
+        <li>Server-side tagging and clean conversion data underneath it all</li>
+      </ul>
+
+      <h2>Proof anchor</h2>
+      <p>£20m+ in paid media managed at Medialab, 60% year-on-year Google Ads growth, and Google Premier Partner status earned in February 2024.</p>
+    </article>
+  </div>
+
+  <!-- Three child sub-offers, linked as cards (not in nav) -->
+  <section class="container-tg pb-16" aria-labelledby="suboffers-heading">
+    <h2 id="suboffers-heading" class="mb-8">Specific, productised entry points</h2>
+    <div class="grid gap-6 md:grid-cols-3">
+      {subOffers.map((s) => (
+        <OfferCard title={s.title} slug={s.slug} summary={s.summary} />
+      ))}
+    </div>
+  </section>
+
+  <FAQ items={faqs} />
+  <CTASection
+    heading="Spending money you can't fully account for?"
+    body="Send a brief, or start with a fixed-fee audit. I'll tell you where the waste is before you commit to anything ongoing."
+  />
+</BaseLayout>

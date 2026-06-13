@@ -1,0 +1,42 @@
+---
+import OfferLayout from "../../../layouts/OfferLayout.astro";
+const path = "/work-with-me/paid-media-strategy/google-ads-audit";
+const breadcrumb = [
+  { label: "Home", href: "/" },
+  { label: "Work with me", href: "/work-with-me" },
+  { label: "Paid Media Strategy", href: "/work-with-me/paid-media-strategy" },
+  { label: "Google Ads Audit", href: path },
+];
+const faqs = [
+  { q: "What does the Google Ads audit cover?", a: "Account structure, bidding, match types, search terms and negatives, conversion tracking accuracy, budget allocation and wasted spend. You get a prioritised list of fixes ranked by impact, not a 60-page PDF nobody reads." },
+  { q: "How much does it cost and how long does it take?", a: "It is a fixed fee with a fixed turnaround, usually under two weeks. You know the price before we start and there is no obligation to continue afterwards." },
+  { q: "Will you implement the fixes too?", a: "The audit is deliberately standalone so you can act on it with your own team. If you want me to implement or take over, that rolls into a paid media or fractional engagement." },
+];
+---
+<OfferLayout
+  title="Google Ads Audit"
+  eyebrow="Paid Media Strategy"
+  lead="A productised, fixed-fee Google Ads audit. A prioritised list of what to fix, ranked by impact, in under two weeks."
+  description="A fixed-fee, productised Google Ads audit. Find wasted spend and the fixes that matter, ranked by impact. From Tom Goodwin, Founder of GAMEPLAN."
+  {path}
+  serviceName="Google Ads Audit"
+  breadcrumb={breadcrumb}
+  faqs={faqs}
+  ctaHeading="Want to know what your account is really doing?"
+  ctaBody="Book the fixed-fee audit. You'll get a ranked list of fixes and an honest read on the waste."
+>
+  <p><strong>A fixed-fee audit that tells you exactly what to fix in your Google Ads account, ranked by impact.</strong> No retainer, no sales process dressed up as a report. You get the findings and you act on them.</p>
+
+  <h2>What you get</h2>
+  <ul>
+    <li>A structure, bidding and match-type review</li>
+    <li>Search-term and negative-keyword analysis: where the money leaks</li>
+    <li>A conversion-tracking sanity check, because most audits skip it</li>
+    <li>A prioritised fix list, ranked by impact and effort</li>
+  </ul>
+
+  <h2>Proof anchor</h2>
+  <p>The same auditing discipline that drove 60% year-on-year growth on a £20m+ portfolio, productised into a fixed-fee engagement.</p>
+
+  <p>Want the method? I wrote up <a href="/blog/03-audit-google-ads-60-minutes">how to audit a Google Ads account in 60 minutes</a>.</p>
+</OfferLayout>

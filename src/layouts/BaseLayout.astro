@@ -1,0 +1,53 @@
+---
+import "../styles/global.css";
+import SEO from "../components/SEO.astro";
+import SchemaGraph from "../components/SchemaGraph.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  type?: "website" | "article";
+  schemaNodes?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  path,
+  ogImage,
+  noindex = false,
+  type = "website",
+  schemaNodes = [],
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="tomgoodwin.ai" href="/rss.xml" />
+    <link rel="preload" href="/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="generator" content={Astro.generator} />
+    <SEO {title} {description} {path} {ogImage} {noindex} {type} />
+    <SchemaGraph nodes={schemaNodes} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:text-paper focus:px-4 focus:py-2">
+      Skip to content
+    </a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

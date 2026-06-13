@@ -1,0 +1,42 @@
+---
+import OfferLayout from "../../../layouts/OfferLayout.astro";
+const path = "/work-with-me/paid-media-strategy/measurement-audit";
+const breadcrumb = [
+  { label: "Home", href: "/" },
+  { label: "Work with me", href: "/work-with-me" },
+  { label: "Paid Media Strategy", href: "/work-with-me/paid-media-strategy" },
+  { label: "Measurement Audit", href: path },
+];
+const faqs = [
+  { q: "What does a measurement audit include?", a: "A review of your MER and ROAS reporting, conversion tracking, GA4 configuration, and server-side tagging (sGTM or Tag Gateway). I check whether the numbers you trust are real, then show you the ones that are." },
+  { q: "Why does measurement matter more than the media?", a: "Because you scale what you measure. If your tracking over-credits one channel, you pour money into it and starve the channels actually driving incremental revenue. Fix the measurement and the media decisions fix themselves." },
+  { q: "Do I need server-side tagging?", a: "Increasingly, yes. Browser-based tracking is degrading as privacy controls tighten. Server-side tagging via sGTM or a Tag Gateway recovers data quality and conversion accuracy. The audit tells you whether it is worth it for your setup." },
+];
+---
+<OfferLayout
+  title="Measurement Audit"
+  eyebrow="Paid Media Strategy"
+  lead="MER, incrementality, GA4 and server-side tagging. Find out whether the numbers you scale on are real."
+  description="A measurement audit covering MER, incrementality, GA4 and server-side tagging. Make sure the numbers you scale on are real. From Tom Goodwin, Founder of GAMEPLAN."
+  {path}
+  serviceName="Marketing Measurement Audit"
+  breadcrumb={breadcrumb}
+  faqs={faqs}
+  ctaHeading="Sure your numbers are telling the truth?"
+  ctaBody="Book a measurement audit. I'll show you where your tracking lies and what the honest picture looks like."
+>
+  <p><strong>I check whether the numbers you make decisions on are real.</strong> Most teams scale on ROAS that double-counts, conversion tracking that misfires, and a GA4 setup nobody fully trusts. The measurement audit replaces faith with fact.</p>
+
+  <h2>What you get</h2>
+  <ul>
+    <li>A MER versus ROAS reconciliation: the honest top line</li>
+    <li>A conversion-tracking and GA4 configuration review</li>
+    <li>A server-side tagging assessment (sGTM, Tag Gateway)</li>
+    <li>An incrementality view: which spend is actually additive</li>
+  </ul>
+
+  <h2>Proof anchor</h2>
+  <p>Conversion-tracking diagnosis for a London private healthcare client that exposed mis-attributed spend, and a MER-led doctrine carried across a £20m+ portfolio.</p>
+
+  <p>Background reading: <a href="/blog/02-mer-vs-roas">MER vs ROAS, which should you actually measure?</a></p>
+</OfferLayout>

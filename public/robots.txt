@@ -1,0 +1,17 @@
+# tomgoodwin.ai — AI crawlers explicitly welcomed (brief §10.4)
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://tomgoodwin.ai/sitemap-index.xml

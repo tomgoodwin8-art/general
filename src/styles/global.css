@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* ============================================================
+   tomgoodwin.ai — Brand system (brief §2)
+   Swiss-styled performance dashboard wearing a good suit.
+   ============================================================ */
+
+@theme {
+  /* Colour system (§2.2) */
+  --color-ink: #0a0a0a;
+  --color-paper: #ffffff;
+  --color-powder: #b8d4e8;
+  --color-powder-deep: #7fb2d9;
+  --color-grey-100: #f5f5f5;
+  --color-grey-400: #9ca3af;
+
+  /* Typography (§2.3) */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Restraint: shadows capped at shadow-sm (§2.2) */
+}
+
+/* Self-hosted variable fonts, font-display: swap (§2.3) */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/space-grotesk.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter.woff2") format("woff2");
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background: var(--color-paper);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  h2 {
+    font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+  }
+  h3 {
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 500;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-powder-deep);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-tg {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-powder-deep);
+  }
+  .prose-tg {
+    max-width: 65ch;
+  }
+  .prose-tg p { margin-block: 1rem; }
+  .prose-tg h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
+  .prose-tg h3 { margin-top: 1.75rem; margin-bottom: 0.5rem; }
+  .prose-tg ul { margin-block: 1rem; padding-left: 1.25rem; list-style: disc; }
+  .prose-tg ol { margin-block: 1rem; padding-left: 1.25rem; list-style: decimal; }
+  .prose-tg li { margin-block: 0.35rem; }
+  .prose-tg a {
+    color: var(--color-powder-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-tg blockquote {
+    border-left: 3px solid var(--color-powder);
+    padding-left: 1.25rem;
+    margin-block: 1.5rem;
+    font-style: italic;
+  }
+  .prose-tg table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block: 1.5rem;
+    font-size: 1rem;
+  }
+  .prose-tg th, .prose-tg td {
+    border: 1px solid var(--color-grey-100);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .prose-tg th {
+    background: var(--color-grey-100);
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2px;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-ink {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-ink:hover { background: #2a2a2a; }
+  .btn-powder {
+    background: transparent;
+    color: var(--color-ink);
+    border: 1.5px solid var(--color-powder-deep);
+  }
+  .btn-powder:hover { background: var(--color-powder); }
+}
+
+/* Honour reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,23 @@
+---
+/** Newsletter capture (§4.7). Wire to provider action on launch. */
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+<form
+  class:list={["flex flex-col sm:flex-row gap-3", !compact && "max-w-md"]}
+  action="https://formspree.io/f/your-id"
+  method="POST"
+  aria-label="Newsletter signup"
+>
+  <label class="sr-only" for="nl-email">Email address</label>
+  <input
+    id="nl-email"
+    name="email"
+    type="email"
+    required
+    placeholder="you@company.com"
+    class="flex-1 border border-grey-400 px-4 py-2.5 rounded-[2px] focus:border-powder-deep outline-none"
+  />
+  <button type="submit" class="btn btn-ink whitespace-nowrap">Subscribe</button>
+</form>
+<p class="text-grey-400 text-xs mt-2" style="color:#9ca3af">No spam. Performance and AI notes, occasionally.</p>

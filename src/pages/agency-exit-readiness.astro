@@ -1,0 +1,50 @@
+---
+import OfferLayout from "../layouts/OfferLayout.astro";
+const path = "/agency-exit-readiness";
+const breadcrumb = [
+  { label: "Home", href: "/" },
+  { label: "Agency Exit Readiness", href: path },
+];
+const faqs = [
+  { q: "What is agency exit readiness?", a: "Advisory for agency owners preparing to sell: getting the P&L and the operation into a shape a buyer will pay for, then supporting the buyer conversations and the negotiation. It is the work that happens before and during a sale, from the seller's side." },
+  { q: "When should I start preparing to sell?", a: "Twelve to twenty-four months before you want to exit. Buyers pay for clean numbers, low key-person risk and predictable revenue, and those take time to build. Starting at the point of sale leaves money on the table." },
+  { q: "What makes an agency more valuable to a buyer?", a: "Recurring revenue over project income, a team that runs without the founder, documented process, a tidy P&L and a clear growth story. Buyers discount everything that depends on you personally, so the goal is to make yourself replaceable." },
+  { q: "Can you help with the negotiation itself?", a: "Yes. I have sat in the seller's seat and negotiated a completed acquisition. I can support the buyer conversations, sense-check the offer structure, and keep the deal moving without you losing your nerve or your leverage." },
+  { q: "Have you actually sold an agency?", a: "Yes. As Managing Director of Ascend Global I positioned and negotiated its acquisition by MOOT Group, completed in February 2022. This is lived experience, not theory." },
+];
+---
+<OfferLayout
+  title="Agency Exit Readiness"
+  eyebrow="For agency owners"
+  lead="Advisory for agency owners preparing to sell: positioning the P&L, the operational tidy-up, buyer conversations and negotiation support. I've done it from the inside."
+  description="Agency exit readiness advisory: position the P&L, tidy the operation, and negotiate the sale, from someone who sold his own agency. Tom Goodwin, Founder of GAMEPLAN."
+  {path}
+  serviceName="Agency Exit Advisory"
+  breadcrumb={breadcrumb}
+  faqs={faqs}
+  ctaHeading="Thinking about selling your agency?"
+  ctaBody="Have a confidential conversation. I've been the seller, and I'll tell you honestly what your agency needs before a buyer will pay full value."
+>
+  <p><strong>I help agency owners get ready to sell, then help them sell.</strong> Positioning the P&L, tidying the operation, handling buyer conversations and supporting the negotiation. I have done this from the inside, as the MD who sold the agency, so the advice is lived, not borrowed.</p>
+
+  <h2>Who this is for</h2>
+  <p>Founders and owners of marketing or media agencies who are thinking about an exit, whether that is twelve months out or already in conversations. Especially valuable if this is your first sale and you do not yet know what a buyer actually values, or how to avoid the discounts they will otherwise apply.</p>
+
+  <h2>What you get</h2>
+  <ul>
+    <li>A buyer's-eye view of your agency and what is dragging the valuation</li>
+    <li>A plan to position the P&L and reduce key-person risk</li>
+    <li>Operational tidy-up: process, recurring revenue, the growth story</li>
+    <li>Support through buyer conversations and the negotiation itself</li>
+  </ul>
+
+  <h2>Proof anchor</h2>
+  <p>As Managing Director of Ascend Global, I positioned and negotiated its acquisition by MOOT Group, completed in February 2022. I know what the months before a sale demand, because I lived them.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>Assess.</strong> A confidential read on saleability and the valuation drags.</li>
+    <li><strong>Prepare.</strong> The P&L, the operation and the story, made buyer-ready.</li>
+    <li><strong>Support.</strong> Buyer conversations and negotiation, with you in control.</li>
+  </ol>
+</OfferLayout>

@@ -1,0 +1,60 @@
+---
+/**
+ * SchemaGraph — JSON-LD @graph per page (brief §10.1).
+ * Always includes the Person + Organization nodes (canonical entity).
+ * Pages pass additional nodes (ProfessionalService, Article, FAQPage,
+ * BreadcrumbList, Event) via `nodes`.
+ */
+import { SITE_URL, profile, ENTITY, DISAMBIGUATION } from "../data/profile";
+
+interface Props {
+  nodes?: Record<string, unknown>[];
+}
+const { nodes = [] } = Astro.props;
+
+const personId = `${SITE_URL}/#person`;
+const orgId = `${SITE_URL}/#gameplan`;
+
+const person = {
+  "@type": "Person",
+  "@id": personId,
+  name: profile.name,
+  alternateName: ENTITY,
+  disambiguatingDescription: DISAMBIGUATION,
+  jobTitle: profile.jobTitle,
+  description: DISAMBIGUATION,
+  url: SITE_URL,
+  email: `mailto:${profile.email}`,
+  knowsAbout: profile.knowsAbout,
+  sameAs: profile.sameAs,
+  alumniOf: { "@type": "CollegeOrUniversity", name: profile.alumniOf },
+  worksFor: { "@id": orgId },
+  founder: { "@id": orgId },
+  homeLocation: { "@type": "Place", name: profile.location },
+};
+
+const organization = {
+  "@type": "Organization",
+  "@id": orgId,
+  name: "GAMEPLAN.",
+  legalName: profile.legalEntity,
+  description:
+    "Performance, media and technology consultancy. AI-first marketing operations.",
+  url: SITE_URL,
+  founder: { "@id": personId },
+  foundingDate: "2024",
+  areaServed: "GB",
+  sameAs: ["https://hellogameplan.com"],
+};
+
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [person, organization, ...nodes],
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(graph)}
+  is:inline
+/>

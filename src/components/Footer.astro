@@ -1,0 +1,55 @@
+---
+import { navOffers, mainNav, profile, ENTITY } from "../data/profile";
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-ink text-paper mt-24">
+  <div class="container-tg py-16">
+    <div class="grid gap-10 md:grid-cols-4">
+      <div class="md:col-span-1">
+        <a href="/" class="display text-xl font-bold">
+          TOM&nbsp;GOODWIN<span class="text-powder">.ai</span>
+        </a>
+        <p class="mt-4 text-grey-400 text-sm max-w-xs">{ENTITY}</p>
+        <p class="mt-2 text-grey-400 text-sm">London, UK</p>
+      </div>
+
+      <nav aria-label="Offers">
+        <h2 class="eyebrow !text-powder mb-4">Work with me</h2>
+        <ul class="space-y-2 text-sm">
+          {navOffers.map((o) => (
+            <li><a href={o.slug} class="text-grey-400 hover:text-paper transition-colors">{o.title}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <nav aria-label="Site">
+        <h2 class="eyebrow !text-powder mb-4">Site</h2>
+        <ul class="space-y-2 text-sm">
+          {mainNav.filter((n) => n.href !== "/work-with-me").map((item) => (
+            <li><a href={item.href} class="text-grey-400 hover:text-paper transition-colors">{item.label}</a></li>
+          ))}
+          <li><a href="/now" class="text-grey-400 hover:text-paper transition-colors">Now</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="eyebrow !text-powder mb-4">Direct</h2>
+        <ul class="space-y-2 text-sm">
+          <li><a href={`mailto:${profile.email}`} class="text-grey-400 hover:text-paper transition-colors">{profile.email}</a></li>
+          <li><a href={`mailto:${profile.pressEmail}`} class="text-grey-400 hover:text-paper transition-colors">{profile.pressEmail}</a></li>
+          <li><a href="https://www.linkedin.com/in/tomgoodwinppc/" class="text-grey-400 hover:text-paper transition-colors" rel="me">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-4 text-sm text-grey-400">
+      <p>&copy; {year} {profile.legalEntity} t/a GAMEPLAN.</p>
+      <p>
+        <a href="/llms.txt" class="hover:text-paper">llms.txt</a>
+        <span class="mx-2">·</span>
+        <a href="/rss.xml" class="hover:text-paper">RSS</a>
+      </p>
+    </div>
+  </div>
+</footer>

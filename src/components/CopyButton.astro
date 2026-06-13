@@ -1,0 +1,28 @@
+---
+/** CopyButton — copies a target element's text (press kit bios, §8). */
+interface Props { target: string; label?: string; }
+const { target, label = "Copy" } = Astro.props;
+---
+<button
+  type="button"
+  class="copy-btn btn btn-powder !py-1.5 !px-3 text-sm"
+  data-target={target}
+>
+  {label}
+</button>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".copy-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const sel = btn.dataset.target!;
+      const el = document.getElementById(sel);
+      if (!el) return;
+      try {
+        await navigator.clipboard.writeText(el.innerText.trim());
+        const orig = btn.textContent;
+        btn.textContent = "Copied";
+        setTimeout(() => { btn.textContent = orig; }, 1500);
+      } catch { /* clipboard unavailable */ }
+    });
+  });
+</script>

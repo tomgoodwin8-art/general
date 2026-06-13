@@ -1,0 +1,73 @@
+---
+import { mainNav } from "../data/profile";
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<header class="border-b border-grey-100 bg-paper sticky top-0 z-50">
+  <nav class="container-tg flex items-center justify-between h-16" aria-label="Primary">
+    <a href="/" class="display text-lg font-bold tracking-tight" aria-label="Tom Goodwin home">
+      TOM&nbsp;GOODWIN<span class="text-powder-deep">.ai</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-6 text-[0.95rem]">
+      {mainNav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              "py-1 transition-colors hover:text-powder-deep",
+              isActive(item.href) && "text-powder-deep font-medium",
+            ]}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a href="/contact" class="hidden md:inline-flex btn btn-ink !py-2 !px-4 text-sm">
+      Work with me
+    </a>
+
+    <button
+      id="nav-toggle"
+      class="md:hidden p-2 -mr-2"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-grey-100 bg-paper">
+    <ul class="container-tg py-4 flex flex-col gap-1">
+      {mainNav.map((item) => (
+        <li>
+          <a href={item.href} class="block py-2.5 text-lg hover:text-powder-deep">
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li class="pt-2">
+        <a href="/contact" class="btn btn-ink w-full">Work with me</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  // Client JS limited to nav toggle (brief §10.7).
+  const toggle = document.getElementById("nav-toggle");
+  const menu = document.getElementById("mobile-menu");
+  toggle?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+</script>

@@ -1,0 +1,45 @@
+---
+import OfferLayout from "../../../layouts/OfferLayout.astro";
+const path = "/work-with-me/paid-media-strategy/private-healthcare";
+const breadcrumb = [
+  { label: "Home", href: "/" },
+  { label: "Work with me", href: "/work-with-me" },
+  { label: "Paid Media Strategy", href: "/work-with-me/paid-media-strategy" },
+  { label: "Private Healthcare", href: path },
+];
+const faqs = [
+  { q: "What's different about paid media for private healthcare?", a: "Healthcare advertising sits under stricter platform policy and, in the UK, CQC regulation. Ad copy, landing pages and conditions you can target are all constrained. Get it wrong and accounts get suspended, not just throttled. The work is as much compliance as performance." },
+  { q: "What gets a healthcare ad account banned?", a: "Targeting sensitive health conditions the platforms restrict, making claims you cannot substantiate, and landing pages that breach health or financial advertising policy. I build campaigns that stay inside the lines while still performing." },
+  { q: "Do you understand CQC requirements?", a: "Yes. I have run paid media for CQC-regulated providers and navigated the overlap between clinical regulation and advertising policy. Compliance is designed in, not bolted on after a suspension." },
+];
+---
+<OfferLayout
+  title="Paid Media for Private Healthcare"
+  eyebrow="Paid Media Strategy"
+  lead="CQC-regulated paid media and healthcare ad-policy navigation. Performance that stays compliant and stays live."
+  description="Paid media for private healthcare: CQC-regulated campaigns and healthcare ad-policy navigation that performs and stays live. From Tom Goodwin, Founder of GAMEPLAN."
+  {path}
+  serviceName="Private Healthcare Paid Media"
+  breadcrumb={breadcrumb}
+  faqs={faqs}
+  ctaHeading="Running paid media for a regulated clinic?"
+  ctaBody="Send a brief. I'll tell you where your current setup risks suspension and how to grow it safely."
+>
+  <p><strong>I run paid media for private healthcare that performs without getting banned.</strong> Healthcare is the hardest advertising category to grow: clinical regulation on one side, platform policy on the other. I have worked inside both and I design campaigns that stay live.</p>
+
+  <h2>Who this is for</h2>
+  <p>Private clinics, diagnostics providers and specialist practices that need patient acquisition but operate under CQC regulation and strict ad policy. If you have had accounts suspended or you are nervous about what you can legally say, this is built for you.</p>
+
+  <h2>What you get</h2>
+  <ul>
+    <li>Campaigns designed inside CQC and platform policy from the start</li>
+    <li>Ad copy and landing pages that perform without breaching health-advertising rules</li>
+    <li>Conversion tracking that respects sensitive-data constraints</li>
+    <li>A growth plan that does not bet the account on a policy grey area</li>
+  </ul>
+
+  <h2>Proof anchor</h2>
+  <p>Paid media and measurement work for regulated providers including a London private healthcare client at roughly £3m ARR, plus diagnostics and specialist psychiatry practices. Real category experience, anonymised on request.</p>
+
+  <p>Related reading: <a href="/blog/07-google-ads-private-healthcare">Google Ads for private healthcare, what's different and what gets you banned</a>.</p>
+</OfferLayout>

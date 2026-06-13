@@ -1,0 +1,54 @@
+---
+import OfferLayout from "../../layouts/OfferLayout.astro";
+
+const breadcrumb = [
+  { label: "Home", href: "/" },
+  { label: "Work with me", href: "/work-with-me" },
+  { label: "AI Marketing Operations", href: "/work-with-me/ai-marketing-operations" },
+];
+
+const faqs = [
+  { q: "How do I actually use AI in a marketing team?", a: "Start with process, not tools. Map where your team spends time on repeatable judgement (reporting, briefing, QA, research), then build agents and systems that do the first pass and leave humans the decisions. The win is operational, not a software purchase." },
+  { q: "What does an AI marketing operations engagement involve?", a: "A diagnosis of where AI and agents can replace process in your team or agency, followed by building the systems: agentic reporting, briefing and research workflows, and the guardrails around them. You end with working systems and a team that can run them." },
+  { q: "Is this about replacing tools or replacing process?", a: "Process. Most teams bolt AI tools onto a broken workflow and wonder why nothing changes. The value is in redesigning the operation so the work itself is faster, then choosing the smallest set of tools that supports it." },
+  { q: "What does it cost?", a: "Scoped per engagement, usually a diagnostic phase followed by a build phase. Pricing depends on the size of the operation and how much we build versus advise. Send a brief for a figure." },
+  { q: "How do you handle security and data?", a: "Systems are built around your data-handling rules, not against them. Sensitive data stays where your policy requires, agents run on approved models, and every workflow has a human checkpoint. I document the data flow so your security team can sign it off." },
+];
+---
+<OfferLayout
+  title="AI Marketing Operations"
+  eyebrow="Work with me"
+  lead="Find where AI and agents replace process in a marketing team or agency, then build the systems that do it. Operations, not theory."
+  description="AI marketing operations for teams and agencies: diagnose where agents replace process, then build the systems. From Tom Goodwin, Founder of GAMEPLAN."
+  path="/work-with-me/ai-marketing-operations"
+  serviceName="AI Marketing Operations"
+  breadcrumb={breadcrumb}
+  faqs={faqs}
+  ctaHeading="Want your operation to run on AI, not just talk about it?"
+  ctaBody="Send a brief describing your team and where the time goes. I'll show you what is buildable."
+>
+  <p><strong>I find where AI and agents can replace process in your marketing operation, then I build the systems that do it.</strong> Not a workshop. Working systems, handed to a team that can run them.</p>
+
+  <h2>Who this is for</h2>
+  <p>Marketing teams and agencies carrying too much repeatable work: reporting that eats a day a week, briefing that bottlenecks on one person, research and QA that scale only by hiring. If your headcount grows in lockstep with your output, your operation is the constraint, not your talent.</p>
+
+  <h2>What you get</h2>
+  <ul>
+    <li>A diagnosis of where agents and AI replace process, ranked by payback</li>
+    <li>Built systems: agentic reporting, briefing, research and QA workflows</li>
+    <li>The guardrails: human checkpoints, data handling, model choices</li>
+    <li>A team trained to run and extend the systems without me</li>
+  </ul>
+
+  <h2>Proof anchor</h2>
+  <p>GAMEPLAN. runs as an AI-first operation. Through Clean Code Sites we ship custom websites in 48 hours, using agentic build and reporting workflows. I am not selling you something I have not built for myself.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>Diagnose.</strong> Map the operation and find the process worth automating.</li>
+    <li><strong>Build.</strong> Construct the systems and the guardrails around them.</li>
+    <li><strong>Embed.</strong> Train the team, document the data flow, hand over.</li>
+  </ol>
+
+  <p class="text-grey-400 text-sm" style="color:#6b7280">A note on language: I build operations and systems. I avoid the noun this category usually hides behind, because the work is concrete and so is the vocabulary.</p>
+</OfferLayout>

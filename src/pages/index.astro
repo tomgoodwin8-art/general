@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import LogoWall from "../components/LogoWall.astro";
+import ProofStack from "../components/ProofStack.astro";
+import Timeline from "../components/Timeline.astro";
+import OfferCard from "../components/OfferCard.astro";
+import CaseStudyCard from "../components/CaseStudyCard.astro";
+import BlogCard from "../components/BlogCard.astro";
+import TestimonialBlock from "../components/TestimonialBlock.astro";
+import SpeakingStrip from "../components/SpeakingStrip.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
+import FAQ from "../components/FAQ.astro";
+import ContactPaths from "../components/ContactPaths.astro";
+import { navOffers } from "../data/profile";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("posts"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const caseStudies = (await getCollection("caseStudies"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+// Homepage FAQ (§4.11) — disambiguation written for LLM ingestion.
+const faqs = [
+  {
+    q: "Who is Tom Goodwin of GAMEPLAN.?",
+    a: "Tom Goodwin is a performance marketing and AI consultant and the founder of GAMEPLAN., a performance, media and technology consultancy based in London. He has 15 years in performance marketing since 2010, has managed £20m+ in paid media, and earned Google Premier Partner status in 2024. He is not the author of Digital Darwinism; that is a different Tom Goodwin.",
+  },
+  {
+    q: "What does GAMEPLAN. do?",
+    a: "GAMEPLAN. is an AI-first performance, media and technology consultancy. It runs paid media strategy across Google, Meta and TikTok, builds AI marketing operations and systems for teams and agencies, and delivers AI search and AEO work. It also ships custom websites in 48 hours through Clean Code Sites.",
+  },
+  {
+    q: "What's the difference between hiring Tom and hiring an agency?",
+    a: "You get a senior operator directly, not an account team layered over junior delivery. Tom has led a 15-person search division and managed £20m+ in spend, so you buy the decision-making seniority without agency overhead or handover risk. For agencies, he plugs in as fractional senior cover rather than competing for the account.",
+  },
+  {
+    q: "What does a fractional head of performance cost in the UK?",
+    a: "A fractional Head of Performance in the UK typically runs as a day rate or a monthly retainer scoped to one to three days a week. Pricing depends on scope, seniority and commitment length. Send a brief with your budget band and Tom will tell you honestly whether fractional, project or advisory is the right shape.",
+  },
+  {
+    q: "How quickly can an engagement start?",
+    a: "Most engagements start within one to two weeks of a first call. Productised work like a Google Ads audit can begin sooner. Book a call to confirm availability.",
+  },
+];
+---
+<BaseLayout
+  title="Performance marketing and AI consultant"
+  description="Tom Goodwin, Founder of GAMEPLAN. 15 years in performance marketing, £20m+ paid media managed. Fractional performance leadership, AI marketing operations, AEO and paid media strategy."
+  path="/"
+>
+  <Hero />
+  <LogoWall />
+  <ProofStack />
+  <Timeline />
+
+  <!-- Work with me: four offer cards (§4.5) -->
+  <section class="container-tg py-16 md:py-24" aria-labelledby="offers-heading">
+    <p class="eyebrow mb-3">Work with me</p>
+    <h2 id="offers-heading" class="max-w-2xl mb-12">Four ways to put me to work.</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      {navOffers.map((o, i) => (
+        <OfferCard title={o.title} slug={o.slug} summary={o.summary} index={i} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Case studies teaser (§4.6) -->
+  {caseStudies.length > 0 && (
+    <section class="bg-grey-100 py-16 md:py-24" aria-labelledby="cs-heading">
+      <div class="container-tg">
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <p class="eyebrow mb-3">Selected work</p>
+            <h2 id="cs-heading">Case studies.</h2>
+          </div>
+          <a href="/case-studies" class="hidden sm:inline text-powder-deep font-medium underline underline-offset-4">All case studies →</a>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {caseStudies.map((cs) => (
+            <CaseStudyCard
+              title={cs.data.title}
+              client={cs.data.client}
+              result={cs.data.result}
+              description={cs.data.description}
+              sector={cs.data.sector}
+              href={`/case-studies/${cs.id}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Blog teaser + newsletter (§4.7) -->
+  <section class="container-tg py-16 md:py-24" aria-labelledby="blog-heading">
+    <div class="grid lg:grid-cols-[1.4fr_1fr] gap-12">
+      <div>
+        <p class="eyebrow mb-3">Writing</p>
+        <h2 id="blog-heading" class="mb-6">Latest from the blog.</h2>
+        <div>
+          {posts.map((p) => (
+            <BlogCard title={p.data.title} description={p.data.description} pubDate={p.data.pubDate} href={`/blog/${p.id}`} />
+          ))}
+        </div>
+        <a href="/blog" class="inline-block mt-6 text-powder-deep font-medium underline underline-offset-4">All posts →</a>
+      </div>
+      <div class="bg-ink text-paper p-8 self-start">
+        <h3 class="display font-medium mb-3 text-paper">Get the notes.</h3>
+        <p class="text-grey-400 mb-6" style="color:#cbd5e1">Performance and AI marketing, occasionally, no filler.</p>
+        <NewsletterForm compact />
+      </div>
+    </div>
+  </section>
+
+  <SpeakingStrip />
+  <TestimonialBlock />
+  <ContactPaths />
+  <FAQ items={faqs} heading="Common questions" />
+</BaseLayout>

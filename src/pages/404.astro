@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { navOffers } from "../data/profile";
+---
+<BaseLayout title="Page not found" description="That page doesn't exist. Find your way back to the work." path="/404" noindex>
+  <section class="container-tg py-24 md:py-32 text-center">
+    <p class="eyebrow mb-4">404</p>
+    <h1 class="mb-6">That page got away.</h1>
+    <p class="text-xl text-grey-400 max-w-md mx-auto mb-10" style="color:#4b5563">The page you wanted isn't here. Try one of these instead.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/" class="btn btn-ink">Home</a>
+      <a href="/work-with-me" class="btn btn-powder">Work with me</a>
+      <a href="/blog" class="btn btn-powder">Blog</a>
+    </div>
+    <ul class="mt-12 flex flex-wrap gap-x-6 gap-y-2 justify-center text-sm text-powder-deep">
+      {navOffers.map((o) => <li><a href={o.slug} class="underline underline-offset-4">{o.title}</a></li>)}
+    </ul>
+  </section>
+</BaseLayout>

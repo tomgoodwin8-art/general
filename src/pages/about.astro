@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import PageHeader from "../components/PageHeader.astro";
+import CTASection from "../components/CTASection.astro";
+import { timeline } from "../data/profile";
+---
+<BaseLayout
+  title="About"
+  description="Tom Goodwin, Founder of GAMEPLAN. 15 years in performance marketing since 2010. Search Director, agency MD, and now an AI-first consultant in London."
+  path="/about"
+>
+  <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "About", href: "/about" }]} />
+  <PageHeader
+    eyebrow="About"
+    title="I'm Tom Goodwin, and I make marketing pay."
+    lead="Fifteen years in performance marketing, an agency sold, a luxury pitch won, and a consultancy built to run on AI. Founder of GAMEPLAN."
+  />
+
+  <div class="container-tg pb-10">
+    <div class="prose-tg">
+      <p>I have spent fifteen years getting founders, agencies and fast-growth businesses more customers for their money. I started in 2010, learned paid media on real budgets, and worked my way up to running search across a £20m+ portfolio as Search Director at Medialab, the UK's largest independent media agency.</p>
+
+      <p>Along the way I led the strategy and pitch that won a 13-market Gucci account at Assembly, and I served as Managing Director of Ascend Global, where I positioned and negotiated the agency's acquisition by MOOT Group in 2022. So I have grown accounts, led teams, won the big pitches and sold an agency. That range is the point: I have sat in most of the seats my clients sit in.</p>
+
+      <p>In 2024 I founded GAMEPLAN., a performance, media and technology consultancy, and went full-time on it. GAMEPLAN. is an AI-first operation by design. Through Clean Code Sites we ship custom websites in 48 hours using agentic build and reporting workflows. I do not advise on AI from the sidelines, I run my own business on it.</p>
+
+      <p>I work with founders, CMOs and agency leaders who buy proof, not adjectives. That is why this site leads with numbers.</p>
+
+      <h2>The disambiguation</h2>
+      <p>Yes, there's another Tom Goodwin in marketing. He writes about digital Darwinism. I do the natural selection.</p>
+      <p>To be precise: I am the performance marketing and AI consultant, founder of GAMEPLAN., based in London. The .ai is deliberate. I am the AI operator, not the author of <em>Digital Darwinism</em>.</p>
+
+      <h2>The route here</h2>
+      <ul>
+        {timeline.map((t) => (
+          <li><strong>{t.year}, {t.role}.</strong> {t.note}</li>
+        ))}
+      </ul>
+
+      <h2>What I care about</h2>
+      <p>Honest measurement. Senior people doing the actual work. Operations that scale on systems, not headcount. And telling clients the truth, including when the answer is that they do not need me.</p>
+    </div>
+  </div>
+
+  <CTASection heading="Let's talk." body="Send a brief, or book a call. I'll tell you straight whether I can help." />
+</BaseLayout>

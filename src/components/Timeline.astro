@@ -1,0 +1,19 @@
+---
+import { timeline } from "../data/profile";
+---
+<section class="bg-grey-100 py-16 md:py-24" aria-labelledby="timeline-heading">
+  <div class="container-tg">
+    <p class="eyebrow mb-3">How I got here</p>
+    <h2 id="timeline-heading" class="mb-12">Fifteen years, six stops.</h2>
+    <ol class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {timeline.map((t) => (
+        <li class="bg-paper p-6 border-l-2 border-powder">
+          <span class="display text-2xl font-bold">{t.year}</span>
+          <span class="block display text-lg font-medium mt-1">{t.role}</span>
+          <span class="block text-grey-400 text-sm mt-2" style="color:#6b7280">{t.note}</span>
+        </li>
+      ))}
+    </ol>
+    <a href="/about" class="inline-block mt-10 text-powder-deep underline underline-offset-4 font-medium">Read the full story →</a>
+  </div>
+</section>

@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import CTASection from "../../components/CTASection.astro";
+import { SITE_URL } from "../../data/profile";
+
+export async function getStaticPaths() {
+  const items = await getCollection("caseStudies");
+  return items.map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const path = `/case-studies/${item.id}`;
+
+const articleNode = {
+  "@type": "Article",
+  "@id": `${SITE_URL}${path}#article`,
+  headline: item.data.title,
+  description: item.data.description,
+  author: { "@id": `${SITE_URL}/#person` },
+  publisher: { "@id": `${SITE_URL}/#gameplan` },
+  mainEntityOfPage: new URL(path, SITE_URL).href,
+};
+---
+<BaseLayout
+  title={item.data.title}
+  description={item.data.description}
+  {path}
+  type="article"
+  schemaNodes={[articleNode]}
+>
+  <Breadcrumb items={[
+    { label: "Home", href: "/" },
+    { label: "Case studies", href: "/case-studies" },
+    { label: item.data.title, href: path },
+  ]} />
+
+  <article class="container-tg py-10 md:py-14">
+    <header class="max-w-3xl mb-8">
+      <div class="flex items-center gap-3">
+        <span class="eyebrow">{item.data.client}</span>
+        {item.data.sector && <span class="text-grey-400 text-sm" style="color:#9ca3af">· {item.data.sector}</span>}
+      </div>
+      <h1 class="mt-3 text-balance">{item.data.title}</h1>
+      <p class="display text-5xl font-bold text-powder-deep mt-6 leading-none">{item.data.result}</p>
+    </header>
+    <div class="prose-tg">
+      <Content />
+    </div>
+  </article>
+
+  <CTASection heading="Want results like these?" body="Send a brief with your situation and budget band." />
+</BaseLayout>

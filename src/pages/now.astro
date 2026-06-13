@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import PageHeader from "../components/PageHeader.astro";
+
+const updated = new Date(2026, 5, 1).toLocaleDateString("en-GB", {
+  month: "long", year: "numeric",
+});
+---
+<BaseLayout
+  title="Now"
+  description="What Tom Goodwin, Founder of GAMEPLAN., is focused on right now. Updated monthly."
+  path="/now"
+>
+  <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Now", href: "/now" }]} />
+  <PageHeader eyebrow={`Updated ${updated}`} title="What I'm doing now." lead="A monthly note on what has my attention. Inspired by the /now page convention." />
+  <div class="container-tg pb-16">
+    <div class="prose-tg">
+      <h2>Client work</h2>
+      <p>Running fractional performance leadership and AI marketing operations engagements through GAMEPLAN. Current focus areas are MER-led measurement rebuilds and getting service businesses cited in AI search.</p>
+      <h2>Building</h2>
+      <p>Pushing the AI-first operation further: agentic reporting and build workflows, and shipping sites in 48 hours via Clean Code Sites. This very site is a working demo of the AEO approach I sell.</p>
+      <h2>Writing &amp; speaking</h2>
+      <p>Publishing the launch series on performance, measurement and AI search. Open to speaking on AI-first marketing operations, honest measurement, and AEO.</p>
+      <h2>Open to</h2>
+      <p>Fractional Head of Performance and Search Director engagements, AI marketing operations builds, and selective pitch and exit advisory for agencies.</p>
+      <p class="text-grey-400 text-sm" style="color:#6b7280">This page updates monthly. Last updated {updated}.</p>
+    </div>
+  </div>
+</BaseLayout>

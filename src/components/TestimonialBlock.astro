@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+const testimonials = (await getCollection("testimonials")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+{testimonials.length > 0 && (
+  <section class="container-tg py-16 md:py-24" aria-labelledby="testimonials-heading">
+    <p class="eyebrow mb-3">In their words</p>
+    <h2 id="testimonials-heading" class="mb-12">What clients say.</h2>
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {testimonials.map((t) => (
+        <figure class="border-l-2 border-powder pl-6">
+          <blockquote class="text-lg" style="color:#1f2937">"{t.data.quote}"</blockquote>
+          <figcaption class="mt-4 text-sm">
+            <span class="display font-medium">{t.data.author}</span>
+            <span class="block text-grey-400" style="color:#6b7280">{t.data.role}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+)}

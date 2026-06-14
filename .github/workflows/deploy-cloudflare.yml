@@ -31,26 +31,17 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Diagnose Cloudflare credentials
-        env:
-          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          echo "Token length: ${#CF_TOKEN}  (expected ~40)"
-          echo "Account ID length: ${#CF_ACCOUNT}  (expected 32)"
-          echo "--- token verify ---"
-          curl -s https://api.cloudflare.com/client/v4/user/tokens/verify \
-            -H "Authorization: Bearer $CF_TOKEN" | jq '{success, errors, status: .result.status}'
-          echo "--- accounts visible to token ---"
-          curl -s https://api.cloudflare.com/client/v4/accounts \
-            -H "Authorization: Bearer $CF_TOKEN" | jq '{success, errors, accounts: [.result[]? | {id, name}]}'
-          echo "--- pages projects in CF_ACCOUNT ---"
-          curl -s "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT/pages/projects" \
-            -H "Authorization: Bearer $CF_TOKEN" | jq '{success, errors, projects: [.result[]? | .name]}'
+      - name: Ensure Pages project exists
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create tomgoodwin-london --production-branch=main
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name tomgoodwin-london
+          command: pages deploy dist --project-name tomgoodwin-london --branch=main --commit-dirty=true

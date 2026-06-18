@@ -1,0 +1,81 @@
+---
+import { MOVES } from '../data/site';
+
+interface Props {
+  /** Heading level for the move names, for correct document outline. */
+  headingLevel?: 'h3' | 'h4';
+  showLink?: boolean;
+}
+const { showLink = true } = Astro.props;
+---
+
+<ol class="five-moves">
+  {
+    MOVES.map((move) => (
+      <li class="move">
+        <span class="move-n" aria-hidden="true">{String(move.n).padStart(2, '0')}</span>
+        <div class="move-body">
+          <span class="move-name">{move.name}</span>
+          <span class="move-line">{move.line}</span>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+{
+  showLink && (
+    <p class="mt-8">
+      <a href="/method" class="link-accent">
+        Read the full method
+        <span aria-hidden="true"> &rarr;</span>
+      </a>
+    </p>
+  )
+}
+
+<style>
+  /* A clean numbered sequence, not heavy-bordered cards (brief §6). */
+  .five-moves {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+  .move {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1.25rem;
+    align-items: baseline;
+    padding-block: 1.4rem;
+    border-top: 1px solid var(--color-rule);
+  }
+  .move:last-child { border-bottom: 1px solid var(--color-rule); }
+  .move-n {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 480;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.15rem;
+  }
+  .move-body { display: flex; flex-direction: column; gap: 0.2rem; }
+  .move-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 460;
+    line-height: 1.1;
+  }
+  .move-line {
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+  }
+  .link-accent {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>

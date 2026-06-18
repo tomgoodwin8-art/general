@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dontworkharder.com/sitemap-index.xml

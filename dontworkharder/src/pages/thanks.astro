@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+
+const shareText =
+  'I just signed up for the free 5-day course from Don’t Work Harder: a method for using AI to work less, not more. Reclaim your week:';
+const shareUrl = SITE.url;
+const twitterShare = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+const linkedinShare = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+---
+
+<BaseLayout
+  title="You’re in"
+  description="Thanks for subscribing. Check your inbox for the first lesson."
+  noindex={true}
+>
+  <section class="section thanks">
+    <div class="container-dwh">
+      <div class="measure thanks-inner">
+        <p class="eyebrow">You’re in</p>
+        <h1>Check your inbox.</h1>
+        <p class="lede">
+          Lesson one is on its way, with the week-audit worksheet attached so you can
+          start the See move today. If it has not arrived in a few minutes, check
+          your spam or promotions folder and mark it as not spam so the rest land
+          where they should.
+        </p>
+
+        <div class="share">
+          <p class="share-head">One small thing.</p>
+          <p class="share-body">
+            This list grows by word of mouth, not by algorithm. If you know someone
+            whose week has been eaten the same way, pass it on.
+          </p>
+          <div class="share-buttons">
+            <a class="btn btn-outline" href={twitterShare} target="_blank" rel="noopener">Share on X</a>
+            <a class="btn btn-outline" href={linkedinShare} target="_blank" rel="noopener">Share on LinkedIn</a>
+            <button id="copy-link" class="btn btn-outline" type="button" data-url={shareUrl}>Copy link</button>
+          </div>
+          <p id="copy-status" class="copy-status" role="status" aria-live="polite" hidden>Link copied.</p>
+        </div>
+
+        <p class="back"><a href="/" class="inline-link">Back to the homepage</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks-inner { padding-block: 1rem; }
+  .thanks .lede { margin-top: 1.25rem; font-size: 1.2rem; line-height: 1.6; color: var(--color-ink-soft); }
+  .share {
+    margin-top: 2.5rem;
+    padding: 1.75rem;
+    background: var(--color-paper-deep);
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+  }
+  .share-head { font-family: var(--font-display); font-size: 1.3rem; }
+  .share-body { margin-top: 0.5rem; color: var(--color-ink-soft); }
+  .share-buttons { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .copy-status { margin-top: 0.75rem; font-size: 0.9rem; color: var(--color-accent); font-weight: 600; }
+  .back { margin-top: 2rem; }
+  .inline-link { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+</style>
+
+<script>
+  const btn = document.getElementById('copy-link');
+  const status = document.getElementById('copy-status');
+  btn?.addEventListener('click', async () => {
+    const url = btn.getAttribute('data-url') ?? window.location.origin;
+    try {
+      await navigator.clipboard.writeText(url);
+      if (status) { status.hidden = false; }
+    } catch {
+      window.prompt('Copy this link:', url);
+    }
+  });
+</script>

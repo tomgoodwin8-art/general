@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaCourse from '../components/CtaCourse.astro';
+import { SITE } from '../data/site';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.author,
+  description: 'Author of Don’t Work Harder. Writes about technology, work, and the economics of attention.',
+  url: new URL('/about', SITE.url).href,
+};
+---
+
+<BaseLayout
+  title="About"
+  description="The author and the origin of the Don’t Work Harder idea: why the argument for reclaiming time matters now that AI can finally deliver it."
+  schema={personSchema}
+>
+  <section class="section">
+    <div class="container-dwh">
+      <div class="prose-dwh about-body">
+        <p class="eyebrow">About</p>
+        <h1 class="about-h1">Why this argument, now.</h1>
+
+        <p>
+          I am {SITE.author}. I write about technology and work, and for most of my
+          career I believed the standard story: that better tools make better
+          working lives. The longer I watched, the less the story held. Every wave
+          of tools made us faster. None of them made us freer. The time the tools
+          saved did not come back to us. It was spent on more work, and we barely
+          noticed the exchange.
+        </p>
+
+        <h2>Where the idea came from</h2>
+        <p>
+          The idea for this book started with a small, irritating observation. I had
+          automated a chunk of my own week with AI, genuinely hours of it, and a
+          month later I was no less busy. The time had not vanished. It had been
+          quietly refilled, partly by others and mostly by me. I had won the
+          efficiency and lost the time, which is the oldest trick in the history of
+          work, and I had fallen for it with my eyes open.
+        </p>
+        <p>
+          That sent me back to Keynes, and to a century of the same pattern repeating.
+          The machines always delivered. The leisure never arrived. The difference
+          this time is that AI is powerful enough to make the gap impossible to
+          ignore, which makes it the right moment to ask the question we have always
+          dodged: not how to produce more, but how to keep what we save.
+        </p>
+
+        <h2>What I am arguing</h2>
+        <p>
+          The case is simple. The fifteen-hour week Keynes promised is now technically
+          within reach for a great deal of knowledge work. Whether we get it is not a
+          technical question but a question of defence. So the book is practical
+          rather than utopian. It is a method, the <a href="/method">five moves</a>,
+          for finding the time, cutting the waste, delegating the rest, and then
+          holding the line. The hard part was never the automation. It is keeping the
+          hours once you have them, and that is a skill, not a wish.
+        </p>
+        <p>
+          If that argument is useful to you, the best place to start is the free
+          course below. It is the method in its shortest, most usable form.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaCourse source="about" />
+</BaseLayout>
+
+<style>
+  .about-body { margin-inline: auto; }
+  .about-h1 { margin-top: 0.5rem; margin-bottom: 1.5rem; }
+</style>

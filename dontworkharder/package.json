@@ -1,0 +1,28 @@
+{
+  "name": "dontworkharder",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "pages:dev": "wrangler pages dev ./dist",
+    "deploy": "wrangler pages deploy ./dist --project-name dontworkharder",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "@fontsource-variable/fraunces": "^5.2.5",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^5.0.0",
+    "sharp": "^0.35.1",
+    "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "pdfkit": "^0.19.1",
+    "wrangler": "^3.90.0"
+  }
+}

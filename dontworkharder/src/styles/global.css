@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+/* ============================================================
+   dontworkharder.com — Design system (brief §6)
+   Calm, spacious, editorial. A well-set page in a serious
+   imprint, not a SaaS dashboard. Restraint signals authority.
+   ============================================================ */
+
+@theme {
+  /* Colour: warm paper, near-black ink, one restrained accent (oxblood) */
+  --color-paper: #faf7f2;
+  --color-paper-deep: #f1ece3;
+  --color-ink: #16130f;
+  --color-ink-soft: #4a443c;
+  --color-rule: #e3dccf;
+  --color-accent: #6d2a32;
+  --color-accent-deep: #542026;
+
+  /* Typography */
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-body: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background: var(--color-paper);
+    font-size: 1.1875rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, .display {
+    font-family: var(--font-display);
+    font-weight: 460;
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(2.6rem, 6vw, 4.25rem); font-weight: 480; }
+  h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
+  h3 { font-size: clamp(1.35rem, 2.2vw, 1.7rem); }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-paper);
+  }
+}
+
+@layer components {
+  .container-dwh {
+    width: 100%;
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  .measure {
+    max-width: 38rem; /* ~68 characters at body size */
+    margin-inline: auto;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  /* Long-form prose */
+  .prose-dwh { max-width: 38rem; }
+  .prose-dwh > * + * { margin-top: 1.25rem; }
+  .prose-dwh p { line-height: 1.7; }
+  .prose-dwh h2 { margin-top: 3rem; }
+  .prose-dwh h3 { margin-top: 2.25rem; }
+  .prose-dwh h2 + p, .prose-dwh h3 + p { margin-top: 0.75rem; }
+  .prose-dwh ul { padding-left: 1.25rem; list-style: disc; }
+  .prose-dwh ol { padding-left: 1.25rem; list-style: decimal; }
+  .prose-dwh li { margin-block: 0.4rem; }
+  .prose-dwh li::marker { color: var(--color-accent); }
+  .prose-dwh a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .prose-dwh strong { font-weight: 650; }
+  .prose-dwh blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.4rem;
+    margin-block: 2rem;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    line-height: 1.4;
+    font-style: italic;
+    color: var(--color-ink-soft);
+  }
+  .prose-dwh hr {
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+    margin-block: 2.5rem;
+  }
+  .prose-dwh code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.92em;
+    background: var(--color-paper-deep);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0.85rem 1.5rem;
+    border-radius: 3px;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-accent {
+    background: var(--color-accent);
+    color: var(--color-paper);
+  }
+  .btn-accent:hover { background: var(--color-accent-deep); }
+  .btn-outline {
+    background: transparent;
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+  .btn-outline:hover { background: var(--color-ink); color: var(--color-paper); }
+
+  /* Standard section rhythm */
+  .section { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+  .rule-top { border-top: 1px solid var(--color-rule); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

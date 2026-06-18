@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailCapture from '../components/EmailCapture.astro';
+import { MOVES, SITE } from '../data/site';
+
+const courseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: 'Don’t Work Harder: the free 5-day course',
+  description:
+    'A free five-day email course that walks through the five moves to reclaim your week with AI, one short lesson a day, with a downloadable week-audit worksheet.',
+  provider: { '@type': 'Organization', name: SITE.name, sameAs: SITE.url },
+  isAccessibleForFree: true,
+};
+---
+
+<BaseLayout
+  title="The free 5-day course"
+  description="A free 5-day email course: one short lesson a day through the five moves to reclaim your week with AI, plus a downloadable week-audit worksheet. No hype, no spam."
+  schema={courseSchema}
+>
+  <section class="course-hero section">
+    <div class="container-dwh">
+      <div class="course-grid">
+        <div class="course-pitch">
+          <p class="eyebrow">Free 5-day email course</p>
+          <h1>Reclaim your week in five short lessons.</h1>
+          <p class="lede">
+            One email a day for five days. Each one takes a few minutes to read and
+            gives you one thing to do. By Friday you will have audited your week,
+            cut the work that should not exist, handed the rest to AI, and built a
+            way to keep the time you get back.
+          </p>
+
+          <ul class="includes">
+            <li>
+              <strong>Five daily lessons</strong>, one per move (See, Shed, Shift, Shield, Spend),
+              each with a single exercise you can finish the same day.
+            </li>
+            <li>
+              <strong>The week-audit worksheet</strong> (a one-page PDF), sent with the
+              first lesson so you can start the See move immediately.
+            </li>
+            <li>
+              <strong>A plain promise of value.</strong> No upsell sequence, no daily
+              barrage. Unsubscribe in one click whenever you like.
+            </li>
+          </ul>
+        </div>
+
+        <aside class="course-signup">
+          <div class="signup-card">
+            <p class="signup-head">Start now. It is free.</p>
+            <EmailCapture source="course" list="course" variant="stacked" cta="Send me lesson one" />
+            <p class="signup-foot">Join readers reclaiming their week, one move at a time.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rule-top">
+    <div class="container-dwh">
+      <div class="measure">
+        <p class="eyebrow">What you will work through</p>
+        <h2>The five moves, one day at a time.</h2>
+        <ol class="syllabus">
+          {
+            MOVES.map((m) => (
+              <li class="syllabus-item">
+                <span class="syl-day">Day {m.n}</span>
+                <span class="syl-name">{m.name}</span>
+                <span class="syl-line">{m.line}</span>
+              </li>
+            ))
+          }
+        </ol>
+        <p class="syllabus-note">
+          Prefer the long version first? Read <a href="/method" class="inline-link">the full method</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .course-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  .course-pitch .lede {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+  }
+  .includes { margin-top: 2rem; list-style: none; padding: 0; display: grid; gap: 1.1rem; }
+  .includes li {
+    padding-left: 1.6rem;
+    position: relative;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+  }
+  .includes li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    background: var(--color-accent);
+    border-radius: 1px;
+  }
+  .includes strong { color: var(--color-ink); }
+
+  .course-signup { position: sticky; top: 1.5rem; }
+  .signup-card {
+    background: var(--color-paper-deep);
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    padding: 1.75rem;
+  }
+  .signup-head {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+  }
+  .signup-foot { margin-top: 1rem; font-size: 0.85rem; color: var(--color-ink-soft); }
+
+  .syllabus { margin-top: 2rem; list-style: none; padding: 0; }
+  .syllabus-item {
+    display: grid;
+    grid-template-columns: 5rem auto;
+    grid-template-areas: 'day name' 'day line';
+    gap: 0 1.25rem;
+    padding-block: 1.1rem;
+    border-top: 1px solid var(--color-rule);
+  }
+  .syllabus-item:last-child { border-bottom: 1px solid var(--color-rule); }
+  .syl-day {
+    grid-area: day;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    padding-top: 0.35rem;
+  }
+  .syl-name { grid-area: name; font-family: var(--font-display); font-size: 1.35rem; }
+  .syl-line { grid-area: line; color: var(--color-ink-soft); font-size: 1rem; }
+  .syllabus-note { margin-top: 1.75rem; }
+  .inline-link, .syllabus-note a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+
+  @media (max-width: 820px) {
+    .course-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .course-signup { position: static; }
+  }
+</style>

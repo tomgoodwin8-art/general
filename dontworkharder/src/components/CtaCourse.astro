@@ -1,0 +1,44 @@
+---
+import EmailCapture from './EmailCapture.astro';
+import type { CaptureSource } from '../data/site';
+
+interface Props {
+  source?: CaptureSource;
+  heading?: string;
+  body?: string;
+  cta?: string;
+}
+const {
+  source = 'course',
+  heading = 'Start reclaiming your week.',
+  body = 'The free 5-day course walks you through the five moves, one short lesson a day, with the week-audit worksheet to start. No hype. No spam.',
+  cta = 'Get the free 5-day course',
+} = Astro.props;
+---
+
+<aside class="cta-course">
+  <div class="container-dwh">
+    <div class="cta-inner measure">
+      <p class="eyebrow">The free course</p>
+      <h2 class="cta-heading">{heading}</h2>
+      <p class="cta-body">{body}</p>
+      <EmailCapture source={source} list="course" variant="stacked" cta={cta} />
+    </div>
+  </div>
+</aside>
+
+<style>
+  .cta-course {
+    background: var(--color-paper-deep);
+    border-top: 1px solid var(--color-rule);
+    border-bottom: 1px solid var(--color-rule);
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+  .cta-heading { margin-top: 0.4rem; }
+  .cta-body {
+    margin-top: 1rem;
+    margin-bottom: 1.75rem;
+    font-size: 1.1rem;
+    color: var(--color-ink-soft);
+  }
+</style>

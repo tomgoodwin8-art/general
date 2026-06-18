@@ -1,0 +1,5 @@
+# Cloudflare Pages project config for local dev (wrangler pages dev)
+# and CI deploys. Static assets build to ./dist; Functions live in ./functions.
+name = "dontworkharder"
+pages_build_output_dir = "./dist"
+compatibility_date = "2024-11-01"

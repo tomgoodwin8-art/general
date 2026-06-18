@@ -1,0 +1,80 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaCourse from '../../components/CtaCourse.astro';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const { data } = article;
+
+const url = new URL(`/articles/${article.id}`, SITE.url).href;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.pubDate.toISOString(),
+  ...(data.updatedDate && { dateModified: data.updatedDate.toISOString() }),
+  author: { '@type': 'Person', name: SITE.author },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  image: new URL(SITE.ogImage, SITE.url).href,
+};
+
+const dateStr = data.pubDate.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={data.title} description={data.description} type="article" schema={articleSchema}>
+  <article class="article">
+    <header class="article-head section">
+      <div class="container-dwh">
+        <div class="measure">
+          <p class="article-kicker"><a href="/articles">Articles</a></p>
+          <h1 class="article-title">{data.title}</h1>
+          <p class="article-meta">{dateStr} · {data.readTime} min read</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-dwh">
+      <div class="prose-dwh article-body">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <!-- Every article ends with the same conversion block (brief §5.6) -->
+  <div class="article-cta">
+    <CtaCourse source="article" />
+  </div>
+</BaseLayout>
+
+<style>
+  .article-head { padding-bottom: 0; }
+  .article-kicker { margin-bottom: 1rem; }
+  .article-kicker a {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .article-title { margin-bottom: 1rem; }
+  .article-meta { font-size: 0.9rem; color: var(--color-ink-soft); }
+  .article-body { margin-inline: auto; padding-block: 2.5rem 4rem; }
+  .article-cta { margin-top: 0; }
+</style>

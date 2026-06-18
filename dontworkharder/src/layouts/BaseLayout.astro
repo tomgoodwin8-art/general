@@ -1,0 +1,65 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'book';
+  noindex?: boolean;
+  schema?: object | object[];
+  /** Set false for self-contained landing pages (e.g. /course). */
+  showNav?: boolean;
+  showFooter?: boolean;
+}
+const {
+  title,
+  description,
+  image,
+  type,
+  noindex,
+  schema,
+  showNav = true,
+  showFooter = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#faf7f2" />
+    <SEO title={title} description={description} image={image} type={type} noindex={noindex} schema={schema} />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <a href="#main" class="skip-link">Skip to content</a>
+    {showNav && <Nav />}
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    {showFooter && <Footer />}
+
+    <style>
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -3rem;
+        background: var(--color-ink);
+        color: var(--color-paper);
+        padding: 0.6rem 1rem;
+        border-radius: 3px;
+        z-index: 50;
+        transition: top 0.15s ease;
+      }
+      .skip-link:focus { top: 1rem; }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailCapture from '../components/EmailCapture.astro';
+import { SITE } from '../data/site';
+
+const parts = [
+  {
+    label: 'Part One',
+    title: 'The broken promise',
+    body: 'How the fifteen-hour week was forecast, why the productivity arrived but the free time did not, and the century of forces that quietly ate the difference. The diagnosis, made carefully, so the cure makes sense.',
+  },
+  {
+    label: 'Part Two',
+    title: 'The five moves',
+    body: 'See, Shed, Shift, Shield, Spend. The working method, one move per part, with the examples and exercises to run each one. This is the part you will return to.',
+  },
+  {
+    label: 'Part Three',
+    title: 'Living it',
+    body: 'The harder, quieter work: what to do with the hours once you have them, how to hold the line against a culture that rewards looking busy, and how to keep the time without guilt.',
+  },
+];
+
+const bookSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  name: 'Don’t Work Harder',
+  author: { '@type': 'Person', name: SITE.author },
+  description:
+    'AI finally makes the fifteen-hour week possible, but only if you defend the reclaimed time. A five-move method for working less, not more.',
+  bookFormat: 'https://schema.org/Hardcover',
+  inLanguage: 'en',
+  url: new URL('/book', SITE.url).href,
+};
+---
+
+<BaseLayout
+  title="The Book"
+  description="Don’t Work Harder: AI finally makes the fifteen-hour week possible, but only if you defend the time. A five-move method, in three parts. Read about the book and get launch updates."
+  type="book"
+  schema={bookSchema}
+>
+  <section class="book-hero section">
+    <div class="container-dwh book-hero-grid">
+      <div class="book-cover-col">
+        <div class="book-cover" aria-hidden="true">
+          <div class="cover-face">
+            <span class="cover-title">Don’t Work Harder</span>
+            <span class="cover-sub">The five moves to reclaim your week</span>
+            <span class="cover-author">{SITE.author}</span>
+          </div>
+        </div>
+      </div>
+      <div class="book-hero-copy">
+        <p class="eyebrow">The book</p>
+        <h1>Don’t Work Harder.</h1>
+        <p class="lede">
+          For ninety years the promise was that machines would give us our time
+          back. They made us more productive instead, and the hours stayed. AI is
+          the first technology powerful enough to make the short week real. This
+          book is about the part nobody plans for: keeping the time once you have
+          earned it.
+        </p>
+        <div class="buy-row">
+          <a href="#launch" class="btn btn-accent">Get pre-order bonuses</a>
+          <a href="/read" class="btn btn-outline">Read a free sample</a>
+        </div>
+        <p class="buy-note">Coming soon. Retail buy links will appear here at launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rule-top">
+    <div class="container-dwh">
+      <div class="measure">
+        <p class="eyebrow">The structure</p>
+        <h2>Three parts.</h2>
+      </div>
+      <div class="parts">
+        {
+          parts.map((p) => (
+            <article class="part">
+              <p class="part-label">{p.label}</p>
+              <h3 class="part-title">{p.title}</h3>
+              <p class="part-body">{p.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section rule-top">
+    <div class="container-dwh">
+      <div class="measure">
+        <p class="eyebrow">After reading</p>
+        <h2>What you will be able to do.</h2>
+        <ul class="outcomes">
+          <li>See exactly where your week goes, instead of guessing.</li>
+          <li>Cut the work that should not exist, without waiting for permission.</li>
+          <li>Hand durable, repeatable tasks to AI with instructions you reuse.</li>
+          <li>Defend the time you reclaim so it is not quietly taken back.</li>
+          <li>Spend the recovered hours on purpose, on what actually matters to you.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rule-top">
+    <div class="container-dwh">
+      <div class="measure author-block">
+        <p class="eyebrow">The author</p>
+        <h2>{SITE.author}</h2>
+        <p>
+          {SITE.author} writes about technology, work, and the economics of
+          attention. Don’t Work Harder grew out of a simple observation: every tool
+          sold as a way to save time has been used to extract more work, and AI will
+          go the same way unless we decide otherwise. A fuller biography is on the
+          <a href="/about" class="inline-link">about page</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rule-top launch-cta" id="launch">
+    <div class="container-dwh">
+      <div class="measure">
+        <p class="eyebrow">Launch list</p>
+        <h2>Launch updates and pre-order bonuses.</h2>
+        <p class="launch-body">
+          Join the launch list for the publication date, pre-order bonuses, and the
+          chance to read early. Separate from the course. One message only when there
+          is something worth telling you.
+        </p>
+        <EmailCapture source="book-launch" list="launch" variant="stacked" cta="Keep me posted" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .book-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 16rem) 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .book-cover {
+    aspect-ratio: 5 / 7;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-radius: 4px;
+    padding: 2rem;
+    display: flex;
+    box-shadow: 0 1px 0 var(--color-rule);
+  }
+  .cover-face {
+    border: 1px solid rgba(250, 247, 242, 0.3);
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .cover-title { font-family: var(--font-display); font-size: 1.9rem; line-height: 1.05; }
+  .cover-sub { font-size: 0.9rem; opacity: 0.7; line-height: 1.4; }
+  .cover-author { margin-top: auto; font-size: 0.9rem; opacity: 0.8; }
+
+  .book-hero-copy .lede {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+  .buy-row { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.85rem; }
+  .buy-note { margin-top: 1rem; font-size: 0.85rem; color: var(--color-ink-soft); }
+
+  .parts {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2.5rem;
+  }
+  .part { border-top: 2px solid var(--color-accent); padding-top: 1.25rem; }
+  .part-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .part-title { margin-top: 0.4rem; }
+  .part-body { margin-top: 0.75rem; color: var(--color-ink-soft); line-height: 1.6; }
+
+  .outcomes { margin-top: 1.5rem; list-style: none; padding: 0; display: grid; gap: 0.85rem; }
+  .outcomes li {
+    padding-left: 1.6rem;
+    position: relative;
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+  }
+  .outcomes li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.6rem; height: 0.6rem;
+    background: var(--color-accent);
+    border-radius: 1px;
+  }
+
+  .author-block p { margin-top: 1rem; color: var(--color-ink-soft); line-height: 1.7; }
+  .inline-link { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+  .launch-cta { background: var(--color-paper-deep); }
+  .launch-body { margin-top: 1rem; margin-bottom: 1.75rem; color: var(--color-ink-soft); }
+
+  @media (max-width: 720px) {
+    .book-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .book-cover { max-width: 14rem; }
+  }
+</style>

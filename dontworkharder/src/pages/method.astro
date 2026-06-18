@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaCourse from '../components/CtaCourse.astro';
+import { SITE } from '../data/site';
+
+// The cornerstone: one section per move (principle, why, example, action).
+const moves = [
+  {
+    n: 1,
+    name: 'See',
+    principle: 'Audit where your real week goes, at the task level.',
+    why: 'You cannot reclaim a week you have never measured. Most people can name their priorities and almost none can say how their hours were actually spent. The gap between the two is where the time goes. Before you change anything, you need an honest record: not a plan for the ideal week, but a log of the real one.',
+    example:
+      'For five working days, write down what you do in thirty-minute blocks. Be specific. Not "admin" but "reformatting the weekly report nobody reads." Tag each block as deep work, shallow work, coordination, or genuinely needless. By Friday the pattern is undeniable, and it is rarely the one you expected.',
+    action: 'Track your next five working days in thirty-minute blocks. Tag each block. Do not change your behaviour yet. Just look.',
+  },
+  {
+    n: 2,
+    name: 'Shed',
+    principle: 'Kill the work that should not exist. Eliminate before you automate.',
+    why: 'Automating a task you should not be doing is the most seductive mistake in this whole effort. It feels productive and it locks the waste in permanently, now running faster and with less friction to question it. A great deal of professional work survives only because no one has asked whether it needs to happen at all. Ask.',
+    example:
+      'Take the bottom of your audit, the blocks you tagged needless or near-needless. The recurring status report. The meeting that could be a message. The approval step that approves everything. For each one, try removing it for two weeks and see who notices. Most of the time, no one does.',
+    action: 'Pick the single most pointless recurring task in your audit and stop doing it for two weeks. Tell no one in advance.',
+  },
+  {
+    n: 3,
+    name: 'Shift',
+    principle: 'Delegate the rest to AI.',
+    why: 'Only now, once you have cut what should not exist, does automation earn its place. The work that remains and is durable, repeatable, and rule-bound is work a capable model can take on with a clear instruction. The aim is not to do more of it. The aim is to stop spending your own hours on it.',
+    example:
+      'The weekly summary you decided to keep can be drafted from your notes by a model in seconds, leaving you to edit rather than write. First-pass research, reformatting, drafting routine replies, turning messy inputs into clean structure: each is a task you can hand over with a reusable prompt. Build the instruction once. Reuse it forever.',
+    action: 'Take one task you kept after Shed and write a reusable instruction that hands it to an AI tool. Use it this week.',
+  },
+  {
+    n: 4,
+    name: 'Shield',
+    principle: 'Defend the reclaimed time from reabsorption.',
+    why: 'This is the move everyone skips, and it is the reason efficiency has never once become freedom. The moment you save an hour, three forces move to take it back: your employer’s expectations rise to meet your new speed, your own guilt fills the gap with more output, and work expands to fit whatever time is left open. Saved time is not kept time. It has to be defended, deliberately and a little uncomfortably.',
+    example:
+      'Do not announce the time you save. Convert it into a commitment before it can be claimed: a hard stop, a standing obligation outside work, a block on the calendar that is not for sale. Default to no on meetings. Keep a floor of hours that no employer and no ambition gets to touch. The discomfort of looking less busy is the price of the time.',
+    action: 'Take one hour you reclaimed this week and wall it off with a commitment outside work, before anything else fills it.',
+  },
+  {
+    n: 5,
+    name: 'Spend',
+    principle: 'Reinvest the hours in life, or in rare high-value work.',
+    why: 'A shield is only worth having if you spend what it protects. Reclaimed time that is merely banked drifts back into busywork by default. The point of the whole method is not an emptier calendar. It is to put the recovered hours toward the things that do not scale: rest, relationships, the slow and valuable work that genuine focus makes possible. Decide on purpose, or the time decides for you.',
+    example:
+      'Name, in advance, what the hours are for. An afternoon with people you love. A hard problem that needs uninterrupted thought. A craft you have not had time to practise. The specific thing matters less than the deciding. Vague intentions to "have more balance" lose every time to a concrete request for your attention.',
+    action: 'Decide now what the next reclaimed afternoon is for, and put it somewhere real before the week negotiates it away.',
+  },
+];
+
+const url = new URL('/method', SITE.url).href;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The Five Moves: a method for working less, not more',
+  description:
+    'The five-move method behind Don’t Work Harder: See, Shed, Shift, Shield, Spend. How to use AI to reclaim your week and defend the time.',
+  author: { '@type': 'Person', name: SITE.author },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+};
+---
+
+<BaseLayout
+  title="The Method: the five moves"
+  description="The five-move method behind Don’t Work Harder: See, Shed, Shift, Shield, Spend. How to use AI to reclaim your week and defend the time against reabsorption."
+  schema={schema}
+>
+  <section class="method-hero section">
+    <div class="container-dwh">
+      <div class="measure">
+        <p class="eyebrow">The method</p>
+        <h1>The five moves.</h1>
+        <p class="lede">
+          Productivity advice tells you to go faster. This does the opposite. The
+          five moves are a sequence for finding your wasted hours, cutting what
+          should not exist, handing the rest to AI, and then keeping the time you
+          win rather than watching it leak back into more work. The order is the
+          method. Skip a step and the gains evaporate.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="moves">
+    {
+      moves.map((m) => (
+        <section class="move-section section rule-top" id={m.name.toLowerCase()}>
+          <div class="container-dwh">
+            <div class="move-layout">
+              <div class="move-marker">
+                <span class="move-num">{String(m.n).padStart(2, '0')}</span>
+                <h2 class="move-h2">{m.name}</h2>
+              </div>
+              <div class="move-content measure">
+                <p class="move-principle">{m.principle}</p>
+                <p>{m.why}</p>
+                <h3>In practice</h3>
+                <p>{m.example}</p>
+                <p class="move-action">
+                  <span class="action-label">Do this:</span> {m.action}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <CtaCourse
+    source="method"
+    heading="Walk the five moves in five days."
+    body="The free course takes one move a day, with a single exercise each, and sends the week-audit worksheet to start. The fastest way to put this into practice."
+  />
+</BaseLayout>
+
+<style>
+  .method-hero .lede {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+  .move-layout {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .move-marker { position: sticky; top: 1.5rem; }
+  .move-num {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .move-h2 { margin-top: 0.2rem; font-size: clamp(2rem, 4vw, 3rem); }
+  .move-principle {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+  }
+  .move-content p { margin-top: 1rem; line-height: 1.7; color: var(--color-ink-soft); }
+  .move-content p.move-principle { color: var(--color-ink); margin-top: 0; }
+  .move-content h3 { margin-top: 2rem; font-size: 1.15rem; color: var(--color-ink); }
+  .move-action {
+    margin-top: 1.75rem !important;
+    padding: 1.1rem 1.25rem;
+    background: var(--color-paper-deep);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 0 3px 3px 0;
+    color: var(--color-ink) !important;
+  }
+  .action-label { font-weight: 650; color: var(--color-accent); }
+
+  @media (max-width: 760px) {
+    .move-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+    .move-marker { position: static; display: flex; align-items: baseline; gap: 1rem; }
+    .move-h2 { margin-top: 0; }
+  }
+</style>

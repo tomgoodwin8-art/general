@@ -1,0 +1,67 @@
+---
+// A slot built to be easy to populate later with endorsements and press logos
+// (brief §5.1). Ships now with public, citable data points.
+interface Stat {
+  figure: string;
+  label: string;
+}
+interface Props {
+  stats?: Stat[];
+  note?: string;
+}
+const {
+  stats = [
+    { figure: '15 hrs', label: 'the working week Keynes forecast for his grandchildren, by 2030' },
+    { figure: '71%', label: 'of UK four-day-week trial companies kept the shorter week after the pilot ended' },
+    { figure: '~5×', label: 'reported productivity gains on suitable tasks for skilled workers using AI assistants' },
+  ],
+  note = 'Sources collected on the articles. Endorsements and press to follow.',
+} = Astro.props;
+---
+
+<section class="proof-strip section" aria-label="Supporting data">
+  <div class="container-dwh">
+    <dl class="proof-grid">
+      {
+        stats.map((s) => (
+          <div class="proof-item">
+            <dt class="proof-figure">{s.figure}</dt>
+            <dd class="proof-label">{s.label}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    {note && <p class="proof-note">{note}</p>}
+  </div>
+</section>
+
+<style>
+  .proof-strip { background: var(--color-paper); }
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 2.5rem;
+    margin: 0;
+  }
+  .proof-item { margin: 0; }
+  .proof-figure {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 480;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+  .proof-label {
+    margin: 0.6rem 0 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+    max-width: 22rem;
+  }
+  .proof-note {
+    margin-top: 2.5rem;
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+    opacity: 0.8;
+  }
+</style>

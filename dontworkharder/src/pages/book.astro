@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EmailCapture from '../components/EmailCapture.astro';
 import { SITE } from '../data/site';
+import bookCover from '../assets/dwh-front-cover.png';
 
 const parts = [
   {
@@ -43,13 +45,14 @@ const bookSchema = {
   <section class="book-hero section">
     <div class="container-dwh book-hero-grid">
       <div class="book-cover-col">
-        <div class="book-cover" aria-hidden="true">
-          <div class="cover-face">
-            <span class="cover-title">Don’t Work Harder</span>
-            <span class="cover-sub">The five moves to reclaim your week</span>
-            <span class="cover-author">{SITE.author}</span>
-          </div>
-        </div>
+        <Image
+          src={bookCover}
+          alt="Front cover of Don’t Work Harder by Tom Goodwin."
+          widths={[256, 384, 512]}
+          sizes="(max-width: 720px) 60vw, 16rem"
+          loading="eager"
+          class="book-cover-img"
+        />
       </div>
       <div class="book-hero-copy">
         <p class="eyebrow">The book</p>
@@ -145,26 +148,12 @@ const bookSchema = {
     gap: 3.5rem;
     align-items: center;
   }
-  .book-cover {
-    aspect-ratio: 5 / 7;
-    background: var(--color-ink);
-    color: var(--color-paper);
+  .book-cover-img {
+    width: 100%;
+    height: auto;
     border-radius: 4px;
-    padding: 2rem;
-    display: flex;
-    box-shadow: 0 1px 0 var(--color-rule);
+    box-shadow: 0 22px 48px -20px rgba(22, 19, 15, 0.4);
   }
-  .cover-face {
-    border: 1px solid rgba(250, 247, 242, 0.3);
-    flex: 1;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-  .cover-title { font-family: var(--font-display); font-size: 1.9rem; line-height: 1.05; }
-  .cover-sub { font-size: 0.9rem; opacity: 0.7; line-height: 1.4; }
-  .cover-author { margin-top: auto; font-size: 0.9rem; opacity: 0.8; }
 
   .book-hero-copy .lede {
     margin-top: 1.5rem;
@@ -217,6 +206,6 @@ const bookSchema = {
 
   @media (max-width: 720px) {
     .book-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .book-cover { max-width: 14rem; }
+    .book-cover-col { max-width: 14rem; }
   }
 </style>

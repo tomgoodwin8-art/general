@@ -1,10 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EmailCapture from '../components/EmailCapture.astro';
 import FiveMoves from '../components/FiveMoves.astro';
 import ProofStrip from '../components/ProofStrip.astro';
 import CtaCourse from '../components/CtaCourse.astro';
 import { SITE } from '../data/site';
+import heroImage from '../assets/dwh-pages-hero.png';
+import bookCover from '../assets/dwh-front-cover.png';
 
 const websiteSchema = {
   '@context': 'https://schema.org',
@@ -22,16 +25,28 @@ const websiteSchema = {
   <!-- 1. Hero: the promise in one line, email field above the fold -->
   <section class="hero section">
     <div class="container-dwh">
-      <div class="hero-inner">
-        <p class="eyebrow">A book and a free course</p>
-        <h1 class="hero-h1">The point of working less was never to work more.</h1>
-        <p class="hero-sub">
-          AI can finally hand back the hours a century of busywork took from you.
-          This is the method for keeping them: five moves to reclaim your week
-          and defend it. Begin with the free 5-day course.
-        </p>
-        <div class="hero-capture">
-          <EmailCapture source="home-hero" list="course" cta="Get the free 5-day course" />
+      <div class="hero-grid">
+        <div class="hero-inner">
+          <p class="eyebrow">A book and a free course</p>
+          <h1 class="hero-h1">The point of working less was never to work more.</h1>
+          <p class="hero-sub">
+            AI can finally hand back the hours a century of busywork took from you.
+            This is the method for keeping them: five moves to reclaim your week
+            and defend it. Begin with the free 5-day course.
+          </p>
+          <div class="hero-capture">
+            <EmailCapture source="home-hero" list="course" cta="Get the free 5-day course" />
+          </div>
+        </div>
+        <div class="hero-art">
+          <Image
+            src={heroImage}
+            alt="The book Don’t Work Harder by Tom Goodwin, shown with sample pages and a free 5-day course badge."
+            widths={[480, 760, 1040]}
+            sizes="(max-width: 900px) 90vw, 44vw"
+            loading="eager"
+            class="hero-img"
+          />
         </div>
       </div>
     </div>
@@ -81,12 +96,14 @@ const websiteSchema = {
   <!-- 5. The book teaser -->
   <section class="section rule-top book-teaser">
     <div class="container-dwh book-grid">
-      <div class="book-cover" aria-hidden="true">
-        <div class="cover-face">
-          <span class="cover-title">Don’t Work Harder</span>
-          <span class="cover-sub">The five moves to reclaim your week</span>
-          <span class="cover-author">{SITE.author}</span>
-        </div>
+      <div class="book-cover-wrap">
+        <Image
+          src={bookCover}
+          alt="Front cover of Don’t Work Harder by Tom Goodwin."
+          widths={[224, 320, 448]}
+          sizes="(max-width: 640px) 60vw, 14rem"
+          class="book-cover-img"
+        />
       </div>
       <div class="book-copy">
         <p class="eyebrow">The book</p>
@@ -108,7 +125,13 @@ const websiteSchema = {
 
 <style>
   .hero { padding-block: clamp(3.5rem, 9vw, 7rem); }
-  .hero-inner { max-width: 46rem; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-inner { max-width: 38rem; }
   .hero-h1 { margin-top: 0.6rem; }
   .hero-sub {
     margin-top: 1.5rem;
@@ -118,6 +141,13 @@ const websiteSchema = {
     max-width: 38rem;
   }
   .hero-capture { margin-top: 2.25rem; max-width: 34rem; }
+  .hero-art { display: flex; justify-content: center; }
+  .hero-img { width: 100%; height: auto; max-width: 32rem; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-img { max-width: 22rem; }
+  }
 
   .hook-lede {
     font-family: var(--font-display);
@@ -138,33 +168,17 @@ const websiteSchema = {
   }
   .book-copy h2 { margin-top: 0.4rem; }
   .book-copy p { margin-top: 1rem; color: var(--color-ink-soft); max-width: 36rem; }
-  .book-cover {
-    aspect-ratio: 5 / 7;
-    background: var(--color-ink);
-    color: var(--color-paper);
+  .book-cover-wrap { display: flex; }
+  .book-cover-img {
+    width: 100%;
+    height: auto;
     border-radius: 3px;
-    padding: 1.75rem;
-    display: flex;
+    box-shadow: 0 18px 40px -18px rgba(22, 19, 15, 0.35);
   }
-  .cover-face {
-    border: 1px solid rgba(250, 247, 242, 0.3);
-    flex: 1;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .cover-title {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    line-height: 1.05;
-  }
-  .cover-sub { font-size: 0.85rem; opacity: 0.7; line-height: 1.4; }
-  .cover-author { margin-top: auto; font-size: 0.85rem; opacity: 0.8; }
   .link-accent { color: var(--color-accent); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
 
   @media (max-width: 640px) {
     .book-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .book-cover { max-width: 12rem; }
+    .book-cover-wrap { max-width: 12rem; }
   }
 </style>

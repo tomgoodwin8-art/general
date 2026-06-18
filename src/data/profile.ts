@@ -50,6 +50,7 @@ export const profile = {
     "https://hellogameplan.com",
     "https://cleancodesites.com",
     "https://www.google.com/partners/agency",
+    "https://www.wikidata.org/entity/Q140278196",
   ],
 } as const;
 

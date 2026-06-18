@@ -51,6 +51,7 @@ export const profile = {
     "https://cleancodesites.com",
     "https://www.google.com/partners/agency",
     "https://www.wikidata.org/entity/Q140278196",
+    "https://www.crunchbase.com/person/tom-goodwin-51ac",
   ],
 } as const;
 

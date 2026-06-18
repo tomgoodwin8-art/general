@@ -45,7 +45,8 @@ export const profile = {
   ],
   /** sameAs (§1.2) — entity graph. Update URLs as confirmed. */
   sameAs: [
-    "https://www.linkedin.com/in/tomgoodwinppc/",
+    "https://www.linkedin.com/in/thomasgoodwin/",
+    "https://www.youtube.com/@TomGoodwinLondon",
     "https://find-and-update.company-information.service.gov.uk/company/hii-internet-group",
     "https://hellogameplan.com",
     "https://cleancodesites.com",
@@ -54,6 +55,12 @@ export const profile = {
     "https://www.crunchbase.com/person/tom-goodwin-51ac",
   ],
 } as const;
+
+/** Social profiles for footer icons (single source of truth). */
+export const socials = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/thomasgoodwin/" },
+  { label: "YouTube", href: "https://www.youtube.com/@TomGoodwinLondon" },
+] as const;
 
 /** Headline proof points (§4.3) — numbered, evidence first. */
 export const proofStack = [

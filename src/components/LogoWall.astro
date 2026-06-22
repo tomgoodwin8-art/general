@@ -1,21 +1,22 @@
 ---
 import { logoWall } from "../data/profile";
 /**
- * Logo wall (§4.2). Dark section. Single-colour placeholder tiles until
- * official SVGs are sourced — every tile is flagged [TOM TO SUPPLY SVG].
- * No traced approximations.
+ * Logo wall (§4.2). Dark section. White brand marks (white-on-transparent
+ * PNGs) on the ink background.
  */
 ---
 <section class="bg-ink text-paper py-16 md:py-20" aria-labelledby="logos-heading">
   <div class="container-tg">
     <h2 id="logos-heading" class="sr-only">Brands and organisations Tom has worked with</h2>
     <ul class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-7 gap-px bg-white/10">
-      {logoWall.map((name) => (
-        <li
-          class="bg-ink flex items-center justify-center px-3 py-6 text-center opacity-85 hover:opacity-100 transition-opacity"
-          title={`[TOM TO SUPPLY SVG] ${name}`}
-        >
-          <span class="display text-sm font-medium tracking-tight text-paper">{name}</span>
+      {logoWall.map((logo) => (
+        <li class="bg-ink flex items-center justify-center px-4 py-7 opacity-75 hover:opacity-100 transition-opacity">
+          <img
+            src={logo.src}
+            alt={logo.name}
+            loading="lazy"
+            class="max-h-8 w-auto object-contain"
+          />
         </li>
       ))}
     </ul>

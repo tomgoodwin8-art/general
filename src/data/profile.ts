@@ -173,10 +173,27 @@ export const mainNav = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-/** Logo wall (§4.2) — 19 marks. */
+/** Logo wall (§4.2) — white marks on dark, from supplied brand logos. */
 export const logoWall = [
-  "Hilton", "THG", "YouGov", "ASOS", "Gucci", "IWG", "Revive Collagen",
-  "FFS Beauty", "Fortnum & Mason", "Olivias", "Hallmark", "SunLife",
-  "PushDR", "London Private Ultrasound", "Sharps", "GOSH", "Save The Children",
-  "Huel", "Skyscanner",
+  { name: "Gucci", src: "/images/logos/gucci.png" },
+  { name: "Hilton", src: "/images/logos/hilton.png" },
+  { name: "ASOS", src: "/images/logos/asos.png" },
+  { name: "Skyscanner", src: "/images/logos/skyscanner.png" },
+  { name: "Fortnum & Mason", src: "/images/logos/fortnum.png" },
+  { name: "Huel", src: "/images/logos/huel.png" },
+  { name: "ghd", src: "/images/logos/ghd.png" },
+  { name: "Hearst", src: "/images/logos/hearst.png" },
+  { name: "Save the Children", src: "/images/logos/savethechildren.png" },
+  { name: "Great Ormond Street Hospital", src: "/images/logos/gosh.png" },
+  { name: "YouGov", src: "/images/logos/yougov.png" },
+  { name: "THG", src: "/images/logos/thg.png" },
+  { name: "SunLife", src: "/images/logos/sunlife.png" },
+  { name: "Revive Collagen", src: "/images/logos/revive.png" },
+  { name: "FFS Beauty", src: "/images/logos/ffs.png" },
+  { name: "Olivia's", src: "/images/logos/olivias.png" },
+  { name: "Hallmark", src: "/images/logos/hallmark.png" },
+  { name: "Sharps", src: "/images/logos/sharps.png" },
+  { name: "Regus", src: "/images/logos/regus.png" },
+  { name: "PushDR", src: "/images/logos/pushdr.png" },
+  { name: "London Private Ultrasound", src: "/images/logos/lpu.png" },
 ] as const;

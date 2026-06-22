@@ -25,9 +25,21 @@ const slots = [
       {testimonials.map((t) => (
         <figure class="border-l-2 border-powder pl-6">
           <blockquote class="text-lg" style="color:#1f2937">"{t.data.quote}"</blockquote>
-          <figcaption class="mt-4 text-sm">
-            <span class="display font-medium">{t.data.author}</span>
-            <span class="block text-grey-400" style="color:#6b7280">{t.data.role}</span>
+          <figcaption class="mt-4 flex items-center gap-3 text-sm">
+            {t.data.image && (
+              <img
+                src={t.data.image}
+                alt={t.data.author}
+                width="40"
+                height="40"
+                loading="lazy"
+                class="w-10 h-10 rounded-full object-cover shrink-0"
+              />
+            )}
+            <span>
+              <span class="display font-medium">{t.data.author}</span>
+              <span class="block text-grey-400" style="color:#6b7280">{t.data.role}</span>
+            </span>
           </figcaption>
         </figure>
       ))}

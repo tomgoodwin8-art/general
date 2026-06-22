@@ -40,6 +40,8 @@ const testimonials = defineCollection({
     quote: z.string(),
     author: z.string(),
     role: z.string(),
+    // Optional avatar (path under /public, e.g. /images/testimonials/foo.jpg).
+    image: z.string().optional(),
     order: z.number().default(0),
   }),
 });

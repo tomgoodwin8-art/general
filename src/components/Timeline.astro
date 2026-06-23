@@ -9,7 +9,7 @@ import { timeline } from "../data/profile";
       {timeline.map((t) => (
         <li class="bg-paper p-6 border-l-2 border-powder">
           {t.logo && (
-            <span class="inline-flex items-center justify-center bg-ink rounded px-3 py-2 mb-4 h-10">
+            <span class="flex items-center mb-4 h-10">
               <img src={t.logo} alt={t.role} class="max-h-5 w-auto object-contain" loading="lazy" />
             </span>
           )}

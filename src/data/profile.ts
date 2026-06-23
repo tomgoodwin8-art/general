@@ -93,12 +93,12 @@ export const proofStack = [
 
 /** Career timeline (§4.4). */
 export const timeline = [
-  { year: "2010", role: "Assembly", note: "Started in performance marketing.", logo: "/images/timeline/assembly.png" },
-  { year: "2013", role: "Sofa & Chair", note: "Brand-side growth.", logo: "/images/timeline/sofa-chair.png" },
-  { year: "2018", role: "Croud", note: "Consulting, the digital-nomad years.", logo: "/images/timeline/croud.png" },
-  { year: "2021", role: "Ascend Global", note: "Managing Director; led the acquisition.", logo: "/images/timeline/ascend.png" },
-  { year: "2023", role: "Medialab", note: "Search Director, £20m+ managed.", logo: "/images/timeline/medialab.png" },
-  { year: "2024", role: "GAMEPLAN.", note: "Founded the consultancy, full-time.", logo: "/images/timeline/gameplan.png" },
+  { year: "2010", role: "Assembly", note: "Started in performance marketing.", logo: "/images/timeline/assembly-bw.png" },
+  { year: "2013", role: "Sofa & Chair", note: "Brand-side growth.", logo: "/images/timeline/sofa-chair-bw.png" },
+  { year: "2018", role: "Croud", note: "Consulting, the digital-nomad years.", logo: "/images/timeline/croud-bw.png" },
+  { year: "2021", role: "Ascend Global", note: "Managing Director; led the acquisition.", logo: "/images/timeline/ascend-bw.png" },
+  { year: "2023", role: "Medialab", note: "Search Director, £20m+ managed.", logo: "/images/timeline/medialab-bw.png" },
+  { year: "2024", role: "GAMEPLAN.", note: "Founded the consultancy, full-time.", logo: "/images/timeline/gameplan-bw.png" },
 ] as const;
 
 /** Navigation offers — the four public offers (§5). Hidden pages excluded. */

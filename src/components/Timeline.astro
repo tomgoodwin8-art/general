@@ -8,7 +8,12 @@ import { timeline } from "../data/profile";
     <ol class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {timeline.map((t) => (
         <li class="bg-paper p-6 border-l-2 border-powder">
-          <span class="display text-2xl font-bold">{t.year}</span>
+          {t.logo && (
+            <span class="inline-flex items-center justify-center bg-ink rounded px-3 py-2 mb-4 h-10">
+              <img src={t.logo} alt={t.role} class="max-h-5 w-auto object-contain" loading="lazy" />
+            </span>
+          )}
+          <span class="block display text-2xl font-bold">{t.year}</span>
           <span class="block display text-lg font-medium mt-1">{t.role}</span>
           <span class="block text-grey-400 text-sm mt-2" style="color:#6b7280">{t.note}</span>
         </li>

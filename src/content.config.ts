@@ -46,13 +46,17 @@ const testimonials = defineCollection({
   }),
 });
 
-/** Talks (§7). */
+/** Talks (§7). Markdown body = transcript. */
 const talks = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/talks" }),
+  loader: glob({ pattern: "**/*.md", base: "./src/content/talks" }),
   schema: z.object({
     title: z.string(),
     abstract: z.string(),
     order: z.number().default(0),
+    runtime: z.string().optional(),
+    format: z.string().optional(),
+    slideCount: z.number().optional(),
+    deck: z.string().optional(),
   }),
 });
 

@@ -47,10 +47,13 @@ const faqs = [
     <h2 class="mb-10">Talks</h2>
     <div class="grid gap-8 md:grid-cols-3">
       {talks.map((t, i) => (
-        <article class="border-t-2 border-powder pt-5">
+        <article class="border-t-2 border-powder pt-5 flex flex-col">
           <span class="eyebrow !text-grey-400">{String(i + 1).padStart(2, "0")}</span>
-          <h3 class="display font-medium mt-2 mb-3">{t.data.title}</h3>
-          <p class="text-grey-400" style="color:#4b5563">{t.data.abstract}</p>
+          <h3 class="display font-medium mt-2 mb-3">
+            <a href={`/speaking/${t.id}`} class="hover:text-powder-deep transition-colors">{t.data.title}</a>
+          </h3>
+          <p class="text-grey-400 grow" style="color:#4b5563">{t.data.abstract}</p>
+          <a href={`/speaking/${t.id}`} class="mt-4 text-powder-deep font-medium underline underline-offset-4 hover:text-ink transition-colors">View talk and slides →</a>
         </article>
       ))}
     </div>

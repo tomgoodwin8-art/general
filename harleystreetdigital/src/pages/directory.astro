@@ -1,0 +1,170 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  categories,
+  totalListings,
+  uniqueClinicCount,
+  type Clinic,
+} from "../data/clinics";
+
+const SITE_URL = "https://harleystreetdigital.com";
+
+function siteHref(website: string): string {
+  return website.startsWith("http") ? website : `https://${website}`;
+}
+function telHref(phone: string): string {
+  return `tel:${phone.replace(/\s+/g, "")}`;
+}
+
+// JSON-LD: ItemList of MedicalClinic, covering every entry that has a website.
+// position is 1-based across the full, flattened list.
+let position = 0;
+const itemListElements = categories.flatMap((cat) =>
+  cat.clinics.map((c: Clinic) => {
+    position += 1;
+    const clinic: Record<string, unknown> = {
+      "@type": "MedicalClinic",
+      name: c.name,
+      medicalSpecialty: cat.title,
+    };
+    if (c.address || c.postcode) {
+      clinic.address = {
+        "@type": "PostalAddress",
+        ...(c.address ? { streetAddress: c.address } : {}),
+        addressLocality: "London",
+        ...(c.postcode ? { postalCode: c.postcode } : {}),
+        addressCountry: "GB",
+      };
+    }
+    if (c.phone) clinic.telephone = c.phone;
+    if (c.website) clinic.url = siteHref(c.website);
+    return {
+      "@type": "ListItem",
+      position,
+      item: clinic,
+    };
+  }),
+);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Harley Street clinic directory",
+  description: `A directory of ${uniqueClinicCount} private clinics and practices across ${categories.length} specialisms in and around Harley Street, London W1.`,
+  url: `${SITE_URL}/directory`,
+  numberOfItems: itemListElements.length,
+  itemListElement: itemListElements,
+};
+
+const description = `Browse ${uniqueClinicCount}+ private clinics across ${categories.length} specialisms in and around Harley Street, London W1 — diagnostics, hospitals, ENT, cardiology, dermatology, dentistry, GPs and more, with addresses, phone numbers and websites.`;
+---
+
+<BaseLayout
+  title="Harley Street clinic directory"
+  description={description}
+  path="/directory"
+>
+  <script
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(jsonLd)}
+  />
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Harley Street, London W1</p>
+      <h1>The Harley Street clinic directory</h1>
+      <p class="lead">
+        {totalListings} clinic listings across {categories.length} specialisms in
+        and around Harley Street — private hospitals, diagnostics, ENT,
+        cardiology, dermatology, fertility, dentistry, GPs and more. Each entry
+        carries its address, phone and website where confirmed.
+      </p>
+      <div class="stats">
+        <div class="stat">
+          <span class="num">{uniqueClinicCount}</span>
+          <span class="label">Clinics</span>
+        </div>
+        <div class="stat">
+          <span class="num">{categories.length}</span>
+          <span class="label">Specialisms</span>
+        </div>
+        <div class="stat">
+          <span class="num">{totalListings}</span>
+          <span class="label">Listings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="cat-nav" aria-label="Categories">
+    <div class="container">
+      {categories.map((c) => <a href={`#${c.id}`}>{c.title}</a>)}
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="intro">
+        <p>
+          A curated, regularly maintained directory of private medical clinics
+          and practices in the Harley Street medical district. Multiple
+          practices share an address — that is normal for the street, and each
+          is listed in its own right.
+        </p>
+        <div class="legend">
+          <span><span class="badge-verified">Verified</span> name, address, postcode, phone and site confirmed from a primary source</span>
+          <span><span class="badge-confirm">Confirm</span> name and site are good; phone or postcode still needs a check</span>
+        </div>
+      </div>
+
+      {
+        categories.map((cat) => (
+          <section class="category" id={cat.id}>
+            <h2>
+              {cat.title}
+              <span class="count">{cat.clinics.length} listings</span>
+            </h2>
+            {cat.note && <p class="note">{cat.note}</p>}
+            <div class="clinics">
+              {cat.clinics.map((c) => (
+                <article class="clinic">
+                  <div class="name">
+                    {c.name}
+                    {c.verified ? (
+                      <span class="badge-verified">Verified</span>
+                    ) : (
+                      <span class="badge-confirm">Confirm</span>
+                    )}
+                  </div>
+                  <div class="addr">
+                    {c.address}
+                    {c.postcode ? `, ${c.postcode}` : ""}
+                  </div>
+                  <div class="meta">
+                    {c.phone ? (
+                      <a href={telHref(c.phone)}>{c.phone}</a>
+                    ) : (
+                      <span class="none">Phone to confirm</span>
+                    )}
+                    {c.website ? (
+                      <a
+                        href={siteHref(c.website)}
+                        target="_blank"
+                        rel="noopener nofollow"
+                      >
+                        {c.website}
+                      </a>
+                    ) : (
+                      <span class="none">Website to confirm</span>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</BaseLayout>

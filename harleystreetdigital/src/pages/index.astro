@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { categories, uniqueClinicCount, totalListings } from "../data/clinics";
+---
+
+<BaseLayout
+  title="Private clinics in the Harley Street medical district"
+  description={`Harley Street Digital is a curated directory of ${uniqueClinicCount}+ private clinics and practices across ${categories.length} specialisms in and around Harley Street, London W1.`}
+  path="/"
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Harley Street, London W1</p>
+      <h1>Find a private clinic on Harley Street</h1>
+      <p class="lead">
+        A curated directory of {uniqueClinicCount}+ private clinics and
+        practices across {categories.length} specialisms — from diagnostics and
+        private hospitals to dermatology, fertility, dentistry and GPs.
+      </p>
+      <p><a class="brand" href="/directory" style="color:#7fb2ef">Browse the full directory →</a></p>
+      <div class="stats">
+        <div class="stat">
+          <span class="num">{uniqueClinicCount}</span>
+          <span class="label">Clinics</span>
+        </div>
+        <div class="stat">
+          <span class="num">{categories.length}</span>
+          <span class="label">Specialisms</span>
+        </div>
+        <div class="stat">
+          <span class="num">{totalListings}</span>
+          <span class="label">Listings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <div class="clinics">
+        {
+          categories.map((cat) => (
+            <a class="clinic" href={`/directory#${cat.id}`} style="text-decoration:none;color:inherit">
+              <div class="name">{cat.title}</div>
+              <div class="addr">{cat.clinics.length} listings</div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import SEO from "../components/SEO.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+}
+
+const { title, description, path } = Astro.props;
+const year = 2026;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO title={title} description={description} path={path} />
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">Harley Street <span>Digital</span></a>
+        <nav>
+          <a href="/directory">Directory</a>
+        </nav>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          &copy; {year} Harley Street Digital. A curated directory of private
+          clinics and practices in and around Harley Street, London W1.
+        </p>
+        <p>
+          Listings are provided for information only and do not constitute a
+          recommendation or endorsement. Always verify details with the clinic
+          directly. <a href="/directory">Browse the directory</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

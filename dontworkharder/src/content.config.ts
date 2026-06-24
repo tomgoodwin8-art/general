@@ -14,6 +14,37 @@ const articles = defineCollection({
     /** Search intent this piece targets, for our own reference. */
     intent: z.string().optional(),
     draft: z.boolean().default(false),
+
+    // Extended metadata carried by the imported article set (AEO / EEAT).
+    slug: z.string().optional(),
+    canonical: z.string().optional(),
+    datePublished: z.coerce.date().optional(),
+    dateModified: z.coerce.date().optional(),
+    category: z.string().optional(),
+    keywords: z.array(z.string()).optional(),
+    author: z
+      .object({
+        name: z.string().optional(),
+        role: z.string().optional(),
+        url: z.string().optional(),
+        image: z.string().optional(),
+        bio: z.string().optional(),
+      })
+      .optional(),
+    schema: z
+      .object({
+        type: z.string().optional(),
+        publisher: z.string().optional(),
+      })
+      .optional(),
+    faq: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        }),
+      )
+      .optional(),
   }),
 });
 

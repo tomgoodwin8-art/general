@@ -17,18 +17,46 @@ const { Content } = await render(article);
 const { data } = article;
 
 const url = new URL(`/articles/${article.id}`, SITE.url).href;
+
+const authorName = data.author?.name ?? SITE.author;
+const authorNode = {
+  '@type': 'Person',
+  name: authorName,
+  ...(data.author?.url && { url: data.author.url }),
+  ...(data.author?.role && { jobTitle: data.author.role }),
+  ...(data.author?.image && { image: new URL(data.author.image, SITE.url).href }),
+  ...(data.author?.bio && { description: data.author.bio }),
+};
+
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: data.title,
   description: data.description,
   datePublished: data.pubDate.toISOString(),
-  ...(data.updatedDate && { dateModified: data.updatedDate.toISOString() }),
-  author: { '@type': 'Person', name: SITE.author },
-  publisher: { '@type': 'Organization', name: SITE.name },
+  dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
+  ...(data.keywords?.length && { keywords: data.keywords.join(', ') }),
+  ...(data.category && { articleSection: data.category }),
+  author: authorNode,
+  publisher: { '@type': 'Organization', name: data.schema?.publisher ?? SITE.name },
   mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   image: new URL(SITE.ogImage, SITE.url).href,
 };
+
+// FAQPage schema for AEO when the article supplies an faq block (brief §9, EEAT).
+const faqSchema = data.faq?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: data.faq.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      })),
+    }
+  : null;
+
+const schema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
 
 const dateStr = data.pubDate.toLocaleDateString('en-GB', {
   year: 'numeric',
@@ -37,12 +65,12 @@ const dateStr = data.pubDate.toLocaleDateString('en-GB', {
 });
 ---
 
-<BaseLayout title={data.title} description={data.description} type="article" schema={articleSchema}>
+<BaseLayout title={data.title} description={data.description} type="article" schema={schema}>
   <article class="article">
     <header class="article-head section">
       <div class="container-dwh">
         <div class="measure">
-          <p class="article-kicker"><a href="/articles">Articles</a></p>
+          <p class="article-kicker"><a href="/articles">{data.category ?? 'Articles'}</a></p>
           <h1 class="article-title">{data.title}</h1>
           <p class="article-meta">{dateStr} · {data.readTime} min read</p>
         </div>

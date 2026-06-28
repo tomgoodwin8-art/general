@@ -6,6 +6,14 @@ import { SITE } from '../../data/site';
 
 const toolkits = (await getCollection('toolkits')).sort((a, b) => a.data.order - b.data.order);
 
+// Group the grid into plain-English tiers (the brief's build "waves", relabelled
+// for visitors). Order preserved within each group.
+const groups = [
+  { wave: 1, label: 'Most in demand', note: 'The roles where AI is reshaping the week fastest.' },
+  { wave: 2, label: 'Widely useful', note: 'Common roles where the same five moves pay off.' },
+  { wave: 3, label: 'More roles', note: 'Specialist trades, each with its own version of the work.' },
+].map((g) => ({ ...g, items: toolkits.filter((t) => t.data.wave === g.wave) }));
+
 const intro =
   'The five moves work in any role. What changes is the detail: the pointless recurring task a marketer should kill is not the one a lawyer should, and the work AI cannot touch differs by trade. Each toolkit applies See, Shed, Shift, Shield and Spend to a single line of work. Find yours.';
 
@@ -45,37 +53,45 @@ const itemListSchema = {
         <p class="tk-intro">{intro}</p>
       </div>
 
-      <ul class="tk-grid">
-        {
-          toolkits.map((t) => {
-            const live = t.data.status === 'live';
-            const inner = (
-              <>
-                <span class="tk-card-name">{t.data.name}</span>
-                <span class="tk-card-line">{t.data.cardLine}</span>
-                {live ? (
-                  <span class="tk-card-cta" aria-hidden="true">The five moves &rarr;</span>
-                ) : (
-                  <span class="tk-card-soon">Soon</span>
-                )}
-              </>
-            );
-            return (
-              <li class:list={['tk-card', { 'tk-card-disabled': !live }]}>
-                {live ? (
-                  <a href={`/toolkits/${t.data.slug}`} class="tk-card-link">
-                    {inner}
-                  </a>
-                ) : (
-                  <div class="tk-card-link" aria-disabled="true">
-                    {inner}
-                  </div>
-                )}
-              </li>
-            );
-          })
-        }
-      </ul>
+      {
+        groups.map((g) => (
+          <section class="tk-group">
+            <div class="tk-group-head">
+              <h2 class="tk-group-label">{g.label}</h2>
+              <p class="tk-group-note">{g.note}</p>
+            </div>
+            <ul class="tk-grid">
+              {g.items.map((t) => {
+                const live = t.data.status === 'live';
+                const inner = (
+                  <>
+                    <span class="tk-card-name">{t.data.name}</span>
+                    <span class="tk-card-line">{t.data.cardLine}</span>
+                    {live ? (
+                      <span class="tk-card-cta" aria-hidden="true">The five moves &rarr;</span>
+                    ) : (
+                      <span class="tk-card-soon">Soon</span>
+                    )}
+                  </>
+                );
+                return (
+                  <li class:list={['tk-card', { 'tk-card-disabled': !live }]}>
+                    {live ? (
+                      <a href={`/toolkits/${t.data.slug}`} class="tk-card-link">
+                        {inner}
+                      </a>
+                    ) : (
+                      <div class="tk-card-link" aria-disabled="true">
+                        {inner}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))
+      }
     </div>
   </section>
 
@@ -90,8 +106,23 @@ const itemListSchema = {
   .tk-head h1 { margin-top: 0.4rem; }
   .tk-intro { margin-top: 1rem; color: var(--color-ink-soft); font-size: 1.1rem; line-height: 1.6; }
 
+  .tk-group { margin-top: 3.5rem; }
+  .tk-group:first-of-type { margin-top: 3rem; }
+  .tk-group-head {
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .tk-group-label {
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  }
+  .tk-group-note {
+    margin-top: 0.35rem;
+    color: var(--color-ink-soft);
+    font-size: 1rem;
+  }
+
   .tk-grid {
-    margin-top: 3rem;
     list-style: none;
     padding: 0;
     display: grid;

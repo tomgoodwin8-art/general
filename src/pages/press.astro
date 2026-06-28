@@ -120,10 +120,17 @@ const bio150 = "Tom Goodwin, Founder of GAMEPLAN., is a performance marketing an
           <h3 class="eyebrow !text-grey-400 mb-2">{client}</h3>
           <ul class="divide-y divide-grey-100 border-t border-grey-100">
             {items.map((c) => (
-              <li class="py-4 flex items-baseline justify-between gap-4">
-                <div>
-                  <span class="display font-medium">{c.data.outlet}</span>
-                  <span class="text-grey-400 block text-sm" style="color:#6b7280">{c.data.title}{c.data.note ? `. ${c.data.note}` : ""}</span>
+              <li class="py-4 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4 min-w-0">
+                  <span class="shrink-0 flex items-center justify-center" style="width:60px;height:20px">
+                    {c.data.logo
+                      ? <img src={c.data.logo} alt={c.data.outlet} width="60" height="20" class="max-w-[60px] max-h-[20px] w-auto h-auto object-contain" />
+                      : <span class="block w-full h-full bg-grey-100 rounded-sm" aria-hidden="true"></span>}
+                  </span>
+                  <div class="min-w-0">
+                    <span class="display font-medium">{c.data.outlet}</span>
+                    <span class="text-grey-400 block text-sm" style="color:#6b7280">{c.data.title}{c.data.note ? `. ${c.data.note}` : ""}</span>
+                  </div>
                 </div>
                 {c.data.url && <a href={c.data.url} class="text-powder-deep text-sm underline whitespace-nowrap" target="_blank" rel="noopener">Read →</a>}
               </li>

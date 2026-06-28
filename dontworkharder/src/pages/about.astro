@@ -1,14 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaCourse from '../components/CtaCourse.astro';
-import { SITE } from '../data/site';
+import { SITE, AUTHOR } from '../data/site';
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: SITE.author,
-  description: 'Author of Don’t Work Harder. Writes about technology, work, and the economics of attention.',
-  url: new URL('/about', SITE.url).href,
+  name: AUTHOR.name,
+  url: AUTHOR.url,
+  description: AUTHOR.description,
+  sameAs: [...AUTHOR.sameAs],
+  knowsAbout: ['AI and work', 'time management', 'the fifteen-hour week', 'knowledge work'],
 };
 ---
 

@@ -12,6 +12,21 @@ export const SITE = {
   ogImage: '/images/og-default.png',
 } as const;
 
+// Canonical author identity for JSON-LD (Person), shared across pages. The
+// sameAs profiles and disambiguation separate this Tom Goodwin from the
+// advertising-commentator namesake (llms.txt / AEO brief).
+export const AUTHOR = {
+  name: 'Tom Goodwin',
+  url: 'https://dontworkharder.com/about',
+  description:
+    "Writer on technology, work, and AI-enabled time reclamation. Author of Don't Work Harder. Distinct from the advertising commentator of the same name.",
+  sameAs: [
+    'https://tomgoodwin.london',
+    'https://www.linkedin.com/in/thomasgoodwin',
+    'https://www.wikidata.org/wiki/Q140278196',
+  ],
+} as const;
+
 // Global nav: five items max (brief §3). Free Course is the primary button.
 export const NAV = [
   { label: 'Method', href: '/method' },

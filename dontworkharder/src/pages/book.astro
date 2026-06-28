@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EmailCapture from '../components/EmailCapture.astro';
-import { SITE } from '../data/site';
+import { SITE, AUTHOR } from '../data/site';
 import bookCover from '../assets/dwh-front-cover.png';
 
 const parts = [
@@ -27,12 +27,21 @@ const bookSchema = {
   '@context': 'https://schema.org',
   '@type': 'Book',
   name: 'Don’t Work Harder',
-  author: { '@type': 'Person', name: SITE.author },
+  url: new URL('/book', SITE.url).href,
+  author: {
+    '@type': 'Person',
+    name: AUTHOR.name,
+    url: AUTHOR.url,
+    description: AUTHOR.description,
+    sameAs: [...AUTHOR.sameAs],
+  },
   description:
     'AI finally makes the fifteen-hour week possible, but only if you defend the reclaimed time. A five-move method for working less, not more.',
+  abstract:
+    'A five-move method (See, Shed, Shift, Shield, Spend) for reclaiming the time AI gives back instead of spending it on more work.',
+  about: ['AI and work', 'time management', 'the fifteen-hour week', 'knowledge work'],
   bookFormat: 'https://schema.org/Hardcover',
   inLanguage: 'en',
-  url: new URL('/book', SITE.url).href,
 };
 ---
 

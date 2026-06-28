@@ -66,8 +66,10 @@ const itemListSchema = {
                 const live = t.data.status === 'live';
                 const inner = (
                   <>
-                    <ToolkitIcon slug={t.data.slug} class="tk-card-icon" />
-                    <span class="tk-card-name">{t.data.name}</span>
+                    <span class="tk-card-head">
+                      <ToolkitIcon slug={t.data.slug} class="tk-card-icon" />
+                      <span class="tk-card-name">{t.data.name}</span>
+                    </span>
                     <span class="tk-card-line">{t.data.cardLine}</span>
                     {live ? (
                       <span class="tk-card-cta" aria-hidden="true">The five moves &rarr;</span>
@@ -147,9 +149,15 @@ const itemListSchema = {
     border-color: var(--color-accent);
     transform: translateY(-2px);
   }
+  .tk-card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
   .tk-card-icon {
-    width: 1.75rem;
-    height: 1.75rem;
+    flex: 0 0 auto;
+    width: 1.4rem;
+    height: 1.4rem;
     color: var(--color-accent);
   }
   .tk-card-name {

@@ -78,12 +78,19 @@ const bio150 = "Tom Goodwin, Founder of GAMEPLAN., is a performance marketing an
     <section class="grid md:grid-cols-2 gap-10">
       <div>
         <h2 class="mb-6">Headshots</h2>
-        <div class="grid grid-cols-3 gap-3">
-          {[1, 2, 3].map((n) => (
-            <div class="aspect-square bg-grey-100 flex items-center justify-center text-center">
-              <span class="text-grey-400 text-xs px-2" style="color:#9ca3af">[TOM TO SUPPLY: headshot {n}]</span>
-            </div>
-          ))}
+        <div class="grid grid-cols-2 gap-4">
+          <figure>
+            <a href="/images/headshot.jpg" download>
+              <img src="/images/headshot.jpg" alt="Tom Goodwin headshot" width="1366" height="2048" class="aspect-square w-full object-cover object-top bg-grey-100" />
+            </a>
+            <figcaption class="text-grey-400 text-xs mt-2" style="color:#6b7280">Profile photo · <a href="/images/headshot.jpg" class="underline underline-offset-2 hover:text-ink" download>Download</a></figcaption>
+          </figure>
+          <figure>
+            <a href="/images/stage.jpg" download>
+              <img src="/images/stage.jpg" alt="Tom Goodwin speaking on stage" width="1600" height="1066" class="aspect-square w-full object-cover bg-grey-100" />
+            </a>
+            <figcaption class="text-grey-400 text-xs mt-2" style="color:#6b7280">Speaking photo · <a href="/images/stage.jpg" class="underline underline-offset-2 hover:text-ink" download>Download</a></figcaption>
+          </figure>
         </div>
       </div>
       <div>

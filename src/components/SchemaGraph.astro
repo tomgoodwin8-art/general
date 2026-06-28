@@ -9,11 +9,23 @@ import { SITE_URL, profile, ENTITY, DISAMBIGUATION } from "../data/profile";
 
 interface Props {
   nodes?: Record<string, unknown>[];
+  /** Homepage only: emit the WebSite node so Google shows "Tom Goodwin" as the site name. */
+  isHome?: boolean;
 }
-const { nodes = [] } = Astro.props;
+const { nodes = [], isHome = false } = Astro.props;
 
 const personId = `${SITE_URL}/#person`;
 const orgId = `${SITE_URL}/#gameplan`;
+
+// WebSite node — homepage only. `name` must stay exactly "Tom Goodwin"
+// (no descriptors) to win Google's site-name signal hierarchy.
+const website = {
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: "Tom Goodwin",
+  alternateName: "GAMEPLAN",
+  url: `${SITE_URL}/`,
+};
 
 const person = {
   "@type": "Person",
@@ -50,7 +62,7 @@ const organization = {
 
 const graph = {
   "@context": "https://schema.org",
-  "@graph": [person, organization, ...nodes],
+  "@graph": [...(isHome ? [website] : []), person, organization, ...nodes],
 };
 ---
 

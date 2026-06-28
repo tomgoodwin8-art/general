@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaCourse from '../../components/CtaCourse.astro';
-import ToolkitIcon from '../../components/ToolkitIcon.astro';
 import { SITE } from '../../data/site';
 
 const toolkits = (await getCollection('toolkits')).sort((a, b) => a.data.order - b.data.order);
@@ -66,10 +65,7 @@ const itemListSchema = {
                 const live = t.data.status === 'live';
                 const inner = (
                   <>
-                    <span class="tk-card-head">
-                      <ToolkitIcon slug={t.data.slug} class="tk-card-icon" />
-                      <span class="tk-card-name">{t.data.name}</span>
-                    </span>
+                    <span class="tk-card-name">{t.data.name}</span>
                     <span class="tk-card-line">{t.data.cardLine}</span>
                     {live ? (
                       <span class="tk-card-cta" aria-hidden="true">The five moves &rarr;</span>
@@ -148,17 +144,6 @@ const itemListSchema = {
   a.tk-card-link:hover {
     border-color: var(--color-accent);
     transform: translateY(-2px);
-  }
-  .tk-card-head {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-  }
-  .tk-card-icon {
-    flex: 0 0 auto;
-    width: 0.46rem;
-    height: 0.46rem;
-    color: var(--color-accent);
   }
   .tk-card-name {
     font-family: var(--font-display);

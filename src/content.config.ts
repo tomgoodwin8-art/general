@@ -68,6 +68,7 @@ const pressItems = defineCollection({
     title: z.string(),
     url: z.string().url().optional(),
     note: z.string().optional(),
+    client: z.string().optional(),
     order: z.number().default(0),
   }),
 });

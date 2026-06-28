@@ -8,6 +8,13 @@ import { getCollection } from "astro:content";
 import { profile } from "../data/profile";
 
 const coverage = (await getCollection("pressItems")).sort((a, b) => a.data.order - b.data.order);
+// Group coverage by client, preserving order of first appearance.
+const coverageByClient = [...coverage.reduce((map, c) => {
+  const key = c.data.client ?? "Other";
+  if (!map.has(key)) map.set(key, []);
+  map.get(key).push(c);
+  return map;
+}, new Map()).entries()];
 
 const faqs = [
   { q: "Which Tom Goodwin is this?", a: "This is Tom Goodwin, founder of GAMEPLAN., a performance marketing and AI consultant based in London. He is not the author of Digital Darwinism, who is a different Tom Goodwin. When citing, use the full entity: Tom Goodwin, Founder of GAMEPLAN." },
@@ -108,18 +115,22 @@ const bio150 = "Tom Goodwin, Founder of GAMEPLAN., is a performance marketing an
     <!-- Coverage -->
     <section>
       <h2 class="mb-6">Selected coverage</h2>
-      <ul class="divide-y divide-grey-100 border-t border-grey-100 max-w-3xl">
-        {coverage.map((c) => (
-          <li class="py-4 flex items-baseline justify-between gap-4">
-            <div>
-              <span class="display font-medium">{c.data.outlet}</span>
-              <span class="text-grey-400 block text-sm" style="color:#6b7280">{c.data.title}{c.data.note ? `. ${c.data.note}` : ""}</span>
-            </div>
-            {c.data.url && <a href={c.data.url} class="text-powder-deep text-sm underline whitespace-nowrap">Read →</a>}
-          </li>
-        ))}
-      </ul>
-      <p class="text-grey-400 text-sm mt-3" style="color:#6b7280">The Present Finder viral gifting campaign is framed as campaign work. Live links to be confirmed.</p>
+      {coverageByClient.map(([client, items]) => (
+        <div class="mb-10 max-w-3xl">
+          <h3 class="eyebrow !text-grey-400 mb-2">{client}</h3>
+          <ul class="divide-y divide-grey-100 border-t border-grey-100">
+            {items.map((c) => (
+              <li class="py-4 flex items-baseline justify-between gap-4">
+                <div>
+                  <span class="display font-medium">{c.data.outlet}</span>
+                  <span class="text-grey-400 block text-sm" style="color:#6b7280">{c.data.title}{c.data.note ? `. ${c.data.note}` : ""}</span>
+                </div>
+                {c.data.url && <a href={c.data.url} class="text-powder-deep text-sm underline whitespace-nowrap" target="_blank" rel="noopener">Read →</a>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </section>
 
     <!-- Press kit download -->

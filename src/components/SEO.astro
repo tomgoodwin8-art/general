@@ -9,6 +9,8 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   type?: "website" | "article";
+  /** Homepage: lead the title with the clean site name "Tom Goodwin". */
+  isHome?: boolean;
 }
 
 const {
@@ -18,10 +20,12 @@ const {
   ogImage = "/images/og-default.png",
   noindex = false,
   type = "website",
+  isHome = false,
 } = Astro.props;
 
-// Title pattern always carries the canonical entity string (§1.2, §10).
-const fullTitle = `${title} | ${ENTITY}`;
+// Homepage leads with the clean name so it matches the WebSite schema and
+// og:site_name ("Tom Goodwin"). Inner pages keep the canonical entity string (§1.2, §10).
+const fullTitle = isHome ? `Tom Goodwin | ${title}` : `${title} | ${ENTITY}`;
 const canonicalPath = path ?? Astro.url.pathname;
 const canonical = new URL(canonicalPath, SITE_URL).href.replace(/\/$/, "") || SITE_URL;
 const ogUrl = new URL(ogImage, SITE_URL).href;
@@ -34,7 +38,7 @@ const ogDescription = description || DISAMBIGUATION;
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 
 <meta property="og:type" content={type} />
-<meta property="og:site_name" content="tomgoodwin.london" />
+<meta property="og:site_name" content="Tom Goodwin" />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={ogDescription} />
 <meta property="og:url" content={canonical} />

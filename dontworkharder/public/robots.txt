@@ -1,4 +1,72 @@
-User-agent: *
-Allow: /
+# robots.txt for https://dontworkharder.com
+# Goal: maximum legitimate visibility in search AND AI answer engines (AEO).
+# This site wants to be crawled, cited, and recommended. An empty "Disallow:"
+# means "nothing is blocked". To block an agent, put a slash after it: "Disallow: /".
 
+# ---- Default: allow all standard crawlers (Google, Bing, etc.) ----
+User-agent: *
+Disallow:
+
+# ---- AI answer / retrieval engines (explicitly welcomed) ----
+# These fetch pages to answer user questions and cite sources in real time.
+# Keeping them open is how Don't Work Harder shows up in AI answers.
+User-agent: OAI-SearchBot
+Disallow:
+
+User-agent: ChatGPT-User
+Disallow:
+
+User-agent: PerplexityBot
+Disallow:
+
+User-agent: Perplexity-User
+Disallow:
+
+User-agent: ClaudeBot
+Disallow:
+
+User-agent: Claude-SearchBot
+Disallow:
+
+User-agent: Claude-User
+Disallow:
+
+User-agent: Applebot
+Disallow:
+
+User-agent: Amazonbot
+Disallow:
+
+# ---- AI training crawlers ----
+# These may use page content to train models. Allowing them aids long-term
+# entity recall and recommendation. Disallowing them does NOT remove you from
+# live AI answers (those use the retrieval bots above).
+# Default: allowed, for maximum entity presence.
+# To opt OUT of training only, change "Disallow:" to "Disallow: /" in this block.
+User-agent: GPTBot
+Disallow:
+
+User-agent: Google-Extended
+Disallow:
+
+User-agent: Applebot-Extended
+Disallow:
+
+User-agent: anthropic-ai
+Disallow:
+
+User-agent: CCBot
+Disallow:
+
+User-agent: Meta-ExternalAgent
+Disallow:
+
+User-agent: Bytespider
+Disallow:
+
+# ---- Sitemap ----
+# Confirm the exact path your Astro sitemap integration emits and update if needed.
 Sitemap: https://dontworkharder.com/sitemap-index.xml
+
+# AI-readable site summary (non-standard pointer; for humans and agents):
+# llms.txt: https://dontworkharder.com/llms.txt

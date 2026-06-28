@@ -1,0 +1,51 @@
+{
+  "slug": "hr-recruitment",
+  "name": "HR and recruitment",
+  "wave": 2,
+  "order": 8,
+  "status": "live",
+  "seoTitle": "Don't work harder in HR and recruitment",
+  "title": "Don't work harder in HR and recruitment | Don't Work Harder",
+  "meta": "A toolkit for HR and recruitment: the five moves to cut the admin, hand drafting and screening to AI responsibly, and defend time for the human work.",
+  "h1": "Don't work harder in HR and recruitment.",
+  "lede": "AI drafts the job spec, screens the first pass and summarises the feedback in seconds. Yet the calendar fills with scheduling and admin.",
+  "ledeKicker": "People work is the point, and it is exactly what gets squeezed.",
+  "cardLine": "AI drafts the job spec, screens the first pass and summarises the feedback in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the HR week actually goes",
+      "body": "HR holds the human work and is buried in the paperwork around it. The hours go to scheduling, screening, drafting job specs, answering the same policy questions, comms and ATS admin. The conversations that actually matter to people compete with the process that surrounds them.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as people, drafting, scheduling, or admin. The people share is usually smaller than the job title implies."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the HR work that should not exist",
+      "body": "The job spec rewritten from scratch for a role you have hired before. The screening step that rejects no one. The policy document nobody reads. The recurring update meeting that restates a tracker. Process is not the same as care.",
+      "doThis": "Pick the most ritualistic recurring task in your week and pause it for a fortnight. Note whether anything breaks."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Job-spec drafts. First-pass CV screening, flagged for human review. Interview-question sets. Feedback summaries. Policy and comms drafts. Keep a human firmly in the loop on every decision about a person: AI screening can encode bias, and the judgement on fit, fairness and potential is not yours to delegate.",
+      "doThis": "Take job-spec drafting and write a reusable prompt that produces the first version. Review it for tone and bias before it goes out."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Admin expands to fill an HR week without anyone deciding it should. The candidate experience and the manager coaching are the first things postponed because they have no system chasing them. Protect the time for the human conversations from the churn of process.",
+      "doThis": "Ringfence a weekly block for the people work that has no deadline, and keep admin out of it."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with admin by default. Spend them on the difficult conversation, the culture work, the candidate relationship, the judgement on whether someone will thrive. The human read of people is the part no model replaces.",
+      "doThis": "Name the conversation or culture problem you keep deferring. Give it the first reclaimed afternoon."
+    }
+  ]
+}

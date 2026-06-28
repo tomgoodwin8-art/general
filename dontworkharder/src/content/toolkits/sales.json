@@ -1,0 +1,51 @@
+{
+  "slug": "sales",
+  "name": "Sales",
+  "wave": 1,
+  "order": 3,
+  "status": "live",
+  "seoTitle": "Don't work harder in sales",
+  "title": "Don't work harder in sales | Don't Work Harder",
+  "meta": "A toolkit for sales: the five moves to cut the CRM admin, hand the busywork to AI, and defend the selling time and live conversations that actually close.",
+  "h1": "Don't work harder in sales.",
+  "lede": "AI drafts the outreach, summarises the call and writes the follow-up in seconds. Yet reps still sell a fraction of the week and admin the rest.",
+  "ledeKicker": "The time AI hands back is meant for selling, not more reporting.",
+  "cardLine": "AI drafts the outreach, summarises the call and writes the follow-up in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the sales week actually goes",
+      "body": "Every rep knows the feeling and few have measured it: the day spent on everything except talking to a customer. The hours go to CRM logging, building quotes and decks, internal pipeline meetings, chasing approvals and prospect research. Selling is what you are paid for and rarely what fills the calendar.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as selling, admin, internal, or research. The selling share is usually the smallest."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the sales work that should not exist",
+      "body": "The pipeline review that reads the dashboard aloud. The manual CRM hygiene a rule should handle. The bespoke deck built for a deal that will never close. The forecasting theatre that produces a number no one trusts. None of it advances a single opportunity.",
+      "doThis": "Stop building your most elaborate recurring internal report for two weeks. Count who notices."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "First-pass outreach personalised from real research. Call summaries and follow-up drafts from a transcript. Proposals built from a template. Account research before a meeting. CRM notes written from the recording. Build the instruction once and run it every deal.",
+      "doThis": "Take post-call follow-ups and write a reusable prompt that drafts them from your notes. Send edited, not written, this week."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Look less buried in admin and the internal calendar will fill the gap with syncs and check-ins. Selling time and live customer conversations are the first thing sacrificed because they are the easiest to reschedule. Default to no on any internal meeting that could be a message, and protect the hours you actually sell in.",
+      "doThis": "Ringfence your three best selling hours each day and refuse internal meetings inside them."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours drift back into CRM housekeeping by default. Spend them on the relationship, the hard discovery conversation, the genuine understanding of the customer's problem, the negotiation that turns on trust. The human read of a deal is the part no model closes.",
+      "doThis": "Pick the one account where a real conversation would change everything. Give it the first reclaimed afternoon."
+    }
+  ]
+}

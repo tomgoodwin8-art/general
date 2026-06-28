@@ -1,0 +1,51 @@
+{
+  "slug": "marketing",
+  "name": "Marketing",
+  "wave": 1,
+  "order": 1,
+  "status": "live",
+  "seoTitle": "Don't work harder in marketing",
+  "title": "Don't work harder in marketing | Don't Work Harder",
+  "meta": "A toolkit for marketers: the five moves to find your wasted hours, cut the work that should not exist, hand the rest to AI, and keep the time you win.",
+  "h1": "Don't work harder in marketing.",
+  "lede": "AI drafts the copy, writes the commentary and builds the deck in seconds. The hours did not leave the marketing team. They refilled with more reporting.",
+  "ledeKicker": "Here is how to claim them back.",
+  "cardLine": "AI drafts the copy, writes the commentary and builds the deck in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the marketing week actually goes",
+      "body": "Most marketers can name every channel they run and not one can say how many hours went to building dashboards versus reading them. The time disappears into reporting, reformatting the same numbers across GA4, the ad platforms, Looker and a board deck, status calls, campaign QA and approval chains. None of it shows up as work because all of it feels like work.",
+      "doThis": "Track five working days in thirty-minute blocks. Tag each as strategy, creative, analysis, reporting or coordination. The reporting total is usually the shock."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the marketing work that should not exist",
+      "body": "The weekly performance deck nobody opens. The standing channel sync that reads the dashboard aloud. The third revision round on copy that will not move a conversion. The bespoke report built for one stakeholder who skims the subject line. Automate any of these and you lock the waste in permanently, now running faster and harder to question.",
+      "doThis": "Stop producing your most elaborate recurring report for two weeks. Tell no one in advance. Count how many people ask where it went."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Only now does automation earn its place. First-pass ad and email variants from a brief. A fortnight of campaign data turned into written commentary. Raw exports reformatted into a clean table. First-pass keyword and audience research. One long asset cut into the week's social, email and ad versions. Build the instruction once and reuse it every cycle.",
+      "doThis": "Take the reporting commentary you decided to keep and write a reusable prompt that drafts it from your export. This week, edit it rather than write it."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "The moment a marketer looks less busy, the calendar fills with quick syncs and someone's pet project. Strategy and creative thinking are the first casualties, because to a passing manager they look like doing nothing. Default to no on any meeting that could be a Loom or a line of Slack, and ringfence the analysis and concepting that actually move performance.",
+      "doThis": "Block two hours this week for thinking. Mark them unavailable and defend them like a client call."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours banked drift back into more dashboards by default. Put them toward the work AI cannot do for you: designing an incrementality test instead of relitigating attribution, understanding why customers actually buy, concepting the idea that makes the media work harder. The non-scaling thinking is where the real performance gain hides, and it is the first thing a busy week sacrifices.",
+      "doThis": "Name the one strategic question you never have time for. Give it the first reclaimed afternoon, before the week negotiates it away."
+    }
+  ]
+}

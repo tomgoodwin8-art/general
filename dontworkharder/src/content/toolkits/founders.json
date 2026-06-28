@@ -1,0 +1,51 @@
+{
+  "slug": "founders",
+  "name": "Founders",
+  "wave": 2,
+  "order": 7,
+  "status": "live",
+  "seoTitle": "Don't work harder as a founder",
+  "title": "Don't work harder as a founder | Don't Work Harder",
+  "meta": "A toolkit for founders: the five moves to cut the busywork that feels like progress, hand the admin to AI, and defend the thinking that sets direction.",
+  "h1": "Don't work harder as a founder.",
+  "lede": "AI drafts the investor update, the job spec and the research in seconds. Yet the founder week still fills to the brim.",
+  "ledeKicker": "Doing everything faster is not the same as doing the right things.",
+  "cardLine": "AI drafts the investor update, the job spec and the research in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the founder week actually goes",
+      "body": "Founders wear every hat and rarely audit which ones eat the day. The hours scatter across investor updates, hiring admin, the inbox, and the constant context-switch between functions, much of it busywork that feels like progress because it is motion. Direction-setting is what only you can do and what gets least time.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as direction, building, admin, or reactive. The reactive share is usually the thief."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the work that should not exist",
+      "body": "The metrics dashboard nobody acts on. The investor update written weekly when monthly would do. The meeting taken out of politeness. The feature built before a single customer asked. As founder you have unusual power to simply stop things, and unusual reluctance to use it.",
+      "doThis": "Cut one recurring obligation you maintain from habit, not need, for a month. Reclaim the hours it was quietly taking."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "First-pass investor updates from your notes. Job-spec drafts. Research and competitive scans. Routine comms. Turning a messy brain-dump into structure. Build a small library of prompts for the things you do every week. The aim is to stop being the bottleneck on work that does not need you.",
+      "doThis": "Take your weekly update or recurring comms and write a reusable prompt that drafts it. Edit, do not write, this week."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "A founder's calendar fills faster than anyone's, because everyone's problem routes to you. Thinking time is the first casualty, and its absence is invisible until the company drifts. Default to no aggressively, and protect the deep-work blocks where strategy actually happens.",
+      "doThis": "Block a half-day a week for thinking only. Defend it harder than any meeting."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with reactive work by default. Spend them on the strategic bet, the hire that changes the trajectory, the customer conversation that reveals the real problem, the thinking that sets direction. The non-delegable judgement is not a distraction from the job. It is the job.",
+      "doThis": "Name the one decision that would most change the next six months. Give it the first reclaimed half-day."
+    }
+  ]
+}

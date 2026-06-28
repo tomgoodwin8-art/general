@@ -48,4 +48,35 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { articles };
+// Role-based toolkits: the five moves applied to one line of work (toolkits brief).
+const toolkits = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/toolkits' }),
+  schema: z.object({
+    slug: z.string(),
+    name: z.string(),
+    wave: z.number(),
+    order: z.number(),
+    status: z.enum(['live', 'soon']).default('live'),
+    seoTitle: z.string(),
+    title: z.string(),
+    meta: z.string(),
+    h1: z.string(),
+    lede: z.string(),
+    ledeKicker: z.string(),
+    underLedeNote: z.string().optional(),
+    cardLine: z.string(),
+    moves: z
+      .array(
+        z.object({
+          n: z.number(),
+          name: z.string(),
+          role: z.string(),
+          body: z.string(),
+          doThis: z.string(),
+        }),
+      )
+      .length(5),
+  }),
+});
+
+export const collections = { articles, toolkits };

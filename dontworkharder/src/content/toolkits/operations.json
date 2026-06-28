@@ -1,0 +1,51 @@
+{
+  "slug": "operations",
+  "name": "Operations",
+  "wave": 2,
+  "order": 10,
+  "status": "live",
+  "seoTitle": "Don't work harder in operations",
+  "title": "Don't work harder in operations | Don't Work Harder",
+  "meta": "A toolkit for operations: the five moves to cut the firefighting, hand routine process work to AI, and defend time to fix the root cause not the symptom.",
+  "h1": "Don't work harder in operations.",
+  "lede": "AI drafts the SOP, cleans the data and summarises the incident in seconds. Yet the week is still spent firefighting.",
+  "ledeKicker": "Time saved on the routine is meant for fixing the process, not running it faster.",
+  "cardLine": "AI drafts the SOP, cleans the data and summarises the incident in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the operations week actually goes",
+      "body": "Ops keeps the machine running and rarely steps back to see where the effort goes. The hours pour into firefighting, reformatting data, status reports, coordination, manual handoffs and approval chains. The work that would stop the fires recurring is always lower priority than the fire in front of you.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as firefighting, process, reporting, or coordination. The firefighting share is the diagnosis."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the operations work that should not exist",
+      "body": "The approval step that approves everything. The report built for a process nobody follows. The manual data transfer a rule could handle. The standing meeting that reviews a dashboard aloud. A faster broken process is still a broken process.",
+      "doThis": "Remove your most pointless approval or handoff for two weeks. Watch whether anything actually goes wrong."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "SOP drafts. First-pass data cleaning. Incident summaries. Routine comms. Turning messy inputs into clean structure. Build the instruction once and reuse it across every recurrence. The aim is to stop spending human hours on work that follows a rule.",
+      "doThis": "Take a recurring data-cleaning task and write a reusable prompt that does the first pass. Use it this week."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "In ops, every saved hour is instantly claimed by the next fire. Improvement work has no deadline, so it loses every time to something urgent and small. Protect a block for the root-cause work the firefighting never leaves room for.",
+      "doThis": "Ringfence a weekly block to fix one recurring problem at its source. Keep the urgent queue out of it."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with firefighting by default. Spend them on the process redesign, the bottleneck nobody owns, the cross-team coordination, the systems thinking that stops the next fire before it starts. The fix that ends the recurrence is worth more than any number of fast responses.",
+      "doThis": "Name the fire you fight most often. Use the first reclaimed block to remove its cause."
+    }
+  ]
+}

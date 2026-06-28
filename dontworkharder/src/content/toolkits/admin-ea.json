@@ -1,0 +1,51 @@
+{
+  "slug": "admin-ea",
+  "name": "Assistants and admin",
+  "wave": 3,
+  "order": 17,
+  "status": "live",
+  "seoTitle": "Don't work harder as an assistant",
+  "title": "Don't work harder as an assistant | Don't Work Harder",
+  "meta": "A toolkit for assistants and admin professionals: the five moves to cut low-value churn, hand routine drafting to AI, and defend time for high-judgement work.",
+  "h1": "Don't work harder as an assistant.",
+  "lede": "AI drafts the reply, summarises the inbox and formats the document in seconds. Yet the day is still wall-to-wall.",
+  "ledeKicker": "Time saved is for the judgement and anticipation that make the role valuable.",
+  "cardLine": "AI drafts the reply, summarises the inbox and formats the document in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the admin week actually goes",
+      "body": "Assistants keep everything moving and rarely get to see where their own hours go. The week fills with scheduling, inbox triage, formatting documents, expense admin, coordination and status comms. The high-judgement work, the anticipation and discretion, hides inside a flood of low-value churn.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as judgement, coordination, formatting, or churn. The churn share is the opportunity."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the admin work that should not exist",
+      "body": "The recurring report nobody reads. The manual scheduling a tool could resolve. The document reformatted by hand every time. The update meeting that restates a shared file. Being busy with the avoidable is not the same as being useful.",
+      "doThis": "Pick the most repetitive low-value task in your week and pause or automate it for a fortnight. Note who, if anyone, asks about it."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Routine reply drafts. Inbox and thread summaries. First-pass scheduling. Formatting and reformatting. Turning notes into clean documents. Build reusable instructions for the things you do daily, so the routine stops eating the hours that judgement needs.",
+      "doThis": "Take routine email drafting and write a reusable prompt that produces the first pass. Edit and send this week."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "The moment an assistant has a spare hour, it is filled, because the role is defined by availability. The high-judgement work that makes you indispensable is the first thing displaced by low-value requests. Protect the time for the work that actually needs you.",
+      "doThis": "Ringfence a daily block for the work only you can do well, and keep the churn out of it."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with churn by default. Spend them on anticipating what is needed before it is asked, the relationship, the judgement on priorities, the discretion a principal relies on. The trusted-partner work is the part no tool can be.",
+      "doThis": "Name the thing your principal will need next week that nobody has flagged. Use the first reclaimed hour to get ahead of it."
+    }
+  ]
+}

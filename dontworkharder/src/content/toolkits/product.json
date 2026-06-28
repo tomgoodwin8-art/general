@@ -1,0 +1,51 @@
+{
+  "slug": "product",
+  "name": "Product",
+  "wave": 2,
+  "order": 9,
+  "status": "live",
+  "seoTitle": "Don't work harder in product",
+  "title": "Don't work harder in product | Don't Work Harder",
+  "meta": "A toolkit for product managers: the five moves to cut the status work, hand drafting and synthesis to AI, and defend time for discovery and judgement.",
+  "h1": "Don't work harder in product.",
+  "lede": "AI drafts the PRD, synthesises the feedback and writes the release notes in seconds. Yet the PM week fills with status and syncs.",
+  "ledeKicker": "The time saved is for understanding the problem, not narrating the roadmap again.",
+  "cardLine": "AI drafts the PRD, synthesises the feedback and writes the release notes in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the product week actually goes",
+      "body": "Product managers sit at the centre of everyone's coordination and pay for it in hours. The week goes to writing tickets, status updates, stakeholder syncs, reformatting roadmaps and triaging requests. Discovery, the actual work of deciding what to build, gets whatever is left.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as discovery, writing, coordination, or status. Discovery is usually the casualty."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the product work that should not exist",
+      "body": "The roadmap deck rebuilt every week for the same audience. The detailed spec for the feature that will not ship this quarter. The stakeholder sync that restates the board. The backlog grooming of tickets no one will ever build. Motion on the roadmap is not progress on the product.",
+      "doThis": "Stop rebuilding your recurring roadmap artefact for two weeks. See who actually asks for the update."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "First-pass PRDs from your notes. User-feedback synthesis across hundreds of responses. Ticket drafts. Release notes. Competitive scans. Research summaries. Build reusable templates so the writing stops being the work and becomes the by-product of the thinking.",
+      "doThis": "Take user-feedback synthesis and write a reusable prompt that clusters it into themes. Use it on this cycle's inputs."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "A PM's calendar is the first thing every other team reaches for. Discovery and strategy time look optional because nothing external is chasing them. Default to no on syncs that could be written, and protect the block where you actually understand the problem before solving it.",
+      "doThis": "Block a weekly discovery slot with no stakeholders in it. Defend it as the core of the role."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with coordination by default. Spend them on understanding the customer problem, the prioritisation call nobody else can make, the cross-functional trust, the bet on what to build next. Judgement is what defines the product, and it does not come from a template.",
+      "doThis": "Name the customer problem you have not had time to understand properly. Give it the first reclaimed block."
+    }
+  ]
+}

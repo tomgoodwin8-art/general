@@ -1,0 +1,51 @@
+{
+  "slug": "consulting",
+  "name": "Consulting",
+  "wave": 1,
+  "order": 4,
+  "status": "live",
+  "seoTitle": "Don't work harder in consulting",
+  "title": "Don't work harder in consulting | Don't Work Harder",
+  "meta": "A toolkit for consultants: the five moves to cut the deck-building, hand the research and formatting to AI, and defend the thinking time the fee is actually for.",
+  "h1": "Don't work harder in consulting.",
+  "lede": "AI drafts the slides, cleans the data and synthesises the research in seconds. Yet the hours vanish into formatting and internal reviews.",
+  "ledeKicker": "Clients pay for the insight, not the eightieth slide.",
+  "cardLine": "AI drafts the slides, cleans the data and synthesises the research in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the consulting week actually goes",
+      "body": "Consultants know the late nights and rarely know where they went. The hours pour into deck-building, formatting, internal review rounds, status updates, research and the admin of being on the road. The thinking that justifies the fee is squeezed into the margins of all of it.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as analysis, production, internal, or coordination. Production usually dwarfs analysis."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the consulting work that should not exist",
+      "body": "The eighty-slide deck where ten would carry the argument. The internal review layer that adds polish but no insight. The recurring status report the client skims. The model rebuilt from scratch for an engagement that mirrors the last one. Effort is not the product.",
+      "doThis": "On the next deliverable, cut the deck to the slides that carry a decision. See if anyone misses the rest."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "First-pass research and synthesis. Slide drafts from an outline. Data cleaning. Meeting notes and action logs. Literature and market scans. Proposal boilerplate reused across engagements. Build the asset once and carry it from client to client.",
+      "doThis": "Take first-pass research synthesis and write a reusable instruction that produces it. Use it on the current engagement, then verify the sources."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Always-on client service treats every saved hour as available, and someone always has a use for it. Thinking time looks like idleness to a culture that measures hours billed. Default to no on internal calls that could be async, and protect the analysis block where the actual value is made.",
+      "doThis": "Block two hours for thinking on the live problem. Treat it as billable and unmovable."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with more slides by default. Spend them on the genuine insight, the uncomfortable recommendation the client needs to hear, the relationship that wins the next engagement, the pattern only experience can spot. Judgement is the product, and it does not come from a template.",
+      "doThis": "Name the insight the deck is dancing around. Give it the first reclaimed afternoon and say it plainly."
+    }
+  ]
+}

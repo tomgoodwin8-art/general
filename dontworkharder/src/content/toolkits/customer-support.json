@@ -1,0 +1,51 @@
+{
+  "slug": "customer-support",
+  "name": "Customer support",
+  "wave": 2,
+  "order": 6,
+  "status": "live",
+  "seoTitle": "Don't work harder in customer support",
+  "title": "Don't work harder in customer support | Don't Work Harder",
+  "meta": "A toolkit for support teams: the five moves to cut repetitive ticket work, hand first drafts to AI, and defend time for the hard cases that need a human.",
+  "h1": "Don't work harder in customer support.",
+  "lede": "AI drafts the reply, summarises the thread and tags the ticket in seconds. Yet the queue never shortens.",
+  "ledeKicker": "Time saved on the routine is meant for the customers who actually need you.",
+  "cardLine": "AI drafts the reply, summarises the thread and tags the ticket in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the support week actually goes",
+      "body": "Support runs on volume and rarely measures where the volume goes. The hours pour into repetitive tickets, copy-pasting macros, escalation chains, internal queries and reformatting between systems. The complex cases that need real attention compete with a flood of ones that never should have been tickets.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as repetitive, complex, internal, or admin. The repetitive share points straight at the fix."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the support work that should not exist",
+      "body": "The ticket category that should be a help article. The escalation step that escalates everything regardless. The manual tagging a model could do. The QA meeting that reviews the dashboard aloud. Deflect the avoidable before you get faster at handling it.",
+      "doThis": "Take your single most common ticket type and turn it into a self-serve doc for two weeks. Measure the drop."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "First-pass replies drafted from the knowledge base. Long threads summarised before you pick them up. Triage and tagging. Recurring questions turned into documentation. Translation. The human checks tone, accuracy and the edge cases a model will get confidently wrong.",
+      "doThis": "Take your top repetitive ticket type and write a reusable prompt that drafts the reply. Edit and send this week."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Save time on easy tickets and the queue simply serves up more of them. Depth on the hard cases is the first thing lost when volume is the only metric on the wall. Protect the time and attention the complex tickets need, rather than letting throughput swallow it.",
+      "doThis": "Ringfence a daily block for the genuinely hard cases and keep the easy queue out of it."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with more tickets by default. Spend them on the genuinely upset customer, the novel problem, the relationship recovery, and on spotting the product flaw the tickets keep pointing at. Empathy and pattern-recognition are the parts no macro covers.",
+      "doThis": "Pick the recurring complaint behind your ticket spikes. Use the first reclaimed hour to write up the root cause for the product team."
+    }
+  ]
+}

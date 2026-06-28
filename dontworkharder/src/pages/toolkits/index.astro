@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaCourse from '../../components/CtaCourse.astro';
+import { SITE } from '../../data/site';
+
+const toolkits = (await getCollection('toolkits')).sort((a, b) => a.data.order - b.data.order);
+
+const intro =
+  'The five moves work in any role. What changes is the detail: the pointless recurring task a marketer should kill is not the one a lawyer should, and the work AI cannot touch differs by trade. Each toolkit applies See, Shed, Shift, Shield and Spend to a single line of work. Find yours.';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Toolkits', item: new URL('/toolkits', SITE.url).href },
+  ],
+};
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: toolkits
+    .filter((t) => t.data.status === 'live')
+    .map((t, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: t.data.name,
+      url: new URL(`/toolkits/${t.data.slug}`, SITE.url).href,
+    })),
+};
+---
+
+<BaseLayout
+  title="Toolkits"
+  description="The five moves to reclaim your week, applied to the work you actually do. Role-based toolkits for marketing, software, sales, consulting, finance and more."
+  schema={[breadcrumbSchema, itemListSchema]}
+>
+  <section class="section">
+    <div class="container-dwh">
+      <div class="measure tk-head">
+        <p class="eyebrow">Toolkits</p>
+        <h1>Reclaim your week, by the work you actually do.</h1>
+        <p class="tk-intro">{intro}</p>
+      </div>
+
+      <ul class="tk-grid">
+        {
+          toolkits.map((t) => {
+            const live = t.data.status === 'live';
+            const inner = (
+              <>
+                <span class="tk-card-name">{t.data.name}</span>
+                <span class="tk-card-line">{t.data.cardLine}</span>
+                {live ? (
+                  <span class="tk-card-cta" aria-hidden="true">The five moves &rarr;</span>
+                ) : (
+                  <span class="tk-card-soon">Soon</span>
+                )}
+              </>
+            );
+            return (
+              <li class:list={['tk-card', { 'tk-card-disabled': !live }]}>
+                {live ? (
+                  <a href={`/toolkits/${t.data.slug}`} class="tk-card-link">
+                    {inner}
+                  </a>
+                ) : (
+                  <div class="tk-card-link" aria-disabled="true">
+                    {inner}
+                  </div>
+                )}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaCourse
+    source="toolkit"
+    heading="Walk the five moves in five days."
+    body="The free course takes one move a day, with a single exercise each, and sends the week-audit worksheet to start. The fastest way to put this into practice."
+  />
+</BaseLayout>
+
+<style>
+  .tk-head h1 { margin-top: 0.4rem; }
+  .tk-intro { margin-top: 1rem; color: var(--color-ink-soft); font-size: 1.1rem; line-height: 1.6; }
+
+  .tk-grid {
+    margin-top: 3rem;
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1rem;
+  }
+  .tk-card { margin: 0; }
+  .tk-card-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 0.5rem;
+    padding: 1.4rem 1.5rem;
+    background: var(--color-paper);
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  a.tk-card-link:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+  .tk-card-name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    line-height: 1.1;
+  }
+  .tk-card-line {
+    font-size: 0.95rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .tk-card-cta {
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+  a.tk-card-link:hover .tk-card-cta { text-decoration: underline; text-underline-offset: 3px; }
+  .tk-card-soon {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+  .tk-card-disabled .tk-card-link {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+</style>

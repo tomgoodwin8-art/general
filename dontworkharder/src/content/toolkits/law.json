@@ -1,0 +1,52 @@
+{
+  "slug": "law",
+  "name": "Law",
+  "wave": 3,
+  "order": 11,
+  "status": "live",
+  "seoTitle": "Don't work harder in law",
+  "title": "Don't work harder in law | Don't Work Harder",
+  "meta": "A toolkit for legal professionals: the five moves to cut the routine, use AI on first drafts safely, and defend time for the judgement that carries the case.",
+  "h1": "Don't work harder in law.",
+  "lede": "AI reviews the first pass, drafts the standard clause and summarises the document in seconds. Yet the billable week runs as long as ever.",
+  "ledeKicker": "Time saved on the routine is for judgement, the part that carries the matter.",
+  "underLedeNote": "A necessary caveat: nothing here means handing privileged or confidential material to a model unchecked. Every AI output is a draft to verify, citations included. The judgement, and the liability, stay with you.",
+  "cardLine": "AI reviews the first pass, drafts the standard clause and summarises the document in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the legal week actually goes",
+      "body": "Lawyers track time to the six-minute unit and rarely ask what the units add up to. The hours go to document review, precedent research, drafting standard clauses, formatting, billing admin and status comms. The advisory work that defines good lawyering competes with a mountain of routine that merely has to be done.",
+      "doThis": "Track five days against your usual time codes, then tag each as judgement, routine, or admin. The routine share is usually larger than it feels."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the legal work that should not exist",
+      "body": "The manual precedent hunt a proper search would resolve in minutes. The memo engineered far past what the question needed. The redundant review layer that adds risk-aversion but no insight. The meeting that restates the email. Thoroughness applied to the unnecessary is just cost.",
+      "doThis": "Identify one routine task you perform from habit rather than necessity and pause it for a fortnight. Note whether any matter suffers."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "First-pass document review, flagged for a lawyer's eyes. Clause drafting from your own precedents. Summaries of long documents. Research scans. Formatting and proofing. Confidentiality, privilege and verification are non-negotiable: never rely on unchecked output, and always confirm that cited authority actually exists and says what the model claims.",
+      "doThis": "Take a routine summarising task and write a reusable instruction that produces the first pass. Verify every reference before you use it."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "In a billable culture, every reclaimed hour is assumed available for more matters. The deep analysis that wins the hard case has no slot of its own and gets done late at night or not at all. Protect a block for the judgement work, and treat it as the highest-value time you have.",
+      "doThis": "Ringfence a weekly block for the thinking the hardest matter needs. Defend it from intake."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with more routine by default. Spend them on the counsel, the negotiation, the judgement on risk, the client relationship. The work that carries liability is precisely the work that cannot be delegated to a model, and it is where a lawyer is irreplaceable.",
+      "doThis": "Name the matter where your judgement, not your hours, will decide the outcome. Give it the first reclaimed block."
+    }
+  ]
+}

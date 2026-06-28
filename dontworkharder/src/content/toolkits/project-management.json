@@ -1,0 +1,51 @@
+{
+  "slug": "project-management",
+  "name": "Project management",
+  "wave": 3,
+  "order": 13,
+  "status": "live",
+  "seoTitle": "Don't work harder in project management",
+  "title": "Don't work harder in project management | Don't Work Harder",
+  "meta": "A toolkit for project and programme managers: the five moves to cut the status work, hand reporting to AI, and defend time to unblock what matters.",
+  "h1": "Don't work harder in project management.",
+  "lede": "AI drafts the status report, writes the meeting actions and summarises the risk log in seconds. Yet the week is all reporting.",
+  "ledeKicker": "Time saved is for unblocking the work, not narrating it.",
+  "cardLine": "AI drafts the status report, writes the meeting actions and summarises the risk log in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the PM week actually goes",
+      "body": "Project managers live in the reporting layer and rarely measure how thick it has become. The hours go to status reports, chasing updates, reformatting plans, meetings and the admin of keeping a tracker green. The actual unblocking, the part that moves a project, fights for room.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as unblocking, reporting, chasing, or meetings. Reporting usually dominates."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the project work that should not exist",
+      "body": "The status report that restates the tool anyone could open. The meeting held to prepare the next meeting. The plan updated weekly for an audience of one. The RAG status argued over rather than acted on. Reporting on progress is not the same as making it.",
+      "doThis": "Replace your most elaborate status report with a three-line summary for two weeks. See if anyone wants the detail back."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Status-report drafts from the tracker. Meeting notes and actions from a recording. First-pass plans. Stakeholder-update drafts. Risk-log summaries. Build the instruction once so reporting becomes a by-product rather than the job.",
+      "doThis": "Take status reporting and write a reusable prompt that drafts it from your tracker. Edit and send this week."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "A PM's saved hour is immediately claimed by another update or another meeting. The unblocking and forward-thinking work has no deadline of its own and quietly loses. Protect the time to solve the real risk rather than report on it.",
+      "doThis": "Ringfence a weekly block to clear the project's biggest blocker. Keep status work out of it."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with reporting by default. Spend them on the dependency nobody spotted, the stakeholder relationship, the judgement call on a trade-off, the team unblock that only a human can broker. Coordination that needs trust is the part no tool delivers.",
+      "doThis": "Name the risk the RAG status keeps amber. Use the first reclaimed block to actually resolve it."
+    }
+  ]
+}

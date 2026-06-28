@@ -1,0 +1,51 @@
+{
+  "slug": "data-analytics",
+  "name": "Data and analytics",
+  "wave": 3,
+  "order": 15,
+  "status": "live",
+  "seoTitle": "Don't work harder in data and analytics",
+  "title": "Don't work harder in data and analytics | Don't Work Harder",
+  "meta": "A toolkit for data and analytics: the five moves to cut the reporting, hand cleaning and queries to AI with checks, and defend time for the question that matters.",
+  "h1": "Don't work harder in data and analytics.",
+  "lede": "AI cleans the data, drafts the query and writes the commentary in seconds. Yet the request queue never clears.",
+  "ledeKicker": "Time saved is for the question that changes a decision, not the dashboard nobody opens.",
+  "cardLine": "AI cleans the data, drafts the query and writes the commentary in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the data week actually goes",
+      "body": "Analysts measure the business and rarely measure themselves. The hours go to data cleaning, building recurring reports, ad-hoc requests, reformatting and maintaining dashboards. The deep analysis that changes a decision waits behind a queue of work that mostly serves itself.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as analysis, cleaning, reporting, or requests. Analysis is usually the smallest."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the data work that should not exist",
+      "body": "The dashboard nobody opens. The recurring report a scheduled refresh could send. The ad-hoc request that should be self-serve. The metric tracked because it can be, not because anyone acts on it. Measuring the irrelevant precisely is still a waste.",
+      "doThis": "Stop maintaining your least-viewed dashboard for a month. Count who notices."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "First-pass queries from a plain-language question. Data cleaning. Report commentary. Documentation. Turning analysis into narrative. Verify the logic before anyone acts on it: a query that runs is not a query that is right, and a wrong number drives a wrong decision.",
+      "doThis": "Take a recurring cleaning step and write a reusable prompt that does the first pass. Check the output before you trust it."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Every saved hour is met by another request, because demand for data is effectively infinite. The deep analysis has no deadline and loses to the queue every time. Protect the block for the question worth answering properly.",
+      "doThis": "Ringfence a weekly block for the analysis that has no requester. Keep the queue out of it."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with requests by default. Spend them on the question nobody thought to ask, the analysis that changes a decision, the experiment worth designing, the insight behind the number. Judgement, not reporting, is where analytics earns its keep.",
+      "doThis": "Name the decision your data could improve but no one has asked about. Give it the first reclaimed block."
+    }
+  ]
+}

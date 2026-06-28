@@ -1,0 +1,51 @@
+{
+  "slug": "writing-content",
+  "name": "Writing and content",
+  "wave": 3,
+  "order": 12,
+  "status": "live",
+  "seoTitle": "Don't work harder in writing and content",
+  "title": "Don't work harder in writing and content | Don't Work Harder",
+  "meta": "A toolkit for writers: the five moves to cut the content treadmill, hand research and first drafts to AI, and defend time for the idea worth having.",
+  "h1": "Don't work harder in writing and content.",
+  "lede": "AI drafts the piece, repurposes it ten ways and writes the headlines in seconds. Yet the calendar of slots never empties.",
+  "ledeKicker": "The time saved is for the thinking behind the words, not for filling more slots.",
+  "cardLine": "AI drafts the piece, repurposes it ten ways and writes the headlines in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the writing week actually goes",
+      "body": "Writers picture the week as writing and live it as everything else. The hours go to research, first drafts, reformatting across channels, edit rounds, status comms and sourcing images. The original thinking that makes writing worth reading gets the scraps.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as thinking, drafting, production, or admin. Thinking is usually the thinnest."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the content work that should not exist",
+      "body": "The content calendar nobody reads, served only to keep a cadence. The third revision that will not change a single reader's mind. The manual repurposing done by hand. The piece written because the slot exists, not because there is something to say. Volume is not value.",
+      "doThis": "Skip the lowest-value slot in your calendar for two weeks. Measure whether anyone notices its absence."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Research and outlines. First drafts from a brief. Repurposing one strong piece into many formats. Headline and subject-line variants. Transcribing and structuring raw material. The writer edits and owns the voice: a model can produce serviceable prose, but the distinctive line is still yours.",
+      "doThis": "Take repurposing and write a reusable prompt that turns one piece into the week's formats. Edit each before it ships."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Save time and the content treadmill simply demands more output. The original-thinking time is the first thing sacrificed, because to a content schedule it looks like staring out of a window. Protect the block where the idea actually forms before the writing starts.",
+      "doThis": "Block a weekly slot for thinking, not producing. Defend it from the calendar."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with more posts by default. Spend them on the idea worth having, the original reporting, the distinctive voice, the argument only you can make. The thinking behind the words is the part a model cannot do for you, and it is the only part that lasts.",
+      "doThis": "Name the piece you would write if the calendar disappeared. Give it the first reclaimed afternoon."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "finance-accounting",
+  "name": "Finance and accounting",
+  "wave": 1,
+  "order": 5,
+  "status": "live",
+  "seoTitle": "Don't work harder in finance and accounting",
+  "title": "Don't work harder in finance and accounting | Don't Work Harder",
+  "meta": "A toolkit for finance and accounting: the five moves to cut the manual reporting, hand the routine to AI safely, and defend time for the analysis that matters.",
+  "h1": "Don't work harder in finance and accounting.",
+  "lede": "AI drafts the commentary, reformats the export and flags the reconciliations in seconds. Yet the close still eats the month.",
+  "ledeKicker": "The hours saved are meant for forward-looking analysis, not more retrospective reporting.",
+  "cardLine": "AI drafts the commentary, reformats the export and flags the reconciliations in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the finance week actually goes",
+      "body": "Finance teams measure everything except their own time. The hours go to reconciliations, reformatting the same numbers across systems, chasing figures, assembling the board pack, writing variance commentary and manual data entry. The forward-looking work that adds value is what gets cut when the close runs late.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as reporting, reconciliation, analysis, or data wrangling. Analysis is usually the thinnest slice."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the finance work that should not exist",
+      "body": "The report built for one executive who reads the subject line. The reconciliation a rule could perform. The duplicate spreadsheet maintained by hand. The meeting convened to discuss the variance the email already explained. Precision applied to the pointless is still pointless.",
+      "doThis": "Stop producing your most detailed recurring report for one cycle. Count who asks for it back."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Variance commentary drafted from the numbers. Exports reformatted into a clean pack. First-pass reconciliations flagged for review. Board-narrative drafts. Transaction categorisation. Verify everything before it leaves your hands: figures carry liability, and a confident wrong number is worse than a slow right one.",
+      "doThis": "Take variance commentary and write a reusable prompt that drafts it from the data. Check every figure before it ships."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "The moment the close finishes early, ad-hoc requests rush to fill the gap. Analysis and forecasting are the first to be postponed because they have no deadline of their own. Ringfence the close from interruptions and protect a standing block for the work that looks forward rather than back.",
+      "doThis": "Block a recurring analysis slot the week after close and defend it from ad-hoc requests."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours drift back into reporting by default. Spend them on the forward-looking analysis, the scenario nobody has modelled, the control that prevents the next problem, the business-partnering conversation that changes a decision. Judgement, not bookkeeping, is where finance earns its seat.",
+      "doThis": "Name the question the board should be asking and isn't. Model it with the first reclaimed afternoon."
+    }
+  ]
+}

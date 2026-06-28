@@ -1,0 +1,51 @@
+{
+  "slug": "software",
+  "name": "Software",
+  "wave": 1,
+  "order": 2,
+  "status": "live",
+  "seoTitle": "Don't work harder in software",
+  "title": "Don't work harder in software | Don't Work Harder",
+  "meta": "A toolkit for engineers: the five moves to cut the work that should not ship, hand the boilerplate to AI, and defend the maker time that real building needs.",
+  "h1": "Don't work harder in software.",
+  "lede": "AI writes the boilerplate, the tests and the PR description in seconds. Yet the week still fills, now with more tickets, more reviews, more meetings.",
+  "ledeKicker": "Coding faster was never the bottleneck. Keeping the time was.",
+  "cardLine": "AI writes the boilerplate, the tests and the PR description in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the engineering week actually goes",
+      "body": "Ask an engineer how much of the week was spent building and the honest answer surprises them. The hours leak into ticket triage, code-review queues, standups, environment setup, Slack and the context-switch tax of being pulled between all of them. Speed at the keyboard does not help if the keyboard is rarely where you are.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as building, reviewing, coordinating, or interrupted. The building total is rarely the majority."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the work that should not ship",
+      "body": "The standup that could be three lines in a channel. The ticket endlessly groomed that no one will ever pick up. The feature gold-plated past anything a user asked for. The process step that exists because it always has. Writing an agent to automate a build for a feature that should not exist is the most expensive mistake on this list.",
+      "doThis": "Find the one recurring ceremony that produces nothing and skip it for two sprints. Watch whether velocity changes. It will not."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Boilerplate, test scaffolding, first-pass implementation from a clear spec, the PR description, deciphering a stack trace, converting between formats, drafting the docs. Build reusable prompts and agents for the patterns you repeat. Review every line: generated code is a draft with a confidence problem, and you own what merges.",
+      "doThis": "Take one repetitive coding pattern and write a reusable instruction that produces the first pass. Use it this week, and read it before you commit."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Maker time and manager time do not mix, and the calendar always wins unless you fight it. A single midday meeting can shatter a day into fragments too small to build in. Default to no on anything that breaks a deep block, and protect long uninterrupted stretches as the actual unit of engineering work.",
+      "doThis": "Block one four-hour stretch this week with no meetings inside it. Defend it as non-negotiable."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours drift back into the ticket queue by default. Spend them on the architecture you never get to think through, the debt that quietly slows everyone, the code worth deleting, the mentoring that compounds. The judgement about what to build and how to build it well is the part no model can take.",
+      "doThis": "Name the one design or refactor you keep deferring. Give it the first reclaimed block."
+    }
+  ]
+}

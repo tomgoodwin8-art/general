@@ -15,6 +15,7 @@ export const SITE = {
 // Global nav: five items max (brief §3). Free Course is the primary button.
 export const NAV = [
   { label: 'Method', href: '/method' },
+  { label: 'Toolkits', href: '/toolkits' },
   { label: 'The Book', href: '/book' },
   { label: 'Articles', href: '/articles' },
   { label: 'About', href: '/about' },
@@ -65,4 +66,5 @@ export type CaptureSource =
   | 'book-launch'
   | 'read'
   | 'about'
-  | 'article';
+  | 'article'
+  | 'toolkit';

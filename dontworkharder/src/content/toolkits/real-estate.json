@@ -1,0 +1,51 @@
+{
+  "slug": "real-estate",
+  "name": "Real estate",
+  "wave": 3,
+  "order": 18,
+  "status": "live",
+  "seoTitle": "Don't work harder in real estate",
+  "title": "Don't work harder in real estate | Don't Work Harder",
+  "meta": "A toolkit for estate agents: the five moves to cut the listing admin, hand drafting and comms to AI, and defend time for the relationships that close deals.",
+  "h1": "Don't work harder in real estate.",
+  "lede": "AI drafts the listing, writes the follow-up and summarises the enquiries in seconds. Yet the week disappears into admin.",
+  "ledeKicker": "Time saved is for the relationships and negotiations that actually close.",
+  "cardLine": "AI drafts the listing, writes the follow-up and summarises the enquiries in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the property week actually goes",
+      "body": "Agents are paid to close and spend the week processing. The hours go to listing admin, drafting descriptions, scheduling viewings, comms, paperwork and portal updates. The relationship work and negotiation that win and complete deals fight for what is left.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as selling, admin, comms, or paperwork. The selling share is usually the smallest."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the property work that should not exist",
+      "body": "The listing description written from scratch each time. The manual portal update done by hand. The follow-up chased without a system. The meeting that restates the pipeline. Busywork dressed as diligence is still busywork.",
+      "doThis": "Pick the most repetitive admin task in your week and template or pause it for a fortnight. Note whether any deal slows."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Listing-description drafts from the property details. First-pass client comms. Enquiry summaries. Scheduling. Document drafts. The agent owns the relationship and the accuracy: a description must be true, and the trust must be real.",
+      "doThis": "Take listing descriptions and write a reusable prompt that drafts them from the details. Check every claim before publishing."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Save time on admin and more admin appears, because the paperwork around property is endless. Viewing and relationship time is the first thing squeezed, though it is what actually closes. Protect the hours you spend with clients from the churn.",
+      "doThis": "Ringfence your prime client and viewing hours and keep admin out of them."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with admin by default. Spend them on the negotiation, the local knowledge no portal holds, the trust that turns a viewing into an offer, the judgement on a deal. The relationship work is what completes, and it does not scale.",
+      "doThis": "Name the client or deal where a real conversation would change the outcome. Give it the first reclaimed afternoon."
+    }
+  ]
+}

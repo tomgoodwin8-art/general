@@ -1,0 +1,51 @@
+{
+  "slug": "teaching",
+  "name": "Teaching",
+  "wave": 3,
+  "order": 16,
+  "status": "live",
+  "seoTitle": "Don't work harder in teaching",
+  "title": "Don't work harder in teaching | Don't Work Harder",
+  "meta": "A toolkit for teachers: the five moves to cut the admin, use AI on planning and marking with checks, and defend time for the students who need you.",
+  "h1": "Don't work harder in teaching.",
+  "lede": "AI drafts the lesson plan, marks the first pass and differentiates the materials in seconds. Yet the evenings and weekends still fill.",
+  "ledeKicker": "Time saved is for the students and the teaching, not more paperwork.",
+  "cardLine": "AI drafts the lesson plan, marks the first pass and differentiates the materials in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the teaching week actually goes",
+      "body": "Teachers give themselves to the classroom and lose the rest to everything around it. The hours go to lesson planning, marking, admin, reformatting materials, comms with parents and students, and meetings. The teaching itself competes with the bureaucracy that surrounds it.",
+      "doThis": "Track five working days in thirty-minute blocks. Tag each as teaching, planning, marking, or admin. The admin share is often the quiet thief of evenings."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the teaching work that should not exist",
+      "body": "The resource rebuilt from scratch each year. The report-comment bank written longhand every term. The meeting that could have been a note. The admin that serves the system rather than the student. Effort spent on the wrong things is still effort taken from teaching.",
+      "doThis": "Pick one piece of admin that serves the process not the pupil and pause it for a fortnight. Note whether learning suffers."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "Lesson-plan drafts. First-pass marking, flagged for your review. Differentiated versions of materials. Parent-comms drafts. Quiz and worksheet generation. Check accuracy before anything reaches a student, and keep safeguarding and judgement firmly human: the care is the part that cannot be automated.",
+      "doThis": "Take lesson-plan drafting and write a reusable prompt that produces the first version. Review and adapt it before the lesson."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "In teaching, saved time is instantly absorbed by the next demand, and the profession's culture treats overwork as commitment. The time and energy a struggling student needs is the first thing depleted. Protect it, deliberately, from the admin that would otherwise consume it.",
+      "doThis": "Ringfence time each week for the students who need more of you. Keep paperwork out of it."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with admin by default. Spend them on the student who needs you, the lesson that finally lands, the relationship that changes a year, the judgement about how a particular child learns. The human work at the centre of teaching is the part no tool touches.",
+      "doThis": "Name the student or the lesson that would most benefit from your full attention. Give it the first reclaimed hour."
+    }
+  ]
+}

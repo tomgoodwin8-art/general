@@ -1,0 +1,51 @@
+{
+  "slug": "design",
+  "name": "Design",
+  "wave": 3,
+  "order": 14,
+  "status": "live",
+  "seoTitle": "Don't work harder in design",
+  "title": "Don't work harder in design | Don't Work Harder",
+  "meta": "A toolkit for designers: the five moves to cut the production treadmill, hand variations and resizing to AI, and defend time for concept and craft.",
+  "h1": "Don't work harder in design.",
+  "lede": "AI generates the variations, resizes the assets and mocks up the brief in seconds. Yet the week is all production.",
+  "ledeKicker": "Time saved is for the concept and the craft, not more output.",
+  "cardLine": "AI generates the variations, resizes the assets and mocks up the brief in seconds.",
+  "moves": [
+    {
+      "n": 1,
+      "name": "See",
+      "role": "Where the design week actually goes",
+      "body": "Designers want to make and spend the week processing. The hours go to revisions, asset production, reformatting for every size, feedback rounds, status comms and sourcing. The concepting and craft that make work distinctive get squeezed by the volume around them.",
+      "doThis": "Track five days in thirty-minute blocks. Tag each as concept, production, revisions, or admin. Concept is usually the thinnest slice."
+    },
+    {
+      "n": 2,
+      "name": "Shed",
+      "role": "Kill the design work that should not exist",
+      "body": "The fifth revision that will not change the outcome. The bespoke asset for a channel nobody uses. The manual resizing across a dozen formats. The review meeting that reads the comments aloud. Polish on the pointless is wasted craft.",
+      "doThis": "Cap revisions on the next project at two rounds. See whether the work suffers. It will not."
+    },
+    {
+      "n": 3,
+      "name": "Shift",
+      "role": "Hand the durable, rule-bound work to AI",
+      "body": "First-pass concepts and variations to react against. Resizing and reformatting. Asset production from an established system. Mockups from a brief. Feedback summaries. The designer owns the taste: a model can generate options, but choosing and refining the right one is the work.",
+      "doThis": "Take resizing and reformatting and write a reusable instruction that handles the first pass. Use it this week."
+    },
+    {
+      "n": 4,
+      "name": "Shield",
+      "role": "Defend the reclaimed hours from reabsorption",
+      "body": "Save time and the production queue simply lengthens. Concepting time looks like doing nothing to a pipeline that measures assets shipped. Protect the block where the idea forms before the execution begins.",
+      "doThis": "Block a weekly slot for concepting with no deliverable attached. Defend it."
+    },
+    {
+      "n": 5,
+      "name": "Spend",
+      "role": "Reinvest in the work that does not scale",
+      "body": "Reclaimed hours refill with production by default. Spend them on the original concept, the craft, the taste, the problem-solving that makes the work actually work. Judgement about what is good is the part no model holds.",
+      "doThis": "Name the idea you have not had time to develop. Give it the first reclaimed afternoon."
+    }
+  ]
+}

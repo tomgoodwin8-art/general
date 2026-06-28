@@ -1,0 +1,221 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaCourse from '../../components/CtaCourse.astro';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  const toolkits = await getCollection('toolkits');
+  return toolkits.map((toolkit) => ({
+    params: { slug: toolkit.data.slug },
+    props: { toolkit, all: toolkits },
+  }));
+}
+
+const { toolkit, all } = Astro.props;
+const { data } = toolkit;
+
+const url = new URL(`/toolkits/${data.slug}`, SITE.url).href;
+
+// Shared sequence note that sits under every toolkit lede.
+const sequenceNote =
+  'The five moves are a sequence, not a menu. You cannot reclaim a week you have never measured, and you should never automate work that should not exist. Work them in order. Skip a step and the gains leak away.';
+
+// Sibling chips: same and adjacent waves, same wave first, capped.
+const siblings = all
+  .filter((t) => t.data.slug !== data.slug && Math.abs(t.data.wave - data.wave) <= 1)
+  .sort(
+    (a, b) =>
+      Math.abs(a.data.wave - data.wave) - Math.abs(b.data.wave - data.wave) ||
+      a.data.order - b.data.order,
+  )
+  .slice(0, 7);
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: data.seoTitle,
+  description: data.meta,
+  step: data.moves.map((m) => ({
+    '@type': 'HowToStep',
+    position: m.n,
+    name: m.name,
+    text: m.doThis,
+  })),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Toolkits', item: new URL('/toolkits', SITE.url).href },
+    { '@type': 'ListItem', position: 3, name: data.name, item: url },
+  ],
+};
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  url: SITE.url,
+};
+---
+
+<BaseLayout
+  title={data.seoTitle}
+  description={data.meta}
+  schema={[howToSchema, breadcrumbSchema, organizationSchema]}
+>
+  <section class="tk-hero section">
+    <div class="container-dwh">
+      <div class="measure">
+        <p class="eyebrow">Toolkit &middot; {data.name}</p>
+        <h1>{data.h1}</h1>
+        <p class="lede">
+          {data.lede}{' '}
+          <em>{data.ledeKicker}</em>
+        </p>
+        {data.underLedeNote && <p class="under-lede">{data.underLedeNote}</p>}
+        <p class="sequence-note">{sequenceNote}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="moves">
+    {
+      data.moves.map((m) => (
+        <section class="move-section section rule-top" id={m.name.toLowerCase()}>
+          <div class="container-dwh">
+            <div class="move-layout">
+              <div class="move-marker">
+                <span class="move-num">{String(m.n).padStart(2, '0')}</span>
+                <h2 class="move-h2">{m.name}</h2>
+              </div>
+              <div class="move-content measure">
+                <p class="move-role">{m.role}.</p>
+                <p>{m.body}</p>
+                <p class="move-action">
+                  <span class="action-label">Do this:</span> {m.doThis}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <section class="siblings section rule-top">
+    <div class="container-dwh">
+      <p class="eyebrow">More toolkits</p>
+      <ul class="chip-row">
+        {
+          siblings.map((t) => (
+            <li>
+              <a class="chip" href={`/toolkits/${t.data.slug}`}>
+                {t.data.name}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a class="chip chip-all" href="/toolkits">See all toolkits <span aria-hidden="true">&rarr;</span></a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <CtaCourse
+    source="toolkit"
+    heading="Walk the five moves in five days."
+    body="The free course takes one move a day, with a single exercise each, and sends the week-audit worksheet to start. The fastest way to put this into practice."
+  />
+</BaseLayout>
+
+<style>
+  .tk-hero .lede {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+  .tk-hero .lede em { color: var(--color-ink); font-style: italic; }
+  .under-lede {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-paper-deep);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 0 3px 3px 0;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .sequence-note {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--color-ink-soft);
+  }
+
+  /* Move layout, matching /method */
+  .move-layout {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .move-marker { position: sticky; top: 1.5rem; }
+  .move-num {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .move-h2 { margin-top: 0.2rem; font-size: clamp(2rem, 4vw, 3rem); }
+  .move-role {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    line-height: 1.3;
+    font-style: italic;
+    margin-bottom: 1.25rem;
+  }
+  .move-content p { margin-top: 1rem; line-height: 1.7; color: var(--color-ink-soft); }
+  .move-content p.move-role { color: var(--color-ink); margin-top: 0; }
+  .move-action {
+    margin-top: 1.75rem !important;
+    padding: 1.1rem 1.25rem;
+    background: var(--color-paper-deep);
+    border-left: 2px solid var(--color-accent);
+    border-radius: 0 3px 3px 0;
+    color: var(--color-ink) !important;
+  }
+  .action-label { font-weight: 650; color: var(--color-accent); }
+
+  /* Sibling chips */
+  .chip-row {
+    margin-top: 1.25rem;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+    font-size: 0.92rem;
+    background: var(--color-paper);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .chip:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .chip-all { font-weight: 600; border-color: var(--color-ink); }
+  .chip-all:hover { background: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
+
+  @media (max-width: 760px) {
+    .move-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+    .move-marker { position: static; display: flex; align-items: baseline; gap: 1rem; }
+    .move-h2 { margin-top: 0; }
+  }
+</style>

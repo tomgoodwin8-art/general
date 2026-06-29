@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>London Private Ultrasound homepage mockup</title>
+<meta name="description" content="Consultant-led private ultrasound scans in London and St Albans. No GP referral, same-day appointments, written report in 24 hours. From £119.">
+<style>
+  /* ============================================================
+     Brand tokens
+     ============================================================ */
+  :root {
+    --hero-dark:    #0f3b39;  /* hero background, deep teal */
+    --hero-darker:  #14342f;  /* header text / logo navy-teal */
+    --cta-primary:  #b85c2e;  /* rust, the one dominant CTA */
+    --cta-gold:     #9a8348;  /* gold "Book now" in header */
+    --cream:        #f0e0c0;  /* accent / italic headline word */
+    --eyebrow:      #cda35f;  /* small caps eyebrow text */
+    --proof-text:   #d8efe8;  /* light text on hero */
+    --surface:      #ffffff;
+    --ink:          #1c1c1e;
+    --whatsapp:     #25d366;
+
+    --line:         #e3e1da;
+    --muted:        #5b5f63;
+    --soft-bg:      #f6f3ec;
+
+    --head-font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body-font: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+    --radius: 10px;
+    --maxw: 1180px;
+  }
+
+  /* ============================================================
+     Reset / base
+     ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--body-font);
+    color: var(--ink);
+    background: var(--surface);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  h1, h2, h3, h4 { font-family: var(--head-font); line-height: 1.1; margin: 0 0 .5em; font-weight: 800; letter-spacing: -0.01em; }
+  p { margin: 0 0 1em; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* ============================================================
+     Buttons
+     ============================================================ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+    font-family: var(--head-font); font-weight: 700; font-size: 1rem;
+    min-height: 48px; padding: 0 22px; border-radius: var(--radius);
+    border: 2px solid transparent; cursor: pointer; text-decoration: none;
+    transition: transform .12s ease, background-color .12s ease, box-shadow .12s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--cta-primary); color: #fff; box-shadow: 0 6px 18px rgba(184,92,46,.35); }
+  .btn-primary:hover { background: #a4512a; }
+  .btn-gold { background: var(--cta-gold); color: #fff; }
+  .btn-gold:hover { background: #897440; }
+  .btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,.55); }
+  .btn-outline:hover { border-color: #fff; }
+  .btn-outline-dark { background: transparent; color: var(--hero-darker); border-color: #cfcabd; }
+  .btn-outline-dark:hover { border-color: var(--hero-darker); }
+  .btn-block { width: 100%; }
+  .textlink {
+    display: inline-block; font-weight: 600; color: var(--proof-text);
+    text-decoration: underline; text-underline-offset: 3px; padding: 6px 2px;
+  }
+  .textlink-dark { color: var(--cta-primary); }
+
+  /* ============================================================
+     Review-aid toggle (Before / After). Neutral, unobtrusive.
+     ============================================================ */
+  .variant-toggle {
+    position: fixed; top: 10px; right: 10px; z-index: 1000;
+    display: inline-flex; background: rgba(40,40,40,.82); border-radius: 999px;
+    padding: 2px; font-family: var(--body-font); box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    backdrop-filter: blur(4px);
+  }
+  .variant-toggle button {
+    border: 0; background: transparent; color: #d6d6d6; cursor: pointer;
+    font-size: 11px; font-weight: 600; letter-spacing: .02em;
+    padding: 4px 9px; border-radius: 999px; min-height: 28px;
+  }
+  .variant-toggle button[aria-pressed="true"] { background: #f0f0f0; color: #1c1c1e; }
+
+  /* ============================================================
+     Variant visibility switching
+     data-variant on <body> toggles fold layouts.
+     ============================================================ */
+  .fold-after  { display: block; }
+  .fold-before { display: none; }
+  body[data-variant="before"] .fold-after  { display: none; }
+  body[data-variant="before"] .fold-before { display: block; }
+
+  /* ============================================================
+     Header (sticky both breakpoints)
+     ============================================================ */
+  .site-header {
+    position: sticky; top: 0; z-index: 800;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+  }
+  /* padding-right reserves space so the fixed review toggle never covers header controls */
+  .header-inner { display: flex; align-items: center; gap: 10px; min-height: 64px; padding-right: 118px; }
+  .logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; flex: 0 1 auto; min-width: 0; }
+  .logo .logo-main { font-family: var(--head-font); font-weight: 800; font-size: .82rem; color: var(--hero-darker); letter-spacing: -0.01em; max-width: 128px; }
+  .logo .logo-sub { font-size: 10px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; margin-top: 3px; }
+
+  .location-pills { display: none; gap: 6px; margin-left: 4px; }
+  .pill {
+    font-size: 11px; color: var(--muted); border: 1px solid var(--line);
+    border-radius: 999px; padding: 3px 10px; white-space: nowrap; background: var(--soft-bg);
+  }
+
+  .header-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .header-actions .btn-gold { display: none; }   /* desktop-only header CTA */
+  .header-phone { display: none; font-family: var(--head-font); font-weight: 700; color: var(--hero-darker); text-decoration: none; font-size: .95rem; }
+  .header-phone:hover { color: var(--cta-primary); }
+
+  .header-call { display: inline-flex; padding: 0 14px; }      /* mobile call button */
+  .hamburger {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface); cursor: pointer;
+  }
+  .hamburger span { display: block; width: 20px; height: 2px; background: var(--hero-darker); position: relative; }
+  .hamburger span::before, .hamburger span::after { content: ""; position: absolute; left: 0; width: 20px; height: 2px; background: var(--hero-darker); }
+  .hamburger span::before { top: -6px; } .hamburger span::after { top: 6px; }
+
+  /* Mobile slide-down menu */
+  .mobile-menu { display: none; border-top: 1px solid var(--line); background: var(--surface); }
+  .mobile-menu.open { display: block; }
+  .mobile-menu ul { list-style: none; margin: 0; padding: 8px 0; }
+  .mobile-menu a { display: block; padding: 12px 20px; text-decoration: none; color: var(--hero-darker); font-weight: 600; border-bottom: 1px solid var(--line); }
+
+  /* ============================================================
+     Primary nav (desktop only)
+     ============================================================ */
+  .primary-nav { display: none; background: var(--hero-darker); }
+  .primary-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; min-height: 46px; align-items: center; }
+  .primary-nav a {
+    color: #eaf2ef; text-decoration: none; font-weight: 600; font-size: .92rem;
+    padding: 8px 14px; border-radius: 6px;
+  }
+  .primary-nav a:hover, .primary-nav a[aria-current="page"] { background: rgba(255,255,255,.1); }
+
+  /* ============================================================
+     Hero
+     ============================================================ */
+  .hero { background: var(--hero-dark); color: #fff; position: relative; overflow: hidden; }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 2px, transparent 2px 22px);
+  }
+  .hero .wrap { position: relative; z-index: 1; padding-top: 30px; padding-bottom: 34px; }
+
+  .eyebrow { color: var(--eyebrow); text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 700; margin: 0 0 12px; }
+  .hero h1 { color: #fff; font-size: clamp(1.9rem, 6vw, 2.1rem); margin-bottom: 14px; }
+  .hero h1 em { color: var(--cream); font-style: italic; }
+  .hero .subhead { color: var(--proof-text); font-size: 1.02rem; margin-bottom: 16px; }
+
+  .chips { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li {
+    font-size: 12.5px; font-weight: 600; color: var(--proof-text);
+    border: 1px solid rgba(216,239,232,.35); border-radius: 999px; padding: 5px 12px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chips li::before { content: "✓"; color: var(--eyebrow); font-weight: 700; }
+
+  .reassure { color: var(--proof-text); font-size: 13.5px; margin: 14px 0 0; opacity: .92; max-width: 38ch; }
+
+  /* After fold action stack (mobile-first) */
+  .action-stack { display: flex; flex-direction: column; gap: 10px; }
+  .quiet-pair { display: none; gap: 10px; }      /* desktop only */
+  .quiet-pair .btn { flex: 1; }
+  .call-mobile { display: flex; }                 /* mobile only */
+
+  /* Proof card */
+  .proof-card {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(216,239,232,.25);
+    border-radius: 14px; padding: 18px; margin-top: 22px;
+  }
+  .stars { color: #ffce54; font-size: 1rem; letter-spacing: 1px; }
+  .rating-line { font-family: var(--head-font); font-weight: 700; font-size: 1.05rem; margin: 6px 0 10px; color: #fff; }
+  .review-quote { color: var(--proof-text); font-size: .95rem; font-style: italic; margin: 0 0 8px; }
+  .review-by { font-size: 12.5px; color: var(--eyebrow); font-weight: 600; font-style: normal; }
+
+  /* Long paragraph (Before only) */
+  .hero-paragraph { color: var(--proof-text); font-size: .98rem; max-width: 60ch; margin-bottom: 18px; }
+  .btn-row-before { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+  .btn-row-before .btn { width: 100%; }
+
+  /* In-fold "Find your scan" + Scan Advisor (Before only) */
+  .finder-inline {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(216,239,232,.25);
+    border-radius: 12px; padding: 16px; margin-top: 6px;
+  }
+  .finder-inline h2 { color: #fff; font-size: 1.05rem; margin-bottom: 10px; }
+  .finder-row { display: flex; flex-direction: column; gap: 8px; }
+  .finder-row select, .finder-row input {
+    width: 100%; min-height: 46px; border-radius: 8px; border: 1px solid rgba(255,255,255,.3);
+    background: rgba(255,255,255,.92); color: var(--ink); padding: 0 12px; font-size: .95rem;
+  }
+  .scan-advisor { color: var(--proof-text); font-size: 13px; margin-top: 12px; opacity: .9; }
+
+  /* WhatsApp floating bubble */
+  .whatsapp-bubble {
+    position: fixed; right: 16px; bottom: 84px; z-index: 850;
+    width: 56px; height: 56px; border-radius: 50%; background: var(--whatsapp);
+    display: flex; align-items: center; justify-content: center; text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,.28);
+  }
+  .whatsapp-bubble svg { width: 30px; height: 30px; fill: #fff; }
+
+  /* Mobile sticky bottom bar */
+  .sticky-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 860;
+    display: flex; gap: 8px; padding: 10px 12px;
+    background: var(--surface); border-top: 1px solid var(--line);
+    box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+  }
+  .sticky-bar .btn { min-height: 50px; }
+  .sticky-bar .btn-primary { flex: 2; }
+  .sticky-bar .btn-outline-dark { flex: 1; }
+
+  /* In "before" mobile, no sticky bar */
+  body[data-variant="before"] .sticky-bar { display: none; }
+
+  /* ============================================================
+     Below the fold (shared sections)
+     ============================================================ */
+  section { padding: 46px 0; }
+  section h2.section-title { font-size: clamp(1.4rem, 4.5vw, 1.9rem); margin-bottom: 6px; color: var(--hero-darker); }
+  .section-sub { color: var(--muted); margin: 0 0 26px; max-width: 60ch; }
+  .soft { background: var(--soft-bg); }
+
+  /* Finder (below fold, shared) */
+  .finder-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px; box-shadow: 0 2px 10px rgba(0,0,0,.03);
+  }
+  .finder-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .finder-tabs button {
+    border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+    padding: 8px 16px; font-weight: 600; cursor: pointer; font-family: var(--body-font); min-height: 44px;
+  }
+  .finder-tabs button[aria-pressed="true"] { background: var(--hero-darker); color: #fff; border-color: var(--hero-darker); }
+  .finder-fields { display: grid; gap: 10px; grid-template-columns: 1fr; }
+  .finder-fields select {
+    min-height: 48px; border-radius: 8px; border: 1px solid var(--line); padding: 0 12px; font-size: 1rem; background: #fff;
+  }
+  .finder-actions { display: flex; gap: 12px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
+
+  /* How it works steps */
+  .steps { display: grid; gap: 16px; grid-template-columns: 1fr; counter-reset: step; }
+  .step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; position: relative; }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    font-family: var(--head-font); font-weight: 800; font-size: 1.1rem;
+    width: 36px; height: 36px; border-radius: 50%; background: var(--hero-dark); color: #fff;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
+  }
+  .step h3 { font-size: 1.05rem; margin-bottom: 6px; color: var(--hero-darker); }
+  .step p { font-size: .92rem; color: var(--muted); margin: 0; }
+
+  /* NHS vs private comparison */
+  .compare { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .compare-col { border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; background: var(--surface); }
+  .compare-col.us { border-color: var(--cta-primary); box-shadow: 0 4px 18px rgba(184,92,46,.12); }
+  .compare-col h3 { color: var(--hero-darker); margin-bottom: 12px; }
+  .compare-col ul { list-style: none; margin: 0; padding: 0; }
+  .compare-col li { padding: 8px 0 8px 26px; position: relative; font-size: .94rem; border-bottom: 1px solid var(--line); }
+  .compare-col li:last-child { border-bottom: 0; }
+  .compare-col.us li::before { content: "✓"; position: absolute; left: 0; color: var(--cta-primary); font-weight: 800; }
+  .compare-col.nhs li::before { content: "•"; position: absolute; left: 4px; color: var(--muted); font-weight: 800; }
+
+  /* Trust strip */
+  .trust-strip { display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
+  .trust-stats { display: flex; flex-wrap: wrap; gap: 26px; }
+  .trust-stat .num { font-family: var(--head-font); font-weight: 800; font-size: 1.6rem; color: var(--cta-primary); }
+  .trust-stat .lbl { font-size: .85rem; color: var(--muted); }
+  .team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .member { text-align: center; }
+  .member img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; margin: 0 auto 8px; border: 3px solid var(--soft-bg); background: var(--soft-bg); }
+  .member .name { font-weight: 700; font-size: .92rem; color: var(--hero-darker); }
+  .member .role { font-size: .8rem; color: var(--muted); }
+
+  /* Social proof */
+  .reviews-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .review-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .review-card .stars { color: #f0a93b; }
+  .review-card p { font-size: .95rem; margin: 8px 0 12px; }
+  .review-card .review-by { color: var(--muted); }
+  .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .badge { border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; font-size: .82rem; font-weight: 600; color: var(--muted); background: var(--surface); }
+
+  /* Featured scans */
+  .scans-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .scan-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; background: var(--surface); display: flex; flex-direction: column; }
+  .scan-card h3 { font-size: 1.1rem; margin-bottom: 4px; color: var(--hero-darker); }
+  .scan-card .best-for { font-size: .88rem; color: var(--muted); margin-bottom: 14px; }
+  .scan-card .price { font-family: var(--head-font); font-weight: 800; color: var(--cta-primary); font-size: 1.15rem; margin-bottom: 14px; }
+  .scan-card .btn { margin-top: auto; }
+
+  /* Footer */
+  .site-footer { background: var(--hero-darker); color: #cfe0db; padding: 44px 0 90px; }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 26px; }
+  .site-footer h4 { color: #fff; font-size: .95rem; margin-bottom: 12px; }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; }
+  .site-footer li { margin-bottom: 8px; }
+  .site-footer a { color: #cfe0db; text-decoration: none; font-size: .9rem; }
+  .site-footer a:hover { color: #fff; text-decoration: underline; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 26px; padding-top: 18px; font-size: .82rem; color: #9fb6b0; }
+
+  /* ============================================================
+     Desktop breakpoint
+     ============================================================ */
+  @media (min-width: 1024px) {
+    .location-pills { display: inline-flex; }
+    .header-phone { display: inline-flex; }
+    .header-call, .hamburger { display: none; }
+    .header-actions .btn-gold { display: inline-flex; }
+    .header-inner { padding-right: 120px; gap: 14px; }
+    .logo .logo-main { font-size: 1.02rem; max-width: none; }
+    .primary-nav { display: block; }
+
+    .hero .wrap { padding-top: 44px; padding-bottom: 56px; }
+    .hero h1 { font-size: clamp(2.3rem, 3.4vw, 3rem); }
+    .hero .subhead { font-size: 1.15rem; }
+    .chips { flex-wrap: nowrap; }
+
+    /* Two-column after fold */
+    .fold-after .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: start; }
+    .fold-after .hero-copy { max-width: none; }
+    .action-stack { max-width: 420px; }
+    .quiet-pair { display: flex; }
+    .call-mobile { display: none; }
+    .proof-card { margin-top: 0; }
+
+    /* Before fold two columns too */
+    .fold-before .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: start; }
+    .btn-row-before { flex-direction: row; flex-wrap: wrap; }
+    .btn-row-before .btn { width: auto; flex: 1 1 auto; }
+    .finder-row { flex-direction: row; }
+
+    /* Hide mobile-only chrome on desktop */
+    .sticky-bar { display: none !important; }
+    .whatsapp-bubble { bottom: 24px; }
+
+    .steps { grid-template-columns: repeat(4, 1fr); }
+    .compare { grid-template-columns: 1fr 1fr; }
+    .trust-strip { grid-template-columns: 1.2fr 1fr; }
+    .team { grid-template-columns: repeat(4, 1fr); }
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    .scans-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    .site-footer { padding-bottom: 44px; }
+  }
+
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .reviews-grid, .scans-grid { grid-template-columns: repeat(2, 1fr); }
+    .team { grid-template-columns: repeat(4, 1fr); }
+    .compare { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ============================================================
+     Reduced motion
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body data-variant="after">
+
+  <!-- Review-aid toggle (not part of the design) -->
+  <div class="variant-toggle" role="group" aria-label="Compare layouts">
+    <button type="button" id="btn-before" aria-pressed="false">Before</button>
+    <button type="button" id="btn-after"  aria-pressed="true">After</button>
+  </div>
+
+  <!-- ============================================================
+       Header (sticky, both breakpoints, shared)
+       ============================================================ -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="#" aria-label="London Private Ultrasound home">
+        <span class="logo-main">London Private Ultrasound</span>
+        <span class="logo-sub">Londonsono.com</span>
+      </a>
+      <div class="location-pills" aria-hidden="false">
+        <span class="pill">Central London</span>
+        <span class="pill">St Albans</span>
+      </div>
+
+      <div class="header-actions">
+        <a class="header-phone" href="tel:02071013377">020 7101 3377</a>
+        <a class="btn btn-gold" href="#book">Book now</a>
+        <a class="btn btn-outline-dark header-call" href="tel:02071013377">Call</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">All scans</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Heart</a></li>
+        <li><a href="#">Pelvic</a></li>
+        <li><a href="#">Pregnancy</a></li>
+        <li><a href="#">Vascular</a></li>
+        <li><a href="#">Info</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Primary nav (desktop only, shared) -->
+  <nav class="primary-nav" aria-label="Primary">
+    <div class="wrap">
+      <ul>
+        <li><a href="#" aria-current="page">Home</a></li>
+        <li><a href="#">All scans</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Heart</a></li>
+        <li><a href="#">Pelvic</a></li>
+        <li><a href="#">Pregnancy</a></li>
+        <li><a href="#">Vascular</a></li>
+        <li><a href="#">Info</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero" aria-label="Introduction">
+      <div class="wrap">
+
+        <!-- ---------- AFTER (redesign) ---------- -->
+        <div class="fold-after">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow">Harley Street Medical District · London &amp; St Albans</p>
+              <h1>Consultant-led scan, <em>report in 24 hours</em></h1>
+              <p class="subhead">No GP referral. Same-day appointments. From £119.</p>
+              <ul class="chips">
+                <li>Same-day</li>
+                <li>No referral</li>
+                <li>24h results</li>
+                <li>CQC-registered</li>
+              </ul>
+
+              <div class="action-stack">
+                <a class="btn btn-primary btn-block" href="#book" id="book">Book your scan online</a>
+                <!-- Mobile: a single subordinate full-width Call. No WhatsApp in the hero. -->
+                <a class="btn btn-outline btn-block call-mobile" href="tel:02071013377">Call 020 7101 3377</a>
+                <!-- Desktop: a quiet, subordinate Call / WhatsApp pair. -->
+                <div class="quiet-pair">
+                  <a class="btn btn-outline" href="tel:02071013377">Call</a>
+                  <a class="btn btn-outline" href="#whatsapp">WhatsApp</a>
+                </div>
+                <a class="textlink" href="#how">How it works</a>
+                <p class="reassure">Plain-English report, re-read by a consultant if you have questions.</p>
+              </div>
+            </div>
+
+            <!-- Proof magnet -->
+            <aside class="proof-card" aria-label="Customer rating and review">
+              <div class="stars" aria-hidden="true">★★★★★</div>
+              <p class="rating-line">4.8 · 1,200+ reviews</p>
+              <p class="review-quote">"Booked online, scanned same day, full report by the next morning. Calm and professional throughout."</p>
+              <p class="review-by">Sarah M., verified Google review</p>
+            </aside>
+          </div>
+        </div>
+
+        <!-- ---------- BEFORE (current live layout, cluttered) ---------- -->
+        <div class="fold-before">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow">Private ultrasound scans across London</p>
+              <h1>Private ultrasound scans in London</h1>
+              <p class="hero-paragraph">
+                London Private Ultrasound provides a wide range of private diagnostic ultrasound
+                scans for men, women and children across our Central London and St Albans clinics.
+                Our experienced consultant radiologists and sonographers offer same-day and
+                next-day appointments with no GP referral required, covering pregnancy, women's
+                health, men's health, musculoskeletal, vascular and general scanning. You will
+                receive a detailed written report, and we are registered with all major insurers.
+                Prices from £149, with flexible appointment times seven days a week to suit you.
+              </p>
+              <div class="btn-row-before">
+                <a class="btn btn-primary" href="#book">Book a scan</a>
+                <a class="btn btn-outline" href="#whatsapp">Message us on WhatsApp</a>
+                <a class="btn btn-outline" href="#how">How It Works</a>
+              </div>
+            </div>
+
+            <div>
+              <div class="finder-inline">
+                <h2>Find your scan</h2>
+                <div class="finder-row">
+                  <select aria-label="Choose by symptom">
+                    <option>Choose by symptom…</option>
+                    <option>Pelvic pain</option>
+                    <option>Pregnancy</option>
+                    <option>Lump or swelling</option>
+                  </select>
+                  <select aria-label="Choose by body area">
+                    <option>Choose by body area…</option>
+                    <option>Abdomen</option>
+                    <option>Pelvis</option>
+                    <option>Legs</option>
+                  </select>
+                  <input type="search" placeholder="Search scans…" aria-label="Search scans">
+                  <a class="btn btn-gold" href="#">Search</a>
+                </div>
+                <p class="scan-advisor">Not sure which scan you need? Our Scan Advisor can help. Call 020 7101 3377 or email info@londonsono.com.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BELOW THE FOLD (shared between variants)
+         ============================================================ -->
+
+    <!-- 1. Find your scan selector -->
+    <section class="soft" aria-labelledby="finder-title">
+      <div class="wrap">
+        <h2 class="section-title" id="finder-title">Find your scan</h2>
+        <p class="section-sub">Pick one path. Filter by body area, or tell us your symptom and we will point you to the right scan.</p>
+        <div class="finder-card">
+          <div class="finder-tabs" role="group" aria-label="Search method">
+            <button type="button" aria-pressed="true" data-tab="area">By body area</button>
+            <button type="button" aria-pressed="false" data-tab="symptom">By symptom</button>
+          </div>
+          <div class="finder-fields">
+            <select aria-label="Select option">
+              <option>Select an area…</option>
+              <option>Pregnancy &amp; women's health</option>
+              <option>Pelvic &amp; abdominal</option>
+              <option>Heart &amp; vascular</option>
+              <option>Musculoskeletal</option>
+              <option>Men's health</option>
+            </select>
+          </div>
+          <div class="finder-actions">
+            <a class="btn btn-primary" href="#book">Show matching scans</a>
+            <a class="textlink textlink-dark" href="#book">Not sure? Talk to us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. How it works -->
+    <section id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <h2 class="section-title" id="how-title">How it works</h2>
+        <p class="section-sub">From booking to a report you can actually use, and what happens if we find something.</p>
+        <div class="steps">
+          <div class="step">
+            <h3>Book online</h3>
+            <p>Choose your scan and a same-day or next-day slot. No GP referral needed.</p>
+          </div>
+          <div class="step">
+            <h3>Your scan</h3>
+            <p>A consultant radiologist or senior sonographer performs the scan at our clinic.</p>
+          </div>
+          <div class="step">
+            <h3>Get your report</h3>
+            <p>A clear written report, in plain English, sent to you within 24 hours.</p>
+          </div>
+          <div class="step">
+            <h3>If something is found</h3>
+            <p>We explain next steps and can refer you on, with a consultant to re-read on request.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. NHS vs private -->
+    <section class="soft" aria-labelledby="compare-title">
+      <div class="wrap">
+        <h2 class="section-title" id="compare-title">Why pay privately?</h2>
+        <p class="section-sub">For non-urgent scans, going private means answers in days, not months.</p>
+        <div class="compare">
+          <div class="compare-col nhs">
+            <h3>NHS route</h3>
+            <ul>
+              <li>GP referral usually required first</li>
+              <li>Typical wait of several weeks to months</li>
+              <li>Limited choice of appointment times</li>
+              <li>Report routed back via your GP</li>
+            </ul>
+          </div>
+          <div class="compare-col us">
+            <h3>London Private Ultrasound</h3>
+            <ul>
+              <li>No GP referral needed</li>
+              <li>Same-day and next-day appointments</li>
+              <li>Evenings and weekends available</li>
+              <li>Written report in 24 hours, from £119</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Trust strip -->
+    <section aria-labelledby="trust-title">
+      <div class="wrap">
+        <h2 class="section-title" id="trust-title">A clinical team you can trust</h2>
+        <div class="trust-strip">
+          <div>
+            <div class="trust-stats">
+              <div class="trust-stat"><div class="num">CQC</div><div class="lbl">Registered &amp; inspected</div></div>
+              <div class="trust-stat"><div class="num">230,000+</div><div class="lbl">Scans since 2012</div></div>
+              <div class="trust-stat"><div class="num">7 days</div><div class="lbl">A week, incl. evenings</div></div>
+            </div>
+            <p class="section-sub" style="margin-top:20px;">Every scan is performed and reported by a registered consultant radiologist or senior sonographer. Nothing is outsourced to an unnamed third party.</p>
+          </div>
+          <div class="team" aria-label="Clinical team">
+            <figure class="member">
+              <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='168' height='168'%3E%3Crect width='168' height='168' fill='%23dcd6c6'/%3E%3Ccircle cx='84' cy='66' r='30' fill='%23b3a98f'/%3E%3Crect x='34' y='104' width='100' height='70' rx='40' fill='%23b3a98f'/%3E%3C/svg%3E" alt="Portrait of Dr Anita Rao">
+              <div class="name">Dr Anita Rao</div>
+              <div class="role">Consultant Radiologist</div>
+            </figure>
+            <figure class="member">
+              <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='168' height='168'%3E%3Crect width='168' height='168' fill='%23cdd7d2'/%3E%3Ccircle cx='84' cy='66' r='30' fill='%238fa39b'/%3E%3Crect x='34' y='104' width='100' height='70' rx='40' fill='%238fa39b'/%3E%3C/svg%3E" alt="Portrait of James Okafor">
+              <div class="name">James Okafor</div>
+              <div class="role">Senior Sonographer</div>
+            </figure>
+            <figure class="member">
+              <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='168' height='168'%3E%3Crect width='168' height='168' fill='%23e0cfc0'/%3E%3Ccircle cx='84' cy='66' r='30' fill='%23bba07f'/%3E%3Crect x='34' y='104' width='100' height='70' rx='40' fill='%23bba07f'/%3E%3C/svg%3E" alt="Portrait of Dr Helena Marsh">
+              <div class="name">Dr Helena Marsh</div>
+              <div class="role">Consultant Radiologist</div>
+            </figure>
+            <figure class="member">
+              <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='168' height='168'%3E%3Crect width='168' height='168' fill='%23d4ddd8'/%3E%3Ccircle cx='84' cy='66' r='30' fill='%23869a92'/%3E%3Crect x='34' y='104' width='100' height='70' rx='40' fill='%23869a92'/%3E%3C/svg%3E" alt="Portrait of Priya Shah">
+              <div class="name">Priya Shah</div>
+              <div class="role">Lead Sonographer</div>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Social proof -->
+    <section class="soft" aria-labelledby="reviews-title">
+      <div class="wrap">
+        <h2 class="section-title" id="reviews-title">What patients say</h2>
+        <p class="section-sub">4.8 average across 1,200+ verified reviews.</p>
+        <div class="reviews-grid">
+          <article class="review-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"Booked online in the morning, scanned by lunch, written report the next day. Genuinely reassuring and very calm."</p>
+            <p class="review-by">Sarah M. · Google</p>
+          </article>
+          <article class="review-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"No referral, no fuss. The consultant talked me through everything and the report was easy to understand."</p>
+            <p class="review-by">David L. · Trustpilot</p>
+          </article>
+          <article class="review-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"Saw me on a Sunday when nowhere else could. Professional from start to finish."</p>
+            <p class="review-by">Aisha K. · Doctify</p>
+          </article>
+          <article class="review-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p>"Clear pricing, quick appointment and a report I could share with my GP straight away."</p>
+            <p class="review-by">Tom R. · Top Doctors</p>
+          </article>
+        </div>
+        <div class="badges" aria-label="Review platforms">
+          <span class="badge">★ 4.8 Google</span>
+          <span class="badge">★ 4.8 Trustpilot</span>
+          <span class="badge">★ 4.9 Doctify</span>
+          <span class="badge">★ 4.9 Top Doctors</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Featured scans -->
+    <section aria-labelledby="scans-title">
+      <div class="wrap">
+        <h2 class="section-title" id="scans-title">Most popular scans</h2>
+        <p class="section-sub">Same-day where available. Written report within 24 hours.</p>
+        <div class="scans-grid">
+          <article class="scan-card">
+            <h3>Pelvic ultrasound</h3>
+            <p class="best-for">Best for pelvic pain, heavy periods and ovarian checks.</p>
+            <p class="price">From £119</p>
+            <a class="btn btn-primary btn-block" href="#book">Book online</a>
+          </article>
+          <article class="scan-card">
+            <h3>Pregnancy scan</h3>
+            <p class="best-for">Best for reassurance, dating and growth checks.</p>
+            <p class="price">From £119</p>
+            <a class="btn btn-primary btn-block" href="#book">Book online</a>
+          </article>
+          <article class="scan-card">
+            <h3>Abdominal ultrasound</h3>
+            <p class="best-for">Best for liver, kidney, gallbladder and general checks.</p>
+            <p class="price">From £119</p>
+            <a class="btn btn-primary btn-block" href="#book">Book online</a>
+          </article>
+          <article class="scan-card">
+            <h3>Vascular / leg veins</h3>
+            <p class="best-for">Best for swelling, varicose veins and DVT concerns.</p>
+            <p class="price">From £119</p>
+            <a class="btn btn-primary btn-block" href="#book">Book online</a>
+          </article>
+          <article class="scan-card">
+            <h3>Echocardiogram</h3>
+            <p class="best-for">Best for palpitations, breathlessness and heart checks.</p>
+            <p class="price">From £119</p>
+            <a class="btn btn-primary btn-block" href="#book">Book online</a>
+          </article>
+          <article class="scan-card">
+            <h3>Musculoskeletal scan</h3>
+            <p class="best-for">Best for shoulder, knee and soft-tissue injuries.</p>
+            <p class="price">From £119</p>
+            <a class="btn btn-primary btn-block" href="#book">Book online</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       Footer (shared)
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <span class="logo-main" style="color:#fff;font-size:1.1rem;">London Private Ultrasound</span>
+          <p style="margin-top:10px;max-width:34ch;color:#9fb6b0;font-size:.88rem;">Consultant-led private ultrasound across Central London and St Albans. CQC-registered.</p>
+        </div>
+        <div>
+          <h4>Scans</h4>
+          <ul>
+            <li><a href="#">Pregnancy</a></li>
+            <li><a href="#">Pelvic</a></li>
+            <li><a href="#">Vascular</a></li>
+            <li><a href="#">Heart</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Clinic</h4>
+          <ul>
+            <li><a href="#">Central London</a></li>
+            <li><a href="#">St Albans</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="tel:02071013377">020 7101 3377</a></li>
+            <li><a href="#">info@londonsono.com</a></li>
+            <li><a href="#book">Book a scan</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 London Private Ultrasound. Mockup for review only. CQC-registered diagnostic imaging.
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating bubble (single entry point) -->
+  <a class="whatsapp-bubble" href="#whatsapp" aria-label="Message us on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.24.68-1.42 1.32-1.95 1.36-.5.05-.99.24-3.35-.7-2.83-1.12-4.64-3.97-4.78-4.16-.14-.19-1.14-1.52-1.14-2.9 0-1.38.72-2.06.98-2.34.24-.26.53-.33.71-.33.18 0 .35 0 .51.01.16.01.39-.06.6.46.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.69-.81.87-1.09.18-.28.36-.23.61-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.33.07.12.07.66-.17 1.34Z"/></svg>
+  </a>
+
+  <!-- Mobile sticky bottom bar (After only) -->
+  <div class="sticky-bar" role="group" aria-label="Quick actions">
+    <a class="btn btn-primary" href="#book">Book online</a>
+    <a class="btn btn-outline-dark" href="tel:02071013377">Call</a>
+  </div>
+
+  <script>
+    // ----- Before / After variant toggle -----
+    (function () {
+      var body = document.body;
+      var btnBefore = document.getElementById('btn-before');
+      var btnAfter  = document.getElementById('btn-after');
+      function setVariant(v) {
+        body.setAttribute('data-variant', v);
+        var after = v === 'after';
+        btnAfter.setAttribute('aria-pressed', String(after));
+        btnBefore.setAttribute('aria-pressed', String(!after));
+      }
+      btnBefore.addEventListener('click', function () { setVariant('before'); });
+      btnAfter.addEventListener('click', function () { setVariant('after'); });
+    })();
+
+    // ----- Mobile menu toggle -----
+    (function () {
+      var burger = document.getElementById('hamburger');
+      var menu = document.getElementById('mobile-menu');
+      burger.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        burger.setAttribute('aria-expanded', String(open));
+      });
+      menu.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+      });
+    })();
+
+    // ----- Finder tabs (below fold) -----
+    (function () {
+      var tabs = document.querySelectorAll('.finder-tabs button');
+      tabs.forEach(function (t) {
+        t.addEventListener('click', function () {
+          tabs.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          t.setAttribute('aria-pressed', 'true');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

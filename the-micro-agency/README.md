@@ -35,7 +35,6 @@ npx wrangler pages deploy dist --project-name themicroagency
 
 - [ ] `{{DOMAIN}}` — set the real domain in `astro.config.mjs` and `src/data/site.ts` (`SITE_URL`).
 - [ ] `{{BOOKING_URL}}` — confirm the dedicated Cal.com link in `src/data/site.ts`.
-- [ ] **Peter Cresswell bio** — populate `src/data/founders.ts` from his LinkedIn / own copy. Do not invent.
 - [ ] **Logo asset** — replace the placeholder wordmark / `public/badges/microsoft-elite-partner-2026.svg` with the official Microsoft Advertising Elite Partner 2026 lockup.
 - [ ] **OG default image** — replace `public/images/og-default.svg` with a final 1200×630 asset if a raster is preferred.
 - [ ] **Report PDF** — wire the gated report delivery on `/report`.

@@ -17,10 +17,9 @@ export async function GET(_context: APIContext) {
 
 ${ORG_DESCRIPTION}
 
-## Founders
+## Founder
 
-- Tom Goodwin, co-founder. Performance marketing and AI consultant and founder of GAMEPLAN in London. See https://tomgoodwin.london and https://www.linkedin.com/in/thomasgoodwin/.
-- Peter Cresswell, co-founder. See https://www.linkedin.com/in/pdcresswell/. [Bio to be populated from source.]
+- Tom Goodwin, founder. Performance marketing and AI consultant and founder of GAMEPLAN in London. See https://tomgoodwin.london and https://www.linkedin.com/in/thomasgoodwin/.
 
 ## Core thesis
 

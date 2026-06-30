@@ -15,7 +15,7 @@ const blog = defineCollection({
       "thought-leadership",
     ]),
     category: z.string(),
-    author: z.enum(["Tom Goodwin", "Peter Cresswell", "The Micro Agency"]),
+    author: z.enum(["Tom Goodwin", "The Micro Agency"]),
     pubDate: z.coerce.date(),
     updated: z.coerce.date().optional(),
     draft: z.boolean().default(false),

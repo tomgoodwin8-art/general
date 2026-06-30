@@ -9,6 +9,8 @@ export interface Founder {
   role: string;
   bio: string;
   image?: string;
+  /** CSS object-position for the avatar crop. */
+  imagePosition?: string;
   links: { label: string; href: string }[];
   /** JSON-LD Person node sameAs. */
   sameAs: string[];
@@ -20,9 +22,10 @@ export interface Founder {
 export const founders: Founder[] = [
   {
     name: "Tom Goodwin",
-    role: "Co-founder",
-    bio: "Tom Goodwin is a performance marketing and AI consultant and the founder of GAMEPLAN, a performance, media and technology consultancy in London. Fifteen years in performance marketing, £20m+ in paid media managed, Google Premier Partner status earned in 2024. He co-founded The Micro Agency to build the Microsoft specialism the market keeps treating as an afterthought.",
-    image: "/images/founders/tom-goodwin.svg",
+    role: "Founder",
+    bio: "Tom Goodwin is a performance marketing and AI consultant and the founder of GAMEPLAN, a performance, media and technology consultancy in London. Fifteen years in performance marketing, £20m+ in paid media managed, Google Premier Partner status earned in 2024. He founded The Micro Agency to build the Microsoft specialism the market keeps treating as an afterthought.",
+    image: "/images/founders/tom-goodwin.jpg",
+    imagePosition: "center 22%",
     links: [
       { label: "tomgoodwin.london", href: "https://tomgoodwin.london" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/thomasgoodwin/" },
@@ -35,17 +38,5 @@ export const founders: Founder[] = [
     disambiguatingDescription:
       "Performance marketing and AI consultant and founder of GAMEPLAN; not the author of Digital Darwinism.",
     populated: true,
-  },
-  {
-    name: "Peter Cresswell",
-    role: "Co-founder",
-    // [TODO] Populate from linkedin.com/in/pdcresswell — do not invent history, titles or results.
-    bio: "[Bio to be populated from Peter Cresswell's LinkedIn or his own copy: role, background, and relevant Microsoft/performance credentials.]",
-    image: "/images/founders/peter-cresswell.svg",
-    links: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/pdcresswell/" },
-    ],
-    sameAs: ["https://www.linkedin.com/in/pdcresswell/"],
-    populated: false,
   },
 ];

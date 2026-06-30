@@ -26,9 +26,11 @@ const palette: Record<string, [string, string]> = {
 };
 const [c1, c2] = palette[category] ?? ["#0078D4", "#0A4E8A"];
 
+// viewBox ratios match the container aspect ratios exactly (wide 5:2, card 5:3)
+// so preserveAspectRatio="slice" never crops the labels at the edges.
 const wide = ratio === "wide";
 const W = wide ? 1200 : 600;
-const H = wide ? 420 : 360;
+const H = wide ? 480 : 360;
 const gid = `g-${category.replace(/[^a-z0-9]/gi, "")}`;
 
 // Small deterministic variation so categories don't all look identical.
@@ -67,7 +69,7 @@ const cy = 70 + (seed % 4) * 18;
 
   <text
     x="40"
-    y={wide ? 360 : 312}
+    y={wide ? 410 : 312}
     fill="#ffffff"
     font-family="'Space Grotesk',Inter,system-ui,sans-serif"
     font-size={wide ? 40 : 34}
@@ -76,7 +78,7 @@ const cy = 70 + (seed % 4) * 18;
   >{category}</text>
   <text
     x="40"
-    y={wide ? 392 : 340}
+    y={wide ? 444 : 340}
     fill="#ffffff"
     opacity="0.7"
     font-family="Inter,system-ui,sans-serif"

@@ -1,0 +1,430 @@
+---
+import Base from "../layouts/Base.astro";
+import FAQ from "../components/FAQ.astro";
+import AuditCTA from "../components/AuditCTA.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import { BOOKING_URL } from "../data/site";
+import milestones from "../data/antitrust-milestones.json";
+import { faqSchema, breadcrumbSchema, articleSchema } from "../lib/schema";
+
+const path = "/google-antitrust";
+const BUILD_DATE = "30 June 2026"; // freshness check completed this date
+const ISO_DATE = "2026-06-30";
+
+const crumbs = [
+  { label: "Home", href: "/" },
+  { label: "Google Antitrust", href: path },
+];
+
+// Reusable inline source link style (every figure carries a visible source).
+const S = "text-xs font-medium text-ms-blue-deep underline underline-offset-2 hover:text-ink";
+
+// Date helper: ISO -> UK format (8 November 2026).
+const months = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+const ukDate = (iso: string) => {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${d} ${months[m - 1]} ${y}`;
+};
+
+const faqs = [
+  {
+    q: "Does this mean Google Ads is going away?",
+    a: "No. This is diversification, not migration. Google remains the largest line in almost every plan and should stay that way. The case for a second engine is about reducing single-platform dependency, not leaving Google.",
+  },
+  {
+    q: "Is it safe to keep spending on Google during the appeals?",
+    a: "Yes. The point is reducing dependency, not exit. The liability findings are under appeal and the remedies face a multi-year implementation. Nothing here is a reason to stop spending where demand is captured; it is a reason to build a hedge.",
+  },
+  {
+    q: "Did the rulings lower my CPCs?",
+    a: "No. The remedies target market structure, such as default deals, data sharing and syndication, not your individual account. They are also under appeal. Do not expect a direct change to your auction prices because of the rulings.",
+  },
+  {
+    q: "What exactly did the courts find?",
+    a: "Two separate US federal courts found Google liable for unlawful monopolies: one in general search and search text advertising (August 2024), and one in publisher ad servers and ad exchanges with an illegal tie (April 2025). Both are civil antitrust findings, and Google is appealing.",
+  },
+  {
+    q: "Why Microsoft rather than another alternative?",
+    a: "Scale and fit. Microsoft Advertising is the second-largest search ad platform, commonly runs at materially lower CPCs, offers LinkedIn Profile Targeting available nowhere else, and is growing its surface through Copilot. It is the most viable second engine for most advertisers.",
+  },
+  {
+    q: "How quickly can we stand up a Microsoft channel?",
+    a: "A clean platform-native build typically goes live within the first weeks of access. The meaningful read on incremental value comes from a quarter-long incrementality test. Start with an audit, which quantifies the opportunity before you commit.",
+  },
+  {
+    q: "Are you saying Google did something criminal?",
+    a: "No. These are civil antitrust matters, not criminal cases. We state the findings as findings: a federal court ruled, trial evidence showed. Google denies wrongdoing and is appealing the liability findings and elements of the remedies.",
+  },
+];
+
+const schemaNodes = [
+  articleSchema({
+    title: "Google antitrust rulings: what they mean for advertisers",
+    description:
+      "What two US federal courts found about Google's search and ad-tech monopolies, how the auction harmed advertisers, and the case for diversifying to Microsoft.",
+    path,
+    datePublished: ISO_DATE,
+    dateModified: ISO_DATE,
+  }),
+  faqSchema(faqs),
+  breadcrumbSchema(crumbs),
+];
+---
+<Base
+  title="Google Antitrust and Advertisers: the case for a second search engine"
+  description="Two US federal courts found Google an unlawful monopolist in search and ad tech. What the rulings found, how the auction raised advertiser costs, and why to diversify to Microsoft."
+  {path}
+  type="article"
+  schemaNodes={schemaNodes}
+>
+  <!-- Section A. Hero -->
+  <section class="border-b border-line bg-mist">
+    <div class="wrap section">
+      <div class="mb-6"><Breadcrumb {crumbs} /></div>
+      <p class="kicker">Research, antitrust and diversification</p>
+      <h1 class="mt-4 max-w-4xl">
+        A court called it a monopoly. Your media plan should call it a risk.
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-slate">
+        Two US federal courts have found Google to be an unlawful monopolist, in
+        search and in ad tech. Trial evidence showed advertisers paid more
+        because no rival kept it honest. Google is where you spend. Microsoft is
+        where you grow.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={BOOKING_URL} class="btn btn-primary" rel="noopener" target="_blank">Book an audit</a>
+        <a href="#what-courts-found" class="btn btn-ghost">What the courts found ↓</a>
+      </div>
+      <p class="mt-6 text-xs text-slate">Last reviewed: {BUILD_DATE}.</p>
+    </div>
+  </section>
+
+  <!-- Section B. TL;DR cards -->
+  <section id="what-courts-found" class="section">
+    <div class="wrap">
+      <h2>What the courts actually found</h2>
+      <p class="mt-3 max-w-2xl text-slate">
+        Two separate cases, two separate courts, two findings of unlawful
+        monopoly. Both are civil matters and both are being appealed.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <div class="rounded-xl border border-line bg-paper p-7">
+          <p class="kicker">Card 1 · Search</p>
+          <h3 class="mt-2 text-xl">US v. Google (DDC, Judge Mehta)</h3>
+          <p class="mt-3 text-slate">
+            On {ukDate("2024-08-05")} the court found Google held unlawful
+            monopolies in general search and in search text advertising
+            <a class={S} href="https://www.congress.gov/crs-product/LSB11362" rel="noopener" target="_blank">(CRS)</a>.
+            The {ukDate("2025-09-02")} remedies decision and {ukDate("2025-12-05")}
+            final judgment ordered behavioural remedies: no Chrome divestiture, a
+            one-year cap on default deals, data sharing with approved "Qualified
+            Competitors", and a five-year syndication pathway for Google's search
+            results and text-ads feed
+            <a class={S} href="https://www.cnbc.com/2025/12/05/judge-finalize-remedies-in-google-antitrust-case.html" rel="noopener" target="_blank">(CNBC)</a>.
+            Google filed its appeal in {ukDate("2026-01-16")}; a motion to stay
+            the data-sharing mandate was denied on {ukDate("2026-05-08")}, so
+            those remedies remain in force during the appeal
+            <a class={S} href="https://www.mediapost.com/publications/article/412128/google-appeals-antitrust-ruling-seeks-to-lift-dat.html" rel="noopener" target="_blank">(MediaPost)</a>.
+          </p>
+        </div>
+        <div class="rounded-xl border border-line bg-paper p-7">
+          <p class="kicker">Card 2 · Ad tech</p>
+          <h3 class="mt-2 text-xl">US v. Google (EDVA, Judge Brinkema)</h3>
+          <p class="mt-3 text-slate">
+            On {ukDate("2025-04-17")} the court found Google unlawfully
+            monopolised the open-web publisher ad server and ad exchange markets
+            and illegally tied DFP to AdX
+            <a class={S} href="https://www.stblaw.com/about-us/publications/view/2025/04/25/district-court-rules-google-is-a-monopolist-in-ad-tech" rel="noopener" target="_blank">(Simpson Thacher)</a>.
+            The remedies trial ran from September to November 2025, with the DOJ
+            seeking divestiture of AdX and open-sourcing of the auction logic
+            <a class={S} href="https://www.adexchanger.com/antitrust/closing-arguments-are-done-in-the-us-v-google-ad-tech-case/" rel="noopener" target="_blank">(AdExchanger)</a>.
+            As of this review the remedies ruling is
+            <strong>still pending</strong>
+            <a class={S} href="https://digiday.com/media-buying/everything-you-need-to-know-about-the-closing-stages-of-googles-ad-tech-antitrust-trial/" rel="noopener" target="_blank">(Digiday)</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section C. Why this matters to advertisers (harm) -->
+  <section class="section bg-mist">
+    <div class="wrap">
+      <h2 class="max-w-3xl">Why this matters to advertisers</h2>
+      <div class="prose mt-5 max-w-3xl">
+        <p>
+          In a competitive market, a supplier that raises prices loses customers.
+          Google's search-ads monopoly removed that check, and trial evidence
+          showed it used the freedom. The mechanics were named in the court
+          record.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <div class="rounded-xl border border-line bg-paper p-6">
+          <h3 class="text-lg">"Intentional pricing"</h3>
+          <p class="mt-2 text-slate">
+            Google's own internal term for the levers that adjust what
+            advertisers pay
+            <a class={S} href="https://en.wikisource.org/wiki/United_States_v._Google/Findings_of_Fact/Section_5F" rel="noopener" target="_blank">(Findings of Fact)</a>.
+          </p>
+        </div>
+        <div class="rounded-xl border border-line bg-paper p-6">
+          <h3 class="text-lg">Squashing ("Butternut Squash")</h3>
+          <p class="mt-2 text-slate">
+            Inflates the runner-up's predicted score so the auction winner has to
+            pay more
+            <a class={S} href="https://en.wikisource.org/wiki/United_States_v._Google/Findings_of_Fact/Section_5F" rel="noopener" target="_blank">(Findings of Fact)</a>.
+          </p>
+        </div>
+        <div class="rounded-xl border border-line bg-paper p-6">
+          <h3 class="text-lg">Format pricing</h3>
+          <p class="mt-2 text-slate">
+            Charging more for ads that carry extra text and links
+            <a class={S} href="https://martech.org/how-google-harms-search-advertisers-in-20-slides/" rel="noopener" target="_blank">(MarTech)</a>.
+          </p>
+        </div>
+        <div class="rounded-xl border border-line bg-paper p-6">
+          <h3 class="text-lg">RGSP</h3>
+          <p class="mt-2 text-slate">
+            A randomised generalised second-price step, introduced in 2019, that
+            occasionally swaps the top two bidders and pushes final prices up
+            <a class={S} href="https://en.wikisource.org/wiki/United_States_v._Google/Findings_of_Fact/Section_5F" rel="noopener" target="_blank">(Findings of Fact)</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="prose mt-8 max-w-3xl">
+        <p>
+          The scale was set out at trial. Google's then head of Ads testified
+          that Google frequently changed its ad auctions without telling
+          advertisers, raising costs by around 5% on average and up to 10% on
+          some queries
+          <a class={S} href="https://finance.yahoo.com/news/google-changed-ad-auctions-raising-191333390.html" rel="noopener" target="_blank">(Bloomberg via Yahoo)</a>.
+          Internal estimates put the combined revenue lift from some changes at
+          around 15%
+          <a class={S} href="https://martech.org/how-google-harms-search-advertisers-in-20-slides/" rel="noopener" target="_blank">(MarTech)</a>.
+          Trial exhibits described tuning the auction to hit revenue targets,
+          internally "shaking the cushions"
+          <a class={S} href="https://ppchero.com/the-google-ads-auction-exposed-antitrust-trial-revelations-part-1/" rel="noopener" target="_blank">(PPC Hero)</a>.
+          Google search ad CPCs more than doubled between 2013 and 2020
+          <a class={S} href="https://searchengineland.com/doj-google-search-ad-price-manipulation-440207" rel="noopener" target="_blank">(Search Engine Land)</a>,
+          and the DOJ characterised the auction as a "black box" to advertisers
+          <a class={S} href="https://ppchero.com/the-google-ads-auction-exposed-antitrust-trial-revelations-part-1/" rel="noopener" target="_blank">(PPC Hero)</a>.
+        </p>
+        <p class="font-medium text-ink">
+          You were not imagining the rising CPCs, and you had no second venue with
+          enough scale to walk to. That is the definition of concentration risk.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section D. Timeline -->
+  <section class="section">
+    <div class="wrap">
+      <h2>Timeline</h2>
+      <p class="mt-3 max-w-2xl text-slate">
+        The case history, from the 2020 filing to the pending ad tech remedies.
+        Pending items are marked and are not final.
+      </p>
+      <ol class="mt-8 flex snap-x gap-4 overflow-x-auto pb-4 md:gap-0" aria-label="Antitrust case timeline">
+        {
+          milestones.map((m) => (
+            <li class="relative w-64 shrink-0 snap-start border-l-2 border-line pl-4 md:w-auto md:flex-1 md:border-l-0 md:border-t-2 md:pl-0 md:pt-4">
+              <span class={`absolute -left-[7px] top-0 h-3 w-3 rounded-full md:-top-[7px] md:left-0 ${m.pending ? "bg-ms-yellow" : "bg-ms-blue-deep"}`} aria-hidden="true" />
+              <div class="md:pr-4">
+                <time class="figure text-sm" datetime={m.date}>{ukDate(m.date)}</time>
+                <p class="mt-1 font-display font-semibold leading-snug">
+                  {m.label}
+                  {m.pending && <span class="ml-1 rounded bg-ms-yellow/20 px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-ink">Pending</span>}
+                </p>
+                <p class="mt-1 text-sm text-slate">{m.summary}</p>
+                <p class="mt-1 text-xs text-slate">{m.court}</p>
+                {m.doc_url && (
+                  <a class={`${S} mt-1 inline-block`} href={m.doc_url} rel="noopener" target="_blank">Source</a>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Section E. The remedy points one way -->
+  <section class="section bg-mist">
+    <div class="wrap-narrow">
+      <h2>The remedy points one way: diversification</h2>
+      <div class="prose mt-5">
+        <p>
+          The search remedies are designed to open the market: capping exclusive
+          defaults, forcing data sharing with approved competitors, and creating
+          a syndication pathway so rival and AI-native search products can compete
+          <a class={S} href="https://www.techpolicy.press/search-remedies-in-google-antitrust-case-can-work-even-if-company-stays-on-top/" rel="noopener" target="_blank">(TechPolicy.Press)</a>.
+        </p>
+        <p>
+          The market is being restructured around competition. Advertisers who
+          build a second engine now are early to the structure the court is
+          trying to create, rather than late to it.
+        </p>
+        <p>
+          Keep the expectation measured. The remedies face appeal and a
+          multi-year implementation, and the ad tech remedies are not yet
+          decided. The point is direction of travel, not a promise about your
+          next quarter.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section F. The Microsoft case -->
+  <section class="section">
+    <div class="wrap">
+      <h2>The constructive alternative: Microsoft</h2>
+      <p class="mt-3 max-w-2xl text-slate">
+        From problem to action. Microsoft is the most viable second engine, and
+        it is structurally under-used.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <div class="rounded-xl border border-line bg-paper p-7">
+          <h3 class="text-lg">The adoption gap is the arbitrage</h3>
+          <p class="mt-3 text-slate">
+            Microsoft Advertising is the second-largest search ad platform, yet
+            only around a third of advertisers use it, against roughly four in
+            five on Google
+            <a class={S} href="https://searchlab.nl/en/statistics/microsoft-ads-statistics-2026" rel="noopener" target="_blank">(reported, Searchlab)</a>.
+            Less competition in the auction is part of why it commonly runs at
+            materially lower CPCs, around 33% lower on average as commonly cited
+            <a class={S} href="https://searchlab.nl/en/statistics/microsoft-ads-statistics-2026" rel="noopener" target="_blank">(reported, Searchlab)</a>.
+          </p>
+        </div>
+        <div class="rounded-xl border border-line bg-paper p-7">
+          <h3 class="text-lg">A distinct, addressable audience</h3>
+          <p class="mt-3 text-slate">
+            A desktop-leaning, higher-income, B2B-friendly audience, with LinkedIn
+            Profile Targeting by job title, company and industry available
+            nowhere else. In the UK, Microsoft holds a materially higher desktop
+            search share than its global figure, roughly 14 to 16%
+            <!-- source: StatCounter, 2026 (site Appendix A) -->.
+          </p>
+        </div>
+        <div class="rounded-xl border border-line bg-paper p-7">
+          <h3 class="text-lg">The surface is growing through AI</h3>
+          <p class="mt-3 text-slate">
+            Copilot is expanding the Microsoft surface and its share of
+            commercial-intent queries, with reach reported at around 320 million
+            monthly users
+            <a class={S} href="https://searchlab.nl/en/statistics/microsoft-ads-statistics-2026" rel="noopener" target="_blank">(reported, Searchlab)</a>.
+            Microsoft's AI Max for Search places ads inside Copilot responses,
+            announced April 2026
+            <a class={S} href="https://news.designrush.com/microsoft-ai-max-search-ads-copilot" rel="noopener" target="_blank">(DesignRush)</a>.
+          </p>
+        </div>
+        <div class="rounded-xl border border-line bg-paper p-7">
+          <h3 class="text-lg">Google is where you spend. Microsoft is where you grow.</h3>
+          <p class="mt-3 text-slate">
+            The antitrust record is the evidence base for that line, not a
+            replacement for it. See <a class="link" href="/why-microsoft">Why Microsoft</a>
+            for the full thesis and <a class="link" href="/method">The Method</a> for how we
+            prove incremental value.
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 text-xs text-slate">
+        Figures marked "reported" are from secondary sources and presented as
+        such. The UK desktop share figure is from the site's verified sources
+        (StatCounter, 2026).
+      </p>
+    </div>
+  </section>
+
+  <!-- Section G. For agencies -->
+  <section class="section bg-ink text-paper">
+    <div class="wrap-narrow">
+      <p class="kicker text-ms-blue">For agencies</p>
+      <h2 class="mt-3 text-paper">Concentration risk, as a service</h2>
+      <p class="mt-4 text-white/80">
+        Single-platform dependency is a client risk: one vendor sets the price,
+        owns the data, and can change the rules without notice, as the trial
+        record shows. A credible Microsoft specialism lets an agency offer
+        clients a hedge and a second growth lever. We support that white-label or
+        on a referral basis.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/agencies" class="btn btn-primary">For Agencies (white-label)</a>
+        <a href="/contact" class="btn btn-ondark">Talk to us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section H. FAQ -->
+  <FAQ faqs={faqs} heading="Google antitrust: advertiser FAQ" />
+
+  <!-- Section I. Sources -->
+  <section class="section bg-mist">
+    <div class="wrap-narrow">
+      <h2>Sources and further reading</h2>
+      <p class="mt-3 text-slate">
+        Weighted to primary documents first, then reputable analysis. Last
+        reviewed {BUILD_DATE}.
+      </p>
+      <ul class="mt-6 space-y-3 text-sm">
+        <li>
+          <a class="link" href="https://www.congress.gov/crs-product/LSB11362" rel="noopener" target="_blank">Congressional Research Service, LSB11362</a>
+          <span class="text-slate">· search liability and remedies overview (primary, government).</span>
+        </li>
+        <li>
+          <a class="link" href="https://en.wikisource.org/wiki/United_States_v._Google/Findings_of_Fact/Section_5F" rel="noopener" target="_blank">US v. Google, Findings of Fact (Section 5F)</a>
+          <span class="text-slate">· the pricing mechanics, in the court record (primary).</span>
+        </li>
+        <li>
+          <a class="link" href="https://www.stblaw.com/about-us/publications/view/2025/04/25/district-court-rules-google-is-a-monopolist-in-ad-tech" rel="noopener" target="_blank">Simpson Thacher</a>
+          <span class="text-slate">· analysis of the ad tech liability ruling, April 2025.</span>
+        </li>
+        <li>
+          <a class="link" href="https://www.cnbc.com/2025/12/05/judge-finalize-remedies-in-google-antitrust-case.html" rel="noopener" target="_blank">CNBC</a>
+          <span class="text-slate">· search final judgment, {ukDate("2025-12-05")}.</span>
+        </li>
+        <li>
+          <a class="link" href="https://www.techpolicy.press/search-remedies-in-google-antitrust-case-can-work-even-if-company-stays-on-top/" rel="noopener" target="_blank">Tech Policy Press</a>
+          <span class="text-slate">· how the search remedies are designed to open the market.</span>
+        </li>
+        <li>
+          <a class="link" href="https://www.adexchanger.com/antitrust/closing-arguments-are-done-in-the-us-v-google-ad-tech-case/" rel="noopener" target="_blank">AdExchanger</a>
+          <span class="text-slate">· ad tech remedies closing arguments.</span>
+        </li>
+        <li>
+          <a class="link" href="https://finance.yahoo.com/news/google-changed-ad-auctions-raising-191333390.html" rel="noopener" target="_blank">Bloomberg via Yahoo</a>
+          <span class="text-slate">· testimony on auction changes raising advertiser costs.</span>
+        </li>
+        <li>
+          <a class="link" href="https://searchengineland.com/doj-google-search-ad-price-manipulation-440207" rel="noopener" target="_blank">Search Engine Land</a>
+          <span class="text-slate">· DOJ on CPCs more than doubling, 2013 to 2020.</span>
+        </li>
+        <li>
+          <a class="link" href="https://www.mediapost.com/publications/article/412128/google-appeals-antitrust-ruling-seeks-to-lift-dat.html" rel="noopener" target="_blank">MediaPost</a>
+          <span class="text-slate">· Google's appeal and the data-sharing stay.</span>
+        </li>
+        <li>
+          <a class="link" href="https://searchlab.nl/en/statistics/microsoft-ads-statistics-2026" rel="noopener" target="_blank">Searchlab</a>
+          <span class="text-slate">· Microsoft Ads statistics (reported, secondary).</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section J. Closing CTA -->
+  <AuditCTA
+    headline="Reduce single-platform dependency, on your own numbers."
+    line="A fixed-fee audit that quantifies the incremental revenue a properly optimised Microsoft channel can add, before you commit."
+  />
+  <div class="wrap py-8 text-center text-xs text-slate">
+    <!-- [Companion PDF placeholder: "Advertiser's guide to the Google antitrust rulings" one-pager is not yet published. Do not fabricate.] -->
+    A one-page "Advertiser's guide to the Google antitrust rulings" is in
+    preparation. <a class="link" href="/contact">Ask us for an early copy.</a>
+  </div>
+</Base>

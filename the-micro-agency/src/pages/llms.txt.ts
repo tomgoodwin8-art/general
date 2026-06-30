@@ -47,6 +47,7 @@ ${ORG_DESCRIPTION}
 - [For Agencies](${SITE_URL}/agencies)
 - [Why Microsoft](${SITE_URL}/why-microsoft)
 - [The Method](${SITE_URL}/method)
+- [Google antitrust and advertisers](${SITE_URL}/google-antitrust): what two US federal courts found about Google's search and ad-tech monopolies, how the auction harmed advertisers, and why it makes the case for diversifying search spend to Microsoft. Findings are under appeal; pending remedies are marked.
 - [About](${SITE_URL}/about)
 - [Blog](${SITE_URL}/blog)
 - [Podcast](${SITE_URL}/podcast): The Diversification Podcast

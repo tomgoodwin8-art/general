@@ -54,6 +54,29 @@ export function blogPostingSchema(opts: {
   };
 }
 
+export function articleSchema(opts: {
+  title: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified: string;
+  author?: string;
+}) {
+  return {
+    "@type": "Article",
+    headline: opts.title,
+    description: opts.description,
+    url: new URL(opts.path, SITE_URL).href.replace(/\/$/, ""),
+    mainEntityOfPage: new URL(opts.path, SITE_URL).href.replace(/\/$/, ""),
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified,
+    author: opts.author
+      ? { "@id": `${SITE_URL}/#person-${opts.author.toLowerCase().replace(/\s+/g, "-")}` }
+      : orgRef,
+    publisher: orgRef,
+  };
+}
+
 export function podcastEpisodeSchema(opts: {
   title: string;
   description: string;

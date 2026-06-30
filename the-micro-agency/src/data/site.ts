@@ -38,6 +38,7 @@ export const nav = [
       { label: "Blog", href: "/blog" },
       { label: "Podcast", href: "/podcast" },
       { label: "Report", href: "/report" },
+      { label: "Google Antitrust", href: "/google-antitrust" },
       { label: "Case Studies", href: "/case-studies" },
     ],
   },

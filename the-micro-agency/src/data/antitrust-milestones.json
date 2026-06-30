@@ -1,0 +1,59 @@
+[
+  {
+    "date": "2020-10-20",
+    "label": "DOJ sues Google over search",
+    "summary": "The Department of Justice and a group of states file the search monopolisation case in the District of Columbia.",
+    "court": "DDC (Mehta)",
+    "doc_url": ""
+  },
+  {
+    "date": "2024-08-05",
+    "label": "Search liability ruling",
+    "summary": "A federal court finds Google an unlawful monopolist in general search services and search text advertising.",
+    "court": "DDC (Mehta)",
+    "doc_url": "https://www.congress.gov/crs-product/LSB11362"
+  },
+  {
+    "date": "2025-04-17",
+    "label": "Ad tech liability ruling",
+    "summary": "A federal court finds Google unlawfully monopolised the publisher ad server and ad exchange markets and illegally tied DFP to AdX.",
+    "court": "EDVA (Brinkema)",
+    "doc_url": "https://www.stblaw.com/about-us/publications/view/2025/04/25/district-court-rules-google-is-a-monopolist-in-ad-tech"
+  },
+  {
+    "date": "2025-09-02",
+    "label": "Search remedies decision",
+    "summary": "Behavioural remedies ordered. Chrome divestiture rejected. Data sharing with approved competitors and a syndication pathway required.",
+    "court": "DDC (Mehta)",
+    "doc_url": "https://www.congress.gov/crs-product/LSB11362"
+  },
+  {
+    "date": "2025-12-05",
+    "label": "Search final judgment",
+    "summary": "A six-year framework is finalised, including a five-year syndication pathway for search results and search text ads.",
+    "court": "DDC (Mehta)",
+    "doc_url": "https://www.cnbc.com/2025/12/05/judge-finalize-remedies-in-google-antitrust-case.html"
+  },
+  {
+    "date": "2026-01-16",
+    "label": "Google files appeal",
+    "summary": "Google appeals the search-case data-sharing requirements and oversight. The DOJ and states cross-appeal on 3 February 2026.",
+    "court": "DC Circuit",
+    "doc_url": ""
+  },
+  {
+    "date": "2026-05-08",
+    "label": "Stay denied, remedies stand",
+    "summary": "The district court denies Google's motion to stay the data-sharing mandate, so the search remedies remain in force during the appeal. Google files its opening appeal brief on 22 May 2026.",
+    "court": "DDC (Mehta) / DC Circuit",
+    "doc_url": ""
+  },
+  {
+    "date": "2026-07-01",
+    "label": "Ad tech remedies (pending)",
+    "summary": "The ad tech remedies ruling is expected in 2026. The DOJ seeks divestiture of AdX and open-sourcing of the auction logic.",
+    "court": "EDVA (Brinkema)",
+    "doc_url": "",
+    "pending": true
+  }
+]

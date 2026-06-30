@@ -1,0 +1,221 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import ShareButton from "../components/ShareButton.astro";
+import AuditCTA from "../components/AuditCTA.astro";
+import partners from "../data/googlePartners.json";
+
+const total = partners.length;
+const premierCount = partners.filter((p) => p.premier).length;
+const cities = new Set(partners.map((p) => p.city).filter(Boolean)).size;
+const updated = "June 2026";
+const path = "/google-ads-agency-directory";
+const title = "UK Google Ads Agency Directory: every Google Partner";
+
+const hostOf = (url) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+};
+---
+<Base
+  title="UK Google Ads Agency Directory"
+  description={`A free, searchable directory of ${total} UK Google Partners and ${premierCount} Premier Partners, with city, postcode and website for each agency.`}
+  {path}
+>
+  <PageHeader
+    kicker="Free resource"
+    title="UK Google Ads Agency Directory"
+    intro={`Every UK Google Partner in one searchable table: ${total} agencies, including ${premierCount} Premier Partners. Free to use, free to share.`}
+  />
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="grid gap-6 lg:grid-cols-3 lg:items-start">
+        <div class="prose lg:col-span-2">
+          <p>
+            This is a complete, searchable directory of agencies that hold Google
+            Partner status in the United Kingdom. For each agency we list its
+            town or city, postcode, website, and whether it has reached the
+            Premier tier, the top 3% of participating partners by Google's own
+            measure.
+          </p>
+          <p>
+            We built it as a genuinely useful reference: if you are choosing a
+            paid search agency, or simply mapping the UK market, the data is here
+            in one place rather than scattered across hundreds of profile pages.
+            Listing here is informational and does not imply any relationship
+            with, or endorsement by, The Micro Agency or Google.
+          </p>
+          <p>
+            One observation worth making, given what we do. Almost every agency
+            on this list is a Google specialist. Far fewer have built a genuine
+            <a href="/why-microsoft">Microsoft Advertising</a> capability, which
+            is exactly the <a href="/why-microsoft">concentration risk</a> and the
+            skills gap we exist to close. If you are diversifying beyond Google,
+            that is <a href="/services">our whole business</a>.
+          </p>
+        </div>
+
+        <aside class="rounded-xl border border-line bg-mist p-6">
+          <p class="kicker">Share this resource</p>
+          <p class="mt-2 text-sm text-slate">
+            Useful for your team or audience? Link to it or share it.
+          </p>
+          <div class="mt-4">
+            <ShareButton {path} {title} />
+          </div>
+          <dl class="mt-6 grid grid-cols-3 gap-4 border-t border-line pt-5">
+            <div>
+              <dt class="text-xs text-slate">Agencies</dt>
+              <dd class="figure text-2xl">{total}</dd>
+            </div>
+            <div>
+              <dt class="text-xs text-slate">Premier</dt>
+              <dd class="figure text-2xl">{premierCount}</dd>
+            </div>
+            <div>
+              <dt class="text-xs text-slate">Towns</dt>
+              <dd class="figure text-2xl">{cities}</dd>
+            </div>
+          </dl>
+          <p class="mt-4 text-xs text-slate">Last updated: {updated}</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls -->
+  <section class="section-tight pt-0">
+    <div class="wrap">
+      <div class="flex flex-wrap items-center gap-4">
+        <label class="sr-only" for="dir-search">Search agencies</label>
+        <input
+          id="dir-search"
+          type="search"
+          placeholder="Search by agency, town or postcode"
+          class="w-full max-w-md rounded-md border border-line px-3 py-2 outline-none focus:border-ms-blue-deep"
+          data-dir-search
+        />
+        <label class="flex items-center gap-2 text-sm">
+          <input type="checkbox" data-dir-premier />
+          Premier Partners only
+        </label>
+        <span class="text-sm text-slate" data-dir-count>{total} agencies</span>
+      </div>
+
+      <div class="mt-6 overflow-x-auto rounded-xl border border-line">
+        <table class="w-full border-collapse text-left text-sm">
+          <thead class="bg-mist">
+            <tr class="border-b border-line">
+              <th scope="col" class="px-4 py-3 font-display font-semibold">Agency</th>
+              <th scope="col" class="px-4 py-3 font-display font-semibold">Town / City</th>
+              <th scope="col" class="px-4 py-3 font-display font-semibold">Postcode</th>
+              <th scope="col" class="px-4 py-3 font-display font-semibold">Tier</th>
+              <th scope="col" class="px-4 py-3 font-display font-semibold">Google profile</th>
+            </tr>
+          </thead>
+          <tbody data-dir-body>
+            {
+              partners.map((p) => (
+                <tr
+                  class="border-b border-line/70 last:border-0"
+                  data-row
+                  data-search={`${p.agency} ${p.city} ${p.postcode}`.toLowerCase()}
+                  data-premier={p.premier ? "1" : "0"}
+                >
+                  <td class="px-4 py-3 align-top">
+                    {p.website ? (
+                      <a
+                        href={p.website}
+                        class="font-medium text-ms-blue-deep hover:underline"
+                        rel="nofollow noopener"
+                        target="_blank"
+                      >
+                        {p.agency}
+                      </a>
+                    ) : (
+                      <span class="font-medium">{p.agency}</span>
+                    )}
+                    {p.website && (
+                      <span class="block text-xs text-slate">{hostOf(p.website)}</span>
+                    )}
+                  </td>
+                  <td class="px-4 py-3 align-top text-slate">{p.city || "-"}</td>
+                  <td class="px-4 py-3 align-top text-slate">{p.postcode || "-"}</td>
+                  <td class="px-4 py-3 align-top">
+                    {p.premier ? (
+                      <span class="inline-block rounded-full bg-ms-yellow/20 px-2 py-0.5 text-xs font-semibold text-ink">
+                        Premier
+                      </span>
+                    ) : (
+                      <span class="text-xs text-slate">Partner</span>
+                    )}
+                  </td>
+                  <td class="px-4 py-3 align-top">
+                    {p.profileUrl ? (
+                      <a
+                        href={p.profileUrl}
+                        class="text-ms-blue-deep hover:underline"
+                        rel="nofollow noopener"
+                        target="_blank"
+                      >
+                        View
+                      </a>
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-slate" data-dir-empty hidden>
+        No agencies match your search.
+      </p>
+      <p class="mt-4 text-xs text-slate">
+        Outbound links are provided for reference and marked nofollow. Spot an
+        error or want your listing updated? <a href="/contact" class="link">Tell us</a>.
+      </p>
+    </div>
+  </section>
+
+  <AuditCTA />
+</Base>
+
+<script is:inline>
+  (() => {
+    const search = document.querySelector("[data-dir-search]");
+    const premierOnly = document.querySelector("[data-dir-premier]");
+    const rows = Array.from(document.querySelectorAll("[data-row]"));
+    const count = document.querySelector("[data-dir-count]");
+    const empty = document.querySelector("[data-dir-empty]");
+    if (!search || !rows.length) return;
+
+    const apply = () => {
+      const q = search.value.trim().toLowerCase();
+      const prem = premierOnly && premierOnly.checked;
+      let shown = 0;
+      for (const r of rows) {
+        const matchText = !q || r.dataset.search.includes(q);
+        const matchPrem = !prem || r.dataset.premier === "1";
+        const show = matchText && matchPrem;
+        r.hidden = !show;
+        if (show) shown++;
+      }
+      if (count) count.textContent = `${shown} ${shown === 1 ? "agency" : "agencies"}`;
+      if (empty) empty.hidden = shown !== 0;
+    };
+
+    let t;
+    search.addEventListener("input", () => {
+      clearTimeout(t);
+      t = setTimeout(apply, 120);
+    });
+    if (premierOnly) premierOnly.addEventListener("change", apply);
+  })();
+</script>

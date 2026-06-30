@@ -1,0 +1,56 @@
+---
+/**
+ * ShareButton.astro — share controls for linkbuilding resources.
+ * Primary button uses the Web Share API where available, falling back to
+ * copy-to-clipboard. Plus explicit LinkedIn and X share links.
+ */
+import { SITE_URL } from "../data/site";
+interface Props {
+  path: string;
+  title: string;
+}
+const { path, title } = Astro.props;
+const url = new URL(path, SITE_URL).href.replace(/\/$/, "");
+const enc = (s: string) => encodeURIComponent(s);
+const linkedin = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
+const x = `https://twitter.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`;
+const email = `mailto:?subject=${enc(title)}&body=${enc(url)}`;
+---
+<div class="flex flex-wrap items-center gap-2" data-share data-url={url} data-title={title}>
+  <button type="button" class="btn btn-primary" data-share-btn>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v14"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <span data-share-label>Share this</span>
+  </button>
+  <a href={linkedin} class="btn btn-ghost" rel="noopener" target="_blank">LinkedIn</a>
+  <a href={x} class="btn btn-ghost" rel="noopener" target="_blank">X</a>
+  <a href={email} class="btn btn-ghost">Email</a>
+</div>
+
+<script is:inline>
+  document.querySelectorAll("[data-share]").forEach((wrap) => {
+    const btn = wrap.querySelector("[data-share-btn]");
+    const label = wrap.querySelector("[data-share-label]");
+    if (!btn) return;
+    const url = wrap.dataset.url;
+    const title = wrap.dataset.title;
+    btn.addEventListener("click", async () => {
+      if (navigator.share) {
+        try { await navigator.share({ title, url }); } catch (e) { /* cancelled */ }
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        if (label) {
+          const prev = label.textContent;
+          label.textContent = "Link copied";
+          setTimeout(() => (label.textContent = prev), 1800);
+        }
+      } catch (e) {
+        window.prompt("Copy this link:", url);
+      }
+    });
+  });
+</script>

@@ -9,9 +9,20 @@ const { title, description, href, pubDate } = Astro.props;
 const dateStr = pubDate.toLocaleDateString("en-GB", {
   day: "numeric", month: "short", year: "numeric",
 });
+// Simple, on-brand thumbnail: the post's initial on an ink tile with the powder dot.
+const initial = (title.match(/[A-Za-z0-9]/)?.[0] ?? "T").toUpperCase();
 ---
-<a href={href} class="group block py-6 border-b border-grey-100 hover:border-powder-deep transition-colors">
-  <time datetime={pubDate.toISOString()} class="text-grey-400 text-sm" style="color:#9ca3af">{dateStr}</time>
-  <h3 class="mt-2 display font-medium group-hover:text-powder-deep transition-colors">{title}</h3>
-  <p class="mt-2 text-grey-400 max-w-2xl" style="color:#4b5563">{description}</p>
+<a href={href} class="group flex gap-5 py-6 border-b border-grey-100 hover:border-powder-deep transition-colors">
+  <span
+    class="shrink-0 w-16 h-16 sm:w-20 sm:h-20 bg-ink rounded-sm relative flex items-center justify-center overflow-hidden"
+    aria-hidden="true"
+  >
+    <span class="display font-bold text-2xl sm:text-3xl text-paper leading-none">{initial}</span>
+    <span class="absolute bottom-2 right-2 w-2 h-2 bg-powder-deep"></span>
+  </span>
+  <div class="min-w-0">
+    <time datetime={pubDate.toISOString()} class="text-grey-400 text-sm" style="color:#9ca3af">{dateStr}</time>
+    <h3 class="mt-1 display font-medium group-hover:text-powder-deep transition-colors">{title}</h3>
+    <p class="mt-2 text-grey-400 max-w-2xl" style="color:#4b5563">{description}</p>
+  </div>
 </a>

@@ -1,0 +1,57 @@
+name: Deploy The Micro Agency to Cloudflare Pages
+
+on:
+  push:
+    branches: [claude/microagency-cloudflare-deploy-qscm3y]
+    paths:
+      - "the-micro-agency/**"
+      - ".github/workflows/deploy-microagency.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-pages-microagency-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: the-micro-agency
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: the-micro-agency/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Ensure Pages project exists
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: the-micro-agency
+          command: pages project create microagency --production-branch=main
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: the-micro-agency
+          command: pages deploy dist --project-name microagency --branch=main --commit-dirty=true

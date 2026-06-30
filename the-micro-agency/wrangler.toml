@@ -9,6 +9,6 @@
 #        - Build output dir:  dist
 #   2) Direct upload:  npm run build && npx wrangler pages deploy dist
 #
-name = "themicroagency"
+name = "microagency"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-01-01"

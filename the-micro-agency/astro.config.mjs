@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // {{DOMAIN}} — confirm with Tom before deploy. Used in canonical, schema, sitemap, RSS.
-const SITE_URL = 'https://microagency.co';
+const SITE_URL = 'https://themicroagency.co';
 
 export default defineConfig({
   site: SITE_URL,

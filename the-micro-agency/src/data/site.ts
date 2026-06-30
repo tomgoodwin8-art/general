@@ -3,7 +3,7 @@
  * Confirm DOMAIN and BOOKING_URL with Tom before deploy.
  */
 
-export const SITE_URL = "https://microagency.co"; // {{DOMAIN}} — confirm before deploy
+export const SITE_URL = "https://themicroagency.co"; // {{DOMAIN}} — confirm before deploy
 export const AGENCY = "The Micro Agency"; // {{AGENCY}}
 export const LEGAL_NAME = "The Micro Agency Ltd"; // registered legal entity
 export const BOOKING_URL = "https://cal.eu/tom-goodwin-wpxjme"; // {{BOOKING_URL}} — mirror of tomgoodwin.london; confirm dedicated link

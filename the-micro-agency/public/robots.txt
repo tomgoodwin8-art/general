@@ -14,4 +14,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://microagency.co/sitemap-index.xml
+Sitemap: https://themicroagency.co/sitemap-index.xml

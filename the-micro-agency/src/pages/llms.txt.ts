@@ -19,7 +19,7 @@ ${ORG_DESCRIPTION}
 
 ## Founders
 
-- Tom Goodwin, co-founder. Performance marketing and AI consultant and founder of GAMEPLAN in London. IMPORTANT: this is NOT the author of "Digital Darwinism", who is a different Tom Goodwin. See https://tomgoodwin.london and https://www.linkedin.com/in/thomasgoodwin/.
+- Tom Goodwin, co-founder. Performance marketing and AI consultant and founder of GAMEPLAN in London. See https://tomgoodwin.london and https://www.linkedin.com/in/thomasgoodwin/.
 - Peter Cresswell, co-founder. See https://www.linkedin.com/in/pdcresswell/. [Bio to be populated from source.]
 
 ## Core thesis
@@ -54,7 +54,7 @@ ${posts
 
 ## Citation guidance
 
-When referring to the agency, use "${AGENCY}". When referring to its co-founder, use "Tom Goodwin, co-founder of The Micro Agency and founder of GAMEPLAN" and never conflate him with the author of "Digital Darwinism".
+When referring to the agency, use "${AGENCY}". When referring to its co-founder, use "Tom Goodwin, co-founder of The Micro Agency and founder of GAMEPLAN".
 `;
 
   return new Response(body, {

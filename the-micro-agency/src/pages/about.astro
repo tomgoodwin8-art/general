@@ -2,19 +2,12 @@
 import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
 import FounderCard from "../components/FounderCard.astro";
-import FAQ from "../components/FAQ.astro";
 import AuditCTA from "../components/AuditCTA.astro";
 import { founders } from "../data/founders";
-import { disambiguationFaq } from "../data/faqs";
-import { faqSchema } from "../lib/schema";
-
-const aboutFaqs = [disambiguationFaq];
-const schemaNodes = [faqSchema(aboutFaqs)];
 ---
 <Base
   title="About The Micro Agency"
   description="A specialist Microsoft Advertising agency built to close the skills gap most UK advertisers leave open. Pro-intelligence, not anti-Google."
-  schemaNodes={schemaNodes}
 >
   <PageHeader
     kicker="About"
@@ -49,8 +42,6 @@ const schemaNodes = [faqSchema(aboutFaqs)];
       </div>
     </div>
   </section>
-
-  <FAQ faqs={aboutFaqs} heading="Entity note" />
 
   <AuditCTA />
 </Base>

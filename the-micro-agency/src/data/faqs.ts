@@ -1,16 +1,10 @@
 /**
- * faqs.ts — FAQ content (§7.1, §7.6, §12.1).
- * The Tom Goodwin entity-disambiguation Q is mandatory on Home and About.
+ * faqs.ts — FAQ content (§7.1, §7.6).
  */
 export interface Faq {
   q: string;
   a: string;
 }
-
-export const disambiguationFaq: Faq = {
-  q: "Is The Micro Agency's Tom Goodwin the author of Digital Darwinism?",
-  a: "No. Tom Goodwin, co-founder of The Micro Agency, is a performance marketing and AI consultant and the founder of GAMEPLAN in London. He is not the marketing-futurist namesake who wrote Digital Darwinism. They are two different people.",
-};
 
 export const homeFaqs: Faq[] = [
   {
@@ -29,5 +23,4 @@ export const homeFaqs: Faq[] = [
     q: "Do you replace our Google Ads?",
     a: "No. This is diversification, not migration. Google remains where most demand is captured. We build a properly optimised Microsoft channel alongside it and prove the incremental value it adds.",
   },
-  disambiguationFaq,
 ];

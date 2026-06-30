@@ -1,0 +1,101 @@
+---
+/**
+ * ContactForm.astro (§8) — "Send a brief" fielded form.
+ * Required: Name, Email, Message. Optional: Company, monthly Google Ads spend
+ * band, engagement type. Delivers to {{CONTACT_EMAIL}} via FormSubmit.co
+ * (no-backend, works on Cloudflare Pages static). Honeypot + visible fallback.
+ */
+import { CONTACT_EMAIL } from "../data/site";
+// Obfuscate the address in markup (assembled at render, mailto built client-side).
+const emailUser = CONTACT_EMAIL.split("@")[0];
+const emailDomain = CONTACT_EMAIL.split("@")[1];
+---
+<form
+  action={`https://formsubmit.co/${CONTACT_EMAIL}`}
+  method="POST"
+  class="grid gap-4"
+>
+  <input type="hidden" name="_subject" value="New brief from The Micro Agency" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_captcha" value="true" />
+  <!-- Honeypot -->
+  <input
+    type="text"
+    name="_honey"
+    class="hidden"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+  />
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="f-name" class="mb-1 block text-sm font-medium">Name</label>
+      <input id="f-name" name="name" required
+        class="w-full rounded-md border border-line px-3 py-2 outline-none focus:border-ms-blue-deep" />
+    </div>
+    <div>
+      <label for="f-email" class="mb-1 block text-sm font-medium">Email</label>
+      <input id="f-email" name="email" type="email" required
+        class="w-full rounded-md border border-line px-3 py-2 outline-none focus:border-ms-blue-deep" />
+    </div>
+  </div>
+
+  <div>
+    <label for="f-company" class="mb-1 block text-sm font-medium">
+      Company <span class="font-normal text-slate">(optional)</span>
+    </label>
+    <input id="f-company" name="company"
+      class="w-full rounded-md border border-line px-3 py-2 outline-none focus:border-ms-blue-deep" />
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="f-spend" class="mb-1 block text-sm font-medium">
+        Monthly Google Ads spend <span class="font-normal text-slate">(optional)</span>
+      </label>
+      <select id="f-spend" name="monthly_google_spend"
+        class="w-full rounded-md border border-line bg-paper px-3 py-2 outline-none focus:border-ms-blue-deep">
+        <option value="">Prefer not to say</option>
+        <option>Under £10k</option>
+        <option>£10k–£50k</option>
+        <option>£50k–£150k</option>
+        <option>£150k+</option>
+      </select>
+    </div>
+    <div>
+      <label for="f-type" class="mb-1 block text-sm font-medium">
+        Engagement type <span class="font-normal text-slate">(optional)</span>
+      </label>
+      <select id="f-type" name="engagement_type"
+        class="w-full rounded-md border border-line bg-paper px-3 py-2 outline-none focus:border-ms-blue-deep">
+        <option value="">Not sure yet</option>
+        <option>Opportunity audit</option>
+        <option>Managed Microsoft Ads</option>
+        <option>Diversification strategy</option>
+        <option>Podcast / press</option>
+        <option>Other</option>
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label for="f-message" class="mb-1 block text-sm font-medium">Message</label>
+    <textarea id="f-message" name="message" rows="4" required
+      class="w-full rounded-md border border-line px-3 py-2 outline-none focus:border-ms-blue-deep"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary justify-self-start">Send brief →</button>
+
+  <p class="text-xs text-slate">
+    Or email
+    <a
+      class="link"
+      data-user={emailUser}
+      data-domain={emailDomain}
+      href="#"
+      onclick={`this.href='mailto:'+this.dataset.user+'@'+this.dataset.domain`}
+      >{emailUser}<span aria-hidden="true"> [at] </span>{emailDomain}</a
+    > directly.
+  </p>
+</form>

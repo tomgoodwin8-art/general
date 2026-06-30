@@ -1,0 +1,40 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { AGENCY } from "../data/site";
+---
+<Base
+  title="Terms"
+  description="Terms of use for The Micro Agency website."
+  noindex
+>
+  <PageHeader kicker="Governance" title="Terms" />
+  <section class="section">
+    <div class="wrap-narrow prose">
+      <p>
+        Placeholder terms of use for {AGENCY}. Replace with reviewed wording
+        before launch.
+        <!-- [TODO: legal review of terms before deploy.] -->
+      </p>
+      <h2>Use of this site</h2>
+      <p>
+        The content here is provided for information. It is not advice for your
+        specific account until we are engaged. Figures cited are sourced and
+        dated in the page markup; treat them as indicative, not guarantees of
+        performance.
+      </p>
+      <h2>Trademarks</h2>
+      <p>
+        Microsoft, Bing, LinkedIn, Copilot, Xbox and the Microsoft logo are
+        trademarks of the Microsoft group of companies. {AGENCY} is an
+        independent agency. Reference to Microsoft products and partner status
+        does not imply that Microsoft authored or endorses this site's content.
+      </p>
+      <h2>Liability</h2>
+      <p>
+        We take care to keep this site accurate but accept no liability for
+        decisions taken solely on the basis of its general content.
+      </p>
+    </div>
+  </section>
+</Base>

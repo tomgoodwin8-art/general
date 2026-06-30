@@ -1,0 +1,18 @@
+---
+/**
+ * StatBlock.astro (§6.4) — mono figure + label. Pulls only from src/data/stats.ts
+ * (Appendix A). The named, dated source is rendered as an HTML comment in markup.
+ */
+import type { Stat } from "../data/stats";
+interface Props {
+  stat: Stat;
+  align?: "left" | "center";
+}
+const { stat, align = "left" } = Astro.props;
+const alignCls = align === "center" ? "text-center items-center" : "text-left";
+---
+<!-- source: {stat.source} -->
+<div class={`flex flex-col gap-1 ${alignCls}`}>
+  <span class="figure text-3xl sm:text-4xl">{stat.figure}</span>
+  <span class="text-sm text-slate leading-snug max-w-[22ch]">{stat.label}</span>
+</div>

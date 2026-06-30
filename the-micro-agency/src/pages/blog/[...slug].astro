@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from "astro:content";
+import Post from "../../layouts/Post.astro";
+import { blogPostingSchema, breadcrumbSchema } from "../../lib/schema";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", (p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const path = `/blog/${post.id}`;
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+const crumbs = [
+  { label: "Home", href: "/" },
+  { label: "Blog", href: "/blog" },
+  { label: post.data.title, href: path },
+];
+
+// 3 related posts in the same category, else most recent.
+const all = (await getCollection("blog", (p) => !p.data.draft)).filter(
+  (p) => p.id !== post.id
+);
+const related = all
+  .sort((a, b) => {
+    const same = (x: typeof a) => (x.data.category === post.data.category ? 0 : 1);
+    return same(a) - same(b) || b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  })
+  .slice(0, 3);
+
+const meta = `${fmt(post.data.pubDate)} · ${post.data.author} · ${post.data.category}`;
+
+const schemaNodes = [
+  blogPostingSchema({
+    title: post.data.title,
+    description: post.data.description,
+    path,
+    author: post.data.author,
+    pubDate: post.data.pubDate,
+    updated: post.data.updated,
+  }),
+  breadcrumbSchema(crumbs),
+];
+---
+<Post
+  title={post.data.title}
+  description={post.data.description}
+  {path}
+  kicker={post.data.category}
+  {meta}
+  {crumbs}
+  {schemaNodes}
+>
+  <Content />
+
+  <div slot="after" class="wrap-narrow pb-12">
+    <h2 class="text-xl">Related reading</h2>
+    <ul class="mt-4 grid gap-3 sm:grid-cols-3">
+      {
+        related.map((r) => (
+          <li>
+            <a
+              href={`/blog/${r.id}`}
+              class="block h-full rounded-lg border border-line p-4 text-sm transition hover:border-ms-blue-deep"
+            >
+              <span class="kicker text-[0.7rem]">{r.data.category}</span>
+              <span class="mt-2 block font-display font-semibold">{r.data.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Post>

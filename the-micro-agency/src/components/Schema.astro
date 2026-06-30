@@ -1,0 +1,60 @@
+---
+/**
+ * Schema.astro (§12.1) — JSON-LD injector.
+ * Always emits the site-wide Organization graph plus both founder Person nodes
+ * (with Tom Goodwin disambiguation). Page-specific nodes are passed via `nodes`.
+ */
+import { SITE_URL, AGENCY, socials, ORG_DESCRIPTION } from "../data/site";
+import { founders } from "../data/founders";
+
+interface Props {
+  nodes?: Record<string, unknown>[];
+}
+const { nodes = [] } = Astro.props;
+
+const personNodes = founders.map((f) => ({
+  "@type": "Person",
+  "@id": `${SITE_URL}/#person-${f.name.toLowerCase().replace(/\s+/g, "-")}`,
+  name: f.name,
+  jobTitle: f.role,
+  worksFor: { "@id": `${SITE_URL}/#organization` },
+  ...(f.disambiguatingDescription
+    ? { disambiguatingDescription: f.disambiguatingDescription }
+    : {}),
+  sameAs: f.sameAs,
+}));
+
+const organization = {
+  "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
+  name: AGENCY,
+  url: SITE_URL,
+  description: ORG_DESCRIPTION,
+  areaServed: "United Kingdom",
+  sameAs: [socials.linkedin, socials.youtube, socials.spotify],
+  founder: founders.map((f) => ({
+    "@id": `${SITE_URL}/#person-${f.name.toLowerCase().replace(/\s+/g, "-")}`,
+  })),
+  knowsAbout: [
+    "Microsoft Advertising",
+    "search diversification",
+    "incrementality",
+    "LinkedIn Profile Targeting",
+  ],
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    name: "Microsoft Advertising Elite Partner 2026",
+    credentialCategory: "Partner status",
+  },
+};
+
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [organization, ...personNodes, ...nodes],
+};
+---
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(graph)}
+/>

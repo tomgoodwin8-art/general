@@ -1,0 +1,148 @@
+---
+/**
+ * Header.astro (§6.1) — sticky white header, hairline border.
+ * Slim top strip: Elite Partner badge + one rotating proof line (Appendix A).
+ * Wordmark left; nav; "Book an audit" primary CTA.
+ */
+import { nav, BOOKING_URL } from "../data/site";
+import { proofLines } from "../data/stats";
+import Wordmark from "./Wordmark.astro";
+import PartnerBadge from "./PartnerBadge.astro";
+---
+<header class="sticky top-0 z-40 bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/80">
+  <!-- Slim proof strip -->
+  <div class="border-b border-line bg-mist">
+    <div class="wrap flex items-center justify-between gap-4 py-1.5">
+      <PartnerBadge size="sm" />
+      <p
+        class="hidden truncate text-xs text-slate sm:block"
+        data-proof
+        data-lines={JSON.stringify(proofLines)}
+      >
+        {proofLines[0]}
+        <!-- source: Appendix A (rotates client-side across verified lines only) -->
+      </p>
+    </div>
+  </div>
+
+  <!-- Main nav -->
+  <div class="border-b border-line">
+    <div class="wrap flex items-center justify-between gap-6 py-3">
+      <a href="/" aria-label="The Micro Agency, home" class="shrink-0">
+        <Wordmark />
+      </a>
+
+      <nav aria-label="Primary" class="hidden items-center gap-6 lg:flex">
+        {
+          nav.map((item) =>
+            item.children ? (
+              <div class="group relative">
+                <a
+                  href={item.href}
+                  class="flex items-center gap-1 text-sm font-medium text-ink hover:text-ms-blue-deep"
+                >
+                  {item.label}
+                  <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                    <path d="M2 3.5 5 6.5 8 3.5" stroke="currentColor" stroke-width="1.4" fill="none" />
+                  </svg>
+                </a>
+                <div class="invisible absolute left-0 top-full z-50 min-w-44 rounded-lg border border-line bg-paper p-2 opacity-0 shadow-sm transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  {item.children.map((c) => (
+                    <a
+                      href={c.href}
+                      class="block rounded-md px-3 py-2 text-sm text-ink hover:bg-mist hover:text-ms-blue-deep"
+                    >
+                      {c.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a
+                href={item.href}
+                class="text-sm font-medium text-ink hover:text-ms-blue-deep"
+              >
+                {item.label}
+              </a>
+            )
+          )
+        }
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a
+          href={BOOKING_URL}
+          class="btn btn-primary hidden sm:inline-flex"
+          rel="noopener"
+          target="_blank">Book an audit</a
+        >
+        <button
+          type="button"
+          class="lg:hidden"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          data-menu-toggle
+        >
+          <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+            <path d="M4 8h18M4 13h18M4 18h18" stroke="currentColor" stroke-width="1.6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav
+    aria-label="Mobile"
+    class="hidden border-b border-line bg-paper lg:hidden"
+    data-mobile-menu
+  >
+    <div class="wrap flex flex-col py-3">
+      {
+        nav.map((item) => (
+          <>
+            <a href={item.href} class="py-2 font-medium text-ink">
+              {item.label}
+            </a>
+            {item.children && (
+              <div class="ml-3 flex flex-col">
+                {item.children.map((c) => (
+                  <a href={c.href} class="py-1.5 text-sm text-slate">
+                    {c.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </>
+        ))
+      }
+      <a href={BOOKING_URL} class="btn btn-primary mt-3" rel="noopener" target="_blank">
+        Book an audit
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  // Mobile menu toggle
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const menu = document.querySelector("[data-mobile-menu]");
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      const open = menu.classList.toggle("hidden");
+      toggle.setAttribute("aria-expanded", String(!open));
+    });
+  }
+  // Rotate proof line across verified Appendix A lines only.
+  const proofEl = document.querySelector("[data-proof]");
+  if (proofEl) {
+    const lines = JSON.parse(proofEl.getAttribute("data-lines") || "[]");
+    if (lines.length > 1) {
+      let i = 0;
+      setInterval(() => {
+        i = (i + 1) % lines.length;
+        proofEl.textContent = lines[i];
+      }, 5000);
+    }
+  }
+</script>

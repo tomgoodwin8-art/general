@@ -1,0 +1,93 @@
+---
+import { getCollection, render } from "astro:content";
+import Post from "../../layouts/Post.astro";
+import { podcastEpisodeSchema, breadcrumbSchema } from "../../lib/schema";
+
+export async function getStaticPaths() {
+  const eps = await getCollection("podcast", (e) => !e.data.draft);
+  return eps.map((ep) => ({ params: { slug: ep.id }, props: { ep } }));
+}
+
+const { ep } = Astro.props;
+const { Content } = await render(ep);
+const path = `/podcast/${ep.id}`;
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+const crumbs = [
+  { label: "Home", href: "/" },
+  { label: "Podcast", href: "/podcast" },
+  { label: `Ep ${ep.data.episode}`, href: path },
+];
+
+const meta = [
+  `Episode ${ep.data.episode}`,
+  ep.data.duration,
+  fmt(ep.data.pubDate),
+]
+  .filter(Boolean)
+  .join(" · ");
+
+const schemaNodes = [
+  podcastEpisodeSchema({
+    title: ep.data.title,
+    description: ep.data.description,
+    path,
+    episode: ep.data.episode,
+    pubDate: ep.data.pubDate,
+  }),
+  breadcrumbSchema(crumbs),
+];
+---
+<Post
+  title={ep.data.title}
+  description={ep.data.description}
+  {path}
+  kicker="The Diversification Podcast"
+  {meta}
+  {crumbs}
+  {schemaNodes}
+>
+  <!-- Privacy-enhanced YouTube embed (lazy), Spotify episode iframe -->
+  {
+    ep.data.youtubeId && (
+      <div class="not-prose mb-6 aspect-video overflow-hidden rounded-xl border border-line">
+        <iframe
+          class="h-full w-full"
+          src={`https://www.youtube-nocookie.com/embed/${ep.data.youtubeId}`}
+          title={ep.data.title}
+          loading="lazy"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
+    )
+  }
+  {
+    ep.data.spotifyUrl && (
+      <div class="not-prose mb-6">
+        <iframe
+          class="w-full rounded-xl"
+          style="height: 152px"
+          src={ep.data.spotifyUrl}
+          title={`${ep.data.title} on Spotify`}
+          loading="lazy"
+          frameborder="0"
+          allow="encrypted-media"
+        />
+      </div>
+    )
+  }
+  {
+    !ep.data.youtubeId && !ep.data.spotifyUrl && (
+      <p class="not-prose mb-6 rounded-lg border border-line bg-mist p-4 text-sm text-slate">
+        Recording coming soon. Subscribe on
+        <a class="link" href="/podcast">YouTube or Spotify</a> to catch it first.
+        {/* [record TODO] */}
+      </p>
+    )
+  }
+
+  <Content />
+</Post>

@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import StatBlock from "../components/StatBlock.astro";
+import AuditCTA from "../components/AuditCTA.astro";
+import LogoWall from "../components/LogoWall.astro";
+import FAQ from "../components/FAQ.astro";
+import PartnerBadge from "../components/PartnerBadge.astro";
+import { BOOKING_URL, SIGNATURE_LINE, REPORT_NAME } from "../data/site";
+import { homeProof } from "../data/stats";
+import { homeFaqs } from "../data/faqs";
+import { faqSchema } from "../lib/schema";
+
+const valueBlocks = [
+  {
+    title: "Platform-native, not imported.",
+    body: "Most agencies push your Google campaigns through the import tool and call it Microsoft Ads management. We build for the platform: LinkedIn Profile Targeting, Copilot-assisted creative, Microsoft Audience Network, Xbox and CTV inventory.",
+  },
+  {
+    title: "Incrementality, proven.",
+    body: "We measure the revenue Microsoft adds that last-click attribution hides. You see like-for-like value against Google, not a vanity dashboard. We earn our fee on the gap we close.",
+  },
+  {
+    title: "A specialist, not a side desk.",
+    body: "Microsoft is the whole business here, not the channel nobody on the team wanted. That focus is the difference between 70% of the value and all of it.",
+  },
+];
+
+const posts = (await getCollection("blog", (p) => !p.data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const episodes = (await getCollection("podcast", (e) => !e.data.draft)).sort(
+  (a, b) => b.data.episode - a.data.episode
+);
+const latestEpisode = episodes[0];
+
+const schemaNodes = [faqSchema(homeFaqs)];
+---
+<Base
+  title={SIGNATURE_LINE}
+  description="The Micro Agency is the UK's specialist Microsoft Advertising agency. Platform-native campaigns, proven incrementality, and lower blended cost of acquisition."
+  isHome
+  schemaNodes={schemaNodes}
+>
+  <!-- Hero -->
+  <section class="border-b border-line">
+    <div class="wrap section grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div>
+        <p class="kicker">UK Microsoft Advertising specialists</p>
+        <h1 class="mt-4">
+          Google is where you spend.<br />
+          <span class="spark-underline">Microsoft</span> is where you grow.
+        </h1>
+        <p class="mt-6 max-w-xl text-lg text-slate">
+          The Micro Agency is the UK's specialist Microsoft Advertising agency.
+          We build platform-native campaigns across the Microsoft ecosystem,
+          prove incremental revenue Google can't capture, and lower your blended
+          cost of acquisition.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={BOOKING_URL} class="btn btn-primary" rel="noopener" target="_blank">Book an audit</a>
+          <a href="/method" class="btn btn-ghost">See the method →</a>
+        </div>
+      </div>
+      <div class="rounded-2xl border border-line bg-mist p-8">
+        <p class="kicker">Proof, from Appendix A only</p>
+        <div class="mt-6 grid grid-cols-2 gap-x-6 gap-y-8">
+          {homeProof.map((s) => <StatBlock stat={s} />)}
+        </div>
+        <div class="mt-8 border-t border-line pt-5">
+          <PartnerBadge size="sm" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value blocks -->
+  <section class="section">
+    <div class="wrap grid gap-6 md:grid-cols-3">
+      {
+        valueBlocks.map((b) => (
+          <div class="rounded-xl border border-line bg-paper p-7">
+            <h3 class="text-xl">{b.title}</h3>
+            <p class="mt-3 text-slate">{b.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <LogoWall />
+
+  <AuditCTA />
+
+  <!-- Latest from the blog -->
+  <section class="section">
+    <div class="wrap">
+      <div class="flex items-end justify-between">
+        <h2>Latest insights</h2>
+        <a href="/blog" class="link text-sm">All posts →</a>
+      </div>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {
+          posts.map((p) => (
+            <a
+              href={`/blog/${p.id}`}
+              class="flex flex-col rounded-xl border border-line bg-paper p-6 transition hover:border-ms-blue-deep"
+            >
+              <p class="kicker">{p.data.category}</p>
+              <h3 class="mt-3 text-lg">{p.data.title}</h3>
+              <p class="mt-3 line-clamp-3 text-sm text-slate">{p.data.description}</p>
+              <span class="mt-4 text-sm text-ms-blue-deep">Read →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Podcast teaser -->
+  {
+    latestEpisode && (
+      <section class="section-tight">
+        <div class="wrap rounded-2xl border border-line bg-mist p-8 md:flex md:items-center md:justify-between md:gap-8">
+          <div class="max-w-xl">
+            <p class="kicker">The Diversification Podcast</p>
+            <h2 class="mt-3 text-2xl">{latestEpisode.data.title}</h2>
+            <p class="mt-3 text-slate">{latestEpisode.data.description}</p>
+          </div>
+          <a
+            href={`/podcast/${latestEpisode.id}`}
+            class="btn btn-ghost mt-5 md:mt-0"
+          >
+            Listen →
+          </a>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Report CTA -->
+  <section class="section-tight">
+    <div class="wrap rounded-2xl bg-ink p-8 text-paper md:flex md:items-center md:justify-between md:gap-8">
+      <div class="max-w-xl">
+        <p class="kicker text-ms-blue">Free report</p>
+        <h2 class="mt-3 text-2xl text-paper">{REPORT_NAME}</h2>
+        <p class="mt-3 text-white/75">
+          The data, benchmarks and targeting levers UK performance teams are
+          missing on Microsoft. A free, gated download.
+        </p>
+      </div>
+      <a href="/report" class="btn btn-primary mt-5 md:mt-0">Get the report</a>
+    </div>
+  </section>
+
+  <FAQ faqs={homeFaqs} />
+</Base>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="The Micro Agency">
+  <rect width="1200" height="630" fill="#15202b"/>
+  <g transform="translate(80,80)">
+    <rect x="0" y="0" width="34" height="34" fill="#F25022"/>
+    <rect x="38" y="0" width="34" height="34" fill="#7FBA00"/>
+    <rect x="0" y="38" width="34" height="34" fill="#00A4EF"/>
+    <rect x="38" y="38" width="34" height="34" fill="#FFB900"/>
+  </g>
+  <text x="80" y="320" fill="#ffffff" font-family="'Space Grotesk',Inter,system-ui,sans-serif" font-size="68" font-weight="700">Google is where you spend.</text>
+  <text x="80" y="400" fill="#ffffff" font-family="'Space Grotesk',Inter,system-ui,sans-serif" font-size="68" font-weight="700">Microsoft is where you <tspan fill="#FFB900">grow</tspan>.</text>
+  <text x="80" y="500" fill="#b9c4cd" font-family="Inter,system-ui,sans-serif" font-size="30">The Micro Agency — UK specialist Microsoft Advertising agency</text>
+</svg>

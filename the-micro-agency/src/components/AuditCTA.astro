@@ -1,0 +1,35 @@
+---
+/**
+ * AuditCTA.astro (§6.3) — reusable CTA band. Dark variant for section breaks.
+ */
+import { BOOKING_URL } from "../data/site";
+interface Props {
+  variant?: "light" | "dark";
+  headline?: string;
+  line?: string;
+}
+const {
+  variant = "dark",
+  headline = "See the revenue you are leaving on the table.",
+  line = "A fixed-fee Microsoft Ads opportunity analysis that quantifies the gap, in your account, on your numbers.",
+} = Astro.props;
+const dark = variant === "dark";
+---
+<section class={dark ? "bg-ink text-paper" : "bg-mist text-ink"}>
+  <div class="wrap section-tight">
+    <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl sm:text-3xl">{headline}</h2>
+        <p class={`mt-3 ${dark ? "text-white/75" : "text-slate"}`}>{line}</p>
+      </div>
+      <div class="flex flex-wrap gap-3 shrink-0">
+        <a href={BOOKING_URL} class="btn btn-primary" rel="noopener" target="_blank">
+          Book an audit
+        </a>
+        <a href="/contact" class={`btn ${dark ? "btn-ondark" : "btn-ghost"}`}>
+          Send a brief
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+---
+/**
+ * FAQ.astro — accessible accordion. FAQPage JSON-LD is emitted by the page via
+ * schemaNodes (build with faqSchema()).
+ */
+import type { Faq } from "../data/faqs";
+interface Props {
+  faqs: Faq[];
+  heading?: string;
+}
+const { faqs, heading = "Frequently asked questions" } = Astro.props;
+---
+<section class="section">
+  <div class="wrap-narrow">
+    <h2 class="text-center">{heading}</h2>
+    <div class="mt-8 divide-y divide-line border-y border-line">
+      {
+        faqs.map((f) => (
+          <details class="group py-4">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold">
+              {f.q}
+              <span class="text-ms-blue-deep transition group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-3 text-slate">{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

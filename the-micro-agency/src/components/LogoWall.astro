@@ -1,0 +1,31 @@
+---
+/**
+ * LogoWall.astro (§6.6) — at launch there are no client logos, so we show the
+ * verticals we serve, never fake client logos. Swap to real logos once anchor
+ * clients ship.
+ */
+interface Props {
+  heading?: string;
+}
+const { heading = "Verticals we serve" } = Astro.props;
+const verticals = [
+  { name: "B2B & SaaS", note: "Desktop-dominant, LinkedIn-targetable demand" },
+  { name: "Financial Services", note: "Higher-income, desktop-first audiences" },
+  { name: "Professional Services", note: "Considered, high-value lead generation" },
+];
+---
+<section class="section-tight">
+  <div class="wrap">
+    <p class="kicker text-center">{heading}</p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-3">
+      {
+        verticals.map((v) => (
+          <div class="rounded-xl border border-line bg-paper p-5 text-center">
+            <p class="font-display text-lg font-bold">{v.name}</p>
+            <p class="mt-1 text-sm text-slate">{v.note}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

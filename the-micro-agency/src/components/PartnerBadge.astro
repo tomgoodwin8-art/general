@@ -1,0 +1,41 @@
+---
+/**
+ * PartnerBadge.astro (§6.2) — Microsoft Advertising Elite Partner 2026.
+ * Clear space = 0.5x badge height (wrapper padding). Do not place inside the
+ * agency logo lockup. Microsoft four-square mark keeps its official colours and
+ * is never recoloured; only the wordmark text follows light/dark variant.
+ * Canonical asset also lives at /public/badges/microsoft-elite-partner-2026.svg.
+ */
+interface Props {
+  size?: "sm" | "md";
+  variant?: "light" | "dark";
+  class?: string;
+}
+const { size = "md", variant = "light", class: cls = "" } = Astro.props;
+const h = size === "sm" ? 28 : 40;
+const textColour = variant === "dark" ? "#ffffff" : "#15202b";
+---
+<span
+  class={`inline-flex items-center ${cls}`}
+  style="padding: 0.5em"
+  role="img"
+  aria-label="Microsoft Advertising Elite Partner 2026"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 260 64"
+    height={h}
+    width={(h * 260) / 64}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <rect x="8" y="14" width="16" height="16" fill="#F25022" />
+    <rect x="26" y="14" width="16" height="16" fill="#7FBA00" />
+    <rect x="8" y="32" width="16" height="16" fill="#00A4EF" />
+    <rect x="26" y="32" width="16" height="16" fill="#FFB900" />
+    <g fill={textColour} font-family="'Space Grotesk','Inter',system-ui,sans-serif">
+      <text x="56" y="28" font-size="13" font-weight="600">Microsoft Advertising</text>
+      <text x="56" y="46" font-size="13" font-weight="400">Elite Partner 2026</text>
+    </g>
+  </svg>
+</span>

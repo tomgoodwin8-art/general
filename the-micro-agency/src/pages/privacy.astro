@@ -1,0 +1,43 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { CONTACT_EMAIL, AGENCY } from "../data/site";
+---
+<Base
+  title="Privacy"
+  description="How The Micro Agency handles the personal data you share through this site."
+  noindex
+>
+  <PageHeader kicker="Governance" title="Privacy" />
+  <section class="section">
+    <div class="wrap-narrow prose">
+      <p>
+        This is a placeholder privacy notice for {AGENCY}. Replace with a
+        reviewed policy before launch.
+        <!-- [TODO: legal review of privacy + cookie wording before deploy.] -->
+      </p>
+      <h2>What we collect</h2>
+      <p>
+        When you submit the contact form or request the report, we collect the
+        details you provide (such as name, email, company and message) solely to
+        respond to you and, where you consent, to send the report and occasional
+        insights.
+      </p>
+      <h2>How forms are processed</h2>
+      <p>
+        Form submissions are delivered to us by email via a third-party form
+        provider. We do not sell your data. You can ask us to delete it at any
+        time by emailing <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+      </p>
+      <h2>Analytics and cookies</h2>
+      <p>
+        The site is static and avoids unnecessary third-party scripts. Any
+        analytics added later will be privacy-respecting and disclosed here.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        Questions about your data: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+      </p>
+    </div>
+  </section>
+</Base>

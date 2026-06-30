@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { CONTACT_EMAIL, REPORT_NAME } from "../data/site";
+
+const points = [
+  "UK desktop search share, stated honestly, not inflated.",
+  "Where Microsoft's lower CPCs translate into lower CAC, by vertical.",
+  "LinkedIn Profile Targeting: the B2B lever available nowhere else.",
+  "An incrementality testing approach you can run alongside Google.",
+];
+---
+<Base
+  title={REPORT_NAME}
+  description="A free, gated report on the data, benchmarks and targeting levers UK performance teams are missing on Microsoft Advertising."
+>
+  <PageHeader kicker="Free report" title={REPORT_NAME} />
+
+  <section class="section">
+    <div class="wrap grid gap-10 lg:grid-cols-2 lg:items-start">
+      <div class="prose">
+        <p>
+          A practical, UK-focused read for performance leaders weighing whether
+          Microsoft deserves a properly optimised channel. Evidence first, every
+          figure sourced.
+        </p>
+        <ul>
+          {points.map((p) => <li>{p}</li>)}
+        </ul>
+        <p class="text-sm text-slate">
+          We send the report by email and, with your consent, the occasional
+          insight. No spam, unsubscribe any time.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-line bg-mist p-7">
+        <h2 class="text-xl">Get the report</h2>
+        <form
+          action={`https://formsubmit.co/${CONTACT_EMAIL}`}
+          method="POST"
+          class="mt-5 grid gap-4"
+        >
+          <input type="hidden" name="_subject" value={`Report request: ${REPORT_NAME}`} />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div>
+            <label for="r-name" class="mb-1 block text-sm font-medium">Name</label>
+            <input id="r-name" name="name" required
+              class="w-full rounded-md border border-line px-3 py-2 outline-none focus:border-ms-blue-deep" />
+          </div>
+          <div>
+            <label for="r-email" class="mb-1 block text-sm font-medium">Work email</label>
+            <input id="r-email" name="email" type="email" required
+              class="w-full rounded-md border border-line px-3 py-2 outline-none focus:border-ms-blue-deep" />
+          </div>
+          <div>
+            <label for="r-company" class="mb-1 block text-sm font-medium">
+              Company <span class="font-normal text-slate">(optional)</span>
+            </label>
+            <input id="r-company" name="company"
+              class="w-full rounded-md border border-line px-3 py-2 outline-none focus:border-ms-blue-deep" />
+          </div>
+          <button type="submit" class="btn btn-primary justify-self-start">Send me the report →</button>
+          <p class="text-xs text-slate">
+            <!-- [Report asset TODO: link the gated PDF / delivery automation before launch.] -->
+            The report is delivered by email after you submit.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>

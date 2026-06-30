@@ -1,0 +1,17 @@
+---
+title: "What the Google antitrust remedy actually changes"
+episode: 5
+description: "A measured read of the 2025 US v Google remedy: what the court ordered, what it does not do, and why it is not a market-opener."
+pubDate: 2026-04-01
+duration: "TBC"
+---
+
+This episode is part of the launch slate for The Diversification Podcast. The recording is on the way; subscribe on [YouTube or Spotify](/podcast) to catch it first.
+
+## In this episode
+
+A working conversation on the themes The Micro Agency is built around: search diversification, incrementality, and getting the Microsoft ecosystem to earn its place in the plan. Full show notes, guest links and the embed will land here when the episode publishes.
+
+## Book an audit
+
+Want to see whether there is incremental revenue worth chasing in your account? [Book an audit](/contact).

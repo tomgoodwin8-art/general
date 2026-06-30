@@ -1,0 +1,17 @@
+---
+/**
+ * Wordmark.astro (§2.3) — placeholder wordmark until a final logo asset lands.
+ * "The Micro Agency" in the display family; "Micro" carries a yellow spark
+ * underline. A reversed (white) variant serves dark sections. The wordmark is
+ * never combined with the Microsoft four-square mark.
+ */
+interface Props {
+  variant?: "light" | "dark";
+  class?: string;
+}
+const { variant = "light", class: cls = "" } = Astro.props;
+const colour = variant === "dark" ? "text-paper" : "text-ink";
+---
+<span class={`font-display font-bold tracking-tight text-xl ${colour} ${cls}`}>
+  The <span class="spark-underline">Micro</span> Agency
+</span>

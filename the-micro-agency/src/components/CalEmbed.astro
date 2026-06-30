@@ -1,0 +1,48 @@
+---
+/**
+ * CalEmbed.astro (§8) — lazy, below-the-fold Cal.com booking embed.
+ * Renders a lightweight iframe to {{BOOKING_URL}} only when scrolled into view,
+ * so it never blocks render or ships third-party JS up front (§13 perf).
+ */
+import { BOOKING_URL } from "../data/site";
+---
+<div
+  class="cal-embed overflow-hidden rounded-xl border border-line"
+  data-src={BOOKING_URL}
+  style="min-height: 580px"
+>
+  <noscript>
+    <a href={BOOKING_URL} class="btn btn-primary m-4" rel="noopener" target="_blank">
+      Book an audit call →
+    </a>
+  </noscript>
+</div>
+
+<script is:inline>
+  (() => {
+    const el = document.querySelector(".cal-embed");
+    if (!el) return;
+    const load = () => {
+      if (el.dataset.loaded) return;
+      el.dataset.loaded = "1";
+      const iframe = document.createElement("iframe");
+      iframe.src = el.dataset.src;
+      iframe.title = "Book an audit call";
+      iframe.loading = "lazy";
+      iframe.style.cssText = "width:100%;height:580px;border:0;display:block";
+      el.appendChild(iframe);
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            load();
+            io.disconnect();
+          }
+        });
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(el);
+  })();
+</script>

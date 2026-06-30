@@ -1,0 +1,45 @@
+---
+/**
+ * FounderCard.astro (§6.5) — headshot, name, role, bio, link out.
+ */
+import type { Founder } from "../data/founders";
+interface Props {
+  founder: Founder;
+}
+const { founder } = Astro.props;
+const initials = founder.name
+  .split(" ")
+  .map((n) => n[0])
+  .join("");
+---
+<div class="flex flex-col gap-4 rounded-xl border border-line bg-paper p-6">
+  <div class="flex items-center gap-4">
+    <div
+      class="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-mist text-ms-blue-deep font-display font-bold text-xl"
+      aria-hidden="true"
+    >
+      {initials}
+    </div>
+    <div>
+      <h3 class="text-xl font-display font-bold">{founder.name}</h3>
+      <p class="text-sm text-slate">{founder.role}</p>
+    </div>
+  </div>
+  <p class="text-[0.95rem] leading-relaxed text-ink/90">{founder.bio}</p>
+  {
+    !founder.populated && (
+      <p class="text-xs text-ms-red">
+        Bio pending: to be supplied from source, not invented.
+      </p>
+    )
+  }
+  <div class="mt-auto flex flex-wrap gap-x-4 gap-y-1 text-sm">
+    {
+      founder.links.map((l) => (
+        <a href={l.href} class="link" rel="noopener" target="_blank">
+          {l.label}
+        </a>
+      ))
+    }
+  </div>
+</div>

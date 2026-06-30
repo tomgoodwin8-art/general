@@ -1,0 +1,14 @@
+# Cloudflare Pages project config for The Micro Agency.
+# Deploy a static Astro build (output: ./dist).
+#
+# Two ways to deploy:
+#   1) Git integration (recommended): in the Cloudflare dashboard, create a
+#      Pages project connected to this repo. Set:
+#        - Root directory:    the-micro-agency
+#        - Build command:     npm run build
+#        - Build output dir:  dist
+#   2) Direct upload:  npm run build && npx wrangler pages deploy dist
+#
+name = "themicroagency"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-01-01"

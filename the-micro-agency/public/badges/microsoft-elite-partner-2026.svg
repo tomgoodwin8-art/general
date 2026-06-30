@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  PLACEHOLDER partner badge (brief §1.2, §6.2).
+  Replace with the official Microsoft Advertising Elite Partner 2026 asset before launch.
+  Microsoft four-square mark colours are correct and must not be recoloured.
+  The agency wordmark must not be combined into this lockup.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" role="img"
+     aria-label="Microsoft Advertising Elite Partner 2026" width="260" height="64">
+  <g>
+    <!-- Microsoft four-square mark (official colours, do not recolour) -->
+    <rect x="8" y="14" width="16" height="16" fill="#F25022"/>
+    <rect x="26" y="14" width="16" height="16" fill="#7FBA00"/>
+    <rect x="8" y="32" width="16" height="16" fill="#00A4EF"/>
+    <rect x="26" y="32" width="16" height="16" fill="#FFB900"/>
+  </g>
+  <g fill="currentColor" font-family="'Segoe UI','Inter',system-ui,sans-serif">
+    <text x="56" y="28" font-size="13" font-weight="600">Microsoft Advertising</text>
+    <text x="56" y="46" font-size="13" font-weight="400">Elite Partner 2026</text>
+  </g>
+</svg>

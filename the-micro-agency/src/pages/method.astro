@@ -1,0 +1,65 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import AuditCTA from "../components/AuditCTA.astro";
+
+const steps = [
+  {
+    n: "01",
+    name: "Baseline",
+    body: "We establish your true Google baseline on like-for-like metrics, so every later claim about Microsoft's contribution is measured against something real, not a guess.",
+  },
+  {
+    n: "02",
+    name: "Build (platform-native)",
+    body: "We build for Microsoft from the ground up: LinkedIn Profile Targeting, the Microsoft Audience Network, match-type and audience structure that suits the platform rather than a Google import.",
+  },
+  {
+    n: "03",
+    name: "Test (incrementality)",
+    body: "Geo and holdout-based incrementality tests isolate the revenue Microsoft genuinely adds, separating real lift from demand that would have converted anyway.",
+  },
+  {
+    n: "04",
+    name: "Report (incremental revenue and blended CAC)",
+    body: "We report lift in revenue, not clicks, and the effect on your blended cost of acquisition. You also get a quarterly benchmarking snapshot that catches drift before it costs you.",
+  },
+];
+---
+<Base
+  title="The Method: incrementality and benchmarking"
+  description="We do not ask you to trust Microsoft Ads. We prove it. Geo and holdout incrementality tests, like-for-like benchmarking, and reporting on revenue, not clicks."
+>
+  <PageHeader
+    kicker="The Method"
+    title="We do not ask you to trust Microsoft Ads. We prove it."
+    intro="Our framework runs geo and holdout-based incrementality tests, benchmarks Microsoft against your Google performance on like-for-like metrics, and reports the lift in revenue, not clicks. The output is a measurement methodology you keep, not a black box you rent."
+  />
+
+  <section class="section">
+    <div class="wrap grid gap-6 md:grid-cols-2">
+      {
+        steps.map((s) => (
+          <div class="rounded-xl border border-line bg-paper p-7">
+            <span class="figure text-2xl">{s.n}</span>
+            <h2 class="mt-2 text-xl">{s.name}</h2>
+            <p class="mt-3 text-slate">{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="wrap mt-8">
+      <div class="rounded-xl border border-line bg-mist p-7">
+        <p class="kicker">Quarterly deliverable</p>
+        <p class="mt-3 text-slate">
+          A benchmarking snapshot each quarter: Microsoft against Google on
+          like-for-like metrics, the incremental revenue picture, and a flag on
+          any drift. The framework detail is set with you at kickoff.
+          <!-- [Framework detail TODO: Tom/Peter to specify test design.] -->
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <AuditCTA />
+</Base>

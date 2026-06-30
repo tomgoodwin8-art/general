@@ -6,6 +6,7 @@ import AuditCTA from "../components/AuditCTA.astro";
 import LogoWall from "../components/LogoWall.astro";
 import FAQ from "../components/FAQ.astro";
 import PartnerBadge from "../components/PartnerBadge.astro";
+import PostThumb from "../components/PostThumb.astro";
 import { BOOKING_URL, SIGNATURE_LINE, REPORT_NAME } from "../data/site";
 import { homeProof } from "../data/stats";
 import { homeFaqs } from "../data/faqs";
@@ -105,12 +106,17 @@ const schemaNodes = [faqSchema(homeFaqs)];
           posts.map((p) => (
             <a
               href={`/blog/${p.id}`}
-              class="flex flex-col rounded-xl border border-line bg-paper p-6 transition hover:border-ms-blue-deep"
+              class="group flex flex-col overflow-hidden rounded-xl border border-line bg-paper transition hover:border-ms-blue-deep"
             >
-              <p class="kicker">{p.data.category}</p>
-              <h3 class="mt-3 text-lg">{p.data.title}</h3>
-              <p class="mt-3 line-clamp-3 text-sm text-slate">{p.data.description}</p>
-              <span class="mt-4 text-sm text-ms-blue-deep">Read →</span>
+              <div class="aspect-[5/3] overflow-hidden border-b border-line">
+                <PostThumb category={p.data.category} class="transition duration-300 group-hover:scale-[1.03]" />
+              </div>
+              <div class="flex flex-1 flex-col p-6">
+                <p class="kicker">{p.data.category}</p>
+                <h3 class="mt-3 text-lg">{p.data.title}</h3>
+                <p class="mt-3 line-clamp-3 text-sm text-slate">{p.data.description}</p>
+                <span class="mt-4 text-sm text-ms-blue-deep">Read →</span>
+              </div>
             </a>
           ))
         }

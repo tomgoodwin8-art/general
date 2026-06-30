@@ -2,7 +2,12 @@
 import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
 import AuditCTA from "../components/AuditCTA.astro";
+import FAQ from "../components/FAQ.astro";
 import { BOOKING_URL } from "../data/site";
+import { servicesFaqs } from "../data/faqs";
+import { faqSchema } from "../lib/schema";
+
+const schemaNodes = [faqSchema(servicesFaqs)];
 
 const services = [
   {
@@ -31,6 +36,7 @@ const services = [
 <Base
   title="For Brands: Microsoft Advertising services"
   description="Managed Microsoft Advertising, Search Diversification Strategy and a fixed-fee Opportunity Audit. Platform-native, built for the Microsoft ecosystem from the ground up."
+  schemaNodes={schemaNodes}
 >
   <PageHeader
     kicker="For Brands"
@@ -70,6 +76,8 @@ const services = [
       }
     </div>
   </section>
+
+  <FAQ faqs={servicesFaqs} heading="Services FAQ" />
 
   <AuditCTA />
 </Base>

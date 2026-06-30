@@ -1,39 +1,83 @@
 ---
 import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
-import { AGENCY } from "../data/site";
+import { CONTACT_EMAIL, LEGAL_NAME, AGENCY } from "../data/site";
+
+const updated = "30 June 2026";
 ---
 <Base
-  title="Terms"
-  description="Terms of use for The Micro Agency website."
-  noindex
+  title="Terms of Use"
+  description="The terms governing your use of The Micro Agency Ltd website, including trademarks, content, liability and governing law."
 >
-  <PageHeader kicker="Governance" title="Terms" />
+  <PageHeader kicker="Governance" title="Terms of Use" />
+
   <section class="section">
     <div class="wrap-narrow prose">
+      <p class="text-sm text-slate">Last updated: {updated}</p>
+
       <p>
-        Placeholder terms of use for {AGENCY}. Replace with reviewed wording
-        before launch.
-        <!-- [TODO: legal review of terms before deploy.] -->
+        These terms govern your use of this website, operated by {LEGAL_NAME}
+        ("we", "us", "our"), trading as {AGENCY}. By using the site you agree to
+        these terms. If you do not agree, please do not use the site.
+        <!-- [TODO: solicitor review; add registered company number, registered office and any client engagement terms before launch.] -->
       </p>
-      <h2>Use of this site</h2>
+
+      <h2>Use of the site</h2>
       <p>
-        The content here is provided for information. It is not advice for your
-        specific account until we are engaged. Figures cited are sourced and
-        dated in the page markup; treat them as indicative, not guarantees of
-        performance.
+        The content here is provided for general information about our services
+        and thinking. It is not advice for your specific account or
+        circumstances, and no client relationship is formed until we have agreed
+        an engagement in writing. You may view and share the content for your own
+        non-commercial reference, but you may not copy, republish or exploit it
+        commercially without our permission.
       </p>
+
+      <h2>No guarantee of results</h2>
+      <p>
+        Statistics on this site are cited with a named, dated source in the page
+        markup and are indicative of the platform generally, not promises of
+        performance. Advertising outcomes depend on many factors specific to your
+        account, market and budget. Nothing here should be read as a guarantee of
+        any particular result.
+      </p>
+
       <h2>Trademarks</h2>
       <p>
         Microsoft, Bing, LinkedIn, Copilot, Xbox and the Microsoft logo are
-        trademarks of the Microsoft group of companies. {AGENCY} is an
-        independent agency. Reference to Microsoft products and partner status
-        does not imply that Microsoft authored or endorses this site's content.
+        trademarks of the Microsoft group of companies. Google and Google Ads are
+        trademarks of Google LLC. {LEGAL_NAME} is an independent agency.
+        References to Microsoft products, services or partner status, including
+        the Microsoft Advertising Elite Partner designation, do not imply that
+        Microsoft authored, sponsors or endorses this site or its content.
       </p>
-      <h2>Liability</h2>
+
+      <h2>External links and embeds</h2>
       <p>
-        We take care to keep this site accurate but accept no liability for
-        decisions taken solely on the basis of its general content.
+        The site may link to or embed third-party content, such as a booking tool
+        or video. We are not responsible for the content, policies or
+        availability of third-party services, and your use of them is governed by
+        their own terms.
+      </p>
+
+      <h2>Limitation of liability</h2>
+      <p>
+        We take care to keep this site accurate and available, but provide it "as
+        is" without warranties. To the fullest extent permitted by law, we are
+        not liable for any loss arising from reliance on the general content of
+        this site. Nothing in these terms limits liability that cannot be limited
+        under law, such as for death or personal injury caused by negligence, or
+        for fraud.
+      </p>
+
+      <h2>Governing law</h2>
+      <p>
+        These terms are governed by the laws of England and Wales, and the courts
+        of England and Wales have exclusive jurisdiction over any dispute.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
       </p>
     </div>
   </section>

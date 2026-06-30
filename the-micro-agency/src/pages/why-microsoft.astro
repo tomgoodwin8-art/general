@@ -3,11 +3,17 @@ import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
 import StatBlock from "../components/StatBlock.astro";
 import AuditCTA from "../components/AuditCTA.astro";
+import FAQ from "../components/FAQ.astro";
 import { stats } from "../data/stats";
+import { whyMicrosoftFaqs } from "../data/faqs";
+import { faqSchema } from "../lib/schema";
+
+const schemaNodes = [faqSchema(whyMicrosoftFaqs)];
 ---
 <Base
   title="Why Microsoft: concentration risk and diversification"
   description="Single-platform dependence is a measurable risk. Microsoft reaches over a billion users at lower CPCs with targeting found nowhere else. The case for a second engine."
+  schemaNodes={schemaNodes}
 >
   <PageHeader
     kicker="The Thesis"
@@ -94,6 +100,8 @@ import { stats } from "../data/stats";
       </div>
     </div>
   </section>
+
+  <FAQ faqs={whyMicrosoftFaqs} heading="Why Microsoft FAQ" />
 
   <AuditCTA />
 </Base>

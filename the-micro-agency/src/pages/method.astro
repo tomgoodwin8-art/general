@@ -2,6 +2,11 @@
 import Base from "../layouts/Base.astro";
 import PageHeader from "../components/PageHeader.astro";
 import AuditCTA from "../components/AuditCTA.astro";
+import FAQ from "../components/FAQ.astro";
+import { methodFaqs } from "../data/faqs";
+import { faqSchema } from "../lib/schema";
+
+const schemaNodes = [faqSchema(methodFaqs)];
 
 const steps = [
   {
@@ -29,6 +34,7 @@ const steps = [
 <Base
   title="The Method: incrementality and benchmarking"
   description="We do not ask you to trust Microsoft Ads. We prove it. Geo and holdout incrementality tests, like-for-like benchmarking, and reporting on revenue, not clicks."
+  schemaNodes={schemaNodes}
 >
   <PageHeader
     kicker="The Method"
@@ -60,6 +66,8 @@ const steps = [
       </div>
     </div>
   </section>
+
+  <FAQ faqs={methodFaqs} heading="Measurement FAQ" />
 
   <AuditCTA />
 </Base>

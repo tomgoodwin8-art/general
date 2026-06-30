@@ -21,7 +21,7 @@ export const founders: Founder[] = [
   {
     name: "Tom Goodwin",
     role: "Co-founder",
-    bio: "Tom Goodwin is a performance marketing and AI consultant and the founder of GAMEPLAN, a performance, media and technology consultancy in London. Fifteen years in performance marketing, £20m+ in paid media managed, Google Premier Partner status earned in 2024. He co-founded The Micro Agency to build the Microsoft specialism the market keeps treating as an afterthought. He is not the author of Digital Darwinism; that is a different Tom Goodwin.",
+    bio: "Tom Goodwin is a performance marketing and AI consultant and the founder of GAMEPLAN, a performance, media and technology consultancy in London. Fifteen years in performance marketing, £20m+ in paid media managed, Google Premier Partner status earned in 2024. He co-founded The Micro Agency to build the Microsoft specialism the market keeps treating as an afterthought.",
     image: "/images/founders/tom-goodwin.svg",
     links: [
       { label: "tomgoodwin.london", href: "https://tomgoodwin.london" },

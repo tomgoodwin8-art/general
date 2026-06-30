@@ -6,6 +6,7 @@
 import Base from "./Base.astro";
 import Breadcrumb from "../components/Breadcrumb.astro";
 import AuditCTA from "../components/AuditCTA.astro";
+import PostThumb from "../components/PostThumb.astro";
 
 interface Props {
   title: string;
@@ -15,8 +16,10 @@ interface Props {
   meta?: string;
   crumbs: { label: string; href: string }[];
   schemaNodes?: Record<string, unknown>[];
+  /** Blog posts pass their category to render a wide hero thumbnail. */
+  heroCategory?: string;
 }
-const { title, description, path, kicker, meta, crumbs, schemaNodes } =
+const { title, description, path, kicker, meta, crumbs, schemaNodes, heroCategory } =
   Astro.props;
 ---
 <Base {title} {description} {path} type="article" schemaNodes={schemaNodes}>
@@ -29,6 +32,16 @@ const { title, description, path, kicker, meta, crumbs, schemaNodes } =
         {meta && <p class="mt-4 text-sm text-slate">{meta}</p>}
       </div>
     </div>
+
+    {
+      heroCategory && (
+        <div class="wrap-narrow pt-10">
+          <div class="aspect-[5/2] overflow-hidden rounded-xl border border-line">
+            <PostThumb category={heroCategory} ratio="wide" />
+          </div>
+        </div>
+      )
+    }
 
     <div class="wrap-narrow py-12">
       <div class="prose">

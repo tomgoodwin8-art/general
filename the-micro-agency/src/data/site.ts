@@ -5,6 +5,7 @@
 
 export const SITE_URL = "https://microagency.co"; // {{DOMAIN}} — confirm before deploy
 export const AGENCY = "The Micro Agency"; // {{AGENCY}}
+export const LEGAL_NAME = "The Micro Agency Ltd"; // registered legal entity
 export const BOOKING_URL = "https://cal.eu/tom-goodwin-wpxjme"; // {{BOOKING_URL}} — mirror of tomgoodwin.london; confirm dedicated link
 export const CONTACT_EMAIL = "tomgoodwin8@gmail.com"; // {{CONTACT_EMAIL}}
 export const REPORT_NAME = "State of Microsoft Ads: UK Edition"; // {{REPORT_NAME}}

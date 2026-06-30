@@ -1,9 +1,9 @@
 ---
 /**
  * PostThumb.astro — generated, on-brand thumbnail for a blog post.
- * Deterministic colour per category, the Microsoft four-square motif, and the
- * category label. Decorative (the post title sits alongside), so aria-hidden.
- * No external image assets, so it stays fast and never 404s.
+ * Deterministic colour per category with a generic abstract geometric motif
+ * (no Microsoft mark). Decorative (the post title sits alongside), so
+ * aria-hidden. No external image assets, so it stays fast and never 404s.
  */
 interface Props {
   category: string;
@@ -25,12 +25,20 @@ const palette: Record<string, [string, string]> = {
   Resource: ["#34506A", "#1A2C3C"],
 };
 const [c1, c2] = palette[category] ?? ["#0078D4", "#0A4E8A"];
-const vb = ratio === "wide" ? "0 0 1200 420" : "0 0 600 360";
+
+const wide = ratio === "wide";
+const W = wide ? 1200 : 600;
+const H = wide ? 420 : 360;
 const gid = `g-${category.replace(/[^a-z0-9]/gi, "")}`;
+
+// Small deterministic variation so categories don't all look identical.
+const seed = category.length;
+const cx = W - (90 + (seed % 5) * 22);
+const cy = 70 + (seed % 4) * 18;
 ---
 <svg
   class={`block h-full w-full ${cls}`}
-  viewBox={vb}
+  viewBox={`0 0 ${W} ${H}`}
   preserveAspectRatio="xMidYMid slice"
   role="presentation"
   aria-hidden="true"
@@ -43,35 +51,35 @@ const gid = `g-${category.replace(/[^a-z0-9]/gi, "")}`;
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill={`url(#${gid})`} />
-  <!-- faint oversized four-square motif -->
-  <g opacity="0.10" transform="translate(62 60) scale(1.0)">
-    <rect x="0" y="0" width="120" height="120" fill="#fff" />
-    <rect x="132" y="0" width="120" height="120" fill="#fff" />
-    <rect x="0" y="132" width="120" height="120" fill="#fff" />
-    <rect x="132" y="132" width="120" height="120" fill="#fff" />
+
+  <!-- generic abstract motif: concentric rings + thin diagonals -->
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.14" stroke-width="2">
+    <circle cx={cx} cy={cy} r="58" />
+    <circle cx={cx} cy={cy} r="98" />
+    <circle cx={cx} cy={cy} r="138" />
   </g>
-  <!-- crisp brand four-square mark -->
-  <g transform="translate(40 40)">
-    <rect x="0" y="0" width="22" height="22" fill="#F25022" />
-    <rect x="26" y="0" width="22" height="22" fill="#7FBA00" />
-    <rect x="0" y="26" width="22" height="22" fill="#00A4EF" />
-    <rect x="26" y="26" width="22" height="22" fill="#FFB900" />
+  <g stroke="#ffffff" stroke-opacity="0.10" stroke-width="2">
+    <line x1="0" y1={H * 0.35} x2={W} y2={H * 0.05} />
+    <line x1="0" y1={H * 0.6} x2={W} y2={H * 0.28} />
   </g>
+  <!-- small solid accent dot -->
+  <circle cx={cx} cy={cy} r="7" fill="#ffffff" fill-opacity="0.85" />
+
   <text
     x="40"
-    y={ratio === "wide" ? 360 : 312}
+    y={wide ? 360 : 312}
     fill="#ffffff"
     font-family="'Space Grotesk',Inter,system-ui,sans-serif"
-    font-size={ratio === "wide" ? 40 : 34}
+    font-size={wide ? 40 : 34}
     font-weight="700"
     letter-spacing="-0.5"
   >{category}</text>
   <text
     x="40"
-    y={ratio === "wide" ? 392 : 340}
+    y={wide ? 392 : 340}
     fill="#ffffff"
     opacity="0.7"
     font-family="Inter,system-ui,sans-serif"
-    font-size={ratio === "wide" ? 20 : 17}
+    font-size={wide ? 20 : 17}
   >The Micro Agency</text>
 </svg>

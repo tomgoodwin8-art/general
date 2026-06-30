@@ -1,0 +1,47 @@
+---
+/**
+ * CopyBlock.astro - a labelled block of text with a copy-to-clipboard button.
+ * Used for forwardable assets (email templates, one-liners) on the partner kit.
+ */
+interface Props {
+  label?: string;
+  text: string;
+}
+const { label, text } = Astro.props;
+---
+<div class="rounded-xl border border-line bg-paper" data-copyblock>
+  <div class="flex items-center justify-between gap-3 border-b border-line px-4 py-2">
+    <span class="kicker">{label}</span>
+    <button type="button" class="btn btn-ghost !px-3 !py-1.5 text-xs" data-copy-btn>
+      <span data-copy-label>Copy</span>
+    </button>
+  </div>
+  <pre
+    class="overflow-x-auto whitespace-pre-wrap px-4 py-4 text-sm leading-relaxed text-ink"
+    data-copy-text>{text}</pre>
+</div>
+
+<script is:inline>
+  document.querySelectorAll("[data-copyblock]").forEach((b) => {
+    const btn = b.querySelector("[data-copy-btn]");
+    const label = b.querySelector("[data-copy-label]");
+    const text = b.querySelector("[data-copy-text]");
+    if (!btn || !text) return;
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(text.textContent || "");
+        if (label) {
+          const prev = label.textContent;
+          label.textContent = "Copied";
+          setTimeout(() => (label.textContent = prev), 1600);
+        }
+      } catch (e) {
+        const r = document.createRange();
+        r.selectNodeContents(text);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(r);
+      }
+    });
+  });
+</script>

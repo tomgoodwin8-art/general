@@ -27,7 +27,8 @@ export const socials = {
 
 /** Primary navigation (§4). Resources is a grouped dropdown. */
 export const nav = [
-  { label: "Services", href: "/services" },
+  { label: "Advertisers", href: "/advertisers" },
+  { label: "Agencies", href: "/agencies" },
   { label: "The Method", href: "/method" },
   { label: "Why Microsoft", href: "/why-microsoft" },
   {

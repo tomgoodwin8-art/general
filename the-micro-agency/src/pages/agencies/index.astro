@@ -1,0 +1,166 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import FAQ from "../../components/FAQ.astro";
+import AuditCTA from "../../components/AuditCTA.astro";
+import { BOOKING_URL } from "../../data/site";
+import { agenciesFaqs } from "../../data/faqs";
+import { faqSchema, breadcrumbSchema } from "../../lib/schema";
+
+const path = "/agencies";
+const crumbs = [
+  { label: "Home", href: "/" },
+  { label: "For Agencies", href: path },
+];
+const schemaNodes = [faqSchema(agenciesFaqs), breadcrumbSchema(crumbs)];
+
+const how = [
+  {
+    n: "01",
+    t: "You introduce, you stay the brand",
+    b: "You keep the client relationship and present the work as your own. We never approach your clients. The partnership is built so your name stays in front.",
+  },
+  {
+    n: "02",
+    t: "We run the Microsoft desk",
+    b: "Platform-native build and optimisation: LinkedIn Profile Targeting, the Microsoft Audience Network, account structure suited to the platform rather than a Google import.",
+  },
+  {
+    n: "03",
+    t: "Reporting in your templates",
+    b: "Incremental revenue and blended cost of acquisition, benchmarked against Google on like-for-like metrics, delivered in your branding for you to present.",
+  },
+  {
+    n: "04",
+    t: "You keep the margin",
+    b: "White-label and mark up our managed fee, or refer and share revenue. Either way the client stays yours and the Microsoft specialism is covered.",
+  },
+];
+
+const why = [
+  {
+    t: "Add a capability without hiring",
+    b: "Microsoft is a genuine specialism. Building the desk in-house rarely pays back for a single channel. We are that desk, on demand.",
+  },
+  {
+    t: "Deepen retention",
+    b: "Diversifying a client beyond Google reduces their concentration risk and gives you another reason to be indispensable at renewal.",
+  },
+  {
+    t: "Open incremental revenue",
+    b: "Microsoft commonly runs at materially lower CPCs than Google, with audiences and targeting generalists leave on the table. That is upside you can offer without cannibalising your Google work.",
+  },
+];
+---
+<Base
+  title="White-Label Microsoft Ads for Agencies"
+  description="White-label Microsoft Ads for agencies: add a genuine Microsoft Advertising capability under your own brand. We run the desk, you keep the client and the margin."
+  {path}
+  schemaNodes={schemaNodes}
+>
+  <!-- Hero -->
+  <section class="border-b border-line bg-mist">
+    <div class="wrap section">
+      <p class="kicker">For Agencies</p>
+      <h1 class="mt-4 max-w-4xl">White-label Microsoft Ads for agencies</h1>
+      <p class="mt-5 max-w-2xl text-lg text-slate">
+        Offer your clients a genuine Microsoft Advertising capability without
+        building the desk. We run platform-native Microsoft Ads under your brand,
+        you keep the client relationship and the margin. A specialist partner for
+        Google-led agencies that want to diversify their clients, not lose them.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={BOOKING_URL} class="btn btn-primary" rel="noopener" target="_blank">Become a partner</a>
+        <a href="/agencies/partner-kit" class="btn btn-ghost">Get the partner kit →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section class="section">
+    <div class="wrap">
+      <h2>Why Google-led agencies partner with us</h2>
+      <p class="mt-3 max-w-2xl text-slate">
+        Most agencies are Google specialists. Microsoft Ads for agencies is the
+        capability clients increasingly ask for and few can staff. We close that
+        gap quietly, behind your brand.
+      </p>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {
+          why.map((w) => (
+            <div class="rounded-xl border border-line bg-paper p-7">
+              <h3 class="text-lg">{w.t}</h3>
+              <p class="mt-3 text-slate">{w.b}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section bg-mist">
+    <div class="wrap">
+      <h2>How white-label Microsoft Ads works</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {
+          how.map((s) => (
+            <div class="rounded-xl border border-line bg-paper p-7">
+              <span class="figure text-2xl">{s.n}</span>
+              <h3 class="mt-2 text-lg">{s.t}</h3>
+              <p class="mt-3 text-slate">{s.b}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Models -->
+  <section class="section">
+    <div class="wrap grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-line bg-paper p-7">
+        <p class="kicker">Model A</p>
+        <h3 class="mt-2 text-xl">White-label</h3>
+        <p class="mt-3 text-slate">
+          We deliver under your brand, in your reporting. You mark up our managed
+          fee and keep the client relationship end to end. Best when you want
+          Microsoft to look like part of your own offering.
+        </p>
+      </div>
+      <div class="rounded-xl border border-line bg-paper p-7">
+        <p class="kicker">Model B</p>
+        <h3 class="mt-2 text-xl">Referral</h3>
+        <p class="mt-3 text-slate">
+          You introduce the client, we run Microsoft directly and share revenue
+          back to you. Best when you would rather keep Microsoft off your own
+          books but still want your client looked after and the relationship
+          credited. <span class="text-xs">[Referral share TODO: confirm.]</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner kit CTA -->
+  <section class="section-tight">
+    <div class="wrap rounded-2xl bg-ink p-8 text-paper md:flex md:items-center md:justify-between md:gap-8">
+      <div class="max-w-xl">
+        <p class="kicker text-ms-blue">Forward it internally</p>
+        <h2 class="mt-3 text-2xl text-paper">The white-label partner kit</h2>
+        <p class="mt-3 text-white/75">
+          A one-page PDF your head of paid or MD can read in two minutes, plus
+          a ready-to-send internal email and talking points. Everything you need
+          to float the idea without writing it yourself.
+        </p>
+      </div>
+      <a href="/agencies/partner-kit" class="btn btn-primary mt-5 md:mt-0">Open the partner kit</a>
+    </div>
+  </section>
+
+  <FAQ faqs={agenciesFaqs} heading="White-label Microsoft Ads FAQ" />
+
+  <AuditCTA
+    headline="Add Microsoft to your agency, not to your headcount."
+    line="A short partner call to see whether white-label or referral fits how you work, and which client to prove it on first."
+  />
+</Base>

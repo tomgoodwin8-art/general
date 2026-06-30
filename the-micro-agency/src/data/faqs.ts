@@ -139,6 +139,50 @@ export const methodFaqs: Faq[] = [
   },
 ];
 
+/** Agencies: white-label Microsoft Ads partner programme. */
+export const agenciesFaqs: Faq[] = [
+  {
+    q: "What is white-label Microsoft Ads?",
+    a: "White-label Microsoft Ads means we build and run Microsoft Advertising campaigns that your agency delivers under its own brand. Your client sees your agency; we are the specialist desk behind it. You add a genuine Microsoft capability without hiring for it.",
+  },
+  {
+    q: "How does Microsoft Ads for agencies work with us?",
+    a: "You stay the client relationship and the brand. We handle the platform-native build, optimisation, incrementality measurement and reporting, delivered in your templates. You brief us, we deliver, you present. It is a quiet, reliable desk, not another logo in the room.",
+  },
+  {
+    q: "Will you contact or poach our clients?",
+    a: "No. We work behind your brand and do not approach your clients. That is written into the partnership. Our entire model depends on agencies trusting us with their accounts, so protecting your relationship is non-negotiable.",
+  },
+  {
+    q: "Can we resell Microsoft Ads under our own brand?",
+    a: "Yes. White-label partners present the work as their own, in their own reporting and decks. We provide the specialism and the measurement methodology; you own the client and the margin.",
+  },
+  {
+    q: "What is the commercial model: referral or white-label?",
+    a: "Both are available. With white-label, you mark up our managed fee and keep the client. With referral, you introduce the client to us, we run it directly, and we share revenue. We will recommend whichever fits how your agency prefers to work. [Commercials TODO: confirm referral share and white-label rate card.]",
+  },
+  {
+    q: "We are a Google-led agency. Why offer Microsoft Ads?",
+    a: "Because your clients have concentration risk and you are leaving incremental revenue on the table. Microsoft reaches over a billion users monthly and commonly runs at materially lower CPCs, with LinkedIn Profile Targeting available nowhere else. Offering it deepens retention without you building the desk.",
+  },
+  {
+    q: "What do we need to provide?",
+    a: "An introduction to the account and the client's goals, your reporting template, and a single point of contact on your side. We handle the build, the testing and the day-to-day. You stay in control of the relationship and the narrative.",
+  },
+  {
+    q: "Who runs the campaigns and the reporting?",
+    a: "A senior Microsoft specialist on our side runs the account and produces reporting in your branding. You review and present it. There is no junior learning on your client's budget, and the measurement methodology is shared so you can stand behind the numbers.",
+  },
+  {
+    q: "How quickly can we launch with a client?",
+    a: "A clean platform-native build typically goes live within the first weeks of access. The meaningful read on incremental value comes from a quarter-long test, which we design up front so you can set the client's expectations correctly from day one.",
+  },
+  {
+    q: "How do we become a partner?",
+    a: "Book a short partner call or forward our one-pager internally to your head of paid or managing director. We will agree the model, the commercials and a first account to prove it on. Start with the partner kit on this page.",
+  },
+];
+
 /** Why Microsoft: the thesis, the ecosystem, diversification. */
 export const whyMicrosoftFaqs: Faq[] = [
   {

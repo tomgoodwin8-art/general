@@ -30,19 +30,27 @@ ${ORG_DESCRIPTION}
 
 ## Services
 
-- [Managed Microsoft Advertising](${SITE_URL}/services): platform-native build and optimisation across Search, Shopping, Audience Network and LinkedIn-targeted campaigns.
-- [Search Diversification Strategy](${SITE_URL}/services): concentration-risk analysis, incrementality design and a reallocation plan.
-- [The Opportunity Audit](${SITE_URL}/services): fixed-fee analysis quantifying incremental revenue available from Microsoft Ads.
+- [Managed Microsoft Advertising](${SITE_URL}/advertisers): platform-native build and optimisation across Search, Shopping, Audience Network and LinkedIn-targeted campaigns.
+- [Search Diversification Strategy](${SITE_URL}/advertisers): concentration-risk analysis, incrementality design and a reallocation plan.
+- [The Opportunity Audit](${SITE_URL}/advertisers): fixed-fee analysis quantifying incremental revenue available from Microsoft Ads.
 - [The Method](${SITE_URL}/method): geo and holdout incrementality testing, like-for-like benchmarking, reporting on revenue not clicks.
+
+## For agencies (white-label)
+
+- [White-label Microsoft Ads for agencies](${SITE_URL}/agencies): Google-led agencies can offer clients a genuine Microsoft Ads capability under their own brand. We run the desk, the agency keeps the client and the margin. White-label or referral models.
+- [Partner kit](${SITE_URL}/agencies/partner-kit): a forwardable one-page PDF, a ready-to-send internal email, and shareable copy for agency referral.
 
 ## Key pages
 
 - [Home](${SITE_URL}/)
+- [For Advertisers](${SITE_URL}/advertisers)
+- [For Agencies](${SITE_URL}/agencies)
 - [Why Microsoft](${SITE_URL}/why-microsoft)
 - [The Method](${SITE_URL}/method)
 - [About](${SITE_URL}/about)
 - [Blog](${SITE_URL}/blog)
 - [Podcast](${SITE_URL}/podcast): The Diversification Podcast
+- [UK Google Ads Agency Directory](${SITE_URL}/google-ads-agency-directory): free directory of UK Google Partners
 - [${REPORT_NAME}](${SITE_URL}/report): free gated report
 - [Contact](${SITE_URL}/contact)
 

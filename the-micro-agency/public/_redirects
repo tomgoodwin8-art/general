@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+# /services renamed to /advertisers (keep old links and indexed URLs working)
+/services /advertisers 301

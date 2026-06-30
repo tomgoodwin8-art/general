@@ -25,7 +25,7 @@ The first alternative to a do-everything automated campaign is a deliberately se
 
 A practical structure runs the high-intent core as managed search, where visibility and control earn their keep, and reserves heavier automation for the broad, exploratory top of the funnel where hand-tuning has less leverage. This is not anti-automation; it is automation placed where it pays. Manual search gives you clean search-terms data, real negative-keyword control, and the ability to see and steer exactly where spend lands, which is precisely what an all-in-one campaign type withholds.
 
-Standard shopping, where still available, plays the same role for retail: explicit control over which products show and what they cost to promote, rather than ceding the feed to an automated layer. The common thread across these [search-led structures](/services) is that they restore the three things Performance Max takes: placement visibility, creative control, and clean measurement.
+Standard shopping, where still available, plays the same role for retail: explicit control over which products show and what they cost to promote, rather than ceding the feed to an automated layer. The common thread across these [search-led structures](/advertisers) is that they restore the three things Performance Max takes: placement visibility, creative control, and clean measurement.
 
 ## The Microsoft control argument
 

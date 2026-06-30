@@ -1,0 +1,141 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import ShareButton from "../../components/ShareButton.astro";
+import CopyBlock from "../../components/CopyBlock.astro";
+import AuditCTA from "../../components/AuditCTA.astro";
+import { BOOKING_URL, SITE_URL } from "../../data/site";
+import { breadcrumbSchema } from "../../lib/schema";
+
+const path = "/agencies/partner-kit";
+const pdf = "/downloads/microsoft-ads-for-agencies-one-pager.pdf";
+const crumbs = [
+  { label: "Home", href: "/" },
+  { label: "For Agencies", href: "/agencies" },
+  { label: "Partner kit", href: path },
+];
+const schemaNodes = [breadcrumbSchema(crumbs)];
+
+const emailTemplate = `Subject: Adding Microsoft Ads under our brand (white-label)
+
+Hi [name],
+
+A few clients keep asking about Microsoft Ads and we are turning the work away or running it half-built off the Google import. There is a specialist, The Micro Agency, that runs Microsoft Advertising white-label: we keep the client and the brand, they run the platform-native desk and report in our templates.
+
+Worth a look:
+- One-pager (2 min read): ${SITE_URL}${pdf}
+- How it works: ${SITE_URL}/agencies
+
+Two models: white-label (we mark up and keep the client) or referral (we introduce, they run it, we share revenue). They do not approach our clients.
+
+Shall I set up a 20-minute partner call?
+
+Thanks,
+[you]`;
+
+const oneLiner = `We offer Microsoft Ads through a white-label specialist (The Micro Agency): we keep the client and the brand, they run the platform-native desk and report in our templates.`;
+
+const blurb = `The Micro Agency is the UK's specialist Microsoft Advertising agency. Through its white-label partner programme, Google-led agencies can offer clients a genuine Microsoft Ads capability without building the desk: platform-native campaigns, proven incrementality, and reporting in the agency's own brand. The agency keeps the client relationship and the margin.`;
+---
+<Base
+  title="White-label Microsoft Ads partner kit"
+  description="A forwardable partner kit for agencies: a one-page PDF, a ready-to-send internal email, and shareable copy to add white-label Microsoft Ads under your brand."
+  {path}
+  schemaNodes={schemaNodes}
+>
+  <PageHeader
+    kicker="Partner kit"
+    title="Everything you need to forward this internally"
+    intro="Built for the person inside an agency who gets it first. Forward the one-pager, paste the email, share the link. No writing required."
+  />
+
+  <!-- One-pager + share -->
+  <section class="section-tight">
+    <div class="wrap grid gap-6 lg:grid-cols-3 lg:items-start">
+      <div class="rounded-2xl border border-line bg-mist p-7 lg:col-span-2">
+        <p class="kicker">The one-pager</p>
+        <h2 class="mt-2 text-2xl">Microsoft Ads for agencies, on one page</h2>
+        <p class="mt-3 text-slate">
+          A single-page PDF a Google-led agency can forward to its head of paid
+          or managing director and grasp in two minutes: the opportunity, how
+          white-label works, the two commercial models, and the next step.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a href={pdf} class="btn btn-primary" download>Download the PDF</a>
+          <a href={pdf} class="btn btn-ghost" target="_blank" rel="noopener">Open in browser</a>
+        </div>
+      </div>
+      <aside class="rounded-2xl border border-line bg-paper p-7">
+        <p class="kicker">Share this kit</p>
+        <p class="mt-2 text-sm text-slate">Send it to a colleague or your network.</p>
+        <div class="mt-4">
+          <ShareButton {path} title="White-label Microsoft Ads partner kit" />
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Forwardable email -->
+  <section class="section-tight">
+    <div class="wrap">
+      <h2>Ready-to-send internal email</h2>
+      <p class="mt-2 max-w-2xl text-slate">
+        Copy, fill the two brackets, and forward to whoever signs off new
+        capabilities. It makes the case so you do not have to.
+      </p>
+      <div class="mt-6 max-w-3xl">
+        <CopyBlock label="Internal email" text={emailTemplate} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Paste-ready copy -->
+  <section class="section-tight">
+    <div class="wrap grid gap-6 lg:grid-cols-2">
+      <div>
+        <h2 class="text-2xl">One-line description</h2>
+        <p class="mt-2 text-sm text-slate">For a Slack message or a deck note.</p>
+        <div class="mt-4"><CopyBlock label="One-liner" text={oneLiner} /></div>
+      </div>
+      <div>
+        <h2 class="text-2xl">Short description</h2>
+        <p class="mt-2 text-sm text-slate">For a partner page or a proposal.</p>
+        <div class="mt-4"><CopyBlock label="Boilerplate" text={blurb} /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Talking points -->
+  <section class="section-tight">
+    <div class="wrap">
+      <h2>Talking points</h2>
+      <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+        {
+        [
+          "We keep the client and the brand; they run the Microsoft desk behind us.",
+          "They do not approach our clients. Ever. It is in the partnership.",
+          "Two models: white-label mark-up, or referral revenue share.",
+          "Microsoft commonly runs at materially lower CPCs than Google, with LinkedIn Profile Targeting found nowhere else.",
+          "It deepens retention: diversifying a client beyond Google is a renewal argument.",
+          "No hiring, no new desk, no junior learning on the client's budget.",
+        ].map((t) => (
+          <li class="flex gap-2.5 rounded-lg border border-line bg-paper p-4 text-sm">
+            <span class="font-bold text-ms-blue-deep" aria-hidden="true">✓</span>
+            <span>{t}</span>
+          </li>
+        ))
+        }
+      </ul>
+      <p class="mt-4 text-xs text-slate">
+        <!-- source: Searchlab / GoDataFeed, 2025-26; Microsoft Advertising product docs -->
+        Figures above are from our verified sources, cited on the
+        <a href="/why-microsoft" class="link">Why Microsoft</a> page.
+      </p>
+    </div>
+  </section>
+
+  <AuditCTA
+    headline="Ready to talk through it?"
+    line="A 20-minute partner call to pick the model and the first account to prove it on."
+  />
+</Base>

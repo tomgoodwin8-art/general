@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img"
+ aria-label="Dr David Burnell, founder of Burnell Consultancy">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#22304a"/><stop offset="1" stop-color="#1a2332"/>
+</linearGradient></defs>
+<rect width="800" height="800" fill="url(#g)"/>
+<circle cx="400" cy="320" r="130" fill="#33425c"/>
+<path d="M180 760c0-140 100-250 220-250s220 110 220 250z" fill="#33425c"/>
+<text x="400" y="700" font-family="Inter,system-ui,sans-serif" font-size="30"
+ fill="#8b9ab5" text-anchor="middle">Dr David Burnell</text>
+<text x="400" y="740" font-family="Inter,system-ui,sans-serif" font-size="22"
+ fill="#5f708c" text-anchor="middle">portrait: add assets/dave.jpeg</text>
+</svg>

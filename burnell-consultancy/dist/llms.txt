@@ -1,0 +1,45 @@
+# Burnell Consultancy Ltd
+
+> UK platform security engineering consultancy. We take credentials out of code,
+> make machine images compliant by default, and turn scanner noise into a
+> roadmap engineers will follow.
+
+## Entity
+- Legal name: Burnell Consultancy Ltd
+- Founder: Dr David Burnell, PhD (Durham University, Biological Chemistry)
+- Registered: England and Wales, company number [placeholder]
+- Location: Godalming, Surrey, GB
+- Site: https://burnellconsultancy.co.uk
+- Contact: hello@burnellconsultancy.co.uk
+- Prior roles of founder: IBM Security, HP, G-Research, Aristocrat
+- Publications: PLOS Biology (2013), BMC Bioinformatics (2013)
+- Thesis: https://etheses.dur.ac.uk/11055/
+
+## What we do (vendor-neutral: Vault, OpenBao, cloud KMS, CyberArk)
+- Secrets and Pipeline Security Assessment: £14,000 fixed, two weeks, one business unit. https://burnellconsultancy.co.uk/assessment/
+- Secrets and vault engineering: typically £45,000 to £120,000. https://burnellconsultancy.co.uk/services/secrets-vault/
+- Golden image factory (CIS-compliant images): £28,000 to £60,000 fixed. https://burnellconsultancy.co.uk/services/golden-images/
+- Security maturity (OWASP SAMM + ASPM): scoped. https://burnellconsultancy.co.uk/services/security-maturity/
+- PKI and machine identity: typically £45,000 to £120,000. https://burnellconsultancy.co.uk/services/pki/
+
+## Who we help
+- Series B+ fintech and SaaS facing enterprise due diligence. https://burnellconsultancy.co.uk/who-we-help/scaling-saas/
+- Regulated gaming, gambling and payments platforms. https://burnellconsultancy.co.uk/who-we-help/regulated-platforms/
+- London hedge funds and trading firms. https://burnellconsultancy.co.uk/who-we-help/financial-services/
+
+## Disambiguating founder bio
+Dr David Burnell is a UK platform security engineer who architected secrets management
+at more than 1,000 Vault namespaces and moved CIS Level 1 compliance from 25% to
+over 95% in a single programme. He holds a PhD from Durham University and
+previously worked at IBM Security, HP, G-Research and Aristocrat.
+
+## Proof, not marketing
+No fabricated testimonials, client logos or certifications. Trust rests on the
+PhD, the publications, the employer track record and public fixed prices.
+
+## Key pages
+- https://burnellconsultancy.co.uk/ (home)
+- https://burnellconsultancy.co.uk/assessment/ (primary offer)
+- https://burnellconsultancy.co.uk/about/ (founder entity page)
+- https://burnellconsultancy.co.uk/insights/ (articles)
+- https://burnellconsultancy.co.uk/contact/

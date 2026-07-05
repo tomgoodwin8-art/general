@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#1a2332"/>
+<rect x="0" y="0" width="1200" height="8" fill="#0d9488"/>
+<text x="80" y="180" font-family="Inter,system-ui,sans-serif" font-size="40"
+ font-weight="700" fill="#ffffff">Burnell<tspan fill="#93b4fb" font-weight="400"> Consultancy</tspan></text>
+<text x="80" y="300" font-family="Inter,system-ui,sans-serif" font-size="58"
+ font-weight="800" fill="#ffffff">Secrets, pipelines and</text>
+<text x="80" y="372" font-family="Inter,system-ui,sans-serif" font-size="58"
+ font-weight="800" fill="#ffffff">golden images. Fixed.</text>
+<text x="80" y="470" font-family="Inter,system-ui,sans-serif" font-size="30"
+ fill="#c3cede">UK platform security engineering. £14k fixed-price assessment.</text>
+<circle cx="1010" cy="315" r="150" fill="none" stroke="#0d9488" stroke-width="4"/>
+<circle cx="1010" cy="285" r="55" fill="#33425c"/>
+<path d="M900 470c0-70 50-120 110-120s110 50 110 120z" fill="#33425c"/>
+</svg>

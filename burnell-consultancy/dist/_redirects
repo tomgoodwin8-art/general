@@ -1,0 +1,3 @@
+# Netlify redirects. Directory index.html gives clean URLs already.
+# Add host canonicalisation here once the domain is attached, e.g.
+# https://www.burnellconsultancy.co.uk/*  https://burnellconsultancy.co.uk/:splat  301!

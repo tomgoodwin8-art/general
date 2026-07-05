@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insights | Platform security engineering, Burnell Consultancy</title>
+<meta name="description" content="Field notes on secrets management, CI/CD pipeline security, CIS compliance and PKI from Dr David Burnell of Burnell Consultancy. Answer-first, evidence-led, no marketing filler.">
+<link rel="canonical" href="https://burnellconsultancy.co.uk/insights/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Burnell Consultancy Ltd">
+<meta property="og:title" content="Insights | Platform security engineering, Burnell Consultancy">
+<meta property="og:description" content="Field notes on secrets management, CI/CD pipeline security, CIS compliance and PKI from Dr David Burnell of Burnell Consultancy. Answer-first, evidence-led, no marketing filler.">
+<meta property="og:url" content="https://burnellconsultancy.co.uk/insights/">
+<meta property="og:image" content="https://burnellconsultancy.co.uk/assets/og-card.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Insights | Platform security engineering, Burnell Consultancy">
+<meta name="twitter:description" content="Field notes on secrets management, CI/CD pipeline security, CIS compliance and PKI from Dr David Burnell of Burnell Consultancy. Answer-first, evidence-led, no marketing filler.">
+<meta name="twitter:image" content="https://burnellconsultancy.co.uk/assets/og-card.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["Organization", "ProfessionalService"], "@id": "https://burnellconsultancy.co.uk/#organization", "name": "Burnell Consultancy Ltd", "legalName": "Burnell Consultancy Ltd", "url": "https://burnellconsultancy.co.uk/", "email": "hello@burnellconsultancy.co.uk", "description": "UK platform security engineering consultancy specialising in secrets management, CI/CD pipeline security, golden machine images and security programme maturity.", "founder": {"@id": "https://burnellconsultancy.co.uk/#david-burnell"}, "areaServed": {"@type": "Country", "name": "United Kingdom"}, "priceRange": "££", "address": {"@type": "PostalAddress", "addressLocality": "Godalming", "addressRegion": "Surrey", "addressCountry": "GB"}, "sameAs": ["https://www.linkedin.com/company/burnell-consultancy", "https://github.com/burnell-consultancy", "https://find-and-update.company-information.service.gov.uk/"]}, {"@type": "Person", "@id": "https://burnellconsultancy.co.uk/#david-burnell", "name": "Dr David Burnell", "honorificPrefix": "Dr", "givenName": "David", "familyName": "Burnell", "jobTitle": "Founder and Principal Platform Security Engineer", "worksFor": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Durham University"}, "knowsAbout": ["Secrets management", "HashiCorp Vault", "OpenBao", "Public key infrastructure", "CI/CD pipeline security", "CIS Benchmarks", "Golden images", "Non-human identity", "Application security posture management"], "sameAs": ["https://www.linkedin.com/in/david-burnell", "https://github.com/dburnell", "https://orcid.org/0000-0000-0000-0000", "https://scholar.google.com/citations?user=placeholder", "https://etheses.dur.ac.uk/11055/"]}, {"@type": "ProfessionalService", "@id": "https://burnellconsultancy.co.uk/#service", "name": "Burnell Consultancy Ltd", "url": "https://burnellconsultancy.co.uk/", "parentOrganization": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "areaServed": {"@type": "Country", "name": "GB"}, "priceRange": "££", "serviceType": "Platform security engineering"}, {"@type": "WebSite", "@id": "https://burnellconsultancy.co.uk/#website", "url": "https://burnellconsultancy.co.uk/", "name": "Burnell Consultancy Ltd", "publisher": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "inLanguage": "en-GB"}, {"@type": "WebPage", "@id": "https://burnellconsultancy.co.uk/insights/#webpage", "url": "https://burnellconsultancy.co.uk/insights/", "name": "Insights | Platform security engineering, Burnell Consultancy", "description": "Field notes on secrets management, CI/CD pipeline security, CIS compliance and PKI from Dr David Burnell of Burnell Consultancy. Answer-first, evidence-led, no marketing filler.", "isPartOf": {"@id": "https://burnellconsultancy.co.uk/#website"}, "about": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "inLanguage": "en-GB"}, {"@type": "BreadcrumbList", "@id": "https://burnellconsultancy.co.uk/insights/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://burnellconsultancy.co.uk/"}, {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://burnellconsultancy.co.uk/insights/"}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-inner">
+<a class="logo" href="/" aria-label="Burnell Consultancy Ltd home">
+<span class="logo-a">Burnell</span><span class="logo-b">Consultancy</span>
+</a>
+<button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+<span></span><span></span><span></span>
+</button>
+<nav class="primary-nav" id="primary-nav" aria-label="Primary">
+<ul><li><a href="/assessment/">Assessment</a></li><li class="has-sub"><button class="nav-group" aria-haspopup="true" aria-expanded="false">Services<span class="chev" aria-hidden="true">&#9662;</span></button><ul class="submenu"><li><a href="/services/secrets-vault/">Secrets and vault</a></li><li><a href="/services/golden-images/">Golden image factory</a></li><li><a href="/services/security-maturity/">Security maturity (SAMM + ASPM)</a></li><li><a href="/services/pki/">PKI and machine identity</a></li></ul></li><li class="has-sub"><button class="nav-group" aria-haspopup="true" aria-expanded="false">Who we help<span class="chev" aria-hidden="true">&#9662;</span></button><ul class="submenu"><li><a href="/who-we-help/scaling-saas/">Scaling SaaS and fintech</a></li><li><a href="/who-we-help/regulated-platforms/">Regulated platforms</a></li><li><a href="/who-we-help/financial-services/">Financial services</a></li></ul></li><li><a href="/about/">About</a></li><li><a href="/insights/" class="active">Insights</a></li><li><a href="/scorecard/">Scorecard</a></li></ul>
+</nav>
+<a class="btn btn-primary header-cta" href="/assessment/">Book a fixed-price assessment</a>
+</div>
+</header>
+<main id="main">
+<section class="page-hero">
+<div class="wrap narrow">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Insights</span></nav>
+<p class="eyebrow">Insights</p>
+<h1>Field notes on platform security engineering</h1>
+<p class="answer-first big">Answer-first writing on secrets, pipelines, golden
+images and PKI, from the engineer who does the work. Every piece leads with the
+answer and backs it with numbers. The four below are seeded outlines, marked as
+such, being written now.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap">
+<div class="post-grid"><article class="post-card">
+<p class="post-date">2026-02-10 &middot; <span class="todo-tag">Outline</span></p>
+<h2><a href="/insights/cis-25-to-95/">How we took CIS Level 1 compliance from 25% to 95%</a></h2>
+<p>A field account of moving CIS Level 1 conformance from 25% to over 95% by industrialising machine-image builds instead of chasing findings by hand.</p>
+<a class="card-link" href="/insights/cis-25-to-95/">Read &rarr;</a>
+</article><article class="post-card">
+<p class="post-date">2026-03-04 &middot; <span class="todo-tag">Outline</span></p>
+<h2><a href="/insights/vault-openbao-cloud-kms/">Vault, OpenBao or cloud KMS: how to choose in 2026</a></h2>
+<p>A vendor-neutral decision guide for choosing between HashiCorp Vault, OpenBao and cloud KMS for secrets management in 2026.</p>
+<a class="card-link" href="/insights/vault-openbao-cloud-kms/">Read &rarr;</a>
+</article><article class="post-card">
+<p class="post-date">2026-04-01 &middot; <span class="todo-tag">Outline</span></p>
+<h2><a href="/insights/dora-cicd-pipelines/">What DORA actually requires of your CI/CD pipelines</a></h2>
+<p>A plain-language reading of what the Digital Operational Resilience Act actually asks of your CI/CD pipelines, and where teams fall short.</p>
+<a class="card-link" href="/insights/dora-cicd-pipelines/">Read &rarr;</a>
+</article><article class="post-card">
+<p class="post-date">2026-05-06 &middot; <span class="todo-tag">Outline</span></p>
+<h2><a href="/insights/90-day-secrets-plan/">The 90-day plan for getting secrets out of code</a></h2>
+<p>A concrete, sequenced 90-day plan for removing hard-coded secrets from code and CI without halting delivery.</p>
+<a class="card-link" href="/insights/90-day-secrets-plan/">Read &rarr;</a>
+</article></div>
+</div>
+</section>
+
+<section class="cta-band">
+<div class="wrap cta-band-inner">
+<div>
+<h2>Take credentials out of code. In two weeks, for a price you can see.</h2>
+<p>Fixed scope, fixed fee, no lock-in. If you pass cleanly, we say so and leave.</p>
+</div>
+<a class="btn btn-invert" href="/assessment/">Book a fixed-price assessment</a>
+</div>
+</section>
+
+</main>
+<footer class="site-footer">
+<div class="wrap footer-grid">
+<div class="footer-brand">
+<a class="logo" href="/"><span class="logo-a">Burnell</span><span class="logo-b light">Consultancy</span></a>
+<p>Burnell Consultancy Ltd is a UK platform security engineering firm. We take
+credentials out of code, make machine images compliant by default, and turn
+scanner noise into a roadmap your engineers will actually follow.</p>
+<p class="footer-meta">Registered in England and Wales, company number [placeholder].<br>
+Godalming, Surrey, GB. <a href="mailto:hello@burnellconsultancy.co.uk">hello@burnellconsultancy.co.uk</a></p>
+</div>
+<div class="footer-col"><h3>Services</h3><ul><li><a href="/services/secrets-vault/">Secrets and vault</a></li><li><a href="/services/golden-images/">Golden image factory</a></li><li><a href="/services/security-maturity/">Security maturity</a></li><li><a href="/services/pki/">PKI and machine identity</a></li></ul></div>
+<div class="footer-col"><h3>Who we help</h3><ul><li><a href="/who-we-help/scaling-saas/">Scaling SaaS and fintech</a></li><li><a href="/who-we-help/regulated-platforms/">Regulated platforms</a></li><li><a href="/who-we-help/financial-services/">Financial services</a></li></ul></div>
+<div class="footer-col"><h3>Company</h3><ul><li><a href="/assessment/">The assessment</a></li><li><a href="/about/">About Dr David Burnell</a></li><li><a href="/insights/">Insights</a></li><li><a href="/scorecard/">Secrets Sprawl Scorecard</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+</div>
+<div class="footer-band">
+<div class="wrap footer-band-inner">
+<a class="btn btn-primary" href="/assessment/">Book a fixed-price assessment</a>
+<p class="copyright">&copy; 2026 Burnell Consultancy Ltd. Vendor-neutral. No resale, no lock-in.</p>
+</div>
+</div>
+</footer>
+<script src="/js/main.js" defer></script>
+</body>
+</html>

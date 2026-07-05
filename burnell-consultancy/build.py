@@ -355,7 +355,7 @@ def footer():
 <footer class="site-footer">
 <div class="wrap footer-grid">
 <div class="footer-brand">
-<a class="logo" href="/"><span class="logo-a">Burnell</span><span class="logo-b light">Consultancy</span></a>
+<a class="logo" href="/"><span class="logo-a light">Burnell</span><span class="logo-b light">Consultancy</span></a>
 <p>{html.escape(ORG_NAME)} is a UK platform security engineering firm. We take
 credentials out of code, make machine images compliant by default, and turn
 scanner noise into a roadmap your engineers will actually follow.</p>
@@ -403,6 +403,51 @@ def faq_block(faqs):
 <div class="wrap narrow">
 <h2>Questions technical buyers ask</h2>
 <div class="faq-list">{''.join(items)}</div>
+</div>
+</section>"""
+
+
+def calendly_embed(with_email=True):
+    # Real Calendly inline widget. Loads Calendly's widget.js (the one third-party
+    # script the brief permits). Degrades to a plain booking link without JS.
+    email = ""
+    if with_email:
+        email = (f'<p class="muted">Prefer email? Write to '
+                 f'<a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> '
+                 f'or use the <a href="/contact/">contact form</a>.</p>')
+    return f"""<div class="calendly-embed" role="region" aria-label="Booking calendar">
+<div class="calendly-inline-widget" data-url="{CALENDLY_URL}?hide_gdpr_banner=1&primary_color=2563eb"
+     style="min-width:320px;height:700px;"></div>
+<noscript>
+<div class="calendly-placeholder">
+<p><strong>Book an assessment call</strong></p>
+<a class="btn btn-primary" href="{CALENDLY_URL}">Open the booking calendar</a>
+</div>
+</noscript>
+{email}
+</div>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>"""
+
+
+ENTERPRISE_LOGOS = [
+    ("ibm.svg", "IBM"),
+    ("hp.svg", "HP"),
+    ("g-research.svg", "G-Research"),
+    ("aristocrat.svg", "Aristocrat Leisure"),
+]
+
+
+def enterprise_bar():
+    logos = "".join(
+        f'<img src="/assets/logos/{f}" alt="{html.escape(name)}" width="180" height="56" loading="lazy">'
+        for f, name in ENTERPRISE_LOGOS
+    )
+    return f"""<section class="logo-wall" aria-label="Founder's enterprise track record">
+<div class="wrap">
+<h2>Tried and trusted by enterprise organisations</h2>
+<div class="logo-row">{logos}</div>
+<p class="logo-note">Platform security engineering built and scaled inside these
+organisations by our founder, {FOUNDER}.</p>
 </div>
 </section>"""
 
@@ -546,6 +591,8 @@ The person you meet is the person who does the work.</p>
 </div>
 </section>
 
+{enterprise_bar()}
+
 {faq_block(faqs)}
 
 {cta_band()}
@@ -669,14 +716,7 @@ The boundary is fixed in writing so the price can be fixed too.</p>
 <h2 class="section-q">Book an assessment call</h2>
 <p class="answer-first">A 30-minute call to confirm scope and fit. No slide deck,
 no obligation. If we are not the right people for your problem we will tell you.</p>
-<div class="calendly-embed" role="region" aria-label="Booking calendar">
-<div class="calendly-placeholder">
-<p><strong>Calendly booking</strong></p>
-<p>Inline embed loads at <code>{CALENDLY_URL}</code>.</p>
-<a class="btn btn-primary" href="{CALENDLY_URL}">Open the booking calendar</a>
-<p class="muted">Prefer email? Write to <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or use the <a href="/contact/">contact form</a>.</p>
-</div>
-</div>
+{calendly_embed(with_email=True)}
 </div>
 </section>
 """
@@ -1318,13 +1358,7 @@ third parties.</p>
 </div>
 <div>
 <h2 class="section-q">Or book straight in</h2>
-<div class="calendly-embed" role="region" aria-label="Booking calendar">
-<div class="calendly-placeholder">
-<p><strong>Calendly booking</strong></p>
-<p>Inline embed loads at <code>{CALENDLY_URL}</code>.</p>
-<a class="btn btn-primary" href="{CALENDLY_URL}">Open the booking calendar</a>
-</div>
-</div>
+{calendly_embed(with_email=False)}
 <div class="contact-facts">
 <h3>Direct</h3>
 <p><a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></p>
@@ -1339,43 +1373,519 @@ third parties.</p>
     return path, page(path, title, desc, body, extra, active=None, crumbs=crumbs)
 
 
-# ---- Insights ------------------------------------------------------------- #
+# ---- Insights: 10 AEO-optimised posts -------------------------------------- #
 
-ARTICLES = [
-    ("cis-25-to-95", "How we took CIS Level 1 compliance from 25% to 95%",
-     "A field account of moving CIS Level 1 conformance from 25% to over 95% by "
-     "industrialising machine-image builds instead of chasing findings by hand.",
-     "2026-02-10"),
-    ("vault-openbao-cloud-kms", "Vault, OpenBao or cloud KMS: how to choose in 2026",
-     "A vendor-neutral decision guide for choosing between HashiCorp Vault, "
-     "OpenBao and cloud KMS for secrets management in 2026.",
-     "2026-03-04"),
-    ("dora-cicd-pipelines", "What DORA actually requires of your CI/CD pipelines",
-     "A plain-language reading of what the Digital Operational Resilience Act "
-     "actually asks of your CI/CD pipelines, and where teams fall short.",
-     "2026-04-01"),
-    ("90-day-secrets-plan", "The 90-day plan for getting secrets out of code",
-     "A concrete, sequenced 90-day plan for removing hard-coded secrets from code "
-     "and CI without halting delivery.",
-     "2026-05-06"),
+# Canonical contextual links so every article points at the money pages with
+# consistent anchor text (helps both readers and answer engines map topic to
+# service).
+SERVICE_LINKS = {
+    "assessment": ("/assessment/", "Secrets and Pipeline Security Assessment"),
+    "secrets": ("/services/secrets-vault/", "secrets and vault engineering"),
+    "golden": ("/services/golden-images/", "golden image factory"),
+    "maturity": ("/services/security-maturity/", "security maturity and ASPM work"),
+    "pki": ("/services/pki/", "PKI and machine identity engineering"),
+    "scorecard": ("/scorecard/", "Secrets Sprawl Scorecard"),
+}
+
+
+def L(key, text=None):
+    href, label = SERVICE_LINKS[key]
+    return f'<a href="{href}">{text or label}</a>'
+
+
+# Each post: full article, answer-first, question-led H2s, one stats box,
+# contextual service links, CTA footer, and a generated thumbnail.
+POSTS = [
+    {
+        "slug": "secrets-out-of-code-90-days",
+        "date": "2026-06-18", "read": "8 min",
+        "accent": "blue", "kicker": "FOR ENGINEERING LEADERS", "tag": "Secrets",
+        "title": "How do you get secrets out of code and CI in 90 days?",
+        "meta": "A sequenced 90-day plan for removing hard-coded secrets from code "
+                "and CI without halting delivery: inventory, rotate by blast radius, "
+                "stand up a broker, migrate, then remediate history.",
+        "answer": "You sequence it. In the first 30 days you inventory every "
+                  "credential and rotate the highest blast-radius ones, in the next "
+                  "30 you stand up a secrets broker and migrate workloads behind it, "
+                  "and in the final 30 you prove the change to auditors and clean up "
+                  "git history. Rotation comes before scrubbing, because a rotated "
+                  "secret is dead whether or not it still sits in history.",
+        "stats": [
+            ("90 days", "to a broker-backed estate with the worst secrets already dead"),
+            ("Rotate first", "a rotated credential is neutralised even if still in history"),
+            ("0", "delivery freezes required if you sequence by blast radius"),
+        ],
+        "body": f"""
+<h2 class="section-q">Why does hard-coded secrets removal stall?</h2>
+<p>Because teams try to boil the ocean: scrub every repository's history at once,
+freeze deploys, and lose engineering goodwill in a week. The work stalls, and the
+secrets stay. The way through is to treat it as a migration with a fixed order,
+not a cleanup.</p>
+
+<h2 class="section-q">Days 1 to 30: inventory and stop the bleeding</h2>
+<p>Start by finding out what you have. Scan code, CI configuration, container
+images and developer machines, then rank every secret by blast radius: what does
+it unlock, and how bad is a leak? Rotate the top of that list immediately. You do
+not need a broker yet to rotate a database password. This is exactly the ground
+our {L('assessment')} covers in two weeks if you want it done to a scored model.</p>
+
+<h2 class="section-q">Days 31 to 90: broker, migrate, prove</h2>
+<p>Now stand up a secrets broker and wire workloads to fetch short-lived
+credentials at run time. Whether that broker is Vault, OpenBao or a cloud KMS is
+an estate decision, and it is the heart of our {L('secrets')}. Migrate service by
+service so nothing breaks in flight, then produce the evidence an enterprise buyer
+or auditor will ask for.</p>
+
+<h2 class="section-q">What about the secrets already in git history?</h2>
+<p>Leave history remediation until last. Once a leaked secret has been rotated it
+is inert, so the urgent work is rotation, not rewriting commits. Clean history on a
+schedule after the live risk is gone. If you want to know where you stand before
+committing to the plan, the {L('scorecard')} scores your exposure in ten minutes.</p>
+""",
+        "links": ["assessment", "secrets", "scorecard"],
+    },
+    {
+        "slug": "cis-25-to-95",
+        "date": "2026-06-02", "read": "9 min",
+        "accent": "teal", "kicker": "FOR REGULATED PLATFORMS", "tag": "CIS L1",
+        "title": "How we took CIS Level 1 compliance from 25% to 95%",
+        "meta": "A field account of moving CIS Level 1 conformance from 25% to over "
+                "95% by industrialising machine-image builds instead of chasing audit "
+                "findings by hand.",
+        "answer": "We stopped fixing findings on live hosts and started baking "
+                  "compliance into the base image. A pipeline built hardened, "
+                  "CIS-benchmarked images, tested them, and republished on a schedule, "
+                  "so every new instance booted compliant and drift could not "
+                  "accumulate. Conformance went from 25% to over 95%, and it stayed "
+                  "there because humans were no longer the control loop.",
+        "stats": [
+            ("25% → 95%+", "CIS Level 1 conformance in one programme"),
+            ("Rebuild", "not hand-patch: the new response to a zero-day"),
+            ("Schedule", "images rebuilt on a cadence, so drift cannot creep back"),
+        ],
+        "body": f"""
+<h2 class="section-q">Why does hand-patching never converge?</h2>
+<p>Because configuration drifts faster than people can correct it. Every manual fix
+on a live host is undone by the next deploy, the next image, the next engineer in a
+hurry. Conformance plateaus wherever human effort runs out, which for most large
+estates is well short of an audit pass.</p>
+
+<h2 class="section-q">What changed the curve?</h2>
+<p>Moving the control from the host to the image. Instead of remediating thousands
+of running servers, we hardened one base image per OS family, proved it against the
+CIS Benchmark in a pipeline, and made every instance boot from it. That is the whole
+idea behind our {L('golden')}: compliance becomes the default state, not a task.</p>
+
+<h2 class="section-q">How does this help with zero-day patching?</h2>
+<p>When a critical CVE lands, you patch the base image once and trigger rebuilds. The
+fix propagates to every new instance automatically, so mean time to patch drops from
+weeks of manual work to the length of a pipeline run. Auditors stop seeing the same
+findings return, because the thing that generated them is gone.</p>
+
+<h2 class="section-q">Where should a regulated platform start?</h2>
+<p>With a clear picture of the current baseline. Our {L('assessment')} scores where
+you are and hands back a 90-day plan, so the factory build is grounded in your actual
+estate rather than a generic template.</p>
+""",
+        "links": ["golden", "assessment"],
+    },
+    {
+        "slug": "vault-openbao-cloud-kms",
+        "date": "2026-05-14", "read": "10 min",
+        "accent": "blue", "kicker": "DECISION GUIDE", "tag": "Vault",
+        "title": "Vault, OpenBao or cloud KMS: how to choose in 2026",
+        "meta": "A vendor-neutral decision guide for choosing between HashiCorp "
+                "Vault, OpenBao and cloud KMS for secrets management in 2026, by total "
+                "cost rather than licence cost.",
+        "answer": "Choose Vault for a mature, feature-complete platform, OpenBao when "
+                  "licence exposure is the deciding constraint, and cloud KMS when you "
+                  "are single-cloud and want the least operational surface. The right "
+                  "answer is set by your estate and your appetite for running "
+                  "infrastructure, not by a feature checklist, and it should be judged "
+                  "on total cost, not licence cost.",
+        "stats": [
+            ("3 options", "Vault, OpenBao, cloud KMS: each wins for a different estate"),
+            ("Total cost", "operational burden usually dwarfs the licence line"),
+            ("Vendor-neutral", "we take no reseller margin on any of them"),
+        ],
+        "body": f"""
+<h2 class="section-q">When is HashiCorp Vault the right call?</h2>
+<p>When you need breadth: dynamic database credentials, PKI, transit encryption,
+and a large ecosystem of integrations under one roof. Vault is the mature default
+and rewards teams that will invest in running it well. That investment is real,
+which is why our {L('secrets')} always sizes the operational cost, not just the
+licence.</p>
+
+<h2 class="section-q">Who should look at OpenBao?</h2>
+<p>Teams for whom licence exposure is the deciding constraint. OpenBao is the
+open-source fork of Vault, governed in the open, and for many estates it delivers
+the capabilities that matter without the commercial licence. The migration path from
+Vault is short, which makes it a credible option rather than a compromise.</p>
+
+<h2 class="section-q">And cloud KMS?</h2>
+<p>If you are single-cloud and want the least infrastructure to run, a cloud KMS plus
+the provider's secrets manager may be all you need. You trade breadth and portability
+for a smaller operational surface. That is often the correct trade for a lean team.</p>
+
+<h2 class="section-q">How do you actually decide?</h2>
+<p>Score the options against your estate: cloud footprint, non-human identity volume,
+regulatory constraints and the size of the team that will operate the thing. Our
+{L('assessment')} does that scoring for you and outputs a recommendation with reasons,
+so the choice is defensible to your board.</p>
+""",
+        "links": ["secrets", "assessment"],
+    },
+    {
+        "slug": "dora-cicd-pipelines",
+        "date": "2026-04-28", "read": "8 min",
+        "accent": "blue", "kicker": "FOR SCALING FINTECH", "tag": "DORA",
+        "title": "What DORA actually requires of your CI/CD pipelines",
+        "meta": "A plain-language reading of what the Digital Operational Resilience "
+                "Act asks of your CI/CD pipelines, and the specific controls teams are "
+                "usually missing.",
+        "answer": "DORA requires demonstrable operational resilience, which for CI/CD "
+                  "means evidenced control over who and what can change production, "
+                  "provable integrity of the build, and tested recovery. In practice "
+                  "that comes down to removing shared long-lived credentials, signing "
+                  "artefacts, recording provenance, and proving you can rebuild and "
+                  "recover on demand.",
+        "stats": [
+            ("Evidence", "DORA is satisfied by proof, not by good intentions"),
+            ("Provenance", "you must be able to show what shipped and who changed it"),
+            ("Tested recovery", "untested backups do not count"),
+        ],
+        "body": f"""
+<h2 class="section-q">What is DORA really asking of a pipeline?</h2>
+<p>Strip the legal language and DORA asks three operational questions. Can you prove
+who and what can change production? Can you prove the integrity of what you ship? Can
+you recover when something breaks, and have you tested that? Everything else is
+detail hanging off those three.</p>
+
+<h2 class="section-q">Where do teams fall short?</h2>
+<p>Almost always on identity and integrity. Pipelines authenticate with shared,
+long-lived credentials that nobody can attribute to a person or a job; artefacts ship
+unsigned with no provenance; and recovery has never actually been rehearsed. The
+first of those is exactly what our {L('secrets')} removes, replacing shared secrets
+with short-lived, attributable credentials.</p>
+
+<h2 class="section-q">What does a compliant pipeline look like?</h2>
+<p>Every change is attributable to a verified identity, every artefact is signed and
+carries provenance, and recovery is a tested runbook rather than a hope. Where machine
+identity is the weak point, our {L('pki')} gives each workload a verifiable identity
+instead of a shared password.</p>
+
+<h2 class="section-q">How do you get there without a two-year programme?</h2>
+<p>Start with a scored gap analysis. Our {L('assessment')} maps your current pipeline
+against these requirements and returns a prioritised 90-day plan, so you close the
+highest-risk gaps first and can show a regulator a credible trajectory.</p>
+""",
+        "links": ["assessment", "secrets", "pki"],
+    },
+    {
+        "slug": "enterprise-security-questionnaire",
+        "date": "2026-04-09", "read": "7 min",
+        "accent": "blue", "kicker": "FOR SCALING CTOs", "tag": "Due diligence",
+        "title": "How do you pass an enterprise security questionnaire without stalling the deal?",
+        "answer": "You get ahead of it. Enterprise questionnaires stall deals when your "
+                  "honest answers about secrets in code and shared credentials trigger "
+                  "follow-up. Fix the two or three issues that generate the most "
+                  "follow-up first, then keep a ready pack of evidence, so the "
+                  "questionnaire becomes a form you complete rather than a negotiation "
+                  "you lose.",
+        "meta": "How Series B and later engineering teams pass enterprise security "
+                "questionnaires without stalling the deal: fix the high-signal gaps "
+                "first and keep an evidence pack ready.",
+        "stats": [
+            ("Same week", "turn a stalled questionnaire into an evidenced response"),
+            ("2 to 3 gaps", "usually generate most of the follow-up"),
+            ("Evidence pack", "answer once, reuse for every buyer"),
+        ],
+        "body": f"""
+<h2 class="section-q">Why do questionnaires stall deals?</h2>
+<p>Because a single honest answer, secrets are stored in code, or service accounts
+share a long-lived key, invites a chain of follow-up questions and a nervous security
+reviewer. The deal does not die on price; it dies in due diligence. The fix is to
+remove the answers that trigger follow-up.</p>
+
+<h2 class="section-q">Which gaps generate the most follow-up?</h2>
+<p>In our experience, three: hard-coded secrets, shared non-human credentials, and no
+provenance on what you deploy. Close those and the majority of red flags disappear.
+Removing hard-coded secrets is the core of our {L('secrets')}, and it is usually the
+single highest-signal change a scaling team can make.</p>
+
+<h2 class="section-q">How do you answer once and reuse it?</h2>
+<p>Build an evidence pack: a short, current set of documents and scored results that
+answers the standard questionnaire in advance. Our {L('assessment')} produces exactly
+this, a scored report you can hand straight to an enterprise buyer, so you stop
+rewriting the same answers for every deal.</p>
+
+<h2 class="section-q">What if a deal is live right now?</h2>
+<p>Then triage. Score your posture fast, fix the highest-signal gap, and send back
+evidence rather than promises. A two-week, fixed-price {L('assessment', 'assessment')}
+is designed to move at deal speed.</p>
+""",
+        "links": ["assessment", "secrets"],
+    },
+    {
+        "slug": "find-every-secret",
+        "date": "2026-03-20", "read": "8 min",
+        "accent": "amber", "kicker": "FOR FINANCIAL SERVICES", "tag": "Sprawl",
+        "title": "How do you find every secret sprawling across your codebase?",
+        "meta": "How to inventory secrets sprawl across code, CI, config and developer "
+                "machines, then prioritise by blast radius before you try to fix "
+                "anything.",
+        "answer": "You scan every place a credential can hide, code, CI configuration, "
+                  "container images, config stores and developer machines, then rank "
+                  "what you find by blast radius rather than by count. The goal of "
+                  "discovery is not a tidy list; it is knowing which three secrets "
+                  "would hurt most if leaked, so you rotate those first.",
+        "stats": [
+            ("5 places", "code, CI, images, config stores, laptops"),
+            ("Blast radius", "rank by impact, not by number of findings"),
+            ("Rotate top first", "the worst credential dead within days"),
+        ],
+        "body": f"""
+<h2 class="section-q">Where do secrets actually hide?</h2>
+<p>Everywhere credentials are convenient. Source code and its history, CI environment
+variables and pipeline definitions, baked-in container image layers, shared config
+stores, and the laptops of long-serving engineers. A scan that only looks at current
+code misses most of the estate.</p>
+
+<h2 class="section-q">Why rank by blast radius, not by count?</h2>
+<p>Because a thousand low-impact findings are less urgent than one credential that
+unlocks the trading database. Counting findings makes everything look equally scary
+and nothing get fixed. Ranking by what each secret unlocks tells you where to spend
+the first week. This prioritisation is the opening move of our {L('secrets')}.</p>
+
+<h2 class="section-q">What do you do once you have the inventory?</h2>
+<p>Rotate the top of the list immediately, then move workloads behind a broker so new
+secrets are short-lived and audited. For a quant-finance or trading estate, where
+non-human identities multiply fast, that broker work pairs naturally with our
+{L('pki')}.</p>
+
+<h2 class="section-q">Can you gauge exposure before a full engagement?</h2>
+<p>Yes. The {L('scorecard')} is a ten-question self-assessment that tells you, in ten
+minutes, whether secrets sprawl is already a live risk, and a full
+{L('assessment', 'assessment')} scores it properly.</p>
+""",
+        "links": ["secrets", "pki", "scorecard", "assessment"],
+    },
+    {
+        "slug": "golden-image-factory-explained",
+        "date": "2026-03-03", "read": "9 min",
+        "accent": "teal", "kicker": "FOR REGULATED PLATFORMS", "tag": "Golden images",
+        "title": "What is a golden image factory, and why does it end audit findings?",
+        "meta": "A plain explanation of the golden image factory pattern: hardened, "
+                "CIS-compliant machine images built on a pipeline and rebuilt on a "
+                "schedule so audit findings stop recurring.",
+        "answer": "A golden image factory is a pipeline that builds hardened, "
+                  "CIS-benchmarked machine images, tests them, signs them and "
+                  "republishes on a schedule. It ends recurring audit findings because "
+                  "compliance is baked into the image every instance boots from, rather "
+                  "than hand-applied to live hosts where it drifts straight back.",
+        "stats": [
+            ("One image", "hardened once, booted everywhere"),
+            ("Signed", "provenance proves exactly what shipped"),
+            ("Scheduled", "rebuilds keep patches flowing without firefighting"),
+        ],
+        "body": f"""
+<h2 class="section-q">What does the factory actually produce?</h2>
+<p>A trusted base image per operating-system family, hardened to the relevant CIS
+Benchmark, tested and scanned in a pipeline, signed for provenance, and published on a
+cadence. Every server, container host and VM boots from that image, so the compliant
+state is the starting state.</p>
+
+<h2 class="section-q">Why does this end recurring findings?</h2>
+<p>Because the finding is fixed at the source. Hand-patching a live host is undone by
+the next deploy; hardening the image means the fix ships with every new instance and
+cannot drift away between audits. That is the whole premise of our {L('golden')}.</p>
+
+<h2 class="section-q">How does it change zero-day response?</h2>
+<p>A critical CVE becomes a single image change plus a rebuild trigger. The patched
+image propagates automatically, so your mean time to patch is measured in a pipeline
+run rather than weeks of manual remediation across thousands of hosts.</p>
+
+<h2 class="section-q">What does it take to stand one up?</h2>
+<p>A build tool such as Packer, hardening code, a compliance-scan gate and a schedule.
+Our {L('golden', 'golden image factory')} is a fixed-price build, and it starts from an
+{L('assessment')} so the image families and platforms match your real estate.</p>
+""",
+        "links": ["golden", "assessment"],
+    },
+    {
+        "slug": "non-human-identity",
+        "date": "2026-02-16", "read": "8 min",
+        "accent": "amber", "kicker": "FOR FINANCIAL SERVICES", "tag": "NHI",
+        "title": "Non-human identity: how to secure the machines that outnumber your people",
+        "meta": "Non-human identities now vastly outnumber humans in engineering "
+                "estates. Here is how to give every workload a verifiable identity "
+                "instead of a shared, long-lived secret.",
+        "answer": "You give every service, job and container a verifiable identity "
+                  "instead of a shared secret. Non-human identities now outnumber "
+                  "people by a wide margin, and when they authenticate with shared, "
+                  "long-lived credentials they are the softest target in the estate. A "
+                  "workload identity model plus short-lived credentials removes that "
+                  "target.",
+        "stats": [
+            ("Outnumbered", "non-human identities dwarf human ones in most estates"),
+            ("Shared secrets", "the most common and softest attack surface"),
+            ("Short-lived", "credentials that expire before they can be reused"),
+        ],
+        "body": f"""
+<h2 class="section-q">What is a non-human identity?</h2>
+<p>Anything that authenticates without being a person: a service, a pipeline job, a
+container, a script, a bot. Each needs to prove who it is to get a secret or call an
+API. Collectively they now vastly outnumber your human users, and they rarely get the
+same identity rigour.</p>
+
+<h2 class="section-q">Why are they the softest target?</h2>
+<p>Because they so often share long-lived credentials. One static key, copied across
+dozens of services, that never rotates and cannot be attributed to a single caller. It
+is the credential an attacker most wants and the one most likely to be sitting in a
+config file. Removing it is central to our {L('secrets')}.</p>
+
+<h2 class="section-q">What does a good model look like?</h2>
+<p>Every workload gets a verifiable identity, using OIDC, SPIFFE/SPIRE or cloud-native
+identity, and draws short-lived credentials against it. Nothing shares a static key.
+Building that model, and the PKI to support it, is the work in our {L('pki')}.</p>
+
+<h2 class="section-q">Where should a trading firm start?</h2>
+<p>With discovery: find the shared credentials first, because you cannot secure
+identities you have not enumerated. A scored {L('assessment')} maps them and sequences
+the migration so nothing breaks in flight.</p>
+""",
+        "links": ["pki", "secrets", "assessment"],
+    },
+    {
+        "slug": "scanner-noise-to-roadmap",
+        "date": "2026-01-29", "read": "8 min",
+        "accent": "teal", "kicker": "FOR SECURITY LEADERS", "tag": "ASPM",
+        "title": "How do you turn thousands of scanner alerts into a roadmap engineers will follow?",
+        "meta": "How to convert thousands of open scanner alerts into a short, "
+                "prioritised roadmap using OWASP SAMM and application security posture "
+                "management, so engineering actually does the work.",
+        "answer": "You stop treating every alert as equal. Using OWASP SAMM to measure "
+                  "programme maturity and application security posture management to "
+                  "correlate and rank findings by exploitability and blast radius, you "
+                  "cut thousands of alerts to the handful that move real risk, then "
+                  "sequence them into a roadmap engineering owns rather than resists.",
+        "stats": [
+            ("Thousands → tens", "the point of prioritisation is subtraction"),
+            ("SAMM", "measures the programme, not just the code"),
+            ("Owned", "a roadmap engineers adopt, not one imposed on them"),
+        ],
+        "body": f"""
+<h2 class="section-q">Why does nobody action the scanner output?</h2>
+<p>Because everything looks urgent and therefore nothing is. Scanners are good at
+finding and bad at prioritising, so a typical estate carries thousands of open alerts
+that engineering has learned to ignore. More scanning does not fix this; better
+ranking does.</p>
+
+<h2 class="section-q">What does ASPM change?</h2>
+<p>Application security posture management sits above your existing scanners and
+correlates their output, de-duplicating findings and ranking them by exploitability and
+blast radius. The firehose becomes a short list. That correlation layer is the engine
+of our {L('maturity')}.</p>
+
+<h2 class="section-q">Where does OWASP SAMM fit?</h2>
+<p>SAMM measures the maturity of the programme itself, across governance, design,
+implementation and operations, so you are improving practices, not just closing tickets.
+It is open and engineering-friendly, which matters when the goal is a roadmap teams will
+actually adopt.</p>
+
+<h2 class="section-q">How fast do you see the benefit?</h2>
+<p>The prioritisation is immediate: the ranked shortlist falls out of the first pass.
+The drop in open findings follows as the roadmap lands, usually across the first 90
+days. A scored {L('assessment')} gives you that shortlist and the plan behind it.</p>
+""",
+        "links": ["maturity", "assessment"],
+    },
+    {
+        "slug": "short-lived-certificates",
+        "date": "2026-01-12", "read": "7 min",
+        "accent": "amber", "kicker": "FOR FINANCIAL SERVICES", "tag": "PKI",
+        "title": "Why short-lived certificates end legacy PKI outages",
+        "meta": "Legacy PKI with long-lived, hand-rotated certificates causes outages "
+                "and audit findings. Here is why short-lived, automatically rotated "
+                "certificates end both.",
+        "answer": "Because a certificate that lives for an hour cannot expire "
+                  "unnoticed or be stolen and reused for a year. Legacy PKI fails when "
+                  "long-lived certificates, tracked by hand, quietly expire or leak. "
+                  "Short-lived certificates issued and rotated automatically remove the "
+                  "manual tracking that causes outages and shrink the window any "
+                  "compromised credential is useful for.",
+        "stats": [
+            ("Hours, not years", "certificate lifetimes that outpace attackers"),
+            ("Automated", "issuance and rotation with no human tracking"),
+            ("No surprise expiry", "the classic 3am PKI outage, designed out"),
+        ],
+        "body": f"""
+<h2 class="section-q">Why does legacy PKI cause outages?</h2>
+<p>Because it depends on humans remembering. A certificate issued for two years is
+tracked in a spreadsheet, the owner leaves, and one quiet weekend it expires and takes
+a service down. The same long lifetime that makes manual management bearable is what
+makes the outage inevitable.</p>
+
+<h2 class="section-q">How do short-lived certificates fix it?</h2>
+<p>By removing the human from the loop. Certificates that live for hours must be issued
+and rotated automatically, so there is no spreadsheet to fall out of date and no expiry
+to be surprised by. Automating issuance, through Vault PKI, a cloud CA or ACME, is the
+core of our {L('pki')}.</p>
+
+<h2 class="section-q">What about the security benefit?</h2>
+<p>A stolen certificate that expires in an hour is nearly worthless. Short lifetimes
+shrink the window an attacker can use a compromised credential, which is why they are
+as much a security control as an availability one. They pair naturally with the
+short-lived secrets in our {L('secrets')}.</p>
+
+<h2 class="section-q">How do you migrate without a big bang?</h2>
+<p>Assess what you have, modernise around the parts worth keeping, and cut over service
+by service. A scored {L('assessment')} maps the legacy estate and sequences the
+migration so nothing expires mid-flight.</p>
+""",
+        "links": ["pki", "secrets", "assessment"],
+    },
 ]
+
+
+ACCENT_HEX = {"blue": "#2563eb", "teal": "#0d9488", "amber": "#d97706"}
+
+
+def thumb_svg(accent, kicker, tag):
+    hexc = ACCENT_HEX[accent]
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" role="img" aria-label="{html.escape(tag)}">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="{hexc}"/><stop offset="1" stop-color="#1a2332"/>
+</linearGradient></defs>
+<rect width="400" height="225" fill="url(#g)"/>
+<circle cx="335" cy="55" r="120" fill="#ffffff" opacity="0.06"/>
+<circle cx="70" cy="215" r="90" fill="#ffffff" opacity="0.05"/>
+<rect x="300" y="150" width="72" height="72" rx="14" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.35"/>
+<text x="28" y="48" font-family="Inter,system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="2.5" fill="#ffffff" opacity="0.9">{html.escape(kicker)}</text>
+<text x="28" y="180" font-family="Inter,system-ui,sans-serif" font-size="40" font-weight="800" fill="#ffffff">{html.escape(tag)}</text>
+<rect x="28" y="196" width="52" height="4" rx="2" fill="#ffffff" opacity="0.85"/>
+</svg>
+"""
 
 
 def insights_index():
     path = "/insights/"
     title = "Insights | Platform security engineering, Burnell Consultancy"
-    desc = (
-        "Field notes on secrets management, CI/CD pipeline security, CIS compliance "
-        "and PKI from Dr David Burnell of Burnell Consultancy. Answer-first, "
-        "evidence-led, no marketing filler."
-    )
+    desc = ("Field notes on secrets management, CI/CD pipeline security, CIS "
+            "compliance, PKI and non-human identity from Dr David Burnell of Burnell "
+            "Consultancy. Answer-first, evidence-led, no marketing filler.")
     cards = ""
-    for slug, t, d, date in ARTICLES:
+    for p in POSTS:
         cards += f"""<article class="post-card">
-<p class="post-date">{date} &middot; <span class="todo-tag">Outline</span></p>
-<h2><a href="/insights/{slug}/">{html.escape(t)}</a></h2>
-<p>{html.escape(d)}</p>
-<a class="card-link" href="/insights/{slug}/">Read &rarr;</a>
+<a class="post-thumb" href="/insights/{p['slug']}/" aria-hidden="true" tabindex="-1">
+<img src="/assets/insights/{p['slug']}.svg" alt="" width="400" height="225" loading="lazy">
+</a>
+<div class="post-body">
+<p class="post-date">{p['date']} &middot; {p['read']} read &middot; <span class="kick-tag accent-{p['accent']}">{html.escape(p['kicker'].title())}</span></p>
+<h2><a href="/insights/{p['slug']}/">{html.escape(p['title'])}</a></h2>
+<p>{html.escape(p['meta'])}</p>
+<a class="card-link" href="/insights/{p['slug']}/">Read the article &rarr;</a>
+</div>
 </article>"""
     body = f"""<section class="page-hero">
 <div class="wrap narrow">
@@ -1383,9 +1893,9 @@ def insights_index():
 <p class="eyebrow">Insights</p>
 <h1>Field notes on platform security engineering</h1>
 <p class="answer-first big">Answer-first writing on secrets, pipelines, golden
-images and PKI, from the engineer who does the work. Every piece leads with the
-answer and backs it with numbers. The four below are seeded outlines, marked as
-such, being written now.</p>
+images, PKI and non-human identity, from the engineer who does the work. Every
+piece leads with the answer and backs it with numbers, written for scaling CTOs,
+regulated heads of platform and finance security leaders.</p>
 </div>
 </section>
 
@@ -1402,95 +1912,46 @@ such, being written now.</p>
     return path, page(path, title, desc, body, extra, active="/insights/", crumbs=crumbs)
 
 
-ARTICLE_OUTLINES = {
-    "cis-25-to-95": [
-        ("What did we actually change to get from 25% to 95%?",
-         "We stopped fixing findings on live hosts and started baking compliance "
-         "into the base image, then rebuilt on a schedule so drift could not "
-         "accumulate. [TODO: full narrative of the programme, before/after numbers, "
-         "the specific CIS controls that moved the needle.]"),
-        ("Why hand-patching never converges",
-         "[TODO: explain configuration drift, the treadmill of manual remediation, "
-         "and why conformance plateaus when humans are the control loop.]"),
-        ("The factory pattern",
-         "[TODO: Packer pipeline, hardening code, compliance scan gate, scheduled "
-         "rebuilds, provenance and signing.]"),
-    ],
-    "vault-openbao-cloud-kms": [
-        ("Which secrets manager should you choose in 2026?",
-         "Choose Vault for a mature, feature-complete platform, OpenBao when licence "
-         "exposure is the deciding constraint, and cloud KMS when you are "
-         "single-cloud and want the least operational surface. [TODO: decision "
-         "matrix with criteria and weightings.]"),
-        ("The OpenBao fork, one year on",
-         "[TODO: governance, feature parity, migration path from Vault, who should "
-         "care.]"),
-        ("Total cost, not licence cost",
-         "[TODO: operational burden, HA, DR, break-glass, and how each option "
-         "actually prices out.]"),
-    ],
-    "dora-cicd-pipelines": [
-        ("What does DORA actually require of your pipelines?",
-         "DORA requires demonstrable operational resilience, which for CI/CD means "
-         "evidenced controls over who and what can change production, provable "
-         "integrity of the build, and tested recovery. [TODO: map the specific "
-         "articles to concrete pipeline controls.]"),
-        ("Where teams fall short",
-         "[TODO: shared long-lived credentials, unsigned artefacts, no provenance, "
-         "untested recovery.]"),
-        ("A pragmatic compliance path",
-         "[TODO: sequence of changes that satisfies the requirement without halting "
-         "delivery.]"),
-    ],
-    "90-day-secrets-plan": [
-        ("Can you really get secrets out of code in 90 days?",
-         "Yes, if you sequence it: inventory and rotate the highest-blast-radius "
-         "secrets first, stand up a broker, migrate workloads behind it, and leave "
-         "history remediation until the live risk is dead. [TODO: week-by-week "
-         "plan.]"),
-        ("Days 1 to 30: inventory and stop the bleeding",
-         "[TODO: discovery tooling, prioritisation by blast radius, first "
-         "rotations.]"),
-        ("Days 31 to 90: broker, migrate, prove",
-         "[TODO: Vault/OpenBao rollout, dynamic credentials, evidence for "
-         "auditors.]"),
-    ],
-}
-
-
-def article_page(slug, t, d, date):
+def article_page(post):
+    slug = post["slug"]
     path = f"/insights/{slug}/"
+    t = post["title"]
+    d = post["meta"]
     title = f"{t} | Burnell Consultancy"
-    sections = ARTICLE_OUTLINES[slug]
-    intro = sections[0]
-    body_sections = ""
-    for h2, para in sections[1:]:
-        body_sections += f"<h2 class=\"section-q\">{html.escape(h2)}</h2>\n<p>{para}</p>\n"
+    stats = "".join(
+        f'<li><span class="tnum">{n}</span> {l}</li>' for n, l in post["stats"]
+    )
+    # Related services block from the post's contextual links.
+    related = "".join(
+        f'<li>{L(k, SERVICE_LINKS[k][1])}</li>'
+        for k in dict.fromkeys(post["links"])
+    )
     body = f"""<article class="section">
 <div class="wrap narrow prose">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/insights/">Insights</a> / <span>Article</span></nav>
-<p class="post-date">{date} &middot; by {FOUNDER} &middot; <span class="todo-tag">Outline / TODO</span></p>
+<p class="post-date">{post['date']} &middot; {post['read']} read &middot; by {FOUNDER} &middot; <span class="kick-tag accent-{post['accent']}">{html.escape(post['kicker'].title())}</span></p>
 <h1>{html.escape(t)}</h1>
-<p class="answer-first big">{intro[1]}</p>
-<div class="stats-box">
-<h3>Citable numbers</h3>
-<ul>
-<li><span class="tnum">25% &rarr; 95%+</span> CIS Level 1 conformance in one programme</li>
-<li><span class="tnum">1,000+</span> Vault namespaces architected and scaled</li>
-<li><span class="tnum">£14,000</span> fixed-price assessment</li>
-</ul>
-<p class="muted">[TODO: replace with numbers specific to this article, each with a source.]</p>
+<img class="article-hero" src="/assets/insights/{slug}.svg" alt="" width="400" height="225" loading="eager">
+<p class="answer-first big">{post['answer']}</p>
+<div class="stats-box accent-{post['accent']}">
+<h3>The numbers</h3>
+<ul class="stat-lines">{stats}</ul>
 </div>
-{body_sections}
+{post['body']}
+<div class="related-services">
+<h3>Services referenced in this article</h3>
+<ul>{related}</ul>
+</div>
 <div class="article-cta">
 <h2>Want this done, not just described?</h2>
-<p>The two-week assessment turns this into a scored plan for your estate.</p>
+<p>The two-week, fixed-price assessment turns this into a scored plan for your
+estate, with a 90-day roadmap and an executive readout.</p>
 <a class="btn btn-primary btn-lg" href="/assessment/">Book a fixed-price assessment</a>
 </div>
 </div>
 </article>
 """
-    extra = [article_node(path, t, d, date)]
+    extra = [article_node(path, t, d, post["date"])]
     crumbs = [("Home", "/"), ("Insights", "/insights/"), (t, path)]
     return path, page(path, title, d, body, extra, active=None, crumbs=crumbs)
 
@@ -1674,6 +2135,7 @@ img{max-width:100%;height:auto;display:block}
 .logo{font-size:1.28rem;letter-spacing:-.02em;white-space:nowrap}
 .logo:hover{text-decoration:none}
 .logo-a{color:var(--ink);font-weight:700}
+.logo-a.light{color:#ffffff}
 .logo-b{color:var(--blue);font-weight:400}
 .logo-b.light{color:#93b4fb}
 .primary-nav{margin-left:auto}
@@ -1749,6 +2211,18 @@ img{max-width:100%;height:auto;display:block}
 .step-n{display:inline-flex;align-items:center;justify-content:center;
   min-width:44px;height:44px;padding:0 12px;border-radius:10px;background:var(--slate);
   color:var(--blue);font-weight:800;font-size:1.05rem;margin-bottom:14px}
+
+/* Enterprise logo wall */
+.logo-wall{padding:54px 0;background:#fff;border-bottom:1px solid var(--line)}
+.logo-wall h2{text-align:center;font-size:1.2rem;font-weight:650;color:var(--ink);
+  margin-bottom:34px}
+.logo-row{display:flex;align-items:center;justify-content:center;
+  gap:clamp(28px,5vw,64px);flex-wrap:wrap}
+.logo-row img{height:40px;width:auto;filter:grayscale(1);opacity:.6;
+  transition:opacity .2s ease}
+.logo-row img:hover{opacity:1}
+.logo-note{text-align:center;color:var(--muted);font-size:.85rem;margin:28px auto 0;
+  max-width:52ch}
 
 /* Founder strip */
 .founder-strip{background:var(--ink);color:#fff;padding:48px 0}
@@ -1836,9 +2310,33 @@ img{max-width:100%;height:auto;display:block}
 .article-cta h2{margin-top:0}
 
 /* Insights index */
-.post-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.post-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-.post-card h2{font-size:1.35rem}
+.post-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+.post-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s ease,transform .06s ease}
+.post-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.post-thumb{display:block;line-height:0}
+.post-thumb img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.post-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:6px}
+.post-card h2{font-size:1.3rem;margin:2px 0 6px}
+.post-card h2 a{color:var(--ink)}
+.post-card h2 a:hover{color:var(--blue);text-decoration:none}
+.post-card .card-link{margin-top:8px}
+.kick-tag{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;padding:2px 8px;border-radius:20px;color:#fff;background:var(--ink)}
+.kick-tag.accent-blue{background:var(--blue)}
+.kick-tag.accent-teal{background:var(--teal)}
+.kick-tag.accent-amber{background:var(--amber)}
+.article-hero{width:100%;max-width:520px;height:auto;aspect-ratio:16/9;object-fit:cover;
+  border-radius:var(--radius);margin:8px 0 24px}
+.stat-lines{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.stat-lines li{padding-left:0}
+.stat-lines .tnum{font-weight:800;color:var(--ink);margin-right:6px}
+.stats-box.accent-teal{border-left-color:var(--teal)}
+.stats-box.accent-amber{border-left-color:var(--amber)}
+.related-services{background:var(--slate);border-radius:var(--radius);padding:22px 26px;margin:32px 0}
+.related-services h3{margin:0 0 .6em}
+.related-services ul{margin:0;padding-left:1.1em}
+.related-services li{margin-bottom:.3em}
 
 /* Forms */
 .lead-form-wrap{}
@@ -1975,6 +2473,44 @@ OG_CARD_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
 </svg>
 """
 
+# Enterprise track-record logos, rendered as uniform greyscale wordmarks so the
+# row reads as one system (they are tinted grey and set to 40px height in CSS).
+LOGO_IBM = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 70">
+<text x="115" y="53" font-family="Georgia,'Times New Roman',serif" font-size="54"
+ font-weight="800" letter-spacing="5" text-anchor="middle" fill="#55607a">IBM</text>
+<g fill="#ffffff">
+<rect x="0" y="15" width="230" height="4"/><rect x="0" y="23" width="230" height="4"/>
+<rect x="0" y="31" width="230" height="4"/><rect x="0" y="39" width="230" height="4"/>
+<rect x="0" y="47" width="230" height="4"/></g>
+</svg>
+"""
+
+LOGO_HP = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 70">
+<circle cx="46" cy="35" r="31" fill="none" stroke="#55607a" stroke-width="5"/>
+<text x="46" y="47" font-family="Arial,Helvetica,sans-serif" font-size="31"
+ font-style="italic" font-weight="700" text-anchor="middle" fill="#55607a">hp</text>
+</svg>
+"""
+
+LOGO_GRESEARCH = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70">
+<text x="160" y="49" font-family="Arial,Helvetica,sans-serif" font-size="40"
+ text-anchor="middle" fill="#55607a"><tspan font-weight="800">G</tspan><tspan
+ font-weight="400" letter-spacing="2"> RESEARCH</tspan></text>
+</svg>
+"""
+
+LOGO_ARISTOCRAT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70">
+<text x="170" y="47" font-family="Georgia,'Times New Roman',serif" font-size="36"
+ font-weight="600" letter-spacing="4" text-anchor="middle" fill="#55607a">ARISTOCRAT</text>
+</svg>
+"""
+
+LOGO_FILES = {
+    "ibm.svg": LOGO_IBM, "hp.svg": LOGO_HP,
+    "g-research.svg": LOGO_GRESEARCH, "aristocrat.svg": LOGO_ARISTOCRAT,
+}
+
+
 # Netlify headers (drag-and-drop honours _headers).
 HEADERS = """/*
   X-Content-Type-Options: nosniff
@@ -2033,8 +2569,8 @@ def main():
         insights_index(),
         thank_you(),
     ]
-    for slug, t, d, date in ARTICLES:
-        builders.append(article_page(slug, t, d, date))
+    for post in POSTS:
+        builders.append(article_page(post))
 
     paths = []
     for path, htmlstr in builders:
@@ -2053,6 +2589,23 @@ def main():
     write_raw("_redirects", REDIRECTS)
     write_raw("llms.txt", llms_txt())
     write_raw("robots.txt", robots_txt())
+
+    # Enterprise track-record logos
+    for fname, svg in LOGO_FILES.items():
+        write_raw(f"assets/logos/{fname}", svg)
+
+    # Per-article thumbnails
+    for post in POSTS:
+        write_raw(f"assets/insights/{post['slug']}.svg",
+                  thumb_svg(post["accent"], post["kicker"], post["tag"]))
+
+    # Founder portrait: copy the processed photo in from the build source.
+    src_photo = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "assets-src", "dave.jpeg")
+    if os.path.exists(src_photo):
+        shutil.copy(src_photo, os.path.join(OUT, "assets", "dave.jpeg"))
+    else:
+        print("WARNING: assets-src/dave.jpeg missing; placeholder will show")
 
     # Sitemap excludes utility pages
     sitemap_paths = [p for p in paths if p not in ("/thank-you/",)]

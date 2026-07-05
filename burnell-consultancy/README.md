@@ -32,19 +32,29 @@ Everything is generated from `build.py` (pure Python 3, no dependencies):
 python3 build.py            # writes ./dist
 ```
 
+## Content included
+
+- **Founder photo**: the real portrait ships at `assets/dave.jpeg` (processed
+  from `DaveBurnell.png`) and appears in the hero, founder strip and About page.
+  To swap it, replace `assets-src/dave.jpeg` and rebuild. An SVG placeholder
+  still auto-shows if the file is ever missing.
+- **Calendly**: a real inline booking widget is embedded on `/assessment` and
+  `/contact` (loads `assets.calendly.com/assets/external/widget.js`, with a
+  no-JS fallback link). Point `CALENDLY_URL` in `build.py` at the live event.
+- **Insights**: ten complete, AEO-optimised articles across the three ICPs, each
+  with a branded thumbnail, inline contextual links to the service pages, a
+  "services referenced" block and a CTA footer.
+- **Enterprise track record**: a greyscale logo bar (IBM, HP, G-Research,
+  Aristocrat) on the home page, captioned as the founder's employer history.
+
 ## Before go-live (placeholders to replace)
 
-- **Founder photo**: drop the real `dave.jpeg` at `dist/assets/dave.jpeg`.
-  Until then an SVG placeholder shows automatically.
-- **Calendly**: the inline embed is stubbed with the placeholder booking URL
-  `https://calendly.com/burnell-consultancy/assessment-call`.
 - **Forms**: the contact and scorecard forms post to `/thank-you/` by default.
   Wire them to a Netlify Form, Formspark or a Function delivering to
   `hello@burnellconsultancy.co.uk` (both forms carry a `source` field).
 - **Company number**, `sameAs` URLs (LinkedIn, GitHub, ORCID, Google Scholar,
   Companies House) and the OG PNG export are marked `[placeholder]` in-page and
   in the JSON-LD.
-- **Insights**: the four articles are seeded outlines marked TODO.
 - **Fonts**: ships with a system font stack (renders Inter where installed). To
   fully self-host Inter, add the woff2 files and an `@font-face` block.
 

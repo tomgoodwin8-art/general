@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" role="img" aria-label="CIS L1">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0d9488"/><stop offset="1" stop-color="#1a2332"/>
+</linearGradient></defs>
+<rect width="400" height="225" fill="url(#g)"/>
+<circle cx="335" cy="55" r="120" fill="#ffffff" opacity="0.06"/>
+<circle cx="70" cy="215" r="90" fill="#ffffff" opacity="0.05"/>
+<rect x="300" y="150" width="72" height="72" rx="14" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.35"/>
+<text x="28" y="48" font-family="Inter,system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="2.5" fill="#ffffff" opacity="0.9">FOR REGULATED PLATFORMS</text>
+<text x="28" y="180" font-family="Inter,system-ui,sans-serif" font-size="40" font-weight="800" fill="#ffffff">CIS L1</text>
+<rect x="28" y="196" width="52" height="4" rx="2" fill="#ffffff" opacity="0.85"/>
+</svg>

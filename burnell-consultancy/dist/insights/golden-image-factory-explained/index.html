@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is a golden image factory, and why does it end audit findings? | Burnell Consultancy</title>
+<meta name="description" content="A plain explanation of the golden image factory pattern: hardened, CIS-compliant machine images built on a pipeline and rebuilt on a schedule so audit findings stop recurring.">
+<link rel="canonical" href="https://burnellconsultancy.co.uk/insights/golden-image-factory-explained/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Burnell Consultancy Ltd">
+<meta property="og:title" content="What is a golden image factory, and why does it end audit findings? | Burnell Consultancy">
+<meta property="og:description" content="A plain explanation of the golden image factory pattern: hardened, CIS-compliant machine images built on a pipeline and rebuilt on a schedule so audit findings stop recurring.">
+<meta property="og:url" content="https://burnellconsultancy.co.uk/insights/golden-image-factory-explained/">
+<meta property="og:image" content="https://burnellconsultancy.co.uk/assets/og-card.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What is a golden image factory, and why does it end audit findings? | Burnell Consultancy">
+<meta name="twitter:description" content="A plain explanation of the golden image factory pattern: hardened, CIS-compliant machine images built on a pipeline and rebuilt on a schedule so audit findings stop recurring.">
+<meta name="twitter:image" content="https://burnellconsultancy.co.uk/assets/og-card.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["Organization", "ProfessionalService"], "@id": "https://burnellconsultancy.co.uk/#organization", "name": "Burnell Consultancy Ltd", "legalName": "Burnell Consultancy Ltd", "url": "https://burnellconsultancy.co.uk/", "email": "hello@burnellconsultancy.co.uk", "description": "UK platform security engineering consultancy specialising in secrets management, CI/CD pipeline security, golden machine images and security programme maturity.", "founder": {"@id": "https://burnellconsultancy.co.uk/#david-burnell"}, "areaServed": {"@type": "Country", "name": "United Kingdom"}, "priceRange": "££", "address": {"@type": "PostalAddress", "addressLocality": "Godalming", "addressRegion": "Surrey", "addressCountry": "GB"}, "sameAs": ["https://www.linkedin.com/company/burnell-consultancy", "https://github.com/burnell-consultancy", "https://find-and-update.company-information.service.gov.uk/"]}, {"@type": "Person", "@id": "https://burnellconsultancy.co.uk/#david-burnell", "name": "Dr David Burnell", "honorificPrefix": "Dr", "givenName": "David", "familyName": "Burnell", "jobTitle": "Founder and Principal Platform Security Engineer", "worksFor": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Durham University"}, "knowsAbout": ["Secrets management", "HashiCorp Vault", "OpenBao", "Public key infrastructure", "CI/CD pipeline security", "CIS Benchmarks", "Golden images", "Non-human identity", "Application security posture management"], "sameAs": ["https://www.linkedin.com/in/david-burnell", "https://github.com/dburnell", "https://orcid.org/0000-0000-0000-0000", "https://scholar.google.com/citations?user=placeholder", "https://etheses.dur.ac.uk/11055/"]}, {"@type": "ProfessionalService", "@id": "https://burnellconsultancy.co.uk/#service", "name": "Burnell Consultancy Ltd", "url": "https://burnellconsultancy.co.uk/", "parentOrganization": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "areaServed": {"@type": "Country", "name": "GB"}, "priceRange": "££", "serviceType": "Platform security engineering"}, {"@type": "WebSite", "@id": "https://burnellconsultancy.co.uk/#website", "url": "https://burnellconsultancy.co.uk/", "name": "Burnell Consultancy Ltd", "publisher": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "inLanguage": "en-GB"}, {"@type": "WebPage", "@id": "https://burnellconsultancy.co.uk/insights/golden-image-factory-explained/#webpage", "url": "https://burnellconsultancy.co.uk/insights/golden-image-factory-explained/", "name": "What is a golden image factory, and why does it end audit findings? | Burnell Consultancy", "description": "A plain explanation of the golden image factory pattern: hardened, CIS-compliant machine images built on a pipeline and rebuilt on a schedule so audit findings stop recurring.", "isPartOf": {"@id": "https://burnellconsultancy.co.uk/#website"}, "about": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "inLanguage": "en-GB"}, {"@type": "BreadcrumbList", "@id": "https://burnellconsultancy.co.uk/insights/golden-image-factory-explained/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://burnellconsultancy.co.uk/"}, {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://burnellconsultancy.co.uk/insights/"}, {"@type": "ListItem", "position": 3, "name": "What is a golden image factory, and why does it end audit findings?", "item": "https://burnellconsultancy.co.uk/insights/golden-image-factory-explained/"}]}, {"@type": "Article", "@id": "https://burnellconsultancy.co.uk/insights/golden-image-factory-explained/#article", "headline": "What is a golden image factory, and why does it end audit findings?", "description": "A plain explanation of the golden image factory pattern: hardened, CIS-compliant machine images built on a pipeline and rebuilt on a schedule so audit findings stop recurring.", "datePublished": "2026-03-03", "author": {"@id": "https://burnellconsultancy.co.uk/#david-burnell"}, "publisher": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "mainEntityOfPage": {"@id": "https://burnellconsultancy.co.uk/insights/golden-image-factory-explained/#webpage"}, "inLanguage": "en-GB"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-inner">
+<a class="logo" href="/" aria-label="Burnell Consultancy Ltd home">
+<span class="logo-a">Burnell</span><span class="logo-b">Consultancy</span>
+</a>
+<button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+<span></span><span></span><span></span>
+</button>
+<nav class="primary-nav" id="primary-nav" aria-label="Primary">
+<ul><li><a href="/assessment/">Assessment</a></li><li class="has-sub"><button class="nav-group" aria-haspopup="true" aria-expanded="false">Services<span class="chev" aria-hidden="true">&#9662;</span></button><ul class="submenu"><li><a href="/services/secrets-vault/">Secrets and vault</a></li><li><a href="/services/golden-images/">Golden image factory</a></li><li><a href="/services/security-maturity/">Security maturity (SAMM + ASPM)</a></li><li><a href="/services/pki/">PKI and machine identity</a></li></ul></li><li class="has-sub"><button class="nav-group" aria-haspopup="true" aria-expanded="false">Who we help<span class="chev" aria-hidden="true">&#9662;</span></button><ul class="submenu"><li><a href="/who-we-help/scaling-saas/">Scaling SaaS and fintech</a></li><li><a href="/who-we-help/regulated-platforms/">Regulated platforms</a></li><li><a href="/who-we-help/financial-services/">Financial services</a></li></ul></li><li><a href="/about/">About</a></li><li><a href="/insights/">Insights</a></li><li><a href="/scorecard/">Scorecard</a></li></ul>
+</nav>
+<a class="btn btn-primary header-cta" href="/assessment/">Book a fixed-price assessment</a>
+</div>
+</header>
+<main id="main">
+<article class="section">
+<div class="wrap narrow prose">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/insights/">Insights</a> / <span>Article</span></nav>
+<p class="post-date">2026-03-03 &middot; 9 min read &middot; by Dr David Burnell &middot; <span class="kick-tag accent-teal">For Regulated Platforms</span></p>
+<h1>What is a golden image factory, and why does it end audit findings?</h1>
+<img class="article-hero" src="/assets/insights/golden-image-factory-explained.svg" alt="" width="400" height="225" loading="eager">
+<p class="answer-first big">A golden image factory is a pipeline that builds hardened, CIS-benchmarked machine images, tests them, signs them and republishes on a schedule. It ends recurring audit findings because compliance is baked into the image every instance boots from, rather than hand-applied to live hosts where it drifts straight back.</p>
+<div class="stats-box accent-teal">
+<h3>The numbers</h3>
+<ul class="stat-lines"><li><span class="tnum">One image</span> hardened once, booted everywhere</li><li><span class="tnum">Signed</span> provenance proves exactly what shipped</li><li><span class="tnum">Scheduled</span> rebuilds keep patches flowing without firefighting</li></ul>
+</div>
+
+<h2 class="section-q">What does the factory actually produce?</h2>
+<p>A trusted base image per operating-system family, hardened to the relevant CIS
+Benchmark, tested and scanned in a pipeline, signed for provenance, and published on a
+cadence. Every server, container host and VM boots from that image, so the compliant
+state is the starting state.</p>
+
+<h2 class="section-q">Why does this end recurring findings?</h2>
+<p>Because the finding is fixed at the source. Hand-patching a live host is undone by
+the next deploy; hardening the image means the fix ships with every new instance and
+cannot drift away between audits. That is the whole premise of our <a href="/services/golden-images/">golden image factory</a>.</p>
+
+<h2 class="section-q">How does it change zero-day response?</h2>
+<p>A critical CVE becomes a single image change plus a rebuild trigger. The patched
+image propagates automatically, so your mean time to patch is measured in a pipeline
+run rather than weeks of manual remediation across thousands of hosts.</p>
+
+<h2 class="section-q">What does it take to stand one up?</h2>
+<p>A build tool such as Packer, hardening code, a compliance-scan gate and a schedule.
+Our <a href="/services/golden-images/">golden image factory</a> is a fixed-price build, and it starts from an
+<a href="/assessment/">Secrets and Pipeline Security Assessment</a> so the image families and platforms match your real estate.</p>
+
+<div class="related-services">
+<h3>Services referenced in this article</h3>
+<ul><li><a href="/services/golden-images/">golden image factory</a></li><li><a href="/assessment/">Secrets and Pipeline Security Assessment</a></li></ul>
+</div>
+<div class="article-cta">
+<h2>Want this done, not just described?</h2>
+<p>The two-week, fixed-price assessment turns this into a scored plan for your
+estate, with a 90-day roadmap and an executive readout.</p>
+<a class="btn btn-primary btn-lg" href="/assessment/">Book a fixed-price assessment</a>
+</div>
+</div>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap footer-grid">
+<div class="footer-brand">
+<a class="logo" href="/"><span class="logo-a light">Burnell</span><span class="logo-b light">Consultancy</span></a>
+<p>Burnell Consultancy Ltd is a UK platform security engineering firm. We take
+credentials out of code, make machine images compliant by default, and turn
+scanner noise into a roadmap your engineers will actually follow.</p>
+<p class="footer-meta">Registered in England and Wales, company number [placeholder].<br>
+Godalming, Surrey, GB. <a href="mailto:hello@burnellconsultancy.co.uk">hello@burnellconsultancy.co.uk</a></p>
+</div>
+<div class="footer-col"><h3>Services</h3><ul><li><a href="/services/secrets-vault/">Secrets and vault</a></li><li><a href="/services/golden-images/">Golden image factory</a></li><li><a href="/services/security-maturity/">Security maturity</a></li><li><a href="/services/pki/">PKI and machine identity</a></li></ul></div>
+<div class="footer-col"><h3>Who we help</h3><ul><li><a href="/who-we-help/scaling-saas/">Scaling SaaS and fintech</a></li><li><a href="/who-we-help/regulated-platforms/">Regulated platforms</a></li><li><a href="/who-we-help/financial-services/">Financial services</a></li></ul></div>
+<div class="footer-col"><h3>Company</h3><ul><li><a href="/assessment/">The assessment</a></li><li><a href="/about/">About Dr David Burnell</a></li><li><a href="/insights/">Insights</a></li><li><a href="/scorecard/">Secrets Sprawl Scorecard</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+</div>
+<div class="footer-band">
+<div class="wrap footer-band-inner">
+<a class="btn btn-primary" href="/assessment/">Book a fixed-price assessment</a>
+<p class="copyright">&copy; 2026 Burnell Consultancy Ltd. Vendor-neutral. No resale, no lock-in.</p>
+</div>
+</div>
+</footer>
+<script src="/js/main.js" defer></script>
+</body>
+</html>

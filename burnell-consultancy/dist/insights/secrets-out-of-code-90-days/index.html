@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do you get secrets out of code and CI in 90 days? | Burnell Consultancy</title>
+<meta name="description" content="A sequenced 90-day plan for removing hard-coded secrets from code and CI without halting delivery: inventory, rotate by blast radius, stand up a broker, migrate, then remediate history.">
+<link rel="canonical" href="https://burnellconsultancy.co.uk/insights/secrets-out-of-code-90-days/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Burnell Consultancy Ltd">
+<meta property="og:title" content="How do you get secrets out of code and CI in 90 days? | Burnell Consultancy">
+<meta property="og:description" content="A sequenced 90-day plan for removing hard-coded secrets from code and CI without halting delivery: inventory, rotate by blast radius, stand up a broker, migrate, then remediate history.">
+<meta property="og:url" content="https://burnellconsultancy.co.uk/insights/secrets-out-of-code-90-days/">
+<meta property="og:image" content="https://burnellconsultancy.co.uk/assets/og-card.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How do you get secrets out of code and CI in 90 days? | Burnell Consultancy">
+<meta name="twitter:description" content="A sequenced 90-day plan for removing hard-coded secrets from code and CI without halting delivery: inventory, rotate by blast radius, stand up a broker, migrate, then remediate history.">
+<meta name="twitter:image" content="https://burnellconsultancy.co.uk/assets/og-card.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["Organization", "ProfessionalService"], "@id": "https://burnellconsultancy.co.uk/#organization", "name": "Burnell Consultancy Ltd", "legalName": "Burnell Consultancy Ltd", "url": "https://burnellconsultancy.co.uk/", "email": "hello@burnellconsultancy.co.uk", "description": "UK platform security engineering consultancy specialising in secrets management, CI/CD pipeline security, golden machine images and security programme maturity.", "founder": {"@id": "https://burnellconsultancy.co.uk/#david-burnell"}, "areaServed": {"@type": "Country", "name": "United Kingdom"}, "priceRange": "££", "address": {"@type": "PostalAddress", "addressLocality": "Godalming", "addressRegion": "Surrey", "addressCountry": "GB"}, "sameAs": ["https://www.linkedin.com/company/burnell-consultancy", "https://github.com/burnell-consultancy", "https://find-and-update.company-information.service.gov.uk/"]}, {"@type": "Person", "@id": "https://burnellconsultancy.co.uk/#david-burnell", "name": "Dr David Burnell", "honorificPrefix": "Dr", "givenName": "David", "familyName": "Burnell", "jobTitle": "Founder and Principal Platform Security Engineer", "worksFor": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Durham University"}, "knowsAbout": ["Secrets management", "HashiCorp Vault", "OpenBao", "Public key infrastructure", "CI/CD pipeline security", "CIS Benchmarks", "Golden images", "Non-human identity", "Application security posture management"], "sameAs": ["https://www.linkedin.com/in/david-burnell", "https://github.com/dburnell", "https://orcid.org/0000-0000-0000-0000", "https://scholar.google.com/citations?user=placeholder", "https://etheses.dur.ac.uk/11055/"]}, {"@type": "ProfessionalService", "@id": "https://burnellconsultancy.co.uk/#service", "name": "Burnell Consultancy Ltd", "url": "https://burnellconsultancy.co.uk/", "parentOrganization": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "areaServed": {"@type": "Country", "name": "GB"}, "priceRange": "££", "serviceType": "Platform security engineering"}, {"@type": "WebSite", "@id": "https://burnellconsultancy.co.uk/#website", "url": "https://burnellconsultancy.co.uk/", "name": "Burnell Consultancy Ltd", "publisher": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "inLanguage": "en-GB"}, {"@type": "WebPage", "@id": "https://burnellconsultancy.co.uk/insights/secrets-out-of-code-90-days/#webpage", "url": "https://burnellconsultancy.co.uk/insights/secrets-out-of-code-90-days/", "name": "How do you get secrets out of code and CI in 90 days? | Burnell Consultancy", "description": "A sequenced 90-day plan for removing hard-coded secrets from code and CI without halting delivery: inventory, rotate by blast radius, stand up a broker, migrate, then remediate history.", "isPartOf": {"@id": "https://burnellconsultancy.co.uk/#website"}, "about": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "inLanguage": "en-GB"}, {"@type": "BreadcrumbList", "@id": "https://burnellconsultancy.co.uk/insights/secrets-out-of-code-90-days/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://burnellconsultancy.co.uk/"}, {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://burnellconsultancy.co.uk/insights/"}, {"@type": "ListItem", "position": 3, "name": "How do you get secrets out of code and CI in 90 days?", "item": "https://burnellconsultancy.co.uk/insights/secrets-out-of-code-90-days/"}]}, {"@type": "Article", "@id": "https://burnellconsultancy.co.uk/insights/secrets-out-of-code-90-days/#article", "headline": "How do you get secrets out of code and CI in 90 days?", "description": "A sequenced 90-day plan for removing hard-coded secrets from code and CI without halting delivery: inventory, rotate by blast radius, stand up a broker, migrate, then remediate history.", "datePublished": "2026-06-18", "author": {"@id": "https://burnellconsultancy.co.uk/#david-burnell"}, "publisher": {"@id": "https://burnellconsultancy.co.uk/#organization"}, "mainEntityOfPage": {"@id": "https://burnellconsultancy.co.uk/insights/secrets-out-of-code-90-days/#webpage"}, "inLanguage": "en-GB"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-inner">
+<a class="logo" href="/" aria-label="Burnell Consultancy Ltd home">
+<span class="logo-a">Burnell</span><span class="logo-b">Consultancy</span>
+</a>
+<button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+<span></span><span></span><span></span>
+</button>
+<nav class="primary-nav" id="primary-nav" aria-label="Primary">
+<ul><li><a href="/assessment/">Assessment</a></li><li class="has-sub"><button class="nav-group" aria-haspopup="true" aria-expanded="false">Services<span class="chev" aria-hidden="true">&#9662;</span></button><ul class="submenu"><li><a href="/services/secrets-vault/">Secrets and vault</a></li><li><a href="/services/golden-images/">Golden image factory</a></li><li><a href="/services/security-maturity/">Security maturity (SAMM + ASPM)</a></li><li><a href="/services/pki/">PKI and machine identity</a></li></ul></li><li class="has-sub"><button class="nav-group" aria-haspopup="true" aria-expanded="false">Who we help<span class="chev" aria-hidden="true">&#9662;</span></button><ul class="submenu"><li><a href="/who-we-help/scaling-saas/">Scaling SaaS and fintech</a></li><li><a href="/who-we-help/regulated-platforms/">Regulated platforms</a></li><li><a href="/who-we-help/financial-services/">Financial services</a></li></ul></li><li><a href="/about/">About</a></li><li><a href="/insights/">Insights</a></li><li><a href="/scorecard/">Scorecard</a></li></ul>
+</nav>
+<a class="btn btn-primary header-cta" href="/assessment/">Book a fixed-price assessment</a>
+</div>
+</header>
+<main id="main">
+<article class="section">
+<div class="wrap narrow prose">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/insights/">Insights</a> / <span>Article</span></nav>
+<p class="post-date">2026-06-18 &middot; 8 min read &middot; by Dr David Burnell &middot; <span class="kick-tag accent-blue">For Engineering Leaders</span></p>
+<h1>How do you get secrets out of code and CI in 90 days?</h1>
+<img class="article-hero" src="/assets/insights/secrets-out-of-code-90-days.svg" alt="" width="400" height="225" loading="eager">
+<p class="answer-first big">You sequence it. In the first 30 days you inventory every credential and rotate the highest blast-radius ones, in the next 30 you stand up a secrets broker and migrate workloads behind it, and in the final 30 you prove the change to auditors and clean up git history. Rotation comes before scrubbing, because a rotated secret is dead whether or not it still sits in history.</p>
+<div class="stats-box accent-blue">
+<h3>The numbers</h3>
+<ul class="stat-lines"><li><span class="tnum">90 days</span> to a broker-backed estate with the worst secrets already dead</li><li><span class="tnum">Rotate first</span> a rotated credential is neutralised even if still in history</li><li><span class="tnum">0</span> delivery freezes required if you sequence by blast radius</li></ul>
+</div>
+
+<h2 class="section-q">Why does hard-coded secrets removal stall?</h2>
+<p>Because teams try to boil the ocean: scrub every repository's history at once,
+freeze deploys, and lose engineering goodwill in a week. The work stalls, and the
+secrets stay. The way through is to treat it as a migration with a fixed order,
+not a cleanup.</p>
+
+<h2 class="section-q">Days 1 to 30: inventory and stop the bleeding</h2>
+<p>Start by finding out what you have. Scan code, CI configuration, container
+images and developer machines, then rank every secret by blast radius: what does
+it unlock, and how bad is a leak? Rotate the top of that list immediately. You do
+not need a broker yet to rotate a database password. This is exactly the ground
+our <a href="/assessment/">Secrets and Pipeline Security Assessment</a> covers in two weeks if you want it done to a scored model.</p>
+
+<h2 class="section-q">Days 31 to 90: broker, migrate, prove</h2>
+<p>Now stand up a secrets broker and wire workloads to fetch short-lived
+credentials at run time. Whether that broker is Vault, OpenBao or a cloud KMS is
+an estate decision, and it is the heart of our <a href="/services/secrets-vault/">secrets and vault engineering</a>. Migrate service by
+service so nothing breaks in flight, then produce the evidence an enterprise buyer
+or auditor will ask for.</p>
+
+<h2 class="section-q">What about the secrets already in git history?</h2>
+<p>Leave history remediation until last. Once a leaked secret has been rotated it
+is inert, so the urgent work is rotation, not rewriting commits. Clean history on a
+schedule after the live risk is gone. If you want to know where you stand before
+committing to the plan, the <a href="/scorecard/">Secrets Sprawl Scorecard</a> scores your exposure in ten minutes.</p>
+
+<div class="related-services">
+<h3>Services referenced in this article</h3>
+<ul><li><a href="/assessment/">Secrets and Pipeline Security Assessment</a></li><li><a href="/services/secrets-vault/">secrets and vault engineering</a></li><li><a href="/scorecard/">Secrets Sprawl Scorecard</a></li></ul>
+</div>
+<div class="article-cta">
+<h2>Want this done, not just described?</h2>
+<p>The two-week, fixed-price assessment turns this into a scored plan for your
+estate, with a 90-day roadmap and an executive readout.</p>
+<a class="btn btn-primary btn-lg" href="/assessment/">Book a fixed-price assessment</a>
+</div>
+</div>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap footer-grid">
+<div class="footer-brand">
+<a class="logo" href="/"><span class="logo-a light">Burnell</span><span class="logo-b light">Consultancy</span></a>
+<p>Burnell Consultancy Ltd is a UK platform security engineering firm. We take
+credentials out of code, make machine images compliant by default, and turn
+scanner noise into a roadmap your engineers will actually follow.</p>
+<p class="footer-meta">Registered in England and Wales, company number [placeholder].<br>
+Godalming, Surrey, GB. <a href="mailto:hello@burnellconsultancy.co.uk">hello@burnellconsultancy.co.uk</a></p>
+</div>
+<div class="footer-col"><h3>Services</h3><ul><li><a href="/services/secrets-vault/">Secrets and vault</a></li><li><a href="/services/golden-images/">Golden image factory</a></li><li><a href="/services/security-maturity/">Security maturity</a></li><li><a href="/services/pki/">PKI and machine identity</a></li></ul></div>
+<div class="footer-col"><h3>Who we help</h3><ul><li><a href="/who-we-help/scaling-saas/">Scaling SaaS and fintech</a></li><li><a href="/who-we-help/regulated-platforms/">Regulated platforms</a></li><li><a href="/who-we-help/financial-services/">Financial services</a></li></ul></div>
+<div class="footer-col"><h3>Company</h3><ul><li><a href="/assessment/">The assessment</a></li><li><a href="/about/">About Dr David Burnell</a></li><li><a href="/insights/">Insights</a></li><li><a href="/scorecard/">Secrets Sprawl Scorecard</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+</div>
+<div class="footer-band">
+<div class="wrap footer-band-inner">
+<a class="btn btn-primary" href="/assessment/">Book a fixed-price assessment</a>
+<p class="copyright">&copy; 2026 Burnell Consultancy Ltd. Vendor-neutral. No resale, no lock-in.</p>
+</div>
+</div>
+</footer>
+<script src="/js/main.js" defer></script>
+</body>
+</html>

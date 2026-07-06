@@ -1,0 +1,28 @@
+---
+const links = [
+  // Instagram and TikTok handles TBC — add here and to Base.astro sameAs when known.
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/nela-frackowiak-645410331/',
+  },
+];
+---
+<section id="links" class="mx-auto max-w-prose px-6 py-12 md:py-16 reveal">
+  <h2 class="font-serif text-2xl md:text-3xl font-semibold">Links</h2>
+  <ul class="mt-5 space-y-3 text-lg">
+    {
+      links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            target="_blank"
+            rel="noopener"
+            class="text-accent underline decoration-1 underline-offset-4 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ground"
+          >
+            {l.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

@@ -1,0 +1,104 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nela Frackowiak',
+  givenName: 'Nela',
+  familyName: 'Frackowiak',
+  nationality: 'British',
+  jobTitle: 'Student',
+  description:
+    'London-based A-level student (Physics, Maths, Economics) and licensed glider pilot with a strong interest in engineering and aviation.',
+  knowsAbout: ['Aviation', 'Engineering', 'Gliding', 'Art teaching', 'Childcare'],
+  alumniOf: [{ '@type': 'EducationalOrganization', name: "Christ's School, Richmond" }],
+  url: 'https://nelafrackowiak.com/',
+  image: 'https://nelafrackowiak.com/images/nela-frackowiak.jpg',
+  sameAs: ['https://www.linkedin.com/in/nela-frackowiak-645410331/'],
+};
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Nela Frackowiak — A-level Student, Glider Pilot, Aspiring Engineer</title>
+    <meta
+      name="description"
+      content="Nela Frackowiak, London-based A-level student (Physics, Maths, Economics) and licensed glider pilot with a strong interest in engineering and aviation."
+    />
+    <link rel="canonical" href="https://nelafrackowiak.com/" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Nela Frackowiak" />
+    <meta
+      property="og:description"
+      content="A-level student, licensed glider pilot, aspiring engineer. London."
+    />
+    <meta property="og:url" content="https://nelafrackowiak.com/" />
+    <meta property="og:image" content="https://nelafrackowiak.com/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#FAFAFB" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-ground text-ink font-sans antialiased">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  /* Fade-in on scroll — respects reduced motion. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px' }
+    );
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('is-visible'));
+  }
+</script>

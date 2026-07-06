@@ -1,0 +1,81 @@
+---
+// Web3Forms — destination (nela.frackowiak12@gmail.com) is set in the Web3Forms
+// dashboard, not in markup. Replace the access_key below with the real key.
+const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_KEY';
+---
+<section id="contact" class="mx-auto max-w-prose px-6 py-12 md:py-20 reveal">
+  <h2 class="font-serif text-2xl md:text-3xl font-semibold">Get in touch</h2>
+
+  <form id="contact-form" class="mt-6 space-y-4">
+    <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+    <input type="hidden" name="subject" value="Enquiry via nelafrackowiak.com" />
+
+    <div>
+      <label for="name" class="sr-only">Your name</label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Your name"
+        required
+        class="w-full border border-ink/20 bg-white px-4 py-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      />
+    </div>
+    <div>
+      <label for="email" class="sr-only">Your email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="Your email"
+        required
+        class="w-full border border-ink/20 bg-white px-4 py-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      />
+    </div>
+    <div>
+      <label for="message" class="sr-only">Message</label>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message"
+        rows="4"
+        required
+        class="w-full border border-ink/20 bg-white px-4 py-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      ></textarea>
+    </div>
+
+    <!-- Honeypot -->
+    <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+    <button
+      type="submit"
+      class="inline-flex items-center bg-ink text-ground px-6 py-3 rounded-sm font-medium hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ground"
+    >
+      Send
+    </button>
+    <p id="form-status" aria-live="polite" class="text-ink/70"></p>
+  </form>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  if (form && status) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(form),
+        });
+        status.textContent = res.ok
+          ? 'Thank you. Message sent.'
+          : 'Something went wrong. Please try again.';
+        if (res.ok) form.reset();
+      } catch {
+        status.textContent = 'Something went wrong. Please try again.';
+      }
+    });
+  }
+</script>

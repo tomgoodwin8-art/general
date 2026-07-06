@@ -1,0 +1,12 @@
+# Julia Frackowiak
+
+> Under-16 track and field athlete for Thames Valley Harriers, registered with England Athletics. Based in West London.
+
+## Profile
+- [Home](https://juliafrackowiak.com/): bio, results, and links
+- [Athletics results (OpenTrack)](https://data.opentrack.run/a/27f4d59c-9c76-405c-932f-be46c493d91a/): official competition data
+
+## Contact
+- Enquiries via the contact form, handled by parent or guardian.
+
+Last reviewed: 2026-07-06

@@ -1,0 +1,25 @@
+---
+// Fields marked "to be confirmed" must not be invented. Fill from Power of 10 /
+// OpenTrack once verified, then remove the placeholder styling.
+const rows = [
+  { term: 'Club', value: 'Thames Valley Harriers', tbc: false },
+  { term: 'Governing body', value: 'England Athletics (registered)', tbc: false },
+  { term: 'Age group', value: 'Under-16', tbc: false },
+  { term: 'Events', value: 'To be confirmed', tbc: true },
+  { term: 'Personal bests', value: 'To be confirmed', tbc: true },
+  { term: 'Selected results', value: 'To be confirmed', tbc: true },
+];
+---
+<section id="cv" class="mx-auto max-w-prose px-6 py-12 md:py-16 reveal">
+  <h2 class="font-serif text-2xl md:text-3xl font-semibold">CV</h2>
+  <dl class="mt-6 divide-y divide-ink/10">
+    {
+      rows.map((r) => (
+        <div class="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-1 sm:gap-4 py-4">
+          <dt class="font-medium text-ink/90">{r.term}</dt>
+          <dd class={r.tbc ? 'text-ink/45 italic' : 'text-ink/80'}>{r.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

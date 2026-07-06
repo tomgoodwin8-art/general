@@ -1,0 +1,77 @@
+---
+const experience = [
+  {
+    role: 'Waitress',
+    org: 'Villa di Gignano, Chiswick',
+    detail: 'Front-of-house service; keeping the floor presentable.',
+  },
+  {
+    role: 'Customer service',
+    org: 'café, Spain',
+    detail: 'Served a diverse clientele; handled enquiries and feedback.',
+  },
+  {
+    role: 'Childcare assistant (volunteer)',
+    org: 'Little Folks Nursery, Chiswick',
+    detail:
+      'Cared for a group of 20 children aged 2 to 4: supervision, hygiene routines, meals to dietary requirements, progress records.',
+  },
+  {
+    role: 'Art class teacher (self-employed)',
+    org: 'Chiswick',
+    detail:
+      "Ran a children's art class for several years; taught painting, sketching and art history; managed and promoted it as a small business.",
+  },
+  {
+    role: 'Mental Health Ambassador (volunteer)',
+    org: "Christ's School, Richmond",
+    detail: 'Mentors a younger student; active listening and support.',
+  },
+];
+
+const education = [
+  'A-levels (in progress): Physics, Maths, Economics',
+  "10 GCSEs (2024) — Christ's School, Richmond",
+  'SATs (2019) — Grove Park Primary School, Chiswick',
+];
+
+const skills = [
+  'Member of London Gliding Club; licensed glider pilot (2024)',
+  'SpaceCamp Aviation graduate',
+  'Duke of Edinburgh Bronze Award',
+  'Gym training, skiing, travel',
+];
+---
+<section id="cv" class="mx-auto max-w-prose px-6 py-12 md:py-16 reveal">
+  <h2 class="font-serif text-2xl md:text-3xl font-semibold">CV</h2>
+
+  <h3 class="mt-8 font-serif text-xl font-semibold text-ink/90">Experience</h3>
+  <ul class="mt-4 space-y-6">
+    {
+      experience.map((e) => (
+        <li>
+          <p class="font-medium">
+            {e.role} — <span class="text-ink/70">{e.org}</span>
+          </p>
+          <p class="mt-1 text-ink/70 leading-relaxed">{e.detail}</p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h3 class="mt-10 font-serif text-xl font-semibold text-ink/90">Education</h3>
+  <ul class="mt-4 space-y-2 text-ink/80">
+    {education.map((e) => <li>{e}</li>)}
+  </ul>
+
+  <h3 class="mt-10 font-serif text-xl font-semibold text-ink/90">Skills and interests</h3>
+  <ul class="mt-4 space-y-2 text-ink/80">
+    {skills.map((s) => <li>{s}</li>)}
+  </ul>
+
+  <h3 class="mt-10 font-serif text-xl font-semibold text-ink/90">Personal qualities</h3>
+  <p class="mt-4 text-ink/80 leading-relaxed">
+    Responsible, strong work ethic, creative thinker, clear communicator, a stated passion for
+    engineering.
+  </p>
+</section>

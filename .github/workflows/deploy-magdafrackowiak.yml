@@ -1,0 +1,35 @@
+name: Deploy magdafrackowiak.com
+
+# Runs on GitHub's servers (which can reach Cloudflare) and deploys the Worker.
+# One-time setup: add repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID
+# (Settings -> Secrets and variables -> Actions). The first run creates the
+# "magdafrackowiak-com" Worker automatically and uploads the static assets.
+
+on:
+  push:
+    branches:
+      - claude/serene-faraday-d43p27
+      - claude/cloudflare-build-deploy-rspmt0
+    paths:
+      - 'magdafrackowiak.com/**'
+      - '.github/workflows/deploy-magdafrackowiak.yml'
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: magdafrackowiak.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy to Cloudflare Workers
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

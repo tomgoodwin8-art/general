@@ -36,8 +36,10 @@ npm run deploy                     # astro build && wrangler deploy
 ```
 
 `npx wrangler deploy --dry-run` validates the setup without credentials.
-After the first deploy, add the custom domain `magdafrackowiak.com` under the
-Worker's **Settings → Domains & Routes** (Cloudflare provisions TLS).
+The custom domain `magdafrackowiak.com` is declared as a `custom_domain` route
+in `wrangler.toml`, so `wrangler deploy` binds it and provisions TLS
+automatically — no manual dashboard step. This requires `magdafrackowiak.com`
+to be an active zone in the Cloudflare account (nameservers on Cloudflare).
 
 ### Dashboard (git-connected), alternative
 

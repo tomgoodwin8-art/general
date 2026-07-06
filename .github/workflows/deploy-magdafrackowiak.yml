@@ -10,6 +10,7 @@ on:
     branches:
       - claude/serene-faraday-d43p27
       - claude/cloudflare-build-deploy-rspmt0
+      - claude/deploy-cloudflare-workers-pages-6jnwne
     paths:
       - 'magdafrackowiak.com/**'
       - '.github/workflows/deploy-magdafrackowiak.yml'

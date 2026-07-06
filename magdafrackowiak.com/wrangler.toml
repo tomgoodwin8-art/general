@@ -4,6 +4,13 @@
 name = "magdafrackowiak-com"
 compatibility_date = "2025-09-01"
 
+# Custom domain. On deploy, wrangler binds the Worker to the apex domain and
+# provisions its TLS certificate. Requires magdafrackowiak.com to be an active
+# zone in this Cloudflare account (nameservers pointed at Cloudflare).
+routes = [
+  { pattern = "magdafrackowiak.com", custom_domain = true },
+]
+
 [assets]
 directory = "./dist"
 # Static site: honours public/_headers, returns a plain 404 for unknown paths.

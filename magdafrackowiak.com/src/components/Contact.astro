@@ -1,0 +1,93 @@
+---
+// Set the Web3Forms access key below (or via the WEB3FORMS_KEY env var at build time).
+// Destination inbox is configured in the Web3Forms dashboard, never in this markup.
+const accessKey = import.meta.env.WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_KEY';
+---
+
+<section aria-labelledby="contact-heading" class="mx-auto max-w-prose px-6 py-12 sm:py-16">
+  <h2 id="contact-heading" class="reveal font-serif text-3xl font-semibold tracking-tight">
+    Get in touch
+  </h2>
+
+  <form id="contact" class="reveal mt-8 space-y-4">
+    <input type="hidden" name="access_key" value={accessKey} />
+    <input type="hidden" name="subject" value="Enquiry via magdafrackowiak.com" />
+
+    <div>
+      <label for="name" class="sr-only">Your name</label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Your name"
+        required
+        class="w-full rounded-sm border border-ink/20 bg-white px-4 py-3 text-ink placeholder:text-ink/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+      />
+    </div>
+
+    <div>
+      <label for="email" class="sr-only">Your email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="Your email"
+        required
+        class="w-full rounded-sm border border-ink/20 bg-white px-4 py-3 text-ink placeholder:text-ink/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+      />
+    </div>
+
+    <div>
+      <label for="message" class="sr-only">Message</label>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message"
+        rows="4"
+        required
+        class="w-full rounded-sm border border-ink/20 bg-white px-4 py-3 text-ink placeholder:text-ink/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+      ></textarea>
+    </div>
+
+    <input
+      type="checkbox"
+      name="botcheck"
+      class="hidden"
+      style="display:none"
+      tabindex="-1"
+      autocomplete="off"
+    />
+
+    <button
+      type="submit"
+      class="rounded-sm bg-accent px-6 py-3 font-medium text-paper transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      Send
+    </button>
+
+    <p id="form-status" aria-live="polite" class="text-sm text-ink/70"></p>
+  </form>
+</section>
+
+<script>
+  const form = document.getElementById('contact') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  if (form && status) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(form),
+        });
+        status.textContent = res.ok
+          ? 'Thank you. Message sent.'
+          : 'Something went wrong. Please try again.';
+        if (res.ok) form.reset();
+      } catch {
+        status.textContent = 'Something went wrong. Please try again.';
+      }
+    });
+  }
+</script>

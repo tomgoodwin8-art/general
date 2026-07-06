@@ -1,0 +1,41 @@
+---
+const links = [
+  {
+    label: 'GAMEPLAN',
+    href: 'https://hellogameplan.com',
+    note: 'Performance. Media. Technology.',
+    external: true,
+  },
+  {
+    label: 'Companies House',
+    href: 'https://find-and-update.company-information.service.gov.uk/officers/7R_gfb5ipoz4P3nGZyqjzkzpxog/appointments',
+    note: 'Director appointments',
+    external: true,
+  },
+];
+---
+
+<section aria-labelledby="links-heading" class="mx-auto max-w-prose px-6 py-12 sm:py-16">
+  <h2 id="links-heading" class="reveal font-serif text-3xl font-semibold tracking-tight">
+    Links
+  </h2>
+  <ul class="reveal mt-8 divide-y divide-ink/10 border-y border-ink/10">
+    {
+      links.map((link) => (
+        <li class="py-4">
+          <a
+            href={link.href}
+            {...(link.external ? { target: '_blank', rel: 'noopener' } : {})}
+            class="group flex items-baseline justify-between gap-4 text-lg text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            <span>{link.label}</span>
+            <span class="text-sm text-ink/50">{link.note}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="reveal mt-4 text-sm text-ink/50">
+    LinkedIn, Instagram and TikTok to be added.
+  </p>
+</section>

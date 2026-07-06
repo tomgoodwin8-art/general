@@ -1,0 +1,135 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Magda Frackowiak — Software Engineer, Co-founder of GAMEPLAN',
+  description = 'Magda Frackowiak, software engineer and co-founder of GAMEPLAN, a London performance, media and technology consultancy. Claude Certified Architect.',
+} = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Magdalena Frackowiak',
+  alternateName: 'Magda Frackowiak',
+  givenName: 'Magdalena',
+  familyName: 'Frackowiak',
+  nationality: 'Polish',
+  jobTitle: 'Software Engineer',
+  description:
+    'Software engineer and co-founder of GAMEPLAN, a London performance, media and technology consultancy. Claude Certified Architect.',
+  disambiguatingDescription:
+    'Software engineer and GAMEPLAN co-founder, not the fashion model of the same name.',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'GAMEPLAN',
+    legalName: 'Hii Internet Group Ltd',
+    url: 'https://hellogameplan.com',
+  },
+  founder: {
+    '@type': 'Organization',
+    name: 'GAMEPLAN',
+    url: 'https://hellogameplan.com',
+  },
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    name: 'Claude Certified Architect, Foundations',
+    credentialCategory: 'certification',
+    recognizedBy: {
+      '@type': 'Organization',
+      name: 'Anthropic',
+      url: 'https://www.anthropic.com',
+    },
+  },
+  knowsAbout: [
+    'Software Engineering',
+    'Agentic AI Architecture',
+    'Model Context Protocol',
+    'Performance Marketing',
+    'Ad Technology',
+  ],
+  url: 'https://magdafrackowiak.com/',
+  image: 'https://magdafrackowiak.com/images/magda-frackowiak.jpg',
+  sameAs: [
+    'https://find-and-update.company-information.service.gov.uk/officers/7R_gfb5ipoz4P3nGZyqjzkzpxog/appointments',
+    'https://hellogameplan.com',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href="https://magdafrackowiak.com/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link
+      rel="preload"
+      href="/fonts/newsreader-600.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/inter.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Magda Frackowiak" />
+    <meta
+      property="og:description"
+      content="Software engineer and co-founder of GAMEPLAN. Claude Certified Architect. London."
+    />
+    <meta property="og:url" content="https://magdafrackowiak.com/" />
+    <meta property="og:image" content="https://magdafrackowiak.com/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="generator" content={Astro.generator} />
+    <!-- Mark JS available before paint so .reveal only hides content when JS can un-hide it. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-screen">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:text-paper focus:px-4 focus:py-2"
+    >
+      Skip to content
+    </a>
+    <slot />
+    <script>
+      // Subtle fade-in on scroll; a no-op under prefers-reduced-motion.
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = document.querySelectorAll('.reveal');
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px' }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

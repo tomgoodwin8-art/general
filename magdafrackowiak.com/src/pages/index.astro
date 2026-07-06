@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import CV from '../components/CV.astro';
+import Links from '../components/Links.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<Base>
+  <main id="main">
+    <Hero />
+    <About />
+    <hr class="mx-auto max-w-prose border-ink/10" />
+    <CV />
+    <hr class="mx-auto max-w-prose border-ink/10" />
+    <Links />
+    <hr class="mx-auto max-w-prose border-ink/10" />
+    <Contact />
+  </main>
+  <footer class="mx-auto max-w-prose px-6 py-12 text-sm text-ink/50">
+    <p>© {new Date().getFullYear()} Magda Frackowiak</p>
+  </footer>
+</Base>

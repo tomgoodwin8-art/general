@@ -21,23 +21,28 @@ npm run build    # static build to dist/
 npm run preview  # serve the build
 ```
 
-## Deploy — Cloudflare Pages (git-connected)
+## Deploy — Cloudflare Workers (static assets)
 
-This site lives in the `magdafrackowiak.com/` subdirectory of the repo, so set
-the **Root directory** in the Pages build config.
+Configured as a **Workers project** via `wrangler.toml` (assets-only Worker
+serving `./dist`). `public/_headers` — copied into `dist` at build — sets
+security headers, immutable font caching, and `text/plain` for `llms.txt` /
+`robots.txt`.
 
-1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** →
-   **Connect to Git**, and select this repository.
-2. Build settings:
-   - **Framework preset:** Astro
-   - **Root directory:** `magdafrackowiak.com`
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-3. Deploy. Then **Custom domains** → add `magdafrackowiak.com`; Cloudflare
-   provisions TLS automatically.
+### CLI
 
-`public/_headers` sets security headers, immutable font caching, and
-`text/plain` for `llms.txt` / `robots.txt`.
+```bash
+npx wrangler login                 # or set CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID
+npm run deploy                     # astro build && wrangler deploy
+```
+
+`npx wrangler deploy --dry-run` validates the setup without credentials.
+After the first deploy, add the custom domain `magdafrackowiak.com` under the
+Worker's **Settings → Domains & Routes** (Cloudflare provisions TLS).
+
+### Dashboard (git-connected), alternative
+
+**Workers & Pages → Create → Import a repository**, root directory
+`magdafrackowiak.com`, build `npm run build`, deploy command `npx wrangler deploy`.
 
 ## Before it goes live — placeholders to supply
 

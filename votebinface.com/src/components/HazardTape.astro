@@ -1,0 +1,10 @@
+---
+// Diagonal hazard-tape strip (brief §3, device 1). Used as a top band and as
+// section dividers. Decorative only.
+interface Props {
+  class?: string;
+  height?: string;
+}
+const { class: className = '', height = 'h-3' } = Astro.props;
+---
+<div class:list={['hazard-tape w-full', height, className]} role="presentation" aria-hidden="true"></div>

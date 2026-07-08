@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecordTable from '../components/RecordTable.astro';
+import Helmet from '../components/Helmet.astro';
+import Button from '../components/Button.astro';
+import { SITE } from '../data/facts';
+import { affiliationLine } from '../config/mode';
+
+// Person schema (brief §7.2). countbinface.com is the canonical `url`; this
+// site is the party publisher, not the entity home. sameAs lists the
+// well-known canonical profiles.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Count Binface',
+  alternateName: ['Jonathan David Harvey', 'Jon Harvey', 'Lord Buckethead (2017-2018)'],
+  description:
+    'Satirical independent parliamentary candidate, comedian, self-described independent space warrior, and leader of the Count Binface Party.',
+  url: SITE.officialSite,
+  sameAs: [
+    SITE.officialSite,
+    SITE.social.wikipedia,
+    SITE.social.wikidata,
+    SITE.social.x,
+    SITE.social.youtube,
+    SITE.social.substack,
+  ],
+};
+---
+<BaseLayout
+  title="Who is Count Binface? Real name and record | Vote Binface"
+  description="Count Binface is the satirical persona of comedian Jonathan David Harvey, formerly Lord Buckethead. His record, what he stands for, and his official site."
+  path="/about"
+  ogImage="/og/about.png"
+  schema={personSchema}
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]}
+  stickyCTA
+>
+  <section class="mx-auto grid max-w-5xl items-center gap-8 px-4 pt-16 pb-8 sm:grid-cols-[1fr_auto]">
+    <div>
+      <p class="eyebrow">Who is Count Binface</p>
+      <h1 class="mt-3 text-5xl sm:text-6xl">The bin is the joke. The ballot is not.</h1>
+      <p class="mt-5 text-lg text-grey">Everything you need to know about the candidate, and everything you need to know to tell him apart from a man who once wore a bucket.</p>
+    </div>
+    <Helmet class="hidden h-40 w-auto sm:block" />
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-4">
+    <section class="border-t border-line py-8">
+      <h2 class="text-2xl sm:text-3xl">Who he is</h2>
+      <div class="mt-4 prose-body">
+        <p>Count Binface is a satirical independent candidate: the on-stage and on-ballot persona of British comedian <strong>Jonathan David Harvey</strong>. Harvey previously performed as <strong>Lord Buckethead</strong> until 2018, then retired that character and created Count Binface, an independent intergalactic space warrior and leader of the Count Binface Party.</p>
+        <p>He introduces himself as leader of the Recyclons from the planet Sigma IX. His hobbies, he says, include invading star systems, dominating inferior species, and the Lovejoy box set. He addresses the electorate as "humans". All of this is delivered completely straight, which is what makes it work.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-line py-8">
+      <h2 class="text-2xl sm:text-3xl">The record</h2>
+      <p class="mt-4 prose-body">Every campaign, played as a triumph. The numbers are real; the framing is his.</p>
+      <div class="mt-6"><RecordTable /></div>
+      <p class="mt-4"><a href="/past-campaigns" class="text-hazard underline underline-offset-2">The full story of the record</a>, narrated properly.</p>
+    </section>
+
+    <section class="border-t border-line py-8">
+      <h2 class="text-2xl sm:text-3xl">What he actually stands for</h2>
+      <div class="mt-4 prose-body">
+        <p>Underneath the bin is a genuinely sincere civic project: getting people to vote. The long-running message is <strong>"Make Your Vote Count"</strong>, and it is meant. Count Binface campaigns for electoral participation, treats every ballot as worth casting, and has donated fundraising surpluses to the housing charity <strong>Shelter</strong>.</p>
+        <p>That is the switch this whole campaign runs on: make you laugh, then ask you to take voting seriously. The joke gets you in the room. The ballot is the reason you were invited.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-line py-8">
+      <h2 class="text-2xl sm:text-3xl">Is this the official site?</h2>
+      <div class="mt-4 prose-body">
+        <p>{affiliationLine} His official website is <a href={SITE.officialSite} rel="noopener" target="_blank">countbinface.com</a>, and that remains the canonical home for his own statements and biography. This site supports his Clacton candidacy; it never speaks for him.</p>
+      </div>
+    </section>
+
+    <div class="mt-6 rounded-lg border border-hazard/40 bg-void p-6 text-center">
+      <h2 class="text-2xl">Convinced? Or just curious?</h2>
+      <p class="mx-auto mt-3 max-w-md text-grey">Either way, the useful next step is the same.</p>
+      <div class="mx-auto mt-5 max-w-xs"><Button href="/vote" variant="pop" full big>Register to vote</Button></div>
+    </div>
+  </div>
+</BaseLayout>

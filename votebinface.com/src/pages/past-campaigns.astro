@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecordTable from '../components/RecordTable.astro';
+import Button from '../components/Button.astro';
+---
+<BaseLayout
+  title="Count Binface election results: the record | Vote Binface"
+  description="Count Binface's electoral record from 249 votes against Theresa May to 24,775 in London. Every result a victory if you squint. The point was always turnout."
+  path="/past-campaigns"
+  ogImage="/og/past-campaigns.png"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'The record', path: '/past-campaigns' }]}
+  stickyCTA
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-8">
+    <p class="eyebrow">The record</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">A decade of moral victories.</h1>
+    <p class="mt-5 text-lg text-grey">Every result below is a triumph. You simply have to squint at some of them harder than others.</p>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-4">
+    <div class="prose-body">
+      <p><strong>2017, Maidenhead.</strong> Standing as Lord Buckethead against a sitting Prime Minister, Theresa May, and walking away with 249 votes. Two hundred and forty-nine humans looked at the ballot, saw a man in a bucket, and thought: yes, him. That is 249 acts of faith in democracy.</p>
+      <p><strong>2019, Uxbridge & South Ruislip.</strong> A surprising 69 votes against Boris Johnson. A perfect number. No further comment is required and none will be given.</p>
+      <p><strong>2021, London Mayoral.</strong> 24,775 first-choice votes and ninth place out of twenty, ahead of candidates with actual party machines behind them. The whole capital was the opponent and the Count still finished in the top half.</p>
+      <p><strong>2023, Uxbridge & South Ruislip by-election.</strong> 190 votes, a 275% increase on 2019. Show that growth rate to any start-up and they would put the Count on the cover of a magazine.</p>
+      <p><strong>2024, London Mayoral.</strong> 24,260 votes, comfortably ahead of Britain First. Finishing ahead of the far right is a result worth stating plainly, bin or no bin.</p>
+      <p><strong>2024, Richmond & Northallerton.</strong> 308 votes against Rishi Sunak. A moral victory, and the Count defeated the forces of cynicism in the process, if not the actual Prime Minister.</p>
+      <p><strong>2026, Makerfield.</strong> 95 votes and seventh of fourteen against Andy Burnham, on the strength of a manifesto that included price-capping the Wigan Kebab and refereeing corners properly. Seventh of fourteen is the top half. We are counting it.</p>
+    </div>
+
+    <div class="mt-8">
+      <RecordTable />
+    </div>
+
+    <section class="mt-12 border-t border-line pt-8">
+      <h2 class="text-3xl">The bit at the end where we mean it</h2>
+      <div class="mt-4 prose-body">
+        <p>Here is the thing the vote totals do not show. Behind every one of these campaigns is a simple argument: that showing up matters, that a ballot is worth casting even when you know how the night ends, and that democracy is healthier when someone bothers to give people a reason to turn out.</p>
+        <p>The votes were never the point. The turnout was. That is as true in Clacton as it was in Uxbridge, and it is why the most useful thing on this entire site is the button below.</p>
+      </div>
+      <div class="mx-auto mt-8 max-w-xs">
+        <Button href="/vote" variant="pop" full big>Make your vote count</Button>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

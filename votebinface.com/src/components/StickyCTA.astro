@@ -1,0 +1,29 @@
+---
+// Sticky bottom bar on mobile (brief §8.3). Dismissible, respects
+// reduced-motion (no slide animation), never covers form fields (only shown on
+// content pages that opt in). Vanilla JS, no framework.
+---
+<div
+  id="sticky-cta"
+  class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-void/95 backdrop-blur px-4 py-3 lg:hidden"
+  hidden
+>
+  <div class="flex items-center gap-3">
+    <p class="flex-1 font-mono text-xs uppercase tracking-wide text-chrome">Make your vote count</p>
+    <a href="/vote" class="inline-flex min-h-[44px] items-center rounded bg-pop px-4 py-2 font-mono text-sm font-bold uppercase tracking-wider text-white">Register</a>
+    <button id="sticky-cta-close" type="button" class="p-2 text-grey hover:text-chrome" aria-label="Dismiss">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+<script>
+  const bar = document.getElementById('sticky-cta');
+  const close = document.getElementById('sticky-cta-close');
+  if (bar && sessionStorage.getItem('sticky-cta-dismissed') !== '1') {
+    bar.hidden = false;
+  }
+  close?.addEventListener('click', () => {
+    if (bar) bar.hidden = true;
+    sessionStorage.setItem('sticky-cta-dismissed', '1');
+  });
+</script>

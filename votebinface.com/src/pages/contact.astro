@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/facts';
+
+const socials = [
+  { label: 'X / Twitter', href: SITE.social.x, handle: '@CountBinface' },
+  { label: 'YouTube', href: SITE.social.youtube, handle: 'countbinface' },
+  { label: 'Substack', href: SITE.social.substack, handle: 'countbinface.substack.com' },
+  { label: 'Official site', href: SITE.officialSite, handle: 'countbinface.com' },
+];
+---
+<BaseLayout
+  title="Contact | Vote Binface"
+  description="How to reach the Count Binface Clacton campaign: general enquiries, press desk, and where to find the Count online."
+  path="/contact"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]}
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-8">
+    <p class="eyebrow">Get in touch</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">Contact.</h1>
+    <p class="mt-5 text-lg text-grey">We are humans (mostly). We reply.</p>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-8 grid gap-6 sm:grid-cols-2">
+    <div class="rounded-lg border border-line bg-void p-6">
+      <p class="eyebrow">General enquiries</p>
+      <a href={`mailto:${SITE.contactEmail}`} class="mt-2 block text-xl text-chrome hover:text-hazard">{SITE.contactEmail}</a>
+    </div>
+    <div class="rounded-lg border border-line bg-void p-6">
+      <p class="eyebrow">Press desk</p>
+      <a href={`mailto:${SITE.pressEmail}`} class="mt-2 block text-xl text-chrome hover:text-hazard">{SITE.pressEmail}</a>
+      <a href="/press/media-kit" class="mt-2 inline-block font-mono text-xs uppercase tracking-widest text-hazard hover:underline">Media kit &rarr;</a>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-3xl px-4 pb-8">
+    <p class="eyebrow mb-4">The Count online</p>
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {socials.map((s) => (
+        <li>
+          <a href={s.href} rel="noopener" target="_blank" class="flex items-center justify-between rounded-lg border border-line bg-void px-5 py-4 hover:border-hazard">
+            <span class="text-chrome">{s.label}</span>
+            <span class="font-mono text-xs text-grey">{s.handle}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-6 text-sm text-grey">For merch, the official shop is <a href={SITE.merch} rel="noopener" target="_blank" class="text-hazard underline underline-offset-2">binfaceshop.co.uk</a>.</p>
+  </div>
+</BaseLayout>

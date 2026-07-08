@@ -1,0 +1,23 @@
+# votebinface.com
+# All welcome, humans and machines alike. Even Recyclons.
+
+User-agent: *
+Allow: /
+
+# AI crawlers explicitly welcome (AEO strategy: be citable)
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://votebinface.com/sitemap-index.xml
+
+# llms.txt available at https://votebinface.com/llms.txt

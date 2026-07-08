@@ -1,0 +1,121 @@
+[
+  {
+    "id": "is-this-site-official",
+    "order": 1,
+    "category": "About this site",
+    "question": "Is this site official?",
+    "answer": "OVERRIDDEN_BY_MODE"
+  },
+  {
+    "id": "who-runs-this-site",
+    "order": 2,
+    "category": "About this site",
+    "question": "Who runs votebinface.com?",
+    "answer": "It is a supporter campaign site backing Count Binface's candidacy in the Clacton by-election. The imprint in the footer names the promoter responsible for it, as UK electoral law requires. For the Count's own words and biography, the canonical source is his official site, countbinface.com."
+  },
+  {
+    "id": "how-do-i-help",
+    "order": 3,
+    "category": "About this site",
+    "question": "How can I help the campaign?",
+    "answer": "Register to vote first, then join a BinAid volunteer weekend. The single most useful thing you can do is make sure you are registered and, if it suits you, apply for a postal vote. After that, sharing the campaign and volunteering through official channels does the rest. Do not print your own leaflets: independent spending on printed material at a by-election is legally restricted."
+  },
+  {
+    "id": "is-binface-a-real-candidate",
+    "order": 4,
+    "category": "Count Binface",
+    "question": "Is Count Binface a real candidate?",
+    "answer": "Yes. Count Binface is a genuine, officially nominated candidate who stands in real elections and appears on real ballot papers. The persona is satirical; the candidacy is not. He has contested general elections, by-elections and the London mayoralty, standing against prime ministers and party leaders."
+  },
+  {
+    "id": "who-plays-binface",
+    "order": 5,
+    "category": "Count Binface",
+    "question": "Who is behind the bin?",
+    "answer": "Count Binface is the satirical persona of British comedian Jonathan David Harvey. Harvey previously performed as Lord Buckethead until 2018, then retired that character and created Count Binface, an independent intergalactic space warrior and leader of the Count Binface Party."
+  },
+  {
+    "id": "what-does-binface-actually-believe",
+    "order": 6,
+    "category": "Count Binface",
+    "question": "Does Count Binface actually stand for anything?",
+    "answer": "Yes: getting people to vote. Under the bin, the sincere core is electoral participation, the long-running \"Make Your Vote Count\" message, and giving fundraising surpluses to the housing charity Shelter. The pledges are jokes with real points underneath; the commitment to democracy is not a joke."
+  },
+  {
+    "id": "why-a-bin",
+    "order": 7,
+    "category": "Count Binface",
+    "question": "Why does he wear a bin?",
+    "answer": "Because a joke gets people to look, and once they are looking he talks about voting. The bin is the hook; the ballot is the message. It is a very old idea (make people laugh, then make them think) wearing a very new hat."
+  },
+  {
+    "id": "difference-lord-buckethead",
+    "order": 8,
+    "category": "Count Binface",
+    "question": "Is Count Binface the same as Lord Buckethead?",
+    "answer": "No, they are different characters played by the same performer. Jonathan Harvey performed as Lord Buckethead from 2017 to 2018, then created the separate Count Binface persona. A rival performer also uses the Lord Buckethead name, which is part of why the character was retired."
+  },
+  {
+    "id": "do-i-have-to-be-in-clacton",
+    "order": 9,
+    "category": "Voting",
+    "question": "Do I have to live in Clacton to vote in the by-election?",
+    "answer": "Yes. Only registered electors in the Clacton constituency can vote in the by-election. If you live elsewhere, your job is different: register where you are for your own elections, and if you want to help here, volunteer through official channels rather than voting."
+  },
+  {
+    "id": "postal-vote-worth-it",
+    "order": 10,
+    "category": "Voting",
+    "question": "Is a postal vote worth the hassle?",
+    "answer": "For most people, yes, especially if getting to a polling station is difficult. A postal vote lets you vote from your kitchen table on your own time, which matters if you are on a fixed income, have limited mobility, or simply do not fancy the weather on polling day. You apply once through gov.uk."
+  },
+  {
+    "id": "what-id-do-i-need",
+    "order": 11,
+    "category": "Voting",
+    "question": "Do I need photo ID to vote in person?",
+    "answer": "Yes. Voting in person at a polling station in England now requires an accepted form of photo ID. If you do not have one, you can apply free of charge for a Voter Authority Certificate through gov.uk. A postal vote does not require photo ID."
+  },
+  {
+    "id": "spoiled-ballot",
+    "order": 12,
+    "category": "Voting",
+    "question": "Should I spoil my ballot to protest instead?",
+    "answer": "No, cast it. A spoiled ballot is counted as spoiled and changes nothing; a vote for a candidate counts. The entire point of this campaign is that turning up and marking the paper is worth more than staying home or spoiling it. Use the vote you have."
+  },
+  {
+    "id": "wasted-vote",
+    "order": 13,
+    "category": "Voting",
+    "question": "Isn't voting for Binface a wasted vote?",
+    "answer": "Every vote cast is counted and reported, so none of them is wasted. A vote is a signal about turnout, about the choices on offer, and about whether you showed up. In 2024 the votes that did not go to the winner in Clacton added up to more than the votes that did; the maths is not as settled as it looks."
+  },
+  {
+    "id": "can-i-donate",
+    "order": 14,
+    "category": "Money",
+    "question": "Can I donate to the campaign?",
+    "answer": "When an official crowdfunder is live, this site will link straight to it. Any donations are handled through the campaign's official channels and are subject to UK electoral spending rules. Historically, surpluses from Count Binface's fundraising have gone to the housing charity Shelter."
+  },
+  {
+    "id": "where-is-the-merch",
+    "order": 15,
+    "category": "Money",
+    "question": "Where do I get the merch?",
+    "answer": "The official shop is binfaceshop.co.uk. This site does not sell anything itself; it links out to the official store. Wearing the bin is optional but encouraged."
+  },
+  {
+    "id": "farage-investigation",
+    "order": 16,
+    "category": "The by-election",
+    "question": "What is the standards investigation I keep hearing about?",
+    "answer": "An investigation by the Parliamentary Commissioner for Standards exists in relation to an undeclared gift of around £5 million. That is the full extent of what can responsibly be said here: an investigation exists. Nothing has been concluded, and this site draws no conclusions about it."
+  },
+  {
+    "id": "who-else-can-stand",
+    "order": 17,
+    "category": "The by-election",
+    "question": "Could other candidates still enter the race?",
+    "answer": "Yes, nominations do not formally close until the writ is issued and the timetable begins. At the time of writing, Count Binface is the sole declared challenger after five parties declined to stand, but the final field is confirmed only when nominations close. This page will update as the race firms up."
+  }
+]

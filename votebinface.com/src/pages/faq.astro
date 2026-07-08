@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { affiliationLine } from '../config/mode';
+
+const entries = (await getCollection('faq')).sort((a, b) => a.data.order - b.data.order);
+
+// The "is this site official" answer must track the operating mode, so it is
+// computed rather than stored (keeps the legal statement honest in both modes).
+function answerFor(id: string, stored: string): string {
+  if (id === 'is-this-site-official') {
+    return `${affiliationLine} Whichever way, the honest version is on our about page, and the Count's own canonical statements live at countbinface.com.`;
+  }
+  return stored;
+}
+
+const resolved = entries.map((e) => ({ ...e.data, answer: answerFor(e.id, e.data.answer) }));
+
+// Group by category, preserving order.
+const categories: string[] = [];
+for (const e of resolved) if (!categories.includes(e.category)) categories.push(e.category);
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: resolved.map((e) => ({
+    '@type': 'Question',
+    name: e.question,
+    acceptedAnswer: { '@type': 'Answer', text: e.answer },
+  })),
+};
+---
+<BaseLayout
+  title="Count Binface FAQ: the by-election, the bin, the vote | Vote Binface"
+  description="Straight answers about Count Binface, the Clacton by-election and how to vote. Is the site official? Who is behind the bin? Is it a wasted vote?"
+  path="/faq"
+  ogImage="/og/faq.png"
+  schema={faqSchema}
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }]}
+  stickyCTA
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-8">
+    <p class="eyebrow">Questions, answered</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">Frequently asked questions.</h1>
+    <p class="mt-5 text-lg text-grey">One-sentence answer first, the detail after. If you want the by-election specifics, the <a href="/clacton" class="text-hazard underline underline-offset-2">Clacton explainer</a> goes deeper.</p>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-8">
+    {categories.map((cat) => (
+      <section class="border-t border-line py-8">
+        <p class="eyebrow mb-4">{cat}</p>
+        <div class="space-y-4">
+          {resolved.filter((e) => e.category === cat).map((e) => (
+            <details class="group rounded-lg border border-line bg-void p-5">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
+                <h2 class="text-lg text-chrome sm:text-xl">{e.question}</h2>
+                <span class="shrink-0 font-mono text-hazard transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="mt-3 prose-body text-grey">{e.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <div class="mx-auto max-w-3xl px-4 pb-4 text-center">
+    <div class="mx-auto max-w-xs">
+      <Button href="/vote" variant="pop" full big>Register to vote</Button>
+    </div>
+  </div>
+</BaseLayout>

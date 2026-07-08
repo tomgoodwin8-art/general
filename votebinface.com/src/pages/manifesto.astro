@@ -1,0 +1,82 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { SITE } from '../data/facts';
+
+const pledges = (await getCollection('pledges')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(
+  pledges.map(async (p) => ({ ...p, Content: (await render(p)).Content }))
+);
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Count Binface manifesto pledges',
+  itemListElement: pledges.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.data.pledge,
+  })),
+};
+---
+<BaseLayout
+  title="Count Binface manifesto: the pledges | Vote Binface"
+  description="Count Binface's documented pledges: a 99p cap on 99 Flake ice creams, abolishing auto-renew on subscriptions, and building at least one affordable home."
+  path="/manifesto"
+  ogImage="/og/manifesto.png"
+  schema={itemList}
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Manifesto', path: '/manifesto' }]}
+  stickyCTA
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-6">
+    <p class="eyebrow">The manifesto</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">Three pledges. All <span class="strike">real</span> real.</h1>
+    <p class="mt-5 text-lg text-grey">
+      These are Count Binface's documented pledges, played straight to camera. Silly on the surface, serious underneath. That contrast is the entire point.
+    </p>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-4">
+    {rendered.map((p) => (
+      <article class="border-t border-line py-10">
+        <div class="flex items-baseline gap-4">
+          <span class="font-display text-5xl text-hazard leading-none">{String(p.data.order).padStart(2, '0')}</span>
+          <h2 class="text-3xl sm:text-4xl">{p.data.pledge}</h2>
+        </div>
+        <div class="mt-6 grid gap-6 sm:grid-cols-2">
+          <div>
+            <p class="eyebrow mb-2">Why it slaps</p>
+            <p class="text-grey">{p.data.whySlaps}</p>
+          </div>
+          <div>
+            <p class="eyebrow mb-2">Why it matters</p>
+            <div class="prose-body text-grey"><p.Content /></div>
+          </div>
+        </div>
+        {p.data.genuine && (
+          <span class="mt-5 inline-block rounded-full border border-line px-3 py-1 font-mono text-[0.65rem] uppercase tracking-widest text-grey">
+            genuine Binface pledge
+          </span>
+        )}
+      </article>
+    ))}
+  </div>
+
+  <div class="mx-auto max-w-3xl px-4">
+    <div class="rounded-lg border border-hazard/40 bg-void p-6">
+      <p class="font-mono text-sm uppercase tracking-widest text-hazard">Coming soon</p>
+      <p class="mt-2 text-grey">
+        Full Clacton manifesto expected once the writ is issued. This page will update. For the Count's own words in the meantime, see
+        <a href={SITE.officialSite} rel="noopener" target="_blank" class="text-hazard underline underline-offset-2">countbinface.com</a>.
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-3xl px-4 py-12 text-center">
+    <h2 class="text-3xl">Policies are easy. Turning up is the job.</h2>
+    <div class="mx-auto mt-5 max-w-xs">
+      <Button href="/vote" variant="pop" full big>Register to vote</Button>
+    </div>
+  </div>
+</BaseLayout>

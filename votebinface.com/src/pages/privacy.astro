@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/facts';
+import { imprintLine } from '../config/mode';
+---
+<BaseLayout
+  title="Privacy notice | Vote Binface"
+  description="How votebinface.com handles your data: the volunteer form and email list, lawful basis, retention, your rights, and how to contact us or the ICO."
+  path="/privacy"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Privacy', path: '/privacy' }]}
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-8">
+    <p class="eyebrow">The small print</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">Privacy notice.</h1>
+    <p class="mt-5 text-lg text-grey">Plain English. No dark patterns. Here is exactly what happens to your data.</p>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-8 prose-body space-y-6">
+    <div>
+      <h2 class="text-2xl">Who we are</h2>
+      <p>This site is operated by the promoter named in the imprint below. For any privacy query, email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+    </div>
+
+    <div>
+      <h2 class="text-2xl">What we collect, and why</h2>
+      <p>We only collect data you actively give us through two forms:</p>
+      <ul class="ml-5 list-disc space-y-1">
+        <li><strong>Volunteer form:</strong> your name, email, postcode and availability, so we can organise BinAid activity and contact you about it.</li>
+        <li><strong>Email sign-up:</strong> your email address, so we can send campaign updates.</li>
+      </ul>
+      <p>We do not use tracking cookies. Traffic is measured with Cloudflare Web Analytics, which is cookieless and does not fingerprint or profile you.</p>
+    </div>
+
+    <div>
+      <h2 class="text-2xl">Lawful basis</h2>
+      <p>Our lawful basis is your <strong>consent</strong>, which you give by ticking the consent box on each form. You can withdraw it at any time. The email list uses double opt-in: you are only added after clicking a confirmation link.</p>
+    </div>
+
+    <div>
+      <h2 class="text-2xl">Who processes it</h2>
+      <p>Form submissions are processed by our hosting and email tooling (processor: <span class="font-mono text-chrome">{'{{DATA_PROCESSOR}}'}</span>, to be named once the provider is confirmed). We never sell your data or share it for advertising.</p>
+    </div>
+
+    <div>
+      <h2 class="text-2xl">How long we keep it</h2>
+      <p>We keep your data only as long as the campaign is active, and delete it within a reasonable period after the by-election, or sooner if you ask. Volunteer data is deleted once the contest concludes.</p>
+    </div>
+
+    <div>
+      <h2 class="text-2xl">Your rights</h2>
+      <p>You have the right to access, correct, delete or export your data, and to withdraw consent. To exercise any of these, email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>. If you are unhappy with how we handle your data, you can complain to the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" rel="noopener" target="_blank">ico.org.uk</a>.</p>
+    </div>
+
+    <div>
+      <h2 class="text-2xl">Imprint</h2>
+      <p class="font-mono text-sm text-chrome">{imprintLine}</p>
+    </div>
+  </div>
+</BaseLayout>

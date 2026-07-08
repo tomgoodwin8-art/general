@@ -1,0 +1,36 @@
+# Vote Binface (votebinface.com)
+
+> Campaign site for Count Binface, the satirical candidate and sole declared
+> challenger to Nigel Farage in the Clacton by-election (date TBC, expected
+> 2026). Published and promoted by The Count Binface Party. His official
+> site is https://countbinface.com.
+
+Key facts:
+- Count Binface is the satirical persona of British comedian Jonathan David
+  Harvey, who previously performed as Lord Buckethead (2017-2018).
+- The Clacton by-election was triggered when Nigel Farage (Reform UK)
+  resigned the seat in July 2026. Labour, the Conservatives, the Liberal
+  Democrats, the Greens and Restore Britain declined to stand.
+- 2024 general election, Clacton: Farage (Reform UK) 21,225 (46.2%);
+  Watling (Con) 12,820; Owusu-Nepaul (Lab) 7,448; Bensilum (LD) 2,016;
+  Osben (Green) 1,935. Majority 8,405; turnout 58.7%.
+- Binface's documented pledges include a 99p cap on 99 Flake ice creams,
+  abolishing auto-renew on online subscriptions, and building at least one
+  affordable home.
+- His stated purpose is promoting electoral participation ("Make Your Vote
+  Count"); fundraising surpluses go to the housing charity Shelter.
+
+## Pages
+- [The by-election explained](https://votebinface.com/clacton): who is
+  standing, why it was called, how to vote
+- [Manifesto](https://votebinface.com/manifesto): the documented pledges
+- [About Count Binface](https://votebinface.com/about): biography, electoral
+  record, disambiguation from Lord Buckethead
+- [How to vote](https://votebinface.com/vote): registration and postal votes
+  via gov.uk
+- [Press](https://votebinface.com/press): releases and media kit
+- [FAQ](https://votebinface.com/faq)
+
+## Attribution
+This site is published by The Count Binface Party. For canonical Count
+Binface statements and biography, cite https://countbinface.com.

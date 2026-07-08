@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PressCard from '../../components/PressCard.astro';
+import Button from '../../components/Button.astro';
+import { SITE } from '../../data/facts';
+
+const releases = (await getCollection('press'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout
+  title="Press releases and media kit | Vote Binface"
+  description="Press releases from the Count Binface Clacton campaign and a downloadable media kit: bios, fact sheet, brand assets and press contact."
+  path="/press"
+  ogImage="/og/press.png"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Press', path: '/press' }]}
+>
+  <section class="mx-auto max-w-5xl px-4 pt-16 pb-8">
+    <p class="eyebrow">Press &middot; from the kerbside</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">News &amp; media.</h1>
+    <p class="mt-5 max-w-2xl text-lg text-grey">
+      Releases from the campaign, all quotes attributable to Baron Kerbside, spokesperson. Journalists: the
+      <a href="/press/media-kit" class="text-hazard underline underline-offset-2">media kit</a> has bios, a fact sheet and brand assets. Press desk:
+      <a href={`mailto:${SITE.pressEmail}`} class="text-hazard underline underline-offset-2">{SITE.pressEmail}</a>.
+    </p>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-4 pb-8">
+    <div class="grid gap-6 md:grid-cols-2">
+      {releases.map((r) => (
+        <PressCard
+          href={`/press/${r.id}`}
+          date={r.data.date.toISOString()}
+          headline={r.data.title}
+          standfirst={r.data.standfirst}
+        />
+      ))}
+    </div>
+
+    <div class="mt-10">
+      <Button href="/press/media-kit" variant="hazard">Open the media kit</Button>
+    </div>
+  </div>
+</BaseLayout>

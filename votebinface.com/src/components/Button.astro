@@ -1,0 +1,43 @@
+---
+// CTA button (brief §3, §8.3). Variants: pop (primary, pink), hazard
+// (secondary, yellow), ghost (outline). Renders as <a> for links.
+interface Props {
+  href: string;
+  variant?: 'pop' | 'hazard' | 'ghost';
+  external?: boolean;
+  full?: boolean;
+  big?: boolean;
+  class?: string;
+  dataEvent?: string;
+}
+const {
+  href,
+  variant = 'pop',
+  external = false,
+  full = false,
+  big = false,
+  class: className = '',
+  dataEvent,
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 font-mono font-bold uppercase tracking-wider transition-colors duration-150 text-center';
+const size = big ? 'text-base px-7 py-4 min-h-[56px]' : 'text-sm px-5 py-3';
+const width = full ? 'w-full' : '';
+const variants: Record<string, string> = {
+  pop: 'bg-pop text-white hover:bg-[#ff1a5f]',
+  hazard: 'bg-hazard text-ink hover:bg-[#ffe600]',
+  ghost: 'border border-dgrey text-chrome hover:border-hazard hover:text-hazard',
+};
+const rel = external ? 'noopener' : undefined;
+const target = external ? '_blank' : undefined;
+---
+<a
+  href={href}
+  class:list={[base, size, width, variants[variant], className]}
+  rel={rel}
+  target={target}
+  data-event={dataEvent}
+>
+  <slot />
+</a>

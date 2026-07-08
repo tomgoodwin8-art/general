@@ -1,0 +1,27 @@
+---
+// Selectable text block with a copy-to-clipboard button (media kit).
+interface Props { text: string; }
+const { text } = Astro.props;
+---
+<div class="relative rounded-lg border border-line bg-void p-5">
+  <p class="whitespace-pre-line pr-24 text-sm text-grey">{text}</p>
+  <button
+    type="button"
+    class="copy-btn absolute right-4 top-4 rounded border border-dgrey px-3 py-1.5 font-mono text-[0.65rem] uppercase tracking-widest text-chrome hover:border-hazard hover:text-hazard"
+    data-copy={text}
+  >Copy</button>
+</div>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy || '');
+        const prev = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(() => (btn.textContent = prev), 1500);
+      } catch {
+        btn.textContent = 'Select + copy';
+      }
+    });
+  });
+</script>

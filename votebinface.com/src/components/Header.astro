@@ -1,0 +1,52 @@
+---
+import Helmet from './Helmet.astro';
+import Button from './Button.astro';
+
+const nav = [
+  { href: '/clacton', label: 'Clacton' },
+  { href: '/manifesto', label: 'Manifesto' },
+  { href: '/about', label: 'About' },
+  { href: '/past-campaigns', label: 'The record' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/press', label: 'Press' },
+];
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="sticky top-0 z-40 border-b border-line bg-ink/95 backdrop-blur supports-[backdrop-filter]:bg-ink/80">
+  <nav class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3" aria-label="Primary">
+    <a href="/" class="flex items-center gap-2 shrink-0" aria-label="Vote Binface home">
+      <Helmet class="h-9 w-auto" />
+      <span class="font-display text-xl text-chrome tracking-wide">VOTE BINFACE</span>
+    </a>
+    <ul class="ml-auto hidden items-center gap-5 lg:flex">
+      {nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'font-mono text-xs uppercase tracking-widest hover:text-hazard',
+              path === item.href ? 'text-hazard' : 'text-grey',
+            ]}
+            aria-current={path === item.href ? 'page' : undefined}
+          >{item.label}</a>
+        </li>
+      ))}
+    </ul>
+    <div class="ml-auto lg:ml-0">
+      <Button href="/vote" variant="pop">Register to vote</Button>
+    </div>
+    <details class="relative lg:hidden">
+      <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center text-chrome" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </summary>
+      <ul class="absolute right-0 top-12 w-52 rounded-md border border-line bg-void p-2 shadow-xl">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} class="block px-3 py-2 font-mono text-xs uppercase tracking-widest text-grey hover:text-hazard">{item.label}</a>
+          </li>
+        ))}
+        <li><a href="/volunteer" class="block px-3 py-2 font-mono text-xs uppercase tracking-widest text-grey hover:text-hazard">Volunteer</a></li>
+      </ul>
+    </details>
+  </nav>
+</header>

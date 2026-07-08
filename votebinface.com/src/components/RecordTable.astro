@@ -1,0 +1,26 @@
+---
+import { BINFACE_RECORD } from '../data/facts';
+---
+<div class="overflow-x-auto rounded-lg border border-line">
+  <table class="w-full border-collapse text-left text-sm">
+    <caption class="sr-only">Count Binface / Lord Buckethead electoral record</caption>
+    <thead>
+      <tr class="bg-void font-mono text-xs uppercase tracking-widest text-grey">
+        <th scope="col" class="px-4 py-3">Year</th>
+        <th scope="col" class="px-4 py-3">Contest</th>
+        <th scope="col" class="px-4 py-3">Up against</th>
+        <th scope="col" class="px-4 py-3">Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      {BINFACE_RECORD.map((r) => (
+        <tr class="border-t border-line align-top">
+          <td class="px-4 py-3 font-mono text-hazard">{r.year}</td>
+          <td class="px-4 py-3 text-chrome">{r.contest}</td>
+          <td class="px-4 py-3 text-grey">{r.vs || '—'}</td>
+          <td class="px-4 py-3 text-grey">{r.result}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

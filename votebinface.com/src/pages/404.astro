@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Helmet from '../components/Helmet.astro';
+import Button from '../components/Button.astro';
+---
+<BaseLayout
+  title="Page recycled (404) | Vote Binface"
+  description="This page has been recycled. Nothing is wasted here, especially not votes."
+  path="/404"
+>
+  <section class="mx-auto flex max-w-2xl flex-col items-center px-4 py-24 text-center">
+    <Helmet class="h-32 w-auto" />
+    <p class="eyebrow mt-8">Error 404</p>
+    <h1 class="mt-3 text-6xl sm:text-7xl">This page has been recycled.</h1>
+    <p class="mt-5 text-lg text-grey">
+      Nothing is wasted here. Not paper, not aluminium, and definitely not votes. The thing you were after has gone to a better place (or moved).
+    </p>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <Button href="/vote" variant="pop" big>Register to vote</Button>
+      <Button href="/" variant="ghost" big>Back to the start</Button>
+    </div>
+  </section>
+</BaseLayout>

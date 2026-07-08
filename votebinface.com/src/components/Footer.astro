@@ -1,0 +1,71 @@
+---
+import { SITE } from '../data/facts';
+import { imprintLine, affiliationLine } from '../config/mode';
+import HazardTape from './HazardTape.astro';
+
+const cols = [
+  {
+    title: 'Campaign',
+    links: [
+      { href: '/vote', label: 'How to vote' },
+      { href: '/clacton', label: 'The by-election' },
+      { href: '/manifesto', label: 'Manifesto' },
+      { href: '/volunteer', label: 'Volunteer (BinAid)' },
+    ],
+  },
+  {
+    title: 'Binface',
+    links: [
+      { href: '/about', label: 'About' },
+      { href: '/past-campaigns', label: 'The record' },
+      { href: '/faq', label: 'FAQ' },
+      { href: '/press', label: 'Press' },
+    ],
+  },
+  {
+    title: 'The small print',
+    links: [
+      { href: '/privacy', label: 'Privacy' },
+      { href: '/legal', label: 'Legal & imprint' },
+      { href: '/contact', label: 'Contact' },
+      { href: SITE.officialSite, label: 'Official site', external: true },
+    ],
+  },
+];
+---
+<footer class="mt-24 border-t border-line bg-void">
+  <HazardTape height="h-2" />
+  <div class="mx-auto max-w-6xl px-4 py-12">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <p class="font-display text-2xl text-chrome">VOTE BINFACE</p>
+        <p class="mt-2 max-w-xs text-sm text-grey">The only one who turned up in Clacton. The bin is the joke. The ballot is not.</p>
+      </div>
+      {cols.map((col) => (
+        <nav aria-label={col.title}>
+          <p class="eyebrow mb-3">{col.title}</p>
+          <ul class="space-y-2">
+            {col.links.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class="text-sm text-grey hover:text-hazard"
+                  {...('external' in l && l.external ? { rel: 'noopener', target: '_blank' } : {})}
+                >{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+
+    <div class="mt-10 border-t border-line pt-6">
+      <p class="font-mono text-xs leading-relaxed text-grey">{affiliationLine}</p>
+      <!-- Statutory UK digital imprint, rendered from config (brief §1). -->
+      <p class="mt-2 font-mono text-xs leading-relaxed text-grey">{imprintLine}</p>
+      <p class="mt-4 font-mono text-[0.7rem] text-grey">
+        &copy; {new Date().getFullYear()} {SITE.name}. Democracy is not a spectator sport.
+      </p>
+    </div>
+  </div>
+</footer>

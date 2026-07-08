@@ -1,0 +1,39 @@
+---
+import { CLACTON_2024 } from '../data/facts';
+const { results, majority, orphanedVote } = CLACTON_2024;
+---
+<div class="overflow-x-auto rounded-lg border border-line">
+  <table class="w-full border-collapse text-left text-sm">
+    <caption class="sr-only">Clacton constituency, 2024 general election result</caption>
+    <thead>
+      <tr class="bg-void font-mono text-xs uppercase tracking-widest text-grey">
+        <th scope="col" class="px-4 py-3">Candidate</th>
+        <th scope="col" class="px-4 py-3">Party</th>
+        <th scope="col" class="px-4 py-3 text-right">Votes</th>
+        <th scope="col" class="px-4 py-3 text-right">Share</th>
+      </tr>
+    </thead>
+    <tbody>
+      {results.map((r, i) => (
+        <tr class:list={['border-t border-line', i === 0 ? 'bg-void/60' : '']}>
+          <td class="px-4 py-3 text-chrome">{r.candidate}</td>
+          <td class="px-4 py-3 text-grey">{r.party}</td>
+          <td class="px-4 py-3 text-right font-mono text-chrome">{r.votes.toLocaleString('en-GB')}</td>
+          <td class="px-4 py-3 text-right font-mono text-grey">{r.share.toFixed(1)}%</td>
+        </tr>
+      ))}
+    </tbody>
+    <tfoot>
+      <tr class="border-t border-line font-mono text-xs text-grey">
+        <td class="px-4 py-3" colspan="2">Majority</td>
+        <td class="px-4 py-3 text-right text-chrome">{majority.toLocaleString('en-GB')}</td>
+        <td class="px-4 py-3"></td>
+      </tr>
+      <tr class="border-t border-line bg-hazard/10 font-mono text-xs text-hazard">
+        <td class="px-4 py-3" colspan="2">Non-winning vote combined</td>
+        <td class="px-4 py-3 text-right">{orphanedVote.toLocaleString('en-GB')}</td>
+        <td class="px-4 py-3"></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

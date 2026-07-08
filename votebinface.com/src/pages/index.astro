@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Helmet from '../components/Helmet.astro';
+import Button from '../components/Button.astro';
+import StatBand from '../components/StatBand.astro';
+import PledgeCard from '../components/PledgeCard.astro';
+import PressCard from '../components/PressCard.astro';
+import HazardTape from '../components/HazardTape.astro';
+import EmailCapture from '../components/EmailCapture.astro';
+import { SITE, DECLINED_PARTIES } from '../data/facts';
+
+const declined = DECLINED_PARTIES.join(', ').replace(/, ([^,]*)$/, ' and $1');
+
+const pledges = (await getCollection('pledges')).sort((a, b) => a.data.order - b.data.order);
+const releases = (await getCollection('press'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 2);
+---
+<BaseLayout
+  title="Vote Binface | The only one who turned up in Clacton"
+  description="Count Binface is the sole declared challenger to Nigel Farage in the Clacton by-election. Five parties declined to stand. Register to vote and make it count."
+  path="/"
+  ogImage="/og/home.png"
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 pt-14 pb-10 lg:grid-cols-[1.3fr_1fr] lg:pt-20">
+      <div>
+        <p class="eyebrow">Clacton by-election &middot; {SITE.pollingDate}</p>
+        <h1 class="mt-4 text-6xl leading-[0.9] sm:text-7xl lg:text-8xl">
+          THE <span class="strike">ONLY</span> ONE<br />WHO TURNED UP
+        </h1>
+        <p class="mt-6 max-w-xl text-lg text-grey">
+          {declined} all declined to stand against Nigel Farage. Count Binface did not. He is the sole declared challenger, and the ballot is deadly serious even if the candidate wears a bin.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button href="/vote" variant="pop" big>Register to vote</Button>
+          <Button href="/manifesto" variant="hazard" big>Read the manifesto</Button>
+        </div>
+      </div>
+      <div class="flex justify-center lg:justify-end">
+        <Helmet class="h-64 w-auto sm:h-80 lg:h-[26rem]" title="Count Binface, the chrome bin-helmet mascot" bob />
+      </div>
+    </div>
+  </section>
+
+  <StatBand
+    stats={[
+      { figure: '5', label: 'parties ran scared' },
+      { figure: '1', label: 'candidate showed up' },
+      { figure: '24,219', label: 'orphaned votes in 2024' },
+    ]}
+  />
+
+  <!-- Pledges -->
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="eyebrow">The pledges</p>
+        <h2 class="mt-2 text-4xl sm:text-5xl">Three promises, played straight.</h2>
+      </div>
+      <a href="/manifesto" class="hidden shrink-0 font-mono text-xs uppercase tracking-widest text-hazard hover:underline sm:inline">All pledges &rarr;</a>
+    </div>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {pledges.map((p) => (
+        <PledgeCard number={p.data.order} pledge={p.data.pledge} genuine={p.data.genuine} href="/manifesto" />
+      ))}
+    </div>
+  </section>
+
+  <HazardTape height="h-2" />
+
+  <!-- Latest press -->
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <p class="eyebrow">From the kerbside</p>
+    <h2 class="mt-2 text-4xl sm:text-5xl">Latest news</h2>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      {releases.map((r) => (
+        <PressCard
+          href={`/press/${r.id}`}
+          date={r.data.date.toISOString()}
+          headline={r.data.title}
+          standfirst={r.data.standfirst}
+        />
+      ))}
+    </div>
+    <a href="/press" class="mt-6 inline-block font-mono text-xs uppercase tracking-widest text-hazard hover:underline">All releases &rarr;</a>
+  </section>
+
+  <!-- Email capture -->
+  <section class="mx-auto max-w-3xl px-4 pb-8">
+    <EmailCapture />
+  </section>
+</BaseLayout>

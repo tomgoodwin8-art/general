@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResultsTable from '../../components/ResultsTable.astro';
+import RecordTable from '../../components/RecordTable.astro';
+import CopyBlock from '../../components/CopyBlock.astro';
+import Button from '../../components/Button.astro';
+import { SITE } from '../../data/facts';
+
+const bio100 = `Count Binface is a satirical independent parliamentary candidate and the sole declared challenger in the Clacton by-election, standing after Labour, the Conservatives, the Liberal Democrats, the Greens and Restore Britain all declined. He is the persona of comedian Jonathan David Harvey, who previously performed as Lord Buckethead until 2018. An "independent space warrior" and leader of the Count Binface Party, he stands on a platform of pointed, plausible pledges (a 99p cap on 99 Flake ice creams; abolishing auto-renew; building at least one affordable home) with a sincere core: getting people to vote. Fundraising surpluses have gone to the housing charity Shelter.`;
+
+const bio300 = `Count Binface is a satirical independent parliamentary candidate, currently the sole declared challenger in the Clacton by-election. He entered the contest after five parties (Labour, the Conservatives, the Liberal Democrats, the Greens and Restore Britain) declined to field a candidate against the seat's former occupant.
+
+He is the on-ballot persona of British comedian Jonathan David Harvey. From 2017 to 2018 Harvey performed as Lord Buckethead, contesting the 2017 general election in Maidenhead against Theresa May; he later retired that character and created Count Binface, an independent intergalactic space warrior and leader of the Count Binface Party. Binface describes himself as leader of the Recyclons from the planet Sigma IX and addresses the electorate as "humans", all delivered with a straight face.
+
+His electoral record spans general elections, by-elections and two London mayoral contests, including 24,775 first-choice votes in 2021 and 24,260 in 2024. His manifestos pair absurd, memorable pledges with a genuinely civic purpose: the long-running "Make Your Vote Count" campaign for electoral participation. Documented pledges include a 99p cap on 99 Flake ice creams, abolishing auto-renew on online subscriptions, and building at least one affordable home. Fundraising surpluses have been donated to the housing charity Shelter.
+
+In Clacton, the campaign's message is that five parties declined to stand and one candidate turned up. His official website is countbinface.com; this supporter site backs his Clacton candidacy.`;
+---
+<BaseLayout
+  title="Media kit: bios, fact sheet, assets | Vote Binface"
+  description="Downloadable media kit for the Count Binface Clacton campaign: 100 and 300-word bios, fact sheet, electoral record, brand colours and fonts, press contact."
+  path="/press/media-kit"
+  ogImage="/og/press.png"
+  breadcrumbs={[
+    { name: 'Home', path: '/' },
+    { name: 'Press', path: '/press' },
+    { name: 'Media kit', path: '/press/media-kit' },
+  ]}
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-8">
+    <p class="eyebrow">Media kit</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">Everything a newsroom needs.</h1>
+    <p class="mt-5 text-lg text-grey">
+      Copy-paste bios, the fact sheet, brand assets, and the press contact. Quotes are attributable to Baron Kerbside, spokesperson, votebinface.com. Press desk:
+      <a href={`mailto:${SITE.pressEmail}`} class="text-hazard underline underline-offset-2">{SITE.pressEmail}</a>.
+    </p>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-4 space-y-12">
+    <section>
+      <h2 class="text-2xl sm:text-3xl">Boilerplate bio (100 words)</h2>
+      <div class="mt-4"><CopyBlock text={bio100} /></div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl sm:text-3xl">Boilerplate bio (300 words)</h2>
+      <div class="mt-4"><CopyBlock text={bio300} /></div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl sm:text-3xl">Fact sheet</h2>
+      <dl class="mt-4 grid gap-3 rounded-lg border border-line bg-void p-6 sm:grid-cols-2">
+        <div><dt class="eyebrow">Candidate</dt><dd class="mt-1 text-chrome">Count Binface (Jonathan David Harvey)</dd></div>
+        <div><dt class="eyebrow">Contest</dt><dd class="mt-1 text-chrome">Clacton by-election</dd></div>
+        <div><dt class="eyebrow">Polling day</dt><dd class="mt-1 text-chrome">{SITE.pollingDate}</dd></div>
+        <div><dt class="eyebrow">Registration deadline</dt><dd class="mt-1 text-chrome">{SITE.registrationDeadline}</dd></div>
+        <div><dt class="eyebrow">Postal vote deadline</dt><dd class="mt-1 text-chrome">{SITE.postalDeadline}</dd></div>
+        <div><dt class="eyebrow">Official site</dt><dd class="mt-1"><a href={SITE.officialSite} rel="noopener" target="_blank" class="text-hazard underline underline-offset-2">countbinface.com</a></dd></div>
+      </dl>
+    </section>
+
+    <section>
+      <h2 class="text-2xl sm:text-3xl">2024 result, Clacton</h2>
+      <div class="mt-4"><ResultsTable /></div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl sm:text-3xl">Electoral record</h2>
+      <div class="mt-4"><RecordTable /></div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl sm:text-3xl">Brand assets</h2>
+      <p class="mt-2 text-sm text-grey">Fonts: Anton (display), Space Grotesk (body), Space Mono (labels). Colours below. The helmet mark and OG cards are original SVG/PNG artwork, free to reproduce in coverage of the campaign.</p>
+      <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {[
+          { name: 'Ink', hex: '#0B0B0C' },
+          { name: 'Hazard', hex: '#F5E000' },
+          { name: 'Pop', hex: '#FF2D6E' },
+          { name: 'Chrome', hex: '#EDEFF2' },
+        ].map((c) => (
+          <div class="rounded-lg border border-line bg-void p-3">
+            <span class="block h-12 w-full rounded" style={`background:${c.hex}`}></span>
+            <p class="mt-2 font-mono text-xs text-chrome">{c.name}</p>
+            <p class="font-mono text-xs text-grey">{c.hex}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <Button href="/favicon.svg" variant="ghost" external>Helmet mark (SVG)</Button>
+        <Button href="/og/default.png" variant="ghost" external>OG card (PNG)</Button>
+      </div>
+      <p class="mt-4 text-xs text-grey">Photographs of Count Binface are copyrighted and are not distributed here. For an official press photo, contact the Binface team via countbinface.com. Any CC-licensed image used on this site is credited on <a href="/legal" class="text-hazard underline underline-offset-2">/legal</a>.</p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl sm:text-3xl">Press contact</h2>
+      <p class="mt-2 text-grey">{SITE.pressEmail}</p>
+    </section>
+  </div>
+</BaseLayout>

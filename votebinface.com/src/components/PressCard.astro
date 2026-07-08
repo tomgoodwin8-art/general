@@ -1,0 +1,20 @@
+---
+interface Props {
+  href: string;
+  date: string; // ISO
+  headline: string;
+  standfirst: string;
+}
+const { href, date, headline, standfirst } = Astro.props;
+const display = new Date(date).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+<a href={href} class="group block rounded-lg border border-line bg-void p-6 transition-colors hover:border-hazard">
+  <time datetime={date} class="font-mono text-xs uppercase tracking-widest text-hazard">{display}</time>
+  <h3 class="mt-2 text-2xl text-chrome group-hover:text-white">{headline}</h3>
+  <p class="mt-3 text-sm text-grey">{standfirst}</p>
+  <span class="mt-4 inline-block font-mono text-xs uppercase tracking-widest text-grey group-hover:text-hazard">Read release &rarr;</span>
+</a>

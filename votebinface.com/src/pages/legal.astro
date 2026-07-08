@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/facts';
+import { isAuthorised, imprintLine, affiliationLine, modeLabel } from '../config/mode';
+---
+<BaseLayout
+  title="Legal, imprint and credits | Vote Binface"
+  description="The statutory election imprint, authorisation statement, image credits and takedown contact for votebinface.com."
+  path="/legal"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Legal', path: '/legal' }]}
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-8">
+    <p class="eyebrow">The small print</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">Legal &amp; imprint.</h1>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-8 space-y-10">
+    <section>
+      <h2 class="text-2xl">Election imprint</h2>
+      <p class="mt-3 prose-body">The following statutory imprint appears on every page of this site, as required by UK electoral law:</p>
+      <p class="mt-3 rounded-lg border border-line bg-void p-4 font-mono text-sm text-chrome">{imprintLine}</p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl">Authorisation &amp; operating mode</h2>
+      <div class="mt-3 prose-body">
+        <p>This site is currently operating in <strong>{modeLabel} mode</strong>.</p>
+        {isAuthorised ? (
+          <p>{affiliationLine} It runs under the Count Binface Party's imprint with the party's written authorisation on file (reference: {SITE.authorisationRef}). Spending on this site counts toward the candidate's regulated election expenses and is signed off by the election agent.</p>
+        ) : (
+          <p>{affiliationLine} No written party authorisation is on file, so the site does not name the party on its imprint (doing so without authorisation would be a false imprint and an offence). The imprint instead names the promoter responsible for the site. To switch to authorised party mode, the party's authorisation reference must be recorded in the site configuration.</p>
+        )}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl">Image &amp; asset credits</h2>
+      <div class="mt-3 prose-body">
+        <p>All imagery on this site is <strong>original artwork</strong> created for the campaign: the chrome bin-helmet mascot, the hazard-tape motifs, the favicon and the Open Graph cards are original SVG/PNG and free to reproduce in coverage of the campaign.</p>
+        <p>No third-party photographs are used. Photographs of Count Binface published elsewhere are copyrighted and are not reproduced or hotlinked here.</p>
+        <p>If a Creative Commons image is ever added, it will be credited here in the form: <em>title, author, source URL, licence (e.g. CC BY-SA 4.0), and any modifications</em>. CC BY-SA attribution is mandatory and does not imply the licensor endorses this site.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl">Fonts</h2>
+      <p class="mt-3 prose-body">Anton, Space Grotesk and Space Mono are used under the SIL Open Font License, self-hosted and subset to the Latin character set.</p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl">Takedown &amp; corrections</h2>
+      <p class="mt-3 prose-body">Spotted an error, or believe something here infringes your rights? Email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> and we will respond promptly. This site draws no conclusions about any ongoing investigation and states only matters of public record.</p>
+    </section>
+  </div>
+</BaseLayout>

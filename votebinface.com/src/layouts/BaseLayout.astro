@@ -1,0 +1,126 @@
+---
+import '../styles/global.css';
+import { SITE } from '../data/facts';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HazardTape from '../components/HazardTape.astro';
+import StickyCTA from '../components/StickyCTA.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string; // e.g. "/clacton" (no trailing slash, "/" for home)
+  ogImage?: string; // absolute path under site root, e.g. "/og/clacton.png"
+  schema?: object | object[]; // page-specific JSON-LD
+  breadcrumbs?: { name: string; path: string }[];
+  stickyCTA?: boolean;
+}
+const {
+  title,
+  description,
+  path,
+  ogImage = '/og/default.png',
+  schema,
+  breadcrumbs,
+  stickyCTA = false,
+} = Astro.props;
+
+const canonical = new URL(path === '/' ? '/' : path, SITE.url).href.replace(/\/$/, path === '/' ? '/' : '');
+const ogUrl = new URL(ogImage, SITE.url).href;
+
+// Site-wide JSON-LD (brief §7.1): WebSite + Organization (publisher).
+const siteGraph = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    inLanguage: 'en-GB',
+    publisher: { '@id': `${SITE.url}/#organization` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    name: 'The Count Binface Party',
+    url: SITE.url,
+    address: {
+      '@type': 'PostalAddress',
+      postOfficeBoxNumber: 'PO Box 818',
+      addressLocality: 'Tonbridge',
+      postalCode: 'TN9 9YF',
+      addressCountry: 'GB',
+    },
+  },
+];
+
+const breadcrumbSchema = breadcrumbs && breadcrumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: new URL(b.path, SITE.url).href.replace(/\/$/, ''),
+      })),
+    }
+  : null;
+
+const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const allSchemas = [...siteGraph, ...(breadcrumbSchema ? [breadcrumbSchema] : []), ...pageSchemas];
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Fonts: preload the two above-the-fold faces (display + body). -->
+    <link rel="preload" href="/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/space-grotesk-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0b0b0c" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+    <meta name="twitter:site" content="@CountBinface" />
+
+    <!-- Cloudflare Web Analytics (cookieless). Token injected at deploy; the
+         script tag stays inert without it so no beacon fires in dev/preview. -->
+    <slot name="head" />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(allSchemas.length === 1 ? allSchemas[0] : allSchemas)}
+    />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <HazardTape height="h-3" />
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    {stickyCTA && <StickyCTA />}
+  </body>
+</html>

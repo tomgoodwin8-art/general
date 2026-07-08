@@ -1,0 +1,191 @@
+@import 'tailwindcss';
+
+/* Self-hosted, latin-subset fonts (brief §2, §3). Preloaded in BaseLayout. */
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/anton-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/space-mono-400.woff2') format('woff2');
+}
+
+/* Brand tokens (brief §3) exposed as Tailwind theme variables + CSS vars. */
+@theme {
+  --color-ink: #0b0b0c;
+  --color-void: #141416;
+  --color-hazard: #f5e000;
+  --color-chrome: #edeff2;
+  --color-grey: #a7adb6;
+  --color-dgrey: #5b616b;
+  --color-pop: #ff2d6e;
+  --color-line: #26262a;
+
+  --font-display: 'Anton', 'Arial Narrow', sans-serif;
+  --font-body: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-grey);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-chrome);
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--color-hazard);
+}
+
+/* Signature device 1: diagonal hazard-tape band. */
+.hazard-tape {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-hazard) 0,
+    var(--color-hazard) 22px,
+    #0b0b0c 22px,
+    #0b0b0c 44px
+  );
+}
+
+/* Signature device 2: pink strike-through on one display word (rotate -2.5deg). */
+.strike {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.strike::after {
+  content: '';
+  position: absolute;
+  left: -0.06em;
+  right: -0.06em;
+  top: 52%;
+  height: 0.11em;
+  background: var(--color-pop);
+  transform: rotate(-2.5deg);
+  transform-origin: center;
+  border-radius: 2px;
+}
+
+/* Focus visibility (WCAG 2.2 AA). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-hazard);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--color-hazard);
+  color: var(--color-ink);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+.prose-body {
+  color: var(--color-grey);
+  max-width: 68ch;
+}
+.prose-body p { margin-bottom: 1.1rem; }
+.prose-body strong { color: var(--color-chrome); font-weight: 500; }
+.prose-body a {
+  color: var(--color-hazard);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-body a:hover { color: var(--color-chrome); }
+
+/* Reduced motion: halt marquee + bobbing (brief §2). */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .marquee-track { animation: none !important; transform: none !important; }
+}
+
+/* Marquee (halts under reduced-motion via the rule above). */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.bob { animation: bob 4s ease-in-out infinite; }

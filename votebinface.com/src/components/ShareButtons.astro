@@ -1,0 +1,43 @@
+---
+import { SITE } from '../data/facts';
+// Prefilled share links (brief §5.5). Mostly static anchors; copy-link uses a
+// tiny inline script. data-event attributes feed Cloudflare custom events.
+interface Props {
+  url?: string;
+  text?: string;
+}
+const {
+  url = `${SITE.url}/vote`,
+  text = 'The only one who turned up in Clacton. Make your vote count.',
+} = Astro.props;
+const enc = encodeURIComponent;
+const x = `https://x.com/intent/tweet?text=${enc(text)}&url=${enc(url)}`;
+const wa = `https://wa.me/?text=${enc(text + ' ' + url)}`;
+---
+<div class="flex flex-wrap items-center gap-3">
+  <a href={x} target="_blank" rel="noopener" data-event="share-x"
+     class="inline-flex min-h-[44px] items-center gap-2 rounded border border-dgrey px-4 py-2 font-mono text-xs uppercase tracking-widest text-chrome hover:border-hazard hover:text-hazard">
+    Share on X
+  </a>
+  <a href={wa} target="_blank" rel="noopener" data-event="share-whatsapp"
+     class="inline-flex min-h-[44px] items-center gap-2 rounded border border-dgrey px-4 py-2 font-mono text-xs uppercase tracking-widest text-chrome hover:border-hazard hover:text-hazard">
+    Share on WhatsApp
+  </a>
+  <button type="button" id="copy-link" data-url={url} data-event="share-copy"
+     class="inline-flex min-h-[44px] items-center gap-2 rounded border border-dgrey px-4 py-2 font-mono text-xs uppercase tracking-widest text-chrome hover:border-hazard hover:text-hazard">
+    <span id="copy-label">Copy link</span>
+  </button>
+</div>
+<script>
+  const btn = document.getElementById('copy-link');
+  btn?.addEventListener('click', async () => {
+    const url = btn.getAttribute('data-url') || location.href;
+    const label = document.getElementById('copy-label');
+    try {
+      await navigator.clipboard.writeText(url);
+      if (label) { label.textContent = 'Copied'; setTimeout(() => (label.textContent = 'Copy link'), 1600); }
+    } catch {
+      if (label) label.textContent = 'Press Ctrl+C';
+    }
+  });
+</script>

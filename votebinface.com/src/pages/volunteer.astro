@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Volunteer with BinAid | Vote Binface"
+  description="Join BinAid: weekend canvassing in Clacton framed as a day out with mates. Leaflets, doorsteps, lifts for elderly voters on polling day. Sign up in under a minute."
+  path="/volunteer"
+  ogImage="/og/volunteer.png"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Volunteer', path: '/volunteer' }]}
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-8">
+    <p class="eyebrow">Join BinAid</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">A day out with mates that happens to save democracy.</h1>
+    <p class="mt-5 text-lg text-grey">
+      BinAid is the campaign's volunteer operation. It is deliberately sociable and genuinely useful. No experience needed, no bin required (though encouraged).
+    </p>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-8 grid gap-8 lg:grid-cols-[1fr_1fr]">
+    <div>
+      <h2 class="text-2xl">What volunteers actually do</h2>
+      <ul class="mt-4 space-y-3 text-grey">
+        <li class="flex gap-3"><span class="text-hazard">→</span> Deliver leaflets and knock on doors (official materials only).</li>
+        <li class="flex gap-3"><span class="text-hazard">→</span> Have real conversations with real neighbours about turning out.</li>
+        <li class="flex gap-3"><span class="text-hazard">→</span> Give lifts to the polling station for elderly and less mobile voters on the day.</li>
+        <li class="flex gap-3"><span class="text-hazard">→</span> Handle ice cream logistics. A serious operational matter.</li>
+      </ul>
+
+      <div class="mt-6 rounded-lg border border-pop/50 bg-void p-5">
+        <p class="font-mono text-xs uppercase tracking-widest text-pop">Please read</p>
+        <p class="mt-2 text-sm text-grey">
+          Independent spending on printed material by supporters is legally restricted at by-elections. Volunteer through official channels only. Please do not design, print or distribute your own leaflets: it can breach election spending rules and cause the campaign real problems.
+        </p>
+      </div>
+    </div>
+
+    <!-- Form: <=5 fields, GDPR consent unticked. POSTs to a Pages Function. -->
+    <form id="volunteer-form" action="/volunteer-signup" method="POST" class="rounded-lg border border-line bg-void p-6">
+      <h2 class="text-2xl">Sign up</h2>
+      <div class="mt-4 space-y-4">
+        <div>
+          <label for="name" class="block font-mono text-xs uppercase tracking-widest text-grey">Name</label>
+          <input id="name" name="name" type="text" required autocomplete="name" class="mt-1 min-h-[48px] w-full rounded border border-line bg-ink px-3 py-2 text-chrome placeholder:text-grey focus:border-hazard" />
+        </div>
+        <div>
+          <label for="v-email" class="block font-mono text-xs uppercase tracking-widest text-grey">Email</label>
+          <input id="v-email" name="email" type="email" required autocomplete="email" class="mt-1 min-h-[48px] w-full rounded border border-line bg-ink px-3 py-2 text-chrome placeholder:text-grey focus:border-hazard" />
+        </div>
+        <div>
+          <label for="postcode" class="block font-mono text-xs uppercase tracking-widest text-grey">Postcode</label>
+          <input id="postcode" name="postcode" type="text" required autocomplete="postal-code" class="mt-1 min-h-[48px] w-full rounded border border-line bg-ink px-3 py-2 text-chrome placeholder:text-grey focus:border-hazard" />
+        </div>
+        <div>
+          <label for="availability" class="block font-mono text-xs uppercase tracking-widest text-grey">Availability</label>
+          <select id="availability" name="availability" class="mt-1 min-h-[48px] w-full rounded border border-line bg-ink px-3 py-2 text-chrome focus:border-hazard">
+            <option value="weekends">Weekends</option>
+            <option value="weekdays">Weekdays</option>
+            <option value="polling-day">Polling day only</option>
+            <option value="anytime">Anytime</option>
+          </select>
+        </div>
+        <label class="flex items-start gap-2 text-xs text-grey">
+          <input type="checkbox" name="consent" required class="mt-0.5 h-4 w-4 accent-[#ff2d6e]" />
+          <span>I consent to the campaign contacting me about volunteering. I have read the <a href="/privacy" class="text-hazard underline underline-offset-2">privacy notice</a>.</span>
+        </label>
+      </div>
+      <button type="submit" class="mt-5 inline-flex min-h-[52px] w-full items-center justify-center rounded bg-pop px-6 font-mono text-sm font-bold uppercase tracking-wider text-white hover:bg-[#ff1a5f]">
+        Join a BinAid weekend
+      </button>
+      <p id="volunteer-status" class="mt-3 font-mono text-xs" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</BaseLayout>
+<script>
+  const form = document.getElementById('volunteer-form') as HTMLFormElement | null;
+  const status = document.getElementById('volunteer-status');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement | null;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (status) { status.textContent = 'Sending…'; status.style.color = '#a7adb6'; }
+    if (btn) btn.disabled = true;
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+      if (!res.ok) throw new Error('bad status');
+      form.reset();
+      if (status) {
+        status.textContent = "You're in. We'll email you the next BinAid weekend and what to bring (mostly enthusiasm).";
+        status.style.color = '#f5e000';
+      }
+    } catch {
+      if (status) { status.textContent = 'Something went wrong. Please try again shortly.'; status.style.color = '#ff2d6e'; }
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
+</script>

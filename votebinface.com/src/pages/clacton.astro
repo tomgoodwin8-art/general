@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import ResultsTable from '../components/ResultsTable.astro';
+import { SITE, CLACTON_2024, DECLINED_PARTIES } from '../data/facts';
+
+// Answer-first Q&A (brief §5.4, §7.5). Each H2 is a question; the first
+// sentence beneath it is the direct answer. FAQPage schema mirrors these
+// exactly.
+const declined = DECLINED_PARTIES.join(', ').replace(/, ([^,]*)$/, ' and $1');
+
+const qa = [
+  {
+    q: 'Who is standing in the Clacton by-election?',
+    a: `Count Binface is currently the sole declared challenger in the Clacton by-election. After ${declined} all declined to stand, the satirical independent candidate and leader of the Count Binface Party is, at the time of writing, the only declared name on the challenger's side of the contest. The final field is confirmed only when nominations close.`,
+  },
+  {
+    q: 'Why is there a by-election in Clacton?',
+    a: 'There is a by-election because the sitting member, Nigel Farage of Reform UK, resigned the Clacton seat. Separately, an investigation by the Parliamentary Commissioner for Standards exists in relation to an undeclared gift of around £5 million. That is the full extent of what can responsibly be stated: an investigation exists, and no conclusions are drawn here.',
+  },
+  {
+    q: 'When is the Clacton by-election?',
+    a: `The date is ${SITE.pollingDate}. Once a seat becomes vacant, the writ moving the by-election sets a timetable, and polling day must fall between 21 and 27 working days after the writ is issued. Until the writ is moved, no date is fixed, so this page uses a placeholder and will update the moment the date is confirmed.`,
+  },
+  {
+    q: 'Who is Count Binface?',
+    a: 'Count Binface is a satirical independent candidate, the persona of British comedian Jonathan David Harvey, who previously performed as Lord Buckethead until 2018. He leads the Count Binface Party and stands in real elections on a platform whose sincere core is getting people to vote.',
+  },
+  {
+    q: 'Can Count Binface actually win?',
+    a: 'Honestly, no: Nigel Farage would be the heavy favourite and forecasting models project Reform ahead. But the maths permits an upset. In 2024 the combined non-winning vote in Clacton was 24,219, more than the 21,225 that took the seat, so the votes exist if they turn up behind one name. Treat that as a reason to vote, not a prediction.',
+  },
+  {
+    q: 'How do I vote in the Clacton by-election?',
+    a: 'Register to vote at gov.uk, then either apply for a postal vote or vote in person on polling day with accepted photo ID. If you live in the Clacton constituency and are registered before the deadline, you can vote. The full step-by-step is on our how-to-vote page.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: qa.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+<BaseLayout
+  title="Clacton by-election: candidates, date, how to vote | Vote Binface"
+  description="Who is standing in the Clacton by-election, why it was called, when it is, and how to vote. Count Binface is the sole declared challenger to Nigel Farage."
+  path="/clacton"
+  ogImage="/og/clacton.png"
+  schema={faqSchema}
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'The by-election', path: '/clacton' }]}
+  stickyCTA
+>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-8">
+    <p class="eyebrow">The by-election explained</p>
+    <h1 class="mt-3 text-5xl sm:text-6xl">The Clacton by-election, answered.</h1>
+    <p class="mt-5 text-lg text-grey">
+      The facts, in plain English, with the jokes kept to a minimum. Five parties declined to stand. One candidate turned up.
+      <a href="/vote" class="text-hazard underline underline-offset-2">Skip to how to vote</a>.
+    </p>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 pb-10">
+    {qa.map((item) => (
+      <section class="border-t border-line py-8">
+        <h2 class="text-2xl sm:text-3xl">{item.q}</h2>
+        <p class="mt-4 prose-body">{item.a}</p>
+      </section>
+    ))}
+
+    <section class="border-t border-line py-8">
+      <h2 class="text-2xl sm:text-3xl">The 2024 result in Clacton</h2>
+      <p class="mt-4 prose-body">
+        In the 2024 general election Reform UK won Clacton with 21,225 votes on a {(CLACTON_2024.turnout * 100).toFixed(1)}% turnout. The other four candidates shared 24,219 votes between them, which is the number this campaign keeps coming back to.
+      </p>
+      <div class="mt-6">
+        <ResultsTable />
+      </div>
+    </section>
+
+    <div class="mt-10 rounded-lg border border-hazard/40 bg-void p-6 text-center">
+      <h2 class="text-2xl">Registered? Good. Not sure?</h2>
+      <p class="mx-auto mt-3 max-w-md text-grey">Checking takes five minutes and it is free.</p>
+      <div class="mx-auto mt-5 max-w-xs">
+        <Button href="/vote" variant="pop" full big>Make your vote count</Button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -3,6 +3,8 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from "@astrojs/cloudflare";
+
 const SITE_URL = 'https://tomgoodwin.london';
 
 // Hidden pages are indexed + sitemapped but excluded from nav (brief §3).
@@ -10,13 +12,17 @@ const SITE_URL = 'https://tomgoodwin.london';
 export default defineConfig({
   site: SITE_URL,
   trailingSlash: 'ignore',
+
   integrations: [
     mdx(),
     sitemap({
       filter: (page) => !page.includes('/404'),
     }),
   ],
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare()
 });

@@ -15,3 +15,9 @@ node_modules/
 
 # generated bundle for drag-and-drop deploy
 dist.zip
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example

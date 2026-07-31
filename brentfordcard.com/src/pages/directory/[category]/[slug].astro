@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import Poster from '../../../components/Poster.astro';
+import BizImage from '../../../components/BizImage.astro';
 import ConfluenceMark from '../../../components/ConfluenceMark.astro';
 import { categoryName } from '../../../data/site';
 import { breadcrumbList, localBusiness } from '../../../lib/schema';
@@ -54,7 +54,8 @@ const mapHref = data.geo
           <p class="standfirst" style="margin-top:0.75rem;">{data.summary}</p>
           <div class="chips" style="margin-top:1.25rem;">
             {data.founding && <span class="pill tag-founding">Founding business</span>}
-            {data.offer && <span class="pill">Brentford Card offer</span>}
+            {data.offer && data.offer !== 'pending' && <span class="pill">Brentford Card offer</span>}
+            {data.offer === 'pending' && <span class="pill">Offer pending</span>}
             {data.priceRange && <span class="pill">{data.priceRange}</span>}
           </div>
         </header>
@@ -62,17 +63,25 @@ const mapHref = data.geo
         <div style="border-radius:var(--radius-lg); overflow:hidden; max-width:720px;">
           {data.image
             ? <img src={data.image} width="960" height="640" alt={data.name} fetchpriority="high" />
-            : <Poster ratio="3 / 2" tone={data.category === 'culture' ? 'ink' : 'river'} seed={5} label={`${data.name} — photography to follow`} />}
+            : <BizImage motif={data.motif} category={data.category} ratio="3 / 2" seed={5} label={`${data.name} — photography to follow`} />}
         </div>
 
         <div class="grid grid--2" style="align-items:start; gap:2.5rem;">
           <div class="stack">
-            {data.offer && (
+            {data.offer && data.offer !== 'pending' && (
               <div class="panel-plaster">
                 <p class="eyebrow">Card offer</p>
                 <p style="font-size:var(--step-lead); margin-top:0.4rem;">{data.offer}</p>
                 {data.offerTerms && <p class="mono muted" style="margin-top:0.6rem;">{data.offerTerms}</p>}
                 <p style="margin-top:1rem;"><a class="btn btn--brass" href="/card/">Get the card to use this</a></p>
+              </div>
+            )}
+            {data.offer === 'pending' && (
+              <div class="panel-plaster">
+                <p class="eyebrow">Card offer</p>
+                <p style="font-size:var(--step-lead); margin-top:0.4rem;">Pending</p>
+                <p class="muted" style="margin-top:0.6rem;">{data.name} is confirming its Brentford Card offer. Get the card now and you'll be ready the moment it goes live.</p>
+                <p style="margin-top:1rem;"><a class="btn btn--brass" href="/card/">Get the card</a></p>
               </div>
             )}
             <div class="prose"><Content /></div>

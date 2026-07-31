@@ -1,0 +1,29 @@
+---
+// Per-business image. Original, license-free artwork (authored here, CC0):
+// a category-tinted panel with a line-art motif emblem referenced from the
+// shared sprite (EmblemSprite). Not a photograph — set the `image` field to a
+// real licensed/owner-supplied photo to override this.
+interface Props {
+  motif?: string;
+  category?: string;
+  ratio?: string;
+  seed?: number;
+  label?: string;
+  class?: string;
+}
+const { motif, category = 'eat-drink', ratio = '4 / 3', seed = 0, label, class: cls } = Astro.props;
+const fallback: Record<string, string> = {
+  'eat-drink': 'restaurant', shop: 'gift', 'health-beauty': 'sparkle',
+  fitness: 'dumbbell', services: 'hanger', culture: 'museum',
+};
+const emb = motif || fallback[category] || 'restaurant';
+const variant = seed % 3;
+---
+<div
+  class:list={['bizimg', `bizimg--${category}`, `bizimg--v${variant}`, cls]}
+  style={`aspect-ratio:${ratio}`}
+  aria-hidden="true"
+>
+  <svg class="bizimg__emb"><use href={`#emb-${emb}`} /></svg>
+  {label && <span class="bizimg__label">{label}</span>}
+</div>

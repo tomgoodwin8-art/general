@@ -40,7 +40,7 @@ export function localBusiness(entry: {
       closes: h.close,
     }));
   }
-  if (data.offer) {
+  if (data.offer && data.offer !== 'pending') {
     node.hasOfferCatalog = {
       '@type': 'OfferCatalog',
       name: 'Brentford Card member offers',

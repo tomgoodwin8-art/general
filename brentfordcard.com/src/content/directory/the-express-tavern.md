@@ -1,20 +1,16 @@
 ---
 name: "The Express Tavern"
 slug: "the-express-tavern"
-category: "eat-drink"
-address: "56 Kew Bridge Road, Brentford, TW8 0EW"
-geo: { lat: 51.4884, lng: -0.2884 }
-phone: "+44 20 8000 0000"
-website: "https://theexpresstavern.example"
-hours:
-  - { days: "Mon–Fri", open: "12:00", close: "23:00" }
-  - { days: "Sat", open: "12:00", close: "23:00" }
-  - { days: "Sun", open: "12:00", close: "22:00" }
-offer: "10% off Sunday roasts"
-offerTerms: "Booking recommended. One redemption per table."
-founding: true
+category: eat-drink
+address: "56 Kew Bridge Road, TW8 0EW"
+phone: "+44 20 8560 8484"
+website: "https://expresstavern.co.uk"
+hours: []
+offer: "pending"
+offerTerms: ""
+founding: false
 image: ""
-summary: "The Express Tavern is a traditional pub near Kew Bridge, Brentford, offering 10% off Sunday roasts to Brentford Card members."
-priceRange: "££"
+motif: "pub"
+summary: "The Express Tavern is a CAMRA-listed free house in Brentford (TW8)."
 ---
-The Express Tavern is listed in the Brentford Directory. Full opening hours, contact details and current offers are shown above; details are confirmed with each business at onboarding.
+The Express Tavern is listed in the Brentford Directory. Its Brentford Card offer is being confirmed with the business — full offer details and opening hours will appear here once agreed.

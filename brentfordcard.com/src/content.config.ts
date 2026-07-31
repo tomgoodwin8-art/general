@@ -27,6 +27,7 @@ const directory = defineCollection({
     offerTerms: z.string().default(''),
     founding: z.boolean().default(false),
     image: z.string().default(''),
+    motif: z.string().optional(), // emblem key for BizImage when no photo
     summary: z.string(), // one factual sentence, required (AEO)
     priceRange: z.string().optional(),
   }),

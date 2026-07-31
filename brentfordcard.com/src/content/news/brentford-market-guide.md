@@ -6,18 +6,18 @@ publishDate: "2026-07-05"
 category: "guides"
 hero: ""
 relatedListings:
-  - "the-ham-green-grocer"
-  - "half-acre-kitchen"
-  - "the-brent-bakehouse"
+  - "wyndham-house"
+  - "rottura"
+  - "feather-and-heart"
 ---
 Brentford's food scene is small, independent and quietly good, and the best way into it is on foot at the weekend.
 
-Start on the High Street with a flat white and a pastry, then work west toward the canal. The produce to take home is on [The Ham](/directory/shop/the-ham-green-grocer/), where the greengrocer runs weekly veg boxes, and the loaf worth queuing for is the sourdough at [The Brent Bakehouse](/directory/eat-drink/the-brent-bakehouse/).
+Start on the High Street with a flat white and a pastry at [Feather & Heart](/directory/eat-drink/feather-and-heart/) by Brentford Lock, then work west. For meat and deli goods to take home, [Wyndham House](/directory/shop/wyndham-house/) at Syon Park is the free-range butcher worth the short walk.
 
 ## Where to sit down
 
-For lunch, [Half Acre Kitchen](/directory/eat-drink/half-acre-kitchen/) does a short, seasonal à la carte a couple of minutes from the High Street. For an evening by the water, the canalside pubs come into their own.
+For lunch, [Rottura](/directory/eat-drink/rottura/) on the High Street pairs an Italian kitchen with a deli counter. For dinner by the water, [Sam's Waterside](/directory/eat-drink/sams-waterside/) anchors the Brentford Project, and the canalside pubs come into their own in the evening.
 
 ## Card offers worth planning around
 
-Several kitchens and cafés give Brentford Card members a discount or an extra — a free pastry before 10am, money off the à la carte, a loyalty deal on bread. Filter the [Eat & Drink](/directory/eat-drink/) category for everywhere currently taking the card.
+Brentford Card offers are being confirmed with each business now, and every deal will show on its directory listing. Filter the [Eat & Drink](/directory/eat-drink/) category to see everywhere lined up for the card.

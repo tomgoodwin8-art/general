@@ -353,6 +353,32 @@ details.mobile-nav[open] .mobile-nav__sheet {
 .value-card h3 { margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .value-card__mark { width: 30px; height: 30px; color: var(--brass); margin-bottom: 1rem; }
 
+/* --- Business image (category panel + emblem sprite) ------------------- */
+.bizimg {
+  position: relative; width: 100%; height: 100%; overflow: hidden;
+  display: grid; place-items: center; background: var(--river);
+}
+.bizimg::after { /* subtle confluence sheen */
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(120% 130% at 82% 8%, rgba(242,238,230,0.10), transparent 55%);
+}
+.bizimg__emb {
+  width: 26%; height: auto; aspect-ratio: 1; color: rgba(242,238,230,0.9); position: relative; z-index: 1;
+}
+.bizimg__label {
+  position: absolute; left: 12px; bottom: 10px; right: 12px; z-index: 1;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em;
+  color: rgba(242,238,230,0.6); text-transform: uppercase;
+}
+.bizimg--eat-drink   { background: linear-gradient(140deg, #2e4a43, #182a25); }
+.bizimg--shop        { background: linear-gradient(140deg, #8a6f30, #57451e); }
+.bizimg--health-beauty { background: linear-gradient(140deg, #7e4a34, #4b2c1f); }
+.bizimg--fitness     { background: linear-gradient(140deg, #26564d, #12332c); }
+.bizimg--services    { background: linear-gradient(140deg, #202829, #0e1315); }
+.bizimg--culture     { background: linear-gradient(140deg, #33404f, #1a222c); }
+.bizimg--v1 { background-blend-mode: normal; filter: hue-rotate(-6deg); }
+.bizimg--v2 { filter: hue-rotate(6deg) brightness(1.04); }
+
 /* --- Directory cards --------------------------------------------------- */
 .dir-card {
   display: flex;
@@ -379,6 +405,11 @@ details.mobile-nav[open] .mobile-nav__sheet {
   font-size: 0.68rem;
   padding: 0.32em 0.6em;
   border-radius: 2px;
+}
+.dir-card__badge--pending {
+  background: color-mix(in srgb, var(--plaster) 82%, transparent);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
 }
 .dir-card__body { padding: 1.1rem 1.15rem 1.3rem; display: flex; flex-direction: column; gap: 0.35rem; flex: 1; }
 .dir-card__cat { color: var(--brass-ink); }

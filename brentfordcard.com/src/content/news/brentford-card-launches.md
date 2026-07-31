@@ -6,13 +6,13 @@ publishDate: "2026-07-15"
 category: "news"
 hero: ""
 relatedListings:
-  - "the-lock-keeper"
-  - "confluence-coffee"
-  - "watermans-arts-centre"
+  - "sams-waterside"
+  - "feather-and-heart"
+  - "london-museum-of-water-and-steam"
 ---
 The Brentford Card is a paid annual membership that gives residents discounts and offers at independent businesses across Brentford, and it opens to founding members today.
 
-For £29 a year the card lives in your Apple or Google Wallet, so there is nothing to carry and nothing to lose. Members show the pass in store to claim offers at participating businesses, from [The Lock Keeper](/directory/eat-drink/the-lock-keeper/) on the canal to [Confluence Coffee](/directory/eat-drink/confluence-coffee/) on the High Street and [Watermans](/directory/culture/watermans-arts-centre/) arts centre by the river.
+For £29 a year the card lives in your Apple or Google Wallet, so there is nothing to carry and nothing to lose. Members show the pass in store to claim offers at participating businesses, from [Sam's Waterside](/directory/eat-drink/sams-waterside/) at the Brentford Project to [Feather & Heart](/directory/eat-drink/feather-and-heart/) at Brentford Lock and the [London Museum of Water & Steam](/directory/culture/london-museum-of-water-and-steam/) by Kew Bridge.
 
 ## Why a card, and why now
 

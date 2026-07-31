@@ -6,8 +6,9 @@ publishDate: "2026-07-10"
 category: "regeneration"
 hero: ""
 relatedListings:
-  - "confluence-coffee"
-  - "the-brent-bakehouse"
+  - "rottura"
+  - "sams-waterside"
+  - "hewson-books"
 ---
 The Brentford Project is the regeneration reshaping the centre of Brentford, and its defining idea is simple: reconnect the High Street to the water it turned its back on decades ago.
 

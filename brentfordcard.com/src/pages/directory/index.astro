@@ -10,7 +10,7 @@ const listings = (await getCollection('directory')).sort((a, b) =>
   a.data.name.localeCompare(b.data.name),
 );
 const count = listings.length;
-const withOffers = listings.filter((l) => l.data.offer).length;
+const liveOffers = listings.filter((l) => l.data.offer && l.data.offer !== 'pending').length;
 
 const crumbs = [
   { label: 'Home', path: '/' },
@@ -20,7 +20,7 @@ const schema = breadcrumbList(crumbs);
 ---
 <BaseLayout
   title={`Brentford Business Directory | ${count} local businesses`}
-  description={`The Brentford business directory: ${count} independent shops, restaurants and services in Brentford (TW8), ${withOffers} with Brentford Card offers.`}
+  description={`The Brentford business directory: ${count} independent shops, restaurants and services in Brentford (TW8), with Brentford Card offers rolling out now.`}
   path="/directory/"
   schema={schema}
 >
@@ -28,7 +28,7 @@ const schema = breadcrumbList(crumbs);
     <Breadcrumb items={crumbs} />
     <p class="eyebrow" style="margin-top:1rem;">The Brentford Directory</p>
     <h1 class="page-title">The Brentford Directory: {count} local businesses</h1>
-    <p class="lead">Independent shops, restaurants and services across Brentford, TW8. {withOffers} of them give Brentford Card members an offer. Filter by category, or <a class="link" href="/card/">get the card</a>.</p>
+    <p class="lead">Independent shops, restaurants and services across Brentford, TW8. Card offers are being confirmed with each business — every listing will show its deal here. <a class="link" href="/card/">Get the card</a>.</p>
 
     <div class="chips" style="margin-top:2rem;">
       <a class="chip" href="/directory/" aria-current="page">All</a>

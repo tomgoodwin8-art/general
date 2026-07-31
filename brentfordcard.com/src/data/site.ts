@@ -23,11 +23,22 @@ export const SITE = {
   },
   geo: { lat: 51.4875, lng: -0.3095 }, // Brentford, at the confluence
   sameAs: [
+    'https://www.linkedin.com/company/brentfordcard',
     'https://www.instagram.com/brentfordcard',
-    'https://x.com/brentfordcard',
+    'https://www.tiktok.com/@brentfordcard',
+    'https://www.youtube.com/@brentfordcard',
     // Wikidata to be added once the entity exists (brief §8).
   ],
 } as const;
+
+// Social handles (placeholder @brentfordcard) rendered in the footer.
+// `icon` maps to a key in Footer.astro's inline SVG set.
+export const SOCIALS = [
+  { label: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/company/brentfordcard' },
+  { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/brentfordcard' },
+  { label: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@brentfordcard' },
+  { label: 'YouTube', icon: 'youtube', href: 'https://www.youtube.com/@brentfordcard' },
+] as const;
 
 // The Brentford Card scheme facts — mirror in FAQ + /llms.txt on any change.
 export const CARD = {

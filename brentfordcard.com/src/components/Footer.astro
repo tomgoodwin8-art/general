@@ -1,6 +1,7 @@
 ---
 import { SITE, CATEGORIES, CARD } from '../data/site';
 import ConfluenceMark from './ConfluenceMark.astro';
+import SocialLinks from './SocialLinks.astro';
 const year = 2026;
 ---
 <footer class="site-footer">
@@ -19,6 +20,7 @@ const year = 2026;
           {SITE.nap.locality}, {SITE.nap.region} {SITE.nap.postalCode}<br />
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
         </address>
+        <div style="margin-top:1.25rem;"><SocialLinks /></div>
       </div>
 
       <div>

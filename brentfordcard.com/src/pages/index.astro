@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConfluenceMark from '../components/ConfluenceMark.astro';
+import DirectoryCard from '../components/DirectoryCard.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import Newsletter from '../components/Newsletter.astro';
+import Pass from '../components/Pass.astro';
+import { SITE, CARD } from '../data/site';
+import { cardProduct } from '../lib/schema';
+
+const articles = (await getCollection('news'))
+  .sort((a, b) => +new Date(b.data.publishDate) - +new Date(a.data.publishDate))
+  .slice(0, 3);
+
+const featured = (await getCollection('directory'))
+  .filter((l) => l.data.offer)
+  .sort(() => 0) // stable
+  .slice(0, 6);
+
+const dirCount = (await getCollection('directory')).length;
+
+// WebPage node is implicit; Product for the card lives on /card/. Home keeps the
+// site-wide Organization + WebSite from Head, plus a light Product reference.
+const schema = cardProduct();
+---
+<BaseLayout
+  title="The Brentford Card | Local news, directory & TW8 discount card"
+  description="The Brentford Card is a £29 annual discount card for Brentford (TW8) that lives in your phone wallet, plus local news and an independent business directory."
+  path="/"
+  schema={schema}
+>
+  <!-- HERO. Poster (SVG) is the LCP element; a video would replace it on capable
+       clients, but the poster never blocks LCP (brief §5). -->
+  <section class="hero">
+    <div class="hero__media">
+      <svg class="hero__poster" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="hero-g" x1="0" y1="0" x2="0.6" y2="1">
+            <stop offset="0" stop-color="#365a51" />
+            <stop offset="1" stop-color="#16241f" />
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="900" fill="url(#hero-g)" />
+        <g fill="none" stroke="rgba(242,238,230,0.10)" stroke-width="2">
+          <path d="M0 520 Q720 380 1440 560" />
+          <path d="M0 620 Q720 500 1440 660" />
+          <path d="M0 720 Q720 620 1440 760" />
+        </g>
+      </svg>
+    </div>
+    <div class="wrap hero__inner">
+      <p class="eyebrow eyebrow--onriver">Brentford · TW8</p>
+      <h1>The Brentford Card</h1>
+      <p class="lead">One card for your corner of west London — discounts at Brentford independents, delivered to your phone wallet. Plus local news and the town's business directory.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--brass" href="/card/">Get the card — {CARD.priceDisplay}/year</a>
+        <a class="btn btn--ghost-light" href="/#newsletter">Join the newsletter</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="confluence-divider"><ConfluenceMark draw={true} title="The Confluence Mark" /></div></div>
+
+  <!-- Three-up value section -->
+  <section class="section--tight wrap">
+    <div class="grid grid--3">
+      <a class="value-card" href="/news/" style="text-decoration:none; color:inherit;">
+        <ConfluenceMark class="value-card__mark" />
+        <h3>News</h3>
+        <p class="muted">What's happening in Brentford — regeneration, the market, the independents. Fact first, no fluff.</p>
+      </a>
+      <a class="value-card" href="/directory/" style="text-decoration:none; color:inherit;">
+        <ConfluenceMark class="value-card__mark" />
+        <h3>Directory</h3>
+        <p class="muted">{dirCount} independent Brentford businesses across food, shops, health, fitness, services and culture.</p>
+      </a>
+      <a class="value-card" href="/card/" style="text-decoration:none; color:inherit;">
+        <ConfluenceMark class="value-card__mark" />
+        <h3>The Card</h3>
+        <p class="muted">{CARD.priceDisplay} a year for discounts across town, in your Apple or Google Wallet. {CARD.charityPct}% goes to a local cause.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Card teaser with rendered pass -->
+  <section class="section wrap">
+    <div class="grid grid--2" style="align-items:center; gap:3rem;">
+      <div class="stack">
+        <p class="eyebrow">The Brentford Card</p>
+        <h2>Your town, at a discount</h2>
+        <p class="lead">Members show the pass in store to claim offers at participating businesses. No app to download, nothing to carry — it lives in your phone wallet.</p>
+        <p><a class="btn btn--river" href="/card/">See what you get</a></p>
+      </div>
+      <div style="display:grid; place-items:center;">
+        <Pass name="A. Resident" founding={true} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest news -->
+  <section class="section--tight wrap">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+      <h2>Latest from Brentford</h2>
+      <a class="link" href="/news/">All news →</a>
+    </div>
+    <div class="article-list" style="margin-top:1.75rem;">
+      {articles.map((entry, i) => <ArticleCard entry={entry} seed={i + 2} />)}
+    </div>
+  </section>
+
+  <!-- Featured listings with offers -->
+  <section class="section--tight wrap">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+      <h2>Businesses taking the card</h2>
+      <a class="link" href="/directory/">All {dirCount} listings →</a>
+    </div>
+    <div class="cards" style="margin-top:1.75rem;">
+      {featured.map((entry, i) => <DirectoryCard entry={entry} seed={i} />)}
+    </div>
+  </section>
+
+  <section class="section wrap"><Newsletter /></section>
+</BaseLayout>

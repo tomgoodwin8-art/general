@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Pass from '../components/Pass.astro';
+import ConfluenceMark from '../components/ConfluenceMark.astro';
+import { SITE, CARD } from '../data/site';
+import { breadcrumbList } from '../lib/schema';
+
+const releases = (await getCollection('press')).sort(
+  (a, b) => +new Date(b.data.date) - +new Date(a.data.date),
+);
+const crumbs = [{ label: 'Home', path: '/' }, { label: 'Press', path: '/press/' }];
+---
+<BaseLayout
+  title="Press & media kit | The Brentford Card"
+  description="Press releases, boilerplate, brand assets and media contact for the Brentford Card — the community platform for Brentford, TW8."
+  path="/press/"
+  schema={breadcrumbList(crumbs)}
+>
+  <section class="section wrap" style="max-width:900px;">
+    <Breadcrumb items={crumbs} />
+    <p class="eyebrow" style="margin-top:1rem;">Press</p>
+    <h1 class="page-title">Press &amp; media kit</h1>
+    <p class="lead">Everything you need to write about the Brentford Card. Press enquiries: <a class="link" href={`mailto:${SITE.pressEmail}`}>{SITE.pressEmail}</a>.</p>
+
+    <h2 style="margin-top:3rem;">Boilerplate</h2>
+    <p class="prose">The Brentford Card is the community platform for Brentford, west London (TW8): local news, an independent business directory, and a paid annual discount card delivered as an Apple or Google Wallet pass. It costs {CARD.priceDisplay} a year, gives {CARD.charityPct}% of every membership to {CARD.charityName}, and is independent of the council and of developers.</p>
+
+    <h2 style="margin-top:2.5rem;">Founder</h2>
+    <p class="prose"><strong>Note on names:</strong> the Brentford Card is not connected to Tom Goodwin the marketing futurist and author. The founder of the Brentford Card is a Brentford resident; full founder bio and headshot available on request from <a class="link" href={`mailto:${SITE.pressEmail}`}>{SITE.pressEmail}</a>. <span class="muted">[Founder bio to supply before launch.]</span></p>
+
+    <h2 style="margin-top:2.5rem;">Brand assets</h2>
+    <div class="grid grid--3" style="margin-top:1.25rem; align-items:start;">
+      <div class="panel-plaster center">
+        <div style="display:grid; place-items:center; padding:1rem 0;"><ConfluenceMark class="press-mark" /></div>
+        <p class="mono muted">The Confluence Mark</p>
+        <p style="margin-top:0.6rem;"><a class="link" href="/mark.svg" download>Download SVG</a></p>
+      </div>
+      <div class="panel-plaster center">
+        <div style="display:grid; place-items:center; padding:1rem 0;"><img src="/favicon.svg" width="72" height="72" alt="Brentford Card app icon" /></div>
+        <p class="mono muted">App icon</p>
+        <p style="margin-top:0.6rem;"><a class="link" href="/favicon.svg" download>Download SVG</a></p>
+      </div>
+      <div class="panel-plaster center">
+        <div style="display:grid; place-items:center; padding:1rem 0;"><img src="/og-default.svg" width="140" height="74" alt="Brentford Card social card" /></div>
+        <p class="mono muted">Social card</p>
+        <p style="margin-top:0.6rem;"><a class="link" href="/og-default.svg" download>Download SVG</a></p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:2.5rem;">The card, as an asset</h2>
+    <p class="muted" style="max-width:60ch;">The pass renders as vector, crisp at any resolution — use it directly or screenshot at 2×.</p>
+    <div style="margin-top:1.25rem; max-width:360px;"><Pass name="Press Sample" founding={true} id="BFC-PRESS" /></div>
+
+    <h2 style="margin-top:3rem;">Releases</h2>
+    <ul class="stack" style="margin-top:1rem; list-style:none; padding:0;">
+      {releases.map((r) => (
+        <li class="panel-plaster">
+          <span class="mono muted">{new Date(r.data.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+          <h3 style="margin-top:0.3rem;">{r.data.title}</h3>
+          <p class="muted" style="margin-top:0.4rem;">{r.data.summary}</p>
+        </li>
+      ))}
+    </ul>
+
+    <h2 style="margin-top:2.5rem;">Photography credits</h2>
+    <p class="muted">Launch imagery is licensed stock pending a commissioned Brentford shoot; per-image attribution is recorded here as photography goes live. <span class="muted">[Attributions to list as images are added.]</span></p>
+  </section>
+</BaseLayout>
+
+<style>.press-mark { width: 64px; height: 64px; color: var(--river); }</style>

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { SITE, CARD } from '../data/site';
+import { breadcrumbList } from '../lib/schema';
+const crumbs = [{ label: 'Home', path: '/' }, { label: 'Terms', path: '/terms/' }];
+const updated = '15 July 2026';
+---
+<BaseLayout
+  title="Terms & conditions | The Brentford Card"
+  description="Terms and conditions for the Brentford Card, including membership, offers, renewal, cancellation and refunds."
+  path="/terms/"
+  schema={breadcrumbList(crumbs)}
+>
+  <section class="section wrap" style="max-width:720px;">
+    <Breadcrumb items={crumbs} />
+    <p class="eyebrow" style="margin-top:1rem;">Legal</p>
+    <h1 class="page-title">Terms &amp; conditions</h1>
+    <p class="muted mono">Last updated {updated}</p>
+
+    <div class="prose" style="margin-top:1.5rem;">
+      <p>These terms govern your use of {SITE.domain} and your membership of the Brentford Card, operated by {SITE.legalName} ("we", "us"). By buying a card you agree to them.</p>
+
+      <h2>1. Membership</h2>
+      <p>The Brentford Card is an annual membership costing {CARD.priceDisplay}, valid for twelve months from purchase. Membership is personal to you and is <strong>non-transferable</strong>; the pass may not be shared, sold or copied.</p>
+
+      <h2>2. Offers</h2>
+      <p>Offers are provided by participating businesses, not by us. <strong>Offers can change and businesses may withdraw</strong> from the scheme at any time. We show current offers in good faith but do not guarantee any specific offer will be available on any given day. Each offer is subject to the terms shown on that business's directory listing.</p>
+
+      <h2>3. Redemption</h2>
+      <p>To redeem an offer, show your valid pass to the business before paying. A business may decline an offer if the pass has expired, cannot be verified, or the offer's stated terms are not met.</p>
+
+      <h2>4. Renewal and cancellation</h2>
+      <p>Membership does not auto-renew silently: we email you before your card expires and you choose whether to renew. Founding members renew at their original price for as long as membership is continuous. You may cancel at any time; cancellation stops future renewals and does not entitle you to a partial refund of the current year except as set out below.</p>
+
+      <h2>5. Refunds</h2>
+      <p>You may request a <strong>full refund within 14 days</strong> of purchase provided you have not redeemed any offer, in line with your rights under UK consumer law. Requests after 14 days, or where an offer has been redeemed, are at our discretion. Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> to request a refund.</p>
+
+      <h2>6. Charity contribution</h2>
+      <p>We donate {CARD.charityPct}% of each membership to {CARD.charityName}. This is a commitment of the scheme, not a separate charitable service to you, and does not form part of any tax relief you can claim.</p>
+
+      <h2>7. Liability</h2>
+      <p>Nothing in these terms limits liability that cannot lawfully be limited. Subject to that, we are not liable for the acts or omissions of participating businesses, including the quality of goods or services they provide.</p>
+
+      <h2>8. Changes and contact</h2>
+      <p>We may update these terms; material changes will be flagged on this page with a new date. Questions: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

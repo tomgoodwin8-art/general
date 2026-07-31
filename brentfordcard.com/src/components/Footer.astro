@@ -1,0 +1,56 @@
+---
+import { SITE, CATEGORIES, CARD } from '../data/site';
+import ConfluenceMark from './ConfluenceMark.astro';
+const year = 2026;
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <ConfluenceMark title="Brentford Card" />
+          <span>Brentford Card</span>
+        </div>
+        <p class="measure" style="color:var(--mist);">
+          {SITE.description}
+        </p>
+        <address style="font-style:normal; margin-top:1rem; font-family:var(--font-mono); font-size:0.82rem; line-height:1.7;">
+          {SITE.nap.streetAddress}<br />
+          {SITE.nap.locality}, {SITE.nap.region} {SITE.nap.postalCode}<br />
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </address>
+      </div>
+
+      <div>
+        <h4>Directory</h4>
+        <ul>
+          <li><a href="/directory/">All businesses</a></li>
+          {CATEGORIES.map((c) => (
+            <li><a href={`/directory/${c.slug}/`}>{c.name}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4>Brentford Card</h4>
+        <ul>
+          <li><a href="/card/">The card — {CARD.priceDisplay}/{CARD.term}</a></li>
+          <li><a href="/news/">News</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/press/">Press</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <span>© {year} {SITE.legalName}. Independent — not the council, not developer-funded.</span>
+      <span style="display:flex; gap:1.25rem; flex-wrap:wrap;">
+        <a href="/terms/">Terms</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/rss.xml">RSS</a>
+        <a href="/press/">Press kit</a>
+      </span>
+    </div>
+  </div>
+</footer>

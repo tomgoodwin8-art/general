@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Poster from '../../components/Poster.astro';
+import ConfluenceMark from '../../components/ConfluenceMark.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { categoryName } from '../../data/site';
+import { breadcrumbList, newsArticle } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+// Resolve related listings for internal links (brief §7).
+const dir = await getCollection('directory');
+const related = data.relatedListings
+  .map((slug: string) => dir.find((d) => d.id === slug))
+  .filter(Boolean) as typeof dir;
+
+const dateStr = new Date(data.publishDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const crumbs = [
+  { label: 'Home', path: '/' },
+  { label: 'News', path: '/news/' },
+  { label: data.title, path: `/news/${entry.id}/` },
+];
+const schema = [newsArticle({ slug: entry.id, data }), breadcrumbList(crumbs)];
+---
+<BaseLayout
+  title={`Brentford news: ${data.title}`.slice(0, 60)}
+  description={data.standfirst.slice(0, 154)}
+  path={`/news/${entry.id}/`}
+  type="article"
+  schema={schema}
+>
+  <article class="section wrap">
+    <Breadcrumb items={crumbs} />
+    <header style="max-width:720px; margin-top:1.25rem;">
+      <p class="eyebrow">{categoryName(data.category)}</p>
+      <h1 class="page-title">{data.title}</h1>
+      <p class="standfirst" style="margin-top:0.9rem;">{data.standfirst}</p>
+      <p class="article-meta" style="margin-top:1rem;">By {data.author} · {dateStr}</p>
+    </header>
+
+    <div style="border-radius:var(--radius-lg); overflow:hidden; max-width:960px; margin-top:2rem;">
+      {data.hero
+        ? <img src={data.hero} width="960" height="600" alt={data.title} fetchpriority="high" />
+        : <Poster ratio="16 / 9" tone="river" seed={7} />}
+    </div>
+
+    <div class="prose" style="margin-top:2.5rem;">
+      <Content />
+    </div>
+
+    {related.length > 0 && (
+      <section style="margin-top:3rem; max-width:720px;">
+        <div class="confluence-divider" style="justify-content:flex-start;"><ConfluenceMark /></div>
+        <p class="eyebrow">Mentioned in this article</p>
+        <ul class="cards" style="margin-top:1rem; grid-template-columns:1fr;">
+          {related.map((d) => (
+            <li style="list-style:none;">
+              <a class="link" href={`/directory/${d.data.category}/${d.id}/`}>{d.data.name}</a>
+              <span class="muted"> — {categoryName(d.data.category)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+
+  <section class="section wrap"><Newsletter /></section>
+</BaseLayout>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2e4a43"/>
+      <stop offset="1" stop-color="#1a2c28"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g fill="none" stroke="rgba(242,238,230,0.12)" stroke-width="2">
+    <path d="M0 360 Q600 220 1200 400"/>
+    <path d="M0 460 Q600 340 1200 500"/>
+  </g>
+  <g transform="translate(96,150)" fill="none" stroke="#b08d3e" stroke-width="7" stroke-linecap="round">
+    <path d="M0 0 C 26 46, 42 80, 54 120"/>
+    <path d="M54 -6 L 54 120"/>
+    <path d="M108 0 C 82 46, 66 80, 54 120"/>
+  </g>
+  <text x="96" y="420" font-family="Archivo, Arial, sans-serif" font-size="88" font-weight="800" letter-spacing="4" fill="#f2eee6">THE BRENTFORD CARD</text>
+  <text x="98" y="480" font-family="Georgia, serif" font-size="34" fill="#c9cfc9">Local news, business directory, and your TW8 discount card.</text>
+</svg>

@@ -1,0 +1,82 @@
+---
+import { SITE } from '../data/site';
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;                 // canonical path, e.g. "/card/"
+  ogImage?: string;
+  type?: 'website' | 'article';
+  schema?: object | object[];   // JSON-LD graph node(s) for this page
+  noindex?: boolean;
+}
+const {
+  title,
+  description,
+  path,
+  ogImage = '/og-default.svg',
+  type = 'website',
+  schema,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path, SITE.url).href;
+const ogUrl = new URL(ogImage, SITE.url).href;
+
+// One @graph per page (brief §8). Site-wide Organization + WebSite are always
+// present; page-specific nodes are merged in.
+const orgNode = {
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#org`,
+  name: SITE.legalName,
+  url: SITE.url,
+  description: SITE.description,
+  email: SITE.email,
+  areaServed: SITE.coverage,
+  sameAs: SITE.sameAs,
+  logo: { '@type': 'ImageObject', url: `${SITE.url}/mark.svg` },
+};
+const websiteNode = {
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#website`,
+  url: SITE.url,
+  name: SITE.name,
+  publisher: { '@id': `${SITE.url}/#org` },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: { '@type': 'EntryPoint', urlTemplate: `${SITE.url}/directory/?q={query}` },
+    'query-input': 'required name=query',
+  },
+};
+const pageNodes = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const graph = { '@context': 'https://schema.org', '@graph': [orgNode, websiteNode, ...pageNodes] };
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogUrl} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogUrl} />
+
+<meta name="theme-color" content="#2e4a43" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="alternate" type="application/rss+xml" title="Brentford News" href="/rss.xml" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Cloudflare Web Analytics: no cookies set (brief §6). Token added at deploy. -->
+
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

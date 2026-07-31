@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Poster from '../../components/Poster.astro';
+import { categoryName } from '../../data/site';
+import { breadcrumbList } from '../../lib/schema';
+
+const all = (await getCollection('news')).sort(
+  (a, b) => +new Date(b.data.publishDate) - +new Date(a.data.publishDate),
+);
+const [lead, ...rest] = all;
+const leadDate = new Date(lead.data.publishDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const crumbs = [
+  { label: 'Home', path: '/' },
+  { label: 'News', path: '/news/' },
+];
+const schema = breadcrumbList(crumbs);
+---
+<BaseLayout
+  title="Brentford News | The Brentford Card"
+  description="Brentford news: regeneration updates, market guides and profiles of the independent businesses that make TW8."
+  path="/news/"
+  schema={schema}
+>
+  <section class="section wrap">
+    <Breadcrumb items={crumbs} />
+    <p class="eyebrow" style="margin-top:1rem;">Brentford News</p>
+    <h1 class="page-title">Brentford news</h1>
+
+    <!-- Lead story, full width -->
+    <a class="news-lead" href={`/news/${lead.id}/`} style="text-decoration:none; color:inherit; margin-top:2rem;">
+      <div class="news-lead__media">
+        {lead.data.hero
+          ? <img src={lead.data.hero} width="800" height="500" alt={lead.data.title} fetchpriority="high" />
+          : <Poster ratio="16 / 10" tone="river" seed={1} />}
+      </div>
+      <div class="stack">
+        <span class="article-meta">{categoryName(lead.data.category)} · {leadDate}</span>
+        <h2>{lead.data.title}</h2>
+        <p class="lead">{lead.data.standfirst}</p>
+        <span class="link">Read the story →</span>
+      </div>
+    </a>
+
+    <!-- Two-column editorial grid -->
+    {rest.length > 0 && (
+      <div class="article-list" style="margin-top:3.5rem;">
+        {rest.map((entry, i) => <ArticleCard entry={entry} seed={i + 3} />)}
+      </div>
+    )}
+  </section>
+</BaseLayout>

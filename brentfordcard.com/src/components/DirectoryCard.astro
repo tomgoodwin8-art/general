@@ -1,0 +1,23 @@
+---
+import Poster from './Poster.astro';
+import { categoryName } from '../data/site';
+interface Props { entry: { id: string; data: any }; seed?: number; }
+const { entry, seed = 0 } = Astro.props;
+const { data } = entry;
+const href = `/directory/${data.category}/${entry.id}/`;
+const tone = data.category === 'culture' ? 'ink' : data.category === 'health-beauty' ? 'brick' : data.category === 'shop' ? 'brass' : 'river';
+---
+<a class="dir-card" href={href}>
+  <div class="dir-card__media">
+    {data.image
+      ? <img src={data.image} width="400" height="300" loading="lazy" decoding="async" alt={data.name} />
+      : <Poster ratio="4 / 3" tone={tone} seed={seed} />}
+    {data.offer && <span class="dir-card__badge">Card offer</span>}
+  </div>
+  <div class="dir-card__body">
+    <span class="eyebrow dir-card__cat">{categoryName(data.category)}</span>
+    <span class="dir-card__name">{data.name}</span>
+    <span class="dir-card__summary">{data.summary}</span>
+    {data.founding && <span class="pill tag-founding" style="margin-top:0.6rem; align-self:flex-start;">Founding business</span>}
+  </div>
+</a>

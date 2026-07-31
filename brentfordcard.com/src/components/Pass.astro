@@ -1,0 +1,35 @@
+---
+import ConfluenceMark from './ConfluenceMark.astro';
+// The Brentford Card, rendered as a crisp CSS/SVG composition (brief §4).
+// Doubles as the press-kit asset — no raster mockup.
+interface Props { name?: string; founding?: boolean; id?: string; }
+const { name = 'Member Name', founding = true, id = 'BFC-0001' } = Astro.props;
+---
+<div class="pass" role="img" aria-label={`The Brentford Card — ${founding ? 'founding member' : 'member'} pass`}>
+  <div class="pass__top">
+    <div class="pass__brand">
+      <ConfluenceMark />
+      <span>Brentford Card</span>
+    </div>
+    <span class="pass__tier">{founding ? 'Founding Member' : 'Member'}</span>
+  </div>
+
+  <div class="pass__name">
+    <small>Member</small>
+    {name}
+  </div>
+
+  <div class="pass__bottom">
+    <div class="pass__meta">
+      No. {id}<br />
+      Valid TW8 · 2026–27
+    </div>
+    <div class="pass__qr">
+      <!-- Decorative QR glyph; the live pass carries a scannable code. -->
+      <svg viewBox="0 0 29 29" fill="currentColor" aria-hidden="true">
+        <path d="M0 0h9v9H0zM2 2v5h5V2zM20 0h9v9h-9zM22 2v5h5V2zM0 20h9v9H0zM2 22v5h5v-5z"/>
+        <path d="M11 0h2v2h-2zM15 0h2v4h-2zM11 4h4v2h-2v3h-2zM24 11h5v2h-2v2h-2v-2h-1zM11 11h2v2h-2zM17 11h2v2h-2zM20 15h2v2h-2zM11 15h4v2h-4zM24 17h5v2h-5zM11 19h2v4h-2zM15 20h2v2h2v2h-4zM20 22h4v2h-4zM24 24h5v5h-2v-3h-3zM15 25h2v4h-2zM19 26h2v3h-2z"/>
+      </svg>
+    </div>
+  </div>
+</div>

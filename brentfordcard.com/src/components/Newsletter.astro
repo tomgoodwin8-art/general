@@ -1,0 +1,27 @@
+---
+// Newsletter capture. Posts to a Cloudflare Pages Function (brief §2).
+// Turnstile slot has reserved height to avoid CLS (brief §6).
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+<section id="newsletter" class:list={['panel', compact && 'panel--compact']}>
+  <div class:list={[!compact && 'grid grid--2']} style="gap:2rem; align-items:center;">
+    <div>
+      <p class="eyebrow" style="color:var(--brass);">Stay local</p>
+      <h2 class="on-river" style="color:var(--plaster);">Join the Brentford newsletter</h2>
+      <p class="on-river muted" style="margin-top:0.75rem; max-width:46ch;">
+        Local news, new listings and card offers — a couple of emails a month, no more. No cookies, no spam, unsubscribe any time.
+      </p>
+    </div>
+    <form class="stack" method="post" action="/api/subscribe" novalidate>
+      <div class="field">
+        <label for="nl-email">Email address</label>
+        <input id="nl-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+      </div>
+      <input class="visually-hidden" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <div class="turnstile-slot" data-turnstile aria-hidden="true"></div>
+      <button class="btn btn--brass" type="submit" style="justify-content:center;">Join the newsletter</button>
+      <p class="form-note on-river">We store your email only to send the newsletter. See our <a href="/privacy/" style="color:var(--plaster);">privacy policy</a>.</p>
+    </form>
+  </div>
+</section>

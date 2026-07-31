@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConfluenceMark from '../../components/ConfluenceMark.astro';
+import Pass from '../../components/Pass.astro';
+import { SITE, CARD } from '../../data/site';
+---
+<BaseLayout
+  title="You're in | The Brentford Card"
+  description="Thank you for joining the Brentford Card. Your Apple or Google Wallet pass arrives by email within minutes."
+  path="/card/success/"
+  noindex={true}
+>
+  <section class="section wrap center" style="max-width:720px;">
+    <div class="confluence-divider"><ConfluenceMark title="Brentford Card" /></div>
+    <p class="eyebrow">Welcome to the card</p>
+    <h1 class="page-title">You're a Brentford Card member</h1>
+    <p class="lead" style="margin-inline:auto;">Thank you — and welcome. Your Apple or Google Wallet pass arrives by email within minutes. Add it to your wallet, then start using offers across TW8.</p>
+
+    <div style="display:grid; place-items:center; margin:2.5rem 0;">
+      <Pass name="New Member" founding={true} />
+    </div>
+
+    <div class="panel-plaster" style="text-align:left;">
+      <p class="eyebrow">What happens next</p>
+      <ol class="stack" style="margin-top:0.75rem; padding-left:1.2rem;">
+        <li>Check your inbox for an email from {SITE.email} with your pass link.</li>
+        <li>Open it on your phone and tap Add to Apple Wallet or Add to Google Wallet.</li>
+        <li>Show the pass in store at any <a class="link" href="/directory/">participating business</a> to claim your offer.</li>
+      </ol>
+      <p class="muted" style="margin-top:1rem;">No email within 15 minutes? Check spam, then <a class="link" href="/contact/">get in touch</a> and we'll sort it.</p>
+    </div>
+
+    <p style="margin-top:2rem;"><a class="btn btn--river" href="/directory/">Browse the directory</a></p>
+  </section>
+</BaseLayout>

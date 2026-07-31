@@ -1,0 +1,19 @@
+---
+import Poster from './Poster.astro';
+import { categoryName } from '../data/site';
+interface Props { entry: { id: string; data: any }; seed?: number; }
+const { entry, seed = 0 } = Astro.props;
+const { data } = entry;
+const href = `/news/${entry.id}/`;
+const dateStr = new Date(data.publishDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<a class="article-card" href={href}>
+  <div class="article-card__media">
+    {data.hero
+      ? <img src={data.hero} width="600" height="400" loading="lazy" decoding="async" alt={data.title} />
+      : <Poster ratio="3 / 2" tone="river" seed={seed} />}
+  </div>
+  <span class="article-meta">{categoryName(data.category)} · {dateStr}</span>
+  <h3>{data.title}</h3>
+  <p class="muted" style="font-size:0.95rem;">{data.standfirst}</p>
+</a>

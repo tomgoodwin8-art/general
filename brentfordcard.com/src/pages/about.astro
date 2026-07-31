@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import ConfluenceMark from '../components/ConfluenceMark.astro';
+import { SITE, CARD } from '../data/site';
+import { breadcrumbList } from '../lib/schema';
+const crumbs = [{ label: 'Home', path: '/' }, { label: 'About', path: '/about/' }];
+---
+<BaseLayout
+  title="About the Brentford Card | Independent, local, TW8"
+  description="The Brentford Card is an independent community platform for Brentford (TW8) — not the council, not developer-funded. Here's who runs it and why."
+  path="/about/"
+  schema={breadcrumbList(crumbs)}
+>
+  <section class="section wrap" style="max-width:760px;">
+    <Breadcrumb items={crumbs} />
+    <p class="eyebrow" style="margin-top:1rem;">About</p>
+    <h1 class="page-title">Built for Brentford, by Brentford</h1>
+    <p class="standfirst" style="margin-top:0.9rem;">The Brentford Card is an independent community platform for TW8 — it is not the council, and it is not developer-funded editorial.</p>
+
+    <div class="prose" style="margin-top:2rem;">
+      <p>Brentford is having its moment. Thousands of new homes at The Brentford Project and Kew Bridge Rise are bringing new neighbours to a town with real history — the confluence of the Thames, the Brent and the Grand Union Canal, a working high street, and a stubborn set of independents who have held the line for years.</p>
+
+      <h2>Why we exist</h2>
+      <p>We do one job: point spending at Brentford's independent businesses, and give new arrivals a reason to shop local from week one. The Brentford Card is the mechanism — a {CARD.priceDisplay}-a-year membership that lives in your phone wallet and unlocks offers across town. The directory and the news exist to back it up: a proper record of who's here, and what's changing.</p>
+
+      <h2>The charity commitment</h2>
+      <p>Five per cent of every membership goes to {CARD.charityName}. That is fixed, not a launch gimmick. The rest funds the platform and keeps it independent.</p>
+
+      <h2>The editorial line</h2>
+      <p>Our news is written to be useful and honest. We are not the council's newsletter and we are not paid by developers to say nice things about regeneration. When a scheme is good for the high street we'll say so; when it is disruptive, we'll say that too. Businesses pay nothing to be listed during launch, and a listing is never coverage for sale.</p>
+    </div>
+
+    <div class="confluence-divider"><ConfluenceMark /></div>
+    <p><a class="btn btn--river" href="/card/">Get the card</a> <a class="btn btn--ghost" href="/contact/" style="margin-left:0.5rem;">Get in touch</a></p>
+  </section>
+</BaseLayout>

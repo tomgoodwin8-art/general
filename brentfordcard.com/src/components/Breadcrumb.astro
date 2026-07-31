@@ -1,0 +1,16 @@
+---
+import { SITE } from '../data/site';
+// Renders visible breadcrumbs. BreadcrumbList schema is emitted by the page
+// via the `schema` prop so the whole graph stays in one <script> (brief §8).
+interface Crumb { label: string; href?: string; }
+interface Props { items: Crumb[]; }
+const { items } = Astro.props;
+---
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  {items.map((c, i) => (
+    <>
+      {c.href ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}
+      {i < items.length - 1 && <span aria-hidden="true">/</span>}
+    </>
+  ))}
+</nav>

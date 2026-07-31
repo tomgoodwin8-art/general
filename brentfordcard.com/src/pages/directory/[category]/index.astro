@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DirectoryCard from '../../../components/DirectoryCard.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { CATEGORIES, categoryName } from '../../../data/site';
+import { breadcrumbList } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+  return CATEGORIES.map((c) => ({ params: { category: c.slug } }));
+}
+
+const { category } = Astro.params;
+const name = categoryName(category!);
+const listings = (await getCollection('directory'))
+  .filter((l) => l.data.category === category)
+  .sort((a, b) => a.data.name.localeCompare(b.data.name));
+const count = listings.length;
+
+const crumbs = [
+  { label: 'Home', path: '/' },
+  { label: 'Directory', path: '/directory/' },
+  { label: name, path: `/directory/${category}/` },
+];
+const schema = breadcrumbList(crumbs);
+---
+<BaseLayout
+  title={`${name} in Brentford | Brentford Directory`}
+  description={`${count} independent ${name.toLowerCase()} businesses in Brentford (TW8), with Brentford Card offers where available.`}
+  path={`/directory/${category}/`}
+  schema={schema}
+>
+  <section class="section wrap">
+    <Breadcrumb items={crumbs} />
+    <p class="eyebrow" style="margin-top:1rem;">Brentford Directory</p>
+    <h1 class="page-title">{name} in Brentford</h1>
+    <p class="lead">{count} independent {name.toLowerCase()} {count === 1 ? 'business' : 'businesses'} in Brentford, TW8.</p>
+
+    <div class="chips" style="margin-top:2rem;">
+      <a class="chip" href="/directory/">All</a>
+      {CATEGORIES.map((c) => (
+        <a class="chip" href={`/directory/${c.slug}/`} aria-current={c.slug === category ? 'page' : undefined}>{c.name}</a>
+      ))}
+    </div>
+
+    {count > 0 ? (
+      <div class="cards" style="margin-top:2.5rem;">
+        {listings.map((entry, i) => <DirectoryCard entry={entry} seed={i} />)}
+      </div>
+    ) : (
+      <p class="lead" style="margin-top:2.5rem;">No listings in this category yet. <a class="link" href="/contact/">List your business</a>.</p>
+    )}
+  </section>
+</BaseLayout>

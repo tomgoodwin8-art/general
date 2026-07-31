@@ -1,0 +1,50 @@
+name: Deploy brentfordcard.com
+
+# Builds the Astro site and deploys it to Cloudflare Pages from GitHub's
+# runners (which can reach Cloudflare). One-time setup: add repo secrets
+# CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID
+# (Settings -> Secrets and variables -> Actions). The first run creates the
+# "brentfordcard-com" Pages project automatically.
+
+on:
+  push:
+    branches:
+      - claude/cloudflare-build-deploy-7gwtwn
+    paths:
+      - 'brentfordcard.com/**'
+      - '.github/workflows/deploy-brentfordcard.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-brentfordcard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: brentfordcard.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: brentfordcard.com/package-lock.json
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: brentfordcard.com
+          command: pages deploy dist --project-name brentfordcard-com --branch=main --commit-dirty=true

@@ -1,0 +1,16 @@
+# Cloudflare Pages project for brentfordcard.com.
+# Static Astro output in ./dist plus Pages Functions in ./functions.
+#
+# Deploy from CI (recommended) via .github/workflows/deploy-brentfordcard.yml,
+# or locally:  npm run build && npx wrangler pages deploy dist --project-name brentfordcard-com
+# Needs CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID in the environment.
+name = "brentfordcard-com"
+compatibility_date = "2025-09-01"
+pages_build_output_dir = "./dist"
+
+# Bind these in the Cloudflare dashboard (or via `wrangler pages ...`) before the
+# forms persist anything — the Functions degrade gracefully until then:
+#   - KV namespace  SUBMISSIONS          (stores contact + newsletter records)
+#   - Secret        TURNSTILE_SECRET     (server-side Turnstile verification)
+#   - Var           CONTACT_FORWARD_URL  (optional webhook for contact messages)
+#   - Var           NEWSLETTER_FORWARD_URL (optional webhook for signups)

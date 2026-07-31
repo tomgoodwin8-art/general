@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { SITE } from '../data/site';
+import { breadcrumbList } from '../lib/schema';
+const crumbs = [{ label: 'Home', path: '/' }, { label: 'Privacy', path: '/privacy/' }];
+const updated = '15 July 2026';
+---
+<BaseLayout
+  title="Privacy policy | The Brentford Card"
+  description="The Brentford Card privacy policy: we set no cookies, and we store your data only to run your membership and newsletter, under UK GDPR."
+  path="/privacy/"
+  schema={breadcrumbList(crumbs)}
+>
+  <section class="section wrap" style="max-width:720px;">
+    <Breadcrumb items={crumbs} />
+    <p class="eyebrow" style="margin-top:1rem;">Legal</p>
+    <h1 class="page-title">Privacy policy</h1>
+    <p class="muted mono">Last updated {updated}</p>
+
+    <div class="prose" style="margin-top:1.5rem;">
+      <div class="panel-plaster">
+        <p class="eyebrow">The short version</p>
+        <p style="margin-top:0.4rem;"><strong>This site sets no cookies.</strong> There is no cookie banner because there is nothing to consent to. We collect the minimum we need to run your membership and, if you ask for it, the newsletter.</p>
+      </div>
+
+      <h2>Who we are</h2>
+      <p>{SITE.legalName} ({SITE.domain}) is the data controller for the information described here. Contact: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+
+      <h2>What we collect and why</h2>
+      <ul>
+        <li><strong>Newsletter:</strong> your email address, used only to send the Brentford newsletter. Lawful basis: consent. Unsubscribe any time from any email.</li>
+        <li><strong>Contact form:</strong> your name, email, subject and message, used only to reply to you. Lawful basis: legitimate interest in responding to enquiries.</li>
+        <li><strong>Card purchase:</strong> your name and email, and payment handled by Stripe. We never see or store your card number. Lawful basis: performance of your membership contract.</li>
+        <li><strong>Analytics:</strong> Cloudflare Web Analytics, which is privacy-first and sets no cookies and no cross-site identifiers.</li>
+      </ul>
+
+      <h2>Cookies</h2>
+      <p>We do not set cookies for advertising, analytics or tracking. This is deliberate — it is a trust feature, not an oversight.</p>
+
+      <h2>Who we share it with</h2>
+      <p>Only the processors needed to run the service: Stripe (payments), our email/pass provider (to deliver your pass and newsletter), and Cloudflare (hosting and privacy-first analytics). We never sell your data.</p>
+
+      <h2>How long we keep it</h2>
+      <p>Newsletter data until you unsubscribe; contact enquiries for up to 24 months; membership records for as long as you are a member and then as required by law.</p>
+
+      <h2>Your rights</h2>
+      <p>Under UK GDPR you can access, correct, delete or port your data, and object to or restrict processing. Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we will respond within one month. You can also complain to the Information Commissioner's Office (ico.org.uk).</p>
+    </div>
+  </section>
+</BaseLayout>

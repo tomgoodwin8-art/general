@@ -39,8 +39,10 @@ const schema = [cardProduct(), faqPage(CARD_FAQ.map((f) => ({ q: f.q, a: f.a }))
           <p class="eyebrow eyebrow--onriver">The Brentford Card</p>
           <h1 style="font-size:var(--step-h1);">A discount card for the whole of TW8</h1>
           <p class="lead">{CARD.priceDisplay} a year. Offers at independent Brentford businesses, in your phone wallet. {CARD.charityPct}% of every card goes to {CARD.charityName}.</p>
-          <p style="margin-top:1.5rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
-            <a class="btn btn--brass" href={CARD.stripeLink} rel="noopener">Buy the card — {CARD.priceDisplay}</a>
+          <p style="margin-top:1.5rem; display:flex; gap:0.8rem; flex-wrap:wrap; align-items:center;">
+            <form method="post" action="/api/checkout" style="margin:0;">
+              <button class="btn btn--brass" type="submit">Buy the card — {CARD.priceDisplay}</button>
+            </form>
             <a class="btn btn--ghost-light" href="#faq">Read the FAQ</a>
           </p>
           <p class="mono" style="color:var(--brass); margin-top:1.25rem;">Founding member pricing — first {CARD.foundingCount} passes only.</p>
@@ -111,6 +113,8 @@ const schema = [cardProduct(), faqPage(CARD_FAQ.map((f) => ({ q: f.q, a: f.a }))
         </details>
       ))}
     </div>
-    <p style="margin-top:2rem;"><a class="btn btn--brass" href={CARD.stripeLink} rel="noopener">Buy the card — {CARD.priceDisplay}/year</a></p>
+    <form method="post" action="/api/checkout" style="margin-top:2rem;">
+      <button class="btn btn--brass" type="submit">Buy the card — {CARD.priceDisplay}/year</button>
+    </form>
   </section>
 </BaseLayout>

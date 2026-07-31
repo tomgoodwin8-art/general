@@ -1,0 +1,33 @@
+# Copy to `.dev.vars` for local `wrangler pages dev` (git-ignored).
+# In production these are set in the Cloudflare Pages dashboard, NOT committed.
+
+SITE_URL="http://localhost:8788"
+
+# Supabase
+SUPABASE_URL="https://YOUR-PROJECT.supabase.co"
+SUPABASE_SERVICE_ROLE_KEY="ey..."          # service role — server only, secret
+
+# Stripe (use test keys locally)
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."           # from `stripe listen` or the dashboard
+# STRIPE_PRICE_ID="price_..."               # optional; else an inline £29 price
+CARD_PRICE_PENCE="2900"
+
+# Apple Wallet — PEMs/p12 stored base64 (base64 -w0 file.pem)
+APPLE_PASS_TYPE_ID="pass.com.brentfordcard.member"
+APPLE_TEAM_ID="ABCDE12345"
+APPLE_PASS_CERT_P12_BASE64=""               # OR the PEM pair below
+APPLE_PASS_CERT_PEM_BASE64=""
+APPLE_PASS_KEY_PEM_BASE64=""
+APPLE_PASS_KEY_PASSWORD=""
+APPLE_WWDR_PEM_BASE64=""
+
+# Google Wallet
+GOOGLE_WALLET_ISSUER_ID="3388000000000000000"
+GOOGLE_WALLET_CLASS_ID=""                   # optional
+GOOGLE_SA_EMAIL="wallet@your-project.iam.gserviceaccount.com"
+GOOGLE_SA_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+
+# Email (optional)
+RESEND_API_KEY=""
+EMAIL_FROM="Brentford Card <hello@brentfordcard.com>"

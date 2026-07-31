@@ -20,16 +20,60 @@ import { SITE, CARD } from '../../data/site';
       <Pass name="New Member" founding={true} />
     </div>
 
-    <div class="panel-plaster" style="text-align:left;">
-      <p class="eyebrow">What happens next</p>
-      <ol class="stack" style="margin-top:0.75rem; padding-left:1.2rem;">
-        <li>Check your inbox for an email from {SITE.email} with your pass link.</li>
-        <li>Open it on your phone and tap Add to Apple Wallet or Add to Google Wallet.</li>
-        <li>Show the pass in store at any <a class="link" href="/directory/">participating business</a> to claim your offer.</li>
-      </ol>
-      <p class="muted" style="margin-top:1rem;">No email within 15 minutes? Check spam, then <a class="link" href="/contact/">get in touch</a> and we'll sort it.</p>
+    {/* Wallet section — populated client-side from ?session_id= (checkout page
+        is permitted client JS per brief §2). */}
+    <div id="wallet" class="panel-plaster" style="text-align:left;">
+      <div id="wallet-loading">
+        <p class="eyebrow">Preparing your pass</p>
+        <p class="muted" style="margin-top:0.5rem;">One moment while we issue your Brentford Card…</p>
+      </div>
+
+      <div id="wallet-ready" hidden>
+        <p class="eyebrow">Add your card</p>
+        <p style="margin:0.5rem 0 1.25rem;">Your membership number is <strong id="wallet-card" class="mono"></strong>. Add the pass to your phone:</p>
+        <p style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+          <a id="btn-apple" class="btn btn--river" href="#">Add to Apple Wallet</a>
+          <a id="btn-google" class="btn btn--ghost" href="#">Add to Google Wallet</a>
+        </p>
+        <p class="muted" style="margin-top:1rem;">Open this page on your phone to add the pass directly. We've also emailed the link to you.</p>
+      </div>
+
+      <div id="wallet-pending" hidden>
+        <p class="eyebrow">Almost there</p>
+        <p class="muted" style="margin-top:0.5rem;">Your payment is confirmed. Your pass link is on its way by email from {SITE.email} — if it hasn't arrived in a few minutes, <a class="link" href="/contact/">get in touch</a>.</p>
+      </div>
     </div>
 
-    <p style="margin-top:2rem;"><a class="btn btn--river" href="/directory/">Browse the directory</a></p>
+    <p style="margin-top:2rem;"><a class="btn btn--ghost" href="/directory/">Browse the directory</a></p>
   </section>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get('session_id');
+    const $ = (id: string) => document.getElementById(id)!;
+    const show = (id: string) => { $('wallet-loading').hidden = true; $(id).hidden = false; };
+
+    async function load() {
+      if (!sessionId) { show('wallet-pending'); return; }
+      // Poll briefly while the webhook provisions the pass.
+      for (let i = 0; i < 6; i++) {
+        try {
+          const res = await fetch(`/api/pass/by-session?session_id=${encodeURIComponent(sessionId)}`);
+          if (res.ok) {
+            const data = await res.json();
+            if (data.ready) {
+              (($('btn-apple') as HTMLAnchorElement)).href = `/api/pass/apple/${data.serial}?t=${data.token}`;
+              (($('btn-google') as HTMLAnchorElement)).href = `/api/pass/google/${data.serial}?t=${data.token}`;
+              $('wallet-card').textContent = data.cardNumber;
+              show('wallet-ready');
+              return;
+            }
+          }
+        } catch { /* retry */ }
+        await new Promise((r) => setTimeout(r, 1500));
+      }
+      show('wallet-pending');
+    }
+    load();
+  </script>
 </BaseLayout>

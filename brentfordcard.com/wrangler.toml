@@ -7,10 +7,45 @@
 name = "brentfordcard-com"
 compatibility_date = "2025-09-01"
 pages_build_output_dir = "./dist"
+# node-forge (Apple pass signing) needs Node built-ins on the Workers runtime.
+compatibility_flags = ["nodejs_compat"]
 
-# Bind these in the Cloudflare dashboard (or via `wrangler pages ...`) before the
-# forms persist anything — the Functions degrade gracefully until then:
-#   - KV namespace  SUBMISSIONS          (stores contact + newsletter records)
-#   - Secret        TURNSTILE_SECRET     (server-side Turnstile verification)
-#   - Var           CONTACT_FORWARD_URL  (optional webhook for contact messages)
-#   - Var           NEWSLETTER_FORWARD_URL (optional webhook for signups)
+# Bind these in the Cloudflare dashboard (Settings -> Variables and Secrets, and
+# Functions -> KV bindings). All Functions degrade gracefully (503 "not
+# configured") until their vars are present, so partial setup is safe.
+#
+# Forms:
+#   - KV namespace  SUBMISSIONS            (contact + newsletter records)
+#   - Secret        TURNSTILE_SECRET       (Turnstile verification)
+#   - Var           CONTACT_FORWARD_URL    (optional webhook)
+#   - Var           NEWSLETTER_FORWARD_URL (optional webhook)
+#
+# Payments (Stripe):
+#   - Secret  STRIPE_SECRET_KEY
+#   - Secret  STRIPE_WEBHOOK_SECRET
+#   - Var     STRIPE_PRICE_ID     (optional; else an inline £29 price is used)
+#   - Var     CARD_PRICE_PENCE    (optional; default 2900)
+#
+# Database (Supabase):
+#   - Var     SUPABASE_URL
+#   - Secret  SUPABASE_SERVICE_ROLE_KEY
+#
+# Apple Wallet:
+#   - Var     APPLE_PASS_TYPE_ID          (pass.com.brentfordcard.member)
+#   - Var     APPLE_TEAM_ID
+#   - Secret  APPLE_PASS_CERT_P12_BASE64  (OR the PEM pair below)
+#   - Secret  APPLE_PASS_CERT_PEM_BASE64
+#   - Secret  APPLE_PASS_KEY_PEM_BASE64
+#   - Secret  APPLE_PASS_KEY_PASSWORD     (if the key/p12 is encrypted)
+#   - Secret  APPLE_WWDR_PEM_BASE64       (Apple WWDR intermediate cert)
+#
+# Google Wallet:
+#   - Var     GOOGLE_WALLET_ISSUER_ID
+#   - Var     GOOGLE_WALLET_CLASS_ID      (optional; default <issuer>.brentford_card)
+#   - Var     GOOGLE_SA_EMAIL
+#   - Secret  GOOGLE_SA_PRIVATE_KEY       (service-account private key PEM)
+#
+# Email (optional):
+#   - Secret  RESEND_API_KEY
+#   - Var     EMAIL_FROM
+#   - Var     SITE_URL                    (optional; else request origin)

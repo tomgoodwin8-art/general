@@ -82,14 +82,80 @@ until you bind config in the Pages dashboard:
 Add the Turnstile **site key** to render the widget client-side (reserved space
 is already in the layout, so adding it causes no CLS).
 
+## Payments + wallet passes
+
+End-to-end flow: **buy → pay (Stripe) → record (Supabase) → issue an Apple/Google
+Wallet pass**. All server-side in Cloudflare Pages Functions; the browser never
+touches Supabase or the signing keys.
+
+```
+/card/  ──POST /api/checkout──▶  Stripe Checkout
+                                     │ pays
+                                     ▼
+Stripe ──▶ POST /api/stripe-webhook ──▶ Supabase (member, order, pass)
+                                     │            └─ Google Wallet object created
+                                     ▼
+/card/success/?session_id=… ──GET /api/pass/by-session──▶ { serial, token, cardNumber }
+        │  "Add to Apple Wallet" ▶ GET /api/pass/apple/:serial?t=…  (signed .pkpass)
+        └─ "Add to Google Wallet" ▶ GET /api/pass/google/:serial?t=… (Save-to-Wallet JWT)
+```
+
+Key files:
+- `functions/api/checkout.ts` — creates the Stripe Checkout Session (zero-JS form POST).
+- `functions/api/stripe-webhook.ts` — verifies the signature (WebCrypto) and provisions.
+- `functions/_lib/provision.ts` — upserts member + order + pass (idempotent on the session).
+- `functions/_lib/applePass.ts` — builds and signs the `.pkpass` (node-forge + fflate).
+- `functions/_lib/googleWallet.ts` — creates the class/object and mints the Save JWT (jose).
+- `functions/api/apple/[[path]].ts` — Apple Wallet web service for pass push-updates.
+
+### Setup checklist
+
+1. **Supabase** — create a project, run `supabase/migrations/0001_init.sql` (CLI
+   `supabase db push`, or paste into the SQL editor). Set `SUPABASE_URL` and
+   `SUPABASE_SERVICE_ROLE_KEY` in the Pages dashboard.
+2. **Stripe** — create a restricted/secret key. Add a webhook endpoint pointing at
+   `https://brentfordcard.com/api/stripe-webhook` for the `checkout.session.completed`
+   event; copy its signing secret. Set `STRIPE_SECRET_KEY` and
+   `STRIPE_WEBHOOK_SECRET` (optionally `STRIPE_PRICE_ID`).
+3. **Apple Wallet** — Apple Developer account → create a Pass Type ID and its
+   certificate; export the cert+key as `.p12`. Download the Apple WWDR
+   intermediate cert. Base64-encode each (`base64 -w0`) and set
+   `APPLE_PASS_TYPE_ID`, `APPLE_TEAM_ID`, `APPLE_PASS_CERT_P12_BASE64` (+
+   `APPLE_PASS_KEY_PASSWORD`), `APPLE_WWDR_PEM_BASE64`.
+4. **Google Wallet** — enable the Wallet API, create an issuer account and a
+   service account with the Wallet Object Issuer role; download its key. Set
+   `GOOGLE_WALLET_ISSUER_ID`, `GOOGLE_SA_EMAIL`, `GOOGLE_SA_PRIVATE_KEY`.
+5. **Email (optional)** — `RESEND_API_KEY` + `EMAIL_FROM` to send the pass link.
+
+Every Function returns a clear `503 { "not_configured", missing: […] }` until its
+vars exist, so you can wire the pieces in any order without breaking the site.
+`compatibility_flags = ["nodejs_compat"]` (in `wrangler.toml`) is required — the
+Apple pass signer uses Node built-ins.
+
+### Local dev
+
+```bash
+cp .dev.vars.example .dev.vars   # fill in test keys (git-ignored)
+npm run build && npx wrangler pages dev dist   # Functions run locally
+# In another shell, forward Stripe test webhooks:
+stripe listen --forward-to localhost:8788/api/stripe-webhook
+```
+
+### Regenerating the pass image assets
+
+`functions/_lib/passAssets.ts` holds base64 PNGs (icon/logo) for the `.pkpass`.
+Regenerate from the Confluence Mark with `npm i -D sharp && node scripts/gen-pass-assets.mjs .`
+(sharp is only needed for this one-off step; the generated file is committed).
+
 ## To supply before public launch (flagged in code)
 
 - **Photography / hero film** — the build ships crisp SVG placeholders (`Poster.astro`);
   swap for Cloudflare Images `<img srcset>` and a Cloudflare Stream loop. The
   poster must remain the LCP element.
-- **Stripe Payment Link** — set `CARD.stripeLink` in `src/data/site.ts`.
-- **Turnstile keys**, **KV binding**, **wallet-pass provider** (PassKit or
-  equivalent) for real pass issuance on `/card/success/`.
+- **Payment + pass credentials** — the full checkout → pass flow is built (see
+  "Payments + wallet passes"); it needs Stripe, Supabase, Apple Wallet and Google
+  Wallet accounts + keys set as Pages env vars before it goes live.
+- **Turnstile keys** and **KV binding** for the contact/newsletter forms.
 - **Cloudflare Web Analytics** token in `src/components/Head.astro`.
 - **Directory data** — the 25 listings are a representative launch set on real
   Brentford streets with placeholder phone numbers; confirm details with each

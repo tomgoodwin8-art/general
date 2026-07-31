@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConfluenceMark from '../../components/ConfluenceMark.astro';
+import Pass from '../../components/Pass.astro';
+---
+<BaseLayout
+  title="Add your Brentford Card | Wallet"
+  description="Add your Brentford Card to Apple Wallet or Google Wallet."
+  path="/wallet/"
+  noindex={true}
+>
+  <section class="section wrap center" style="max-width:640px;">
+    <div class="confluence-divider"><ConfluenceMark title="Brentford Card" /></div>
+    <p class="eyebrow">Your Brentford Card</p>
+    <h1 class="page-title">Add your card to your wallet</h1>
+
+    <div style="display:grid; place-items:center; margin:2rem 0;">
+      <Pass name="Member" founding={true} />
+    </div>
+
+    <div id="wallet-actions" hidden>
+      <p style="display:flex; gap:0.8rem; flex-wrap:wrap; justify-content:center;">
+        <a id="btn-apple" class="btn btn--river" href="#">Add to Apple Wallet</a>
+        <a id="btn-google" class="btn btn--ghost" href="#">Add to Google Wallet</a>
+      </p>
+      <p class="muted" style="margin-top:1rem;">For the best result, open this page on the phone you want the card on.</p>
+    </div>
+
+    <div id="wallet-missing" hidden>
+      <p class="lead" style="margin-inline:auto;">This link is missing its pass details. Please use the button in your welcome email, or <a class="link" href="/contact/">get in touch</a> and we'll resend it.</p>
+    </div>
+  </section>
+
+  <script>
+    const p = new URLSearchParams(location.search);
+    const s = p.get('s');
+    const t = p.get('t');
+    const el = (id: string) => document.getElementById(id)!;
+    if (s && t) {
+      (el('btn-apple') as HTMLAnchorElement).href = `/api/pass/apple/${encodeURIComponent(s)}?t=${encodeURIComponent(t)}`;
+      (el('btn-google') as HTMLAnchorElement).href = `/api/pass/google/${encodeURIComponent(s)}?t=${encodeURIComponent(t)}`;
+      el('wallet-actions').hidden = false;
+    } else {
+      el('wallet-missing').hidden = false;
+    }
+  </script>
+</BaseLayout>

@@ -7,7 +7,6 @@ website: "https://siracusarestaurant.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pizza"
 summary: "Siracusa is an Italian restaurant and pizzeria in Brentford (TW8)."

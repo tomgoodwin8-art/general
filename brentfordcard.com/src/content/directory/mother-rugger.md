@@ -6,7 +6,6 @@ address: "The Lanes, The Brentford Project, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "gift"
 summary: "Mother Rugger is a gift and interiors boutique in Brentford (TW8)."

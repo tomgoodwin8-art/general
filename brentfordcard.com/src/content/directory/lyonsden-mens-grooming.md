@@ -7,7 +7,6 @@ phone: "+44 20 7018 3890"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "scissors"
 summary: "LyonsDen Men's Grooming is a men’s grooming and barber in Brentford (TW8)."

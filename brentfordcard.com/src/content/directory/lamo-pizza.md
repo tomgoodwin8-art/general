@@ -8,7 +8,6 @@ website: "https://lamopizza.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pizza"
 summary: "L'amo Pizza is a pizza takeaway in Brentford (TW8)."

@@ -7,7 +7,6 @@ website: "https://aemhealthandfitness.net"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "dumbbell"
 summary: "AEM Health and Fitness is a women's fitness and wellness studio in Brentford (TW8)."

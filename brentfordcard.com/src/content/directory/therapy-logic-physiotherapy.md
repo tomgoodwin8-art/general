@@ -6,7 +6,6 @@ address: "Brentford, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "heart"
 summary: "Therapy Logic Physiotherapy is a physiotherapy service in Brentford (TW8)."

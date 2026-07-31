@@ -6,7 +6,6 @@ address: "Brentford, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "paw"
 summary: "Smart Pets is a pet groomer and shop in Brentford (TW8)."

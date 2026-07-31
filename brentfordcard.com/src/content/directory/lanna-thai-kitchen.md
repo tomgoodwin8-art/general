@@ -6,7 +6,6 @@ address: "128 High Street, TW8 8EW"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "restaurant"
 summary: "Lanna Thai Kitchen is a Thai kitchen inside the Magpie & Crown in Brentford (TW8)."

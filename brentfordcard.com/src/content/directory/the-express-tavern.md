@@ -8,7 +8,6 @@ website: "https://expresstavern.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pub"
 summary: "The Express Tavern is a CAMRA-listed free house in Brentford (TW8)."

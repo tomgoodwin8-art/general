@@ -8,7 +8,6 @@ website: "https://beehivebrentford.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pub"
 summary: "The Beehive is a sports and music pub in Brentford (TW8)."

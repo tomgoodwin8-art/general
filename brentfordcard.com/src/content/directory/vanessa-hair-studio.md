@@ -7,7 +7,6 @@ website: "https://vanessahairstudio.mytreatwell.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "scissors"
 summary: "Vanessa Hair Studio is a hair salon in Brentford (TW8)."

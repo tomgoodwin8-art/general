@@ -53,7 +53,6 @@ const mapHref = data.geo
           {/* Answer-first factual summary (brief §8) */}
           <p class="standfirst" style="margin-top:0.75rem;">{data.summary}</p>
           <div class="chips" style="margin-top:1.25rem;">
-            {data.founding && <span class="pill tag-founding">Founding business</span>}
             {data.offer && data.offer !== 'pending' && <span class="pill">Brentford Card offer</span>}
             {data.offer === 'pending' && <span class="pill">Offer pending</span>}
             {data.priceRange && <span class="pill">{data.priceRange}</span>}

@@ -8,7 +8,6 @@ website: "https://waterandsteam.org.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: true
 image: ""
 motif: "museum"
 summary: "London Museum of Water & Steam is a working steam museum in Brentford (TW8)."

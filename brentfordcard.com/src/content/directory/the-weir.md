@@ -8,7 +8,6 @@ website: "https://theweirbar.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: true
 image: ""
 motif: "restaurant"
 summary: "The Weir is a waterside bar and restaurant in Brentford (TW8)."

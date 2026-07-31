@@ -7,7 +7,6 @@ phone: "+44 20 8560 4570"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pub"
 summary: "The Magpie & Crown is a historic free house pub in Brentford (TW8)."

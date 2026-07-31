@@ -8,7 +8,6 @@ website: "https://rottura.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: true
 image: ""
 motif: "restaurant"
 summary: "Rottura is an Italian restaurant and deli in Brentford (TW8)."

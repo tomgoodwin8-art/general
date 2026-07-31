@@ -6,7 +6,6 @@ address: "212 High Street, TW8 8AH"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "grocer"
 summary: "Al Shaam Market is a grocery market in Brentford (TW8)."

@@ -7,7 +7,6 @@ website: "https://whitedrycleaners.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "hanger"
 summary: "White Dry Cleaners is a dry cleaner and laundry in Brentford (TW8)."

@@ -8,7 +8,6 @@ website: "https://wyndham-house.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "grocer"
 summary: "Wyndham House is a free-range butcher and deli in Brentford (TW8)."

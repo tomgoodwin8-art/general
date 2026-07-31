@@ -8,7 +8,6 @@ website: "https://brightsmilestudio.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "tooth"
 summary: "Bright Smile Studio is a dental practice in Brentford (TW8)."

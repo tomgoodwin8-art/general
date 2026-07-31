@@ -8,7 +8,6 @@ website: "https://blackdogbeerhouse.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: true
 image: ""
 motif: "pub"
 summary: "Black Dog Beer House is a craft-beer pub and kitchen in Brentford (TW8)."

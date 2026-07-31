@@ -6,7 +6,6 @@ address: "Boston Manor Park, TW8 9JX"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "cafe"
 summary: "The Potting Shed is a park café in Brentford (TW8)."

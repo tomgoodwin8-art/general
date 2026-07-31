@@ -7,7 +7,6 @@ website: "https://arrowpilates.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "dumbbell"
 summary: "Arrow Pilates is a reformer Pilates studio in Brentford (TW8)."

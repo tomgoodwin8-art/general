@@ -6,7 +6,6 @@ address: "Brentford (mobile), TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "bike"
 summary: "CYCLEDELIK is a mobile bike and e-bike mechanic in Brentford (TW8)."

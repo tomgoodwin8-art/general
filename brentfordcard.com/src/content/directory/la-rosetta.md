@@ -8,7 +8,6 @@ website: "https://larosetta.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "restaurant"
 summary: "La Rosetta is a family-run Italian restaurant in Brentford (TW8)."

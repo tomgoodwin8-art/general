@@ -7,7 +7,6 @@ website: "https://anima.london"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "restaurant"
 summary: "ANIMA is an Indian restaurant and bar in Brentford (TW8)."

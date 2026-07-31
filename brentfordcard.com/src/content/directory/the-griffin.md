@@ -8,7 +8,6 @@ website: "https://griffinbrentford.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pub"
 summary: "The Griffin is a Fuller's pub by the football ground in Brentford (TW8)."

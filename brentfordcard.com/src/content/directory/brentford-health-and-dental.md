@@ -7,7 +7,6 @@ website: "https://brentfordhealthdental.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "tooth"
 summary: "Brentford Health & Dental is a dental and health practice in Brentford (TW8)."

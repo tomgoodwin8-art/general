@@ -7,7 +7,6 @@ website: "https://aotsports.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "dumbbell"
 summary: "AOT Sports & Fitness is a gym and personal-training studio in Brentford (TW8)."

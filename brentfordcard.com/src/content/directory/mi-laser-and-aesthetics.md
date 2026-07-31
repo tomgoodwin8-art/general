@@ -8,7 +8,6 @@ website: "https://milaser.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "sparkle"
 summary: "MI Laser and Aesthetics is a laser and aesthetics clinic in Brentford (TW8)."

@@ -8,7 +8,6 @@ website: "https://brewery-tap.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pub"
 summary: "The Brewery Tap is a riverside pub with pizza and live music in Brentford (TW8)."

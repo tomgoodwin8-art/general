@@ -7,7 +7,6 @@ phone: "+44 20 3337 9333"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "scissors"
 summary: "Milandon is a barbershop in Brentford (TW8)."

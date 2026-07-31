@@ -6,7 +6,6 @@ address: "197 High Street, TW8 8AH"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "scissors"
 summary: "Crew Barbers is a barbershop in Brentford (TW8)."

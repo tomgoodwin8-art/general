@@ -8,7 +8,6 @@ website: "https://hkhairbeautysalon.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "scissors"
 summary: "HK Hair & Beauty Salon is a hair and beauty salon in Brentford (TW8)."

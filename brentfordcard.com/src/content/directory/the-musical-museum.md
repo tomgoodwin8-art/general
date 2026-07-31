@@ -8,7 +8,6 @@ website: "https://musicalmuseum.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: true
 image: ""
 motif: "music"
 summary: "The Musical Museum is a museum of self-playing instruments and concert hall in Brentford (TW8)."

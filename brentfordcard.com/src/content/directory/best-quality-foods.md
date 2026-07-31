@@ -6,7 +6,6 @@ address: "3-4 Albany Parade, High Street, TW8 0JW"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "grocer"
 summary: "Best Quality Foods is a grocer in Brentford (TW8)."

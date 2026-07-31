@@ -6,7 +6,6 @@ address: "408 High Street, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "restaurant"
 summary: "INYUN is a restaurant and takeaway in Brentford (TW8)."

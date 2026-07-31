@@ -7,7 +7,6 @@ website: "https://hewsonbooks.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "books"
 summary: "Hewson Books is an independent bookshop in Brentford (TW8)."

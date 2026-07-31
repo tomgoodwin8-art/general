@@ -7,7 +7,6 @@ phone: "+44 203 092 6392"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "cafe"
 summary: "Cafe S&N is a family café in Brentford (TW8)."

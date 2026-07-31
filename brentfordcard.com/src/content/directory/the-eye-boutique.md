@@ -8,7 +8,6 @@ website: "https://theeyeboutique.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "glasses"
 summary: "The Eye Boutique is an independent optician in Brentford (TW8)."

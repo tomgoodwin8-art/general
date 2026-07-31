@@ -8,7 +8,6 @@ website: "https://oneovertheait.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: true
 image: ""
 motif: "pub"
 summary: "One Over the Ait is a Fuller's riverside gastropub in Brentford (TW8)."

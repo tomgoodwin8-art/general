@@ -7,7 +7,6 @@ website: "https://samswaterside.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: true
 image: ""
 motif: "restaurant"
 summary: "Sam's Waterside is a modern British riverside restaurant in Brentford (TW8)."

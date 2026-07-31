@@ -7,7 +7,6 @@ website: "https://cafesashka.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "cafe"
 summary: "Cafe Sashka is a Georgian café in Brentford (TW8)."

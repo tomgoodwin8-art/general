@@ -6,7 +6,6 @@ address: "Brentford, TW8 0PP"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "paw"
 summary: "Handsome Hounds is a dog-grooming studio in Brentford (TW8)."

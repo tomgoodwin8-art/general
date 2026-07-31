@@ -8,7 +8,6 @@ website: "https://snakes-and-ladders.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "star"
 summary: "Snakes & Ladders is a children's soft-play centre in Brentford (TW8)."

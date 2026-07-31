@@ -7,7 +7,6 @@ website: "https://releasetherapies.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "heart"
 summary: "Release Therapies is a physiotherapy clinic in Brentford (TW8)."

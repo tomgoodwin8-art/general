@@ -6,7 +6,6 @@ address: "Brentford, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "homeware"
 summary: "Naked Grain is a furniture and homeware shop in Brentford (TW8)."

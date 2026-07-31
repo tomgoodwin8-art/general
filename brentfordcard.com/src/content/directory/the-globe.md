@@ -7,7 +7,6 @@ website: "https://theglobebrentford.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pub"
 summary: "The Globe is a Victorian pub in Brentford (TW8)."

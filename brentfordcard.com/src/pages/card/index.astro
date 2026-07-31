@@ -11,9 +11,8 @@ import { breadcrumbList, cardProduct, faqPage } from '../../lib/schema';
 const allBiz = (await getCollection('directory'))
   .filter((l) => l.data.offer)
   .sort((a, b) => a.data.name.localeCompare(b.data.name));
-// Show founding anchors on the card page; the full roster lives in the directory.
-const founding = allBiz.filter((l) => l.data.founding);
-const participating = founding.length ? founding : allBiz.slice(0, 12);
+// Show a sample on the card page; the full roster lives in the directory.
+const participating = allBiz.slice(0, 12);
 const totalBiz = allBiz.length;
 
 const crumbs = [
@@ -89,7 +88,7 @@ const schema = [cardProduct(), faqPage(CARD_FAQ.map((f) => ({ q: f.q, a: f.a }))
   <!-- Participating businesses wall -->
   <section class="section--tight wrap">
     <div style="display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
-      <div><p class="eyebrow">Where it works</p><h2>{totalBiz} businesses lined up for the card</h2><p class="muted" style="margin-top:0.3rem;">Founding anchors shown here — see the directory for the full list.</p></div>
+      <div><p class="eyebrow">Where it works</p><h2>{totalBiz} businesses lined up for the card</h2><p class="muted" style="margin-top:0.3rem;">A selection shown here — see the directory for the full list.</p></div>
       <a class="link" href="/directory/">Full directory →</a>
     </div>
     <ul class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr)); margin-top:1.75rem; list-style:none; padding:0;">

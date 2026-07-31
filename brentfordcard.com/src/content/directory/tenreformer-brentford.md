@@ -8,7 +8,6 @@ website: "https://tenreformer.com/studio/brentford"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "dumbbell"
 summary: "tenreformer Brentford is a reformer Pilates studio in Brentford (TW8)."

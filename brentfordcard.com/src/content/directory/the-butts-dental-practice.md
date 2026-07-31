@@ -8,7 +8,6 @@ website: "https://thebuttsdental.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "tooth"
 summary: "The Butts Dental Practice is a dental practice in Brentford (TW8)."

@@ -1,6 +1,6 @@
 ---
-title: "Founding business: Black Dog Beer House"
-standfirst: "Black Dog Beer House, a craft-beer pub and kitchen on Albany Road, is one of the founding businesses backing the Brentford Card."
+title: "Brentford independents: Black Dog Beer House"
+standfirst: "Black Dog Beer House, a craft-beer pub and kitchen on Albany Road, is one of the independent businesses joining the Brentford Card."
 author: "Brentford Card"
 publishDate: "2026-07-02"
 category: "business"
@@ -9,13 +9,13 @@ relatedListings:
   - "black-dog-beer-house"
 ---
 
-[Black Dog Beer House](/directory/eat-drink/black-dog-beer-house/) is a craft-beer pub and kitchen on Albany Road, and it is one of the founding businesses backing the Brentford Card.
+[Black Dog Beer House](/directory/eat-drink/black-dog-beer-house/) is a craft-beer pub and kitchen on Albany Road, and it is one of the independent businesses joining the Brentford Card.
 
 It is the sort of independent the card is built to support: run by people who know their regulars, with a rotating tap list and a kitchen that pulls a crowd — consistently one of Brentford's best-rated venues.
 
-## Why sign up as a founding business
+## Why join the Brentford Card
 
-Founding businesses get a badge on their directory profile, a link from every article that mentions them, and a place on the card's participating wall from day one. Listing is free during launch.
+Businesses that join get a directory profile, a link from every article that mentions them, and a place on the card's participating wall. Listing is free during launch.
 
 ## The offer
 

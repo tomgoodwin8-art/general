@@ -7,7 +7,6 @@ website: "https://six-bells-brentford.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "pub"
 summary: "The Six Bells is a traditional pub in Brentford (TW8)."

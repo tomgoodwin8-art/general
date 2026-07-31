@@ -8,7 +8,6 @@ website: "https://verveaesthetics.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "sparkle"
 summary: "Verve Aesthetics is an aesthetics clinic in Brentford (TW8)."

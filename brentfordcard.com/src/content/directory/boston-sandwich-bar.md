@@ -6,7 +6,6 @@ address: "Boston Manor Road, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "cafe"
 summary: "Boston Sandwich Bar is a sandwich bar and café in Brentford (TW8)."

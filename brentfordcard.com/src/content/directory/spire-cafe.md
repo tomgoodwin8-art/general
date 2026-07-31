@@ -6,7 +6,6 @@ address: "Brentford, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "cafe"
 summary: "Spire Cafe is a café in Brentford (TW8)."

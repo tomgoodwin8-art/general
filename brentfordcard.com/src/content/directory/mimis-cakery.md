@@ -6,7 +6,6 @@ address: "Brentford, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "bakery"
 summary: "Mimi's Cakery is a bakery and cake maker in Brentford (TW8)."

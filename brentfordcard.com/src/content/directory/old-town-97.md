@@ -8,7 +8,6 @@ website: "https://oldtown97brentford.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "restaurant"
 summary: "Old Town 97 is a Hong Kong Chinese restaurant in Brentford (TW8)."

@@ -8,7 +8,6 @@ website: "https://featherandheart.com"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: true
 image: ""
 motif: "cafe"
 summary: "Feather & Heart is a café and wine bar in Brentford (TW8)."

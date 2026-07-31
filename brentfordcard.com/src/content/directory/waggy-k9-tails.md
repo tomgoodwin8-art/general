@@ -6,7 +6,6 @@ address: "Brentford, TW8"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "paw"
 summary: "Waggy K9 Tails is a dog-walking and pet-care service in Brentford (TW8)."

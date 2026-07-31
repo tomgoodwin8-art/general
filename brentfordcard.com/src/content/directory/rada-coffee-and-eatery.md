@@ -7,7 +7,6 @@ website: "https://rada-cafe.co.uk"
 hours: []
 offer: "pending"
 offerTerms: ""
-founding: false
 image: ""
 motif: "cafe"
 summary: "Rada Coffee & Eatery is a café and eatery in Brentford (TW8)."

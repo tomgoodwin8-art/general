@@ -18,4 +18,4 @@ The Brentford Card is available now at brentfordcard.com/card. Businesses in TW8
 
 **Ends.**
 
-For press enquiries, media assets and interviews, contact press@brentfordcard.com.
+For press enquiries, media assets and interviews, contact hello@brentfordcard.com.

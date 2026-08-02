@@ -11,7 +11,7 @@ export const SITE = {
     'Brentford Card is the community platform for Brentford, west London (TW8): local news, an independent business directory, and The Brentford Card — a paid annual discount card that lives in your Apple or Google Wallet.',
   coverage: 'TW8 — Brentford, west London',
   email: 'hello@brentfordcard.com',
-  pressEmail: 'press@brentfordcard.com',
+  pressEmail: 'hello@brentfordcard.com',
   // Full NAP (name, address, phone) for the footer + Organization schema.
   nap: {
     streetAddress: 'The Brentford Project, High Street',

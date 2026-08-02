@@ -1,0 +1,28 @@
+---
+// Brentford Card logo mark: a "B" on a rounded card rectangle (echoes the
+// membership card — river green with a brass B and keyline).
+interface Props {
+  class?: string;
+  title?: string;
+}
+const { class: cls, title } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 44 32"
+  role={title ? 'img' : 'presentation'}
+  aria-hidden={title ? undefined : 'true'}
+>
+  {title && <title>{title}</title>}
+  <rect x="1" y="1" width="42" height="30" rx="6" fill="#2e4a43" />
+  <rect x="3" y="3" width="38" height="26" rx="4.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity="0.55" />
+  <text
+    x="22" y="23.5"
+    text-anchor="middle"
+    font-family="'Archivo Variable', 'Archivo', Arial, sans-serif"
+    font-weight="800"
+    font-size="21"
+    fill="#b08d3e"
+    letter-spacing="0"
+  >B</text>
+</svg>

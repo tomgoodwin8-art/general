@@ -221,7 +221,7 @@ a.link:hover { text-decoration-color: currentColor; }
   min-height: 68px;
 }
 .brand { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); }
-.brand__mark { width: 34px; height: 34px; flex: none; }
+.brand__mark { width: auto; height: 30px; flex: none; }
 .brand__word {
   font-family: var(--font-display);
   text-transform: uppercase;
@@ -620,7 +620,7 @@ details.mobile-nav[open] .mobile-nav__sheet {
 .footer-grid h4 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; color: var(--plaster); margin-bottom: 0.9rem; }
 .footer-grid ul { list-style: none; padding: 0; display: grid; gap: 0.5rem; }
 .footer-brand { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
-.footer-brand svg { width: 32px; height: 32px; color: var(--brass); }
+.footer-brand svg { width: auto; height: 34px; }
 .footer-brand span { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 800; color: var(--plaster); }
 .footer-legal { border-top: 1px solid rgba(201,207,201,0.18); margin-top: 2.5rem; padding-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; font-size: 0.82rem; }
 

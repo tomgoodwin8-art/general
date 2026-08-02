@@ -68,10 +68,10 @@ export const categorySchema = (slug: string) =>
   CATEGORIES.find((c) => c.slug === slug)?.schema ?? 'LocalBusiness';
 
 export const NAV = [
+  { href: '/card/', label: 'The Card' },
   { href: '/directory/', label: 'Directory' },
   { href: '/news/', label: 'News' },
-  { href: '/street-portraits/', label: 'Portraits' },
-  { href: '/card/', label: 'The Card' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
+  { href: '/street-portraits/', label: 'Portraits' },
 ] as const;

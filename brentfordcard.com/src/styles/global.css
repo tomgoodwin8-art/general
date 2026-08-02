@@ -360,6 +360,38 @@ details.mobile-nav[open] .mobile-nav__sheet {
 .value-card h3 { margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .value-card__mark { width: auto; height: 28px; margin-bottom: 1rem; }
 
+/* --- Street Portraits gallery ------------------------------------------ */
+.gallery {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);   /* mobile: 2-up */
+}
+@media (min-width: 640px) { .gallery { gap: 18px; grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 960px) { .gallery { gap: 20px; grid-template-columns: repeat(4, 1fr); } }
+.gallery__item { margin: 0; }
+.portrait {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--river);
+}
+.portrait > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.portrait > img { width: 100%; height: 100%; object-fit: cover; }
+.portrait__label {
+  position: absolute; left: 8px; bottom: 8px; z-index: 1;
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.04em;
+  text-transform: uppercase; color: rgba(242, 238, 230, 0.6);
+}
+.gallery__caption {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.82rem;
+  color: var(--ink-70);
+}
+
 /* --- Business image (category panel + emblem sprite) ------------------- */
 .bizimg {
   position: relative; width: 100%; height: 100%; overflow: hidden;
@@ -632,7 +664,6 @@ details.mobile-nav[open] .mobile-nav__sheet {
   background: color-mix(in srgb, var(--brass) 18%, transparent);
   color: var(--brass-ink);
 }
-.tag-founding { background: color-mix(in srgb, var(--brick) 16%, transparent); color: var(--brick); }
 .visually-hidden {
   position: absolute !important; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;

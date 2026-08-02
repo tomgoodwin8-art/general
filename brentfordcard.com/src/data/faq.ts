@@ -9,7 +9,7 @@ export const CARD_FAQ = [
   },
   {
     q: 'How much does the Brentford Card cost?',
-    a: `The Brentford Card costs ${CARD.priceDisplay} a year, and the first ${CARD.foundingCount} founding members keep that price at renewal.`,
+    a: `The Brentford Card costs ${CARD.priceDisplay} a year, and that includes a ${CARD.charityPct}% donation to ${CARD.charityName}.`,
   },
   {
     q: 'Where is the Brentford Card accepted?',
@@ -25,7 +25,7 @@ export const CARD_FAQ = [
   },
   {
     q: 'How does renewal work?',
-    a: 'The Brentford Card is an annual membership that you renew once a year; founding members renew at their original price, and we email you before your card is due so nothing renews without warning.',
+    a: 'The Brentford Card is an annual membership that you renew once a year, and we email you before your card is due so nothing renews without warning.',
   },
   {
     q: 'Can I get a refund on the Brentford Card?',

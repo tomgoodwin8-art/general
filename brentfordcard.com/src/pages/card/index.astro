@@ -48,10 +48,10 @@ const schema = [cardProduct(), faqPage(CARD_FAQ.map((f) => ({ q: f.q, a: f.a }))
             </form>
             <a class="btn btn--ghost-light" href="#faq">Read the FAQ</a>
           </p>
-          <p class="mono" style="color:var(--brass); margin-top:1.25rem;">Founding member pricing — first {CARD.foundingCount} passes only.</p>
+          <p class="mono" style="color:var(--brass); margin-top:1.25rem;">{CARD.charityPct}% of every card supports {CARD.charityName}.</p>
         </div>
         <div style="display:grid; place-items:center;">
-          <Pass name="A. Resident" founding={true} />
+          <Pass name="A. Resident" />
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@ const schema = [cardProduct(), faqPage(CARD_FAQ.map((f) => ({ q: f.q, a: f.a }))
   <section class="section--tight wrap">
     <div class="panel">
       <p class="eyebrow" style="color:var(--brass);">The charity commitment</p>
-      <p style="font-size:var(--step-lead); max-width:60ch; color:var(--plaster);">Five per cent of every Brentford Card goes to {CARD.charityName}. It is written into how the scheme runs, not a launch promotion — buy a card and you back a Brentford cause every year you renew.</p>
+      <p style="font-size:var(--step-lead); max-width:60ch; color:var(--plaster);">Ten per cent of every Brentford Card goes to {CARD.charityName}. It is written into how the scheme runs, not a launch promotion — buy a card and you back a Brentford cause every year you renew.</p>
     </div>
   </section>
 

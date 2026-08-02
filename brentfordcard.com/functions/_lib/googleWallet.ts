@@ -87,7 +87,7 @@ function objectBody(env: Env, d: GoogleObjectData) {
     cardTitle: { defaultValue: { language: 'en-GB', value: 'The Brentford Card' } },
     header: { defaultValue: { language: 'en-GB', value: d.memberName } },
     subheader: {
-      defaultValue: { language: 'en-GB', value: d.tier === 'founding' ? 'Founding Member' : 'Member' },
+      defaultValue: { language: 'en-GB', value: 'Member' },
     },
     barcode: { type: 'QR_CODE', value: d.cardNumber, alternateText: d.cardNumber },
     textModulesData: [

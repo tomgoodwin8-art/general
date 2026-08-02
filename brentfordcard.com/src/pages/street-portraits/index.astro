@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import PortraitPlaceholder from '../../components/PortraitPlaceholder.astro';
+import { breadcrumbList } from '../../lib/schema';
+
+const crumbs = [
+  { label: 'Home', path: '/' },
+  { label: 'Street Portraits', path: '/street-portraits/' },
+];
+
+// Placeholder tiles until the commissioned Brentford shoot lands. Replace each
+// with a real photo by dropping <img> in place of PortraitPlaceholder.
+const portraits = Array.from({ length: 12 }, (_, i) => ({
+  seed: i,
+  caption: `Brentford face #${String(i + 1).padStart(2, '0')}`,
+}));
+---
+<BaseLayout
+  title="Street Portraits | The Brentford Card"
+  description="Street Portraits — a photographic series of the people who make Brentford (TW8): the traders, makers and neighbours behind the high street."
+  path="/street-portraits/"
+  schema={breadcrumbList(crumbs)}
+>
+  <section class="section wrap">
+    <Breadcrumb items={crumbs} />
+    <p class="eyebrow" style="margin-top:1rem;">Street Portraits</p>
+    <h1 class="page-title">The faces of Brentford</h1>
+    <p class="lead">A photographic series of the people who make TW8 — traders, makers and neighbours behind the high street. Commissioned photography is on the way; these are placeholders for now.</p>
+
+    <div class="gallery" style="margin-top:2.5rem;">
+      {portraits.map((p) => (
+        <figure class="gallery__item">
+          <PortraitPlaceholder seed={p.seed} label="Photo to follow" />
+          <figcaption class="gallery__caption">{p.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

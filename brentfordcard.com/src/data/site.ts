@@ -46,10 +46,8 @@ export const CARD = {
   currency: 'GBP',
   priceDisplay: '£29',
   term: 'year',
-  charityPct: 5,
+  charityPct: 10,
   charityName: 'Brentford Community Sports Trust', // named Brentford cause
-  foundingCount: 250,
-  foundingPrice: 29,
   stripeLink: 'https://buy.stripe.com/test_brentfordcard', // [VERIFY — live Payment Link]
 } as const;
 
@@ -72,6 +70,7 @@ export const categorySchema = (slug: string) =>
 export const NAV = [
   { href: '/directory/', label: 'Directory' },
   { href: '/news/', label: 'News' },
+  { href: '/street-portraits/', label: 'Portraits' },
   { href: '/card/', label: 'The Card' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },

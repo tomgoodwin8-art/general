@@ -44,11 +44,6 @@ export async function provisionMembership(env: Env, facts: PaymentFacts): Promis
     }
   }
 
-  // Founding member if we're still within the first N passes.
-  const totalPasses = await countPasses(db);
-  const FOUNDING_LIMIT = 250;
-  const isFounding = totalPasses < FOUNDING_LIMIT;
-
   // Upsert member by email.
   const members = await db.insert<{ id: string }>(
     'members',
@@ -56,7 +51,6 @@ export async function provisionMembership(env: Env, facts: PaymentFacts): Promis
       email: facts.email,
       name: facts.name ?? null,
       stripe_customer_id: facts.stripeCustomerId ?? null,
-      founding: isFounding,
       status: 'active',
     },
     { upsertOn: 'email' },
@@ -82,15 +76,9 @@ export async function provisionMembership(env: Env, facts: PaymentFacts): Promis
     serial_number: newSerial(),
     auth_token: newAuthToken(),
     card_number: newCardNumber(),
-    tier: isFounding ? 'founding' : 'member',
+    tier: 'member',
   });
   return maybeProvisionGoogle(env, db, created[0], facts);
-}
-
-async function countPasses(db: Supabase): Promise<number> {
-  // PostgREST returns rows; for a simple bound we fetch ids with a high limit.
-  const rows = await db.select<{ id: string }>('passes', {}, 'id', 1000);
-  return rows.length;
 }
 
 async function maybeProvisionGoogle(env: Env, db: Supabase, pass: PassRow, facts: PaymentFacts): Promise<PassRow> {

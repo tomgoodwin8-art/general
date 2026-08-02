@@ -2,16 +2,16 @@
 import Logo from './Logo.astro';
 // The Brentford Card, rendered as a crisp CSS/SVG composition (brief §4).
 // Doubles as the press-kit asset — no raster mockup.
-interface Props { name?: string; founding?: boolean; id?: string; }
-const { name = 'Member Name', founding = true, id = 'BFC-0001' } = Astro.props;
+interface Props { name?: string; id?: string; }
+const { name = 'Member Name', id = 'BFC-0001' } = Astro.props;
 ---
-<div class="pass" role="img" aria-label={`The Brentford Card — ${founding ? 'founding member' : 'member'} pass`}>
+<div class="pass" role="img" aria-label="The Brentford Card — member pass">
   <div class="pass__top">
     <div class="pass__brand">
       <Logo variant="ghost" />
       <span>Brentford Card</span>
     </div>
-    <span class="pass__tier">{founding ? 'Founding Member' : 'Member'}</span>
+    <span class="pass__tier">Member</span>
   </div>
 
   <div class="pass__name">

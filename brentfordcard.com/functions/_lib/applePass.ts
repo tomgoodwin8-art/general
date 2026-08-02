@@ -58,7 +58,7 @@ function buildPassJson(env: Env, d: PassData) {
         { key: 'member', label: 'MEMBER', value: d.memberName },
       ],
       secondaryFields: [
-        { key: 'tier', label: 'MEMBERSHIP', value: d.tier === 'founding' ? 'Founding Member' : 'Member' },
+        { key: 'tier', label: 'MEMBERSHIP', value: 'Member' },
         { key: 'card', label: 'CARD No.', value: d.cardNumber },
       ],
       auxiliaryFields: [

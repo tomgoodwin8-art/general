@@ -1,0 +1,37 @@
+---
+// Placeholder portrait tile for /street-portraits — original, license-free
+// artwork (a toned panel + head-and-shoulders silhouette). Swap for a real
+// commissioned photo by passing `src`.
+interface Props { seed?: number; label?: string; }
+const { seed = 0, label } = Astro.props;
+const tones: [string, string][] = [
+  ['#2e4a43', '#182a25'],
+  ['#7e4a34', '#4b2c1f'],
+  ['#8a6f30', '#57451e'],
+  ['#33404f', '#1a222c'],
+  ['#26564d', '#12332c'],
+  ['#20282a', '#0e1315'],
+];
+const [c1, c2] = tones[seed % tones.length];
+const angle = 115 + (seed % 5) * 12;
+const gid = `pp-${seed}`;
+---
+<div class="portrait" aria-hidden="true">
+  <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="presentation">
+    <defs>
+      <linearGradient id={gid} gradientTransform={`rotate(${angle} 0.5 0.5)`}>
+        <stop offset="0" stop-color={c1} />
+        <stop offset="1" stop-color={c2} />
+      </linearGradient>
+    </defs>
+    <rect width="300" height="400" fill={`url(#${gid})`} />
+    <g fill="rgba(242,238,230,0.16)">
+      <circle cx="150" cy="150" r="62" />
+      <path d="M64 400 C64 300 104 250 150 250 C196 250 236 300 236 400 Z" />
+    </g>
+    <g stroke="rgba(242,238,230,0.10)" stroke-width="1" fill="none">
+      <path d={`M0 ${330 + (seed % 3) * 10} Q150 ${300 + (seed % 4) * 12} 300 ${340 + (seed % 3) * 8}`} />
+    </g>
+  </svg>
+  {label && <span class="portrait__label">{label}</span>}
+</div>

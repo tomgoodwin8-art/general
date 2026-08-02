@@ -14,10 +14,10 @@ export const SITE = {
   pressEmail: 'hello@brentfordcard.com',
   // Full NAP (name, address, phone) for the footer + Organization schema.
   nap: {
-    streetAddress: 'The Brentford Project, High Street',
+    streetAddress: '205 High Street',
     locality: 'Brentford',
     region: 'London',
-    postalCode: 'TW8 0AA',
+    postalCode: 'TW8 8AH',
     country: 'GB',
     phone: '+44 20 8000 0000', // [VERIFY before launch]
   },

@@ -3,16 +3,14 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Pass from '../../components/Pass.astro';
-import Logo from '../../components/Logo.astro';
-import { SITE, CARD, categoryName } from '../../data/site';
+import { SITE, CARD } from '../../data/site';
 import { CARD_FAQ } from '../../data/faq';
 import { breadcrumbList, cardProduct, faqPage } from '../../lib/schema';
 
 const allBiz = (await getCollection('directory'))
   .filter((l) => l.data.offer)
   .sort((a, b) => a.data.name.localeCompare(b.data.name));
-// Show a sample on the card page; the full roster lives in the directory.
-const participating = allBiz.slice(0, 12);
+const participating = allBiz;
 const totalBiz = allBiz.length;
 
 const crumbs = [
@@ -60,9 +58,9 @@ const schema = [cardProduct(), faqPage(CARD_FAQ.map((f) => ({ q: f.q, a: f.a }))
   <!-- What you get -->
   <section class="section wrap">
     <div class="grid grid--3">
-      <div class="value-card"><Logo class="value-card__mark" /><h3>Real discounts</h3><p class="muted">Discounts rolling out across {totalBiz} Brentford independents — food, shops, health, fitness, services and culture.</p></div>
-      <div class="value-card"><Logo class="value-card__mark" /><h3>In your wallet</h3><p class="muted">Delivered as an Apple or Google Wallet pass. Nothing to download, nothing to carry, nothing to lose.</p></div>
-      <div class="value-card"><Logo class="value-card__mark" /><h3>Backs Brentford</h3><p class="muted">{CARD.charityPct}% of every membership goes to {CARD.charityName}. The rest keeps the directory independent.</p></div>
+      <div class="value-card"><span class="value-card__num">1</span><h3>Real discounts</h3><p class="muted">Discounts rolling out across {totalBiz} Brentford independents — food, shops, health, fitness, services and culture.</p></div>
+      <div class="value-card"><span class="value-card__num">2</span><h3>In your wallet</h3><p class="muted">Delivered as an Apple or Google Wallet pass. Nothing to download, nothing to carry, nothing to lose.</p></div>
+      <div class="value-card"><span class="value-card__num">3</span><h3>Backs Brentford</h3><p class="muted">{CARD.charityPct}% of every membership goes to {CARD.charityName}. The rest keeps the directory independent.</p></div>
     </div>
   </section>
 
@@ -88,21 +86,18 @@ const schema = [cardProduct(), faqPage(CARD_FAQ.map((f) => ({ q: f.q, a: f.a }))
   <!-- Participating businesses wall -->
   <section class="section--tight wrap">
     <div style="display:flex; align-items:baseline; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
-      <div><p class="eyebrow">Where it works</p><h2>{totalBiz} businesses lined up for the card</h2><p class="muted" style="margin-top:0.3rem;">A selection shown here — see the directory for the full list.</p></div>
+      <div><p class="eyebrow">Where it works</p><h2>{totalBiz} businesses lined up for the card</h2></div>
       <a class="link" href="/directory/">Full directory →</a>
     </div>
-    <ul class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr)); margin-top:1.75rem; list-style:none; padding:0;">
+    <ul class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin-top:1.75rem; list-style:none; padding:0;">
       {participating.map((b) => (
         <li>
-          <a class="panel-plaster" href={`/directory/${b.data.category}/${b.id}/`} style="display:block; text-decoration:none; color:inherit; padding:1.1rem 1.2rem;">
-            <span class="eyebrow dir-card__cat">{categoryName(b.data.category)}</span>
-            <span class="dir-card__name" style="display:block; margin:0.3rem 0; font-size:1.05rem;">{b.data.name}</span>
-            <span class="mono muted" style="font-size:0.82rem;">{b.data.offer === 'pending' ? 'Offer pending' : b.data.offer}</span>
+          <a class="panel-plaster" href={`/directory/${b.data.category}/${b.id}/`} style="display:block; text-decoration:none; color:inherit; padding:0.9rem 1.1rem;">
+            <span class="dir-card__name" style="display:block; font-size:1rem;">{b.data.name}</span>
           </a>
         </li>
       ))}
     </ul>
-    <p style="margin-top:1.5rem;"><a class="link" href="/directory/">See all {totalBiz} businesses in the directory →</a></p>
   </section>
 
   <!-- FAQ -->

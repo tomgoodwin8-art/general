@@ -10,12 +10,12 @@ import { cardProduct } from '../lib/schema';
 
 const articles = (await getCollection('news'))
   .sort((a, b) => +new Date(b.data.publishDate) - +new Date(a.data.publishDate))
-  .slice(0, 3);
+  .slice(0, 4);
 
 const featured = (await getCollection('directory'))
   .filter((l) => l.data.offer)
   .sort(() => 0) // stable
-  .slice(0, 6);
+  .slice(0, 8);
 
 const dirCount = (await getCollection('directory')).length;
 
@@ -31,7 +31,7 @@ const schema = cardProduct();
 >
   <!-- HERO. Poster (SVG) is the LCP element; a video would replace it on capable
        clients, but the poster never blocks LCP (brief §5). -->
-  <section class="hero">
+  <section class="hero hero--home">
     <div class="hero__media">
       <svg class="hero__poster" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs>
@@ -111,7 +111,7 @@ const schema = cardProduct();
       <h2>Latest from Brentford</h2>
       <a class="link" href="/news/">All news →</a>
     </div>
-    <div class="article-list" style="margin-top:1.75rem;">
+    <div class="article-list home-articles" style="margin-top:1.75rem;">
       {articles.map((entry, i) => <ArticleCard entry={entry} seed={i + 2} />)}
     </div>
   </section>
@@ -122,7 +122,7 @@ const schema = cardProduct();
       <h2>Businesses joining the Brentford Card</h2>
       <a class="link" href="/directory/">All {dirCount} listings →</a>
     </div>
-    <div class="cards" style="margin-top:1.75rem;">
+    <div class="cards home-cards" style="margin-top:1.75rem;">
       {featured.map((entry, i) => <DirectoryCard entry={entry} seed={i} />)}
     </div>
   </section>

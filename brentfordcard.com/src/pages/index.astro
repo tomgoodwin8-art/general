@@ -50,12 +50,22 @@ const schema = cardProduct();
       </svg>
     </div>
     <div class="wrap hero__inner">
-      <p class="eyebrow eyebrow--onriver">Brentford · TW8</p>
-      <h1>The Brentford Card</h1>
-      <p class="lead">One card for your corner of west London — discounts at Brentford independents, delivered to your phone wallet. Plus local news and the town's business directory.</p>
-      <div class="hero__ctas">
-        <a class="btn btn--brass" href="/card/">Get the card — {CARD.priceDisplay}/year</a>
-        <a class="btn btn--ghost-light" href="/#newsletter">Join the newsletter</a>
+      <div class="hero__body">
+        <p class="eyebrow eyebrow--onriver">Brentford · TW8</p>
+        <h1>The Brentford Card</h1>
+        <p class="lead">One card for your corner of west London — discounts at Brentford independents, delivered to your phone wallet. Plus local news and the town's business directory.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--brass" href="/card/">Get the card — {CARD.priceDisplay}/year</a>
+          <a class="btn btn--ghost-light" href="/#newsletter">Join the newsletter</a>
+        </div>
+      </div>
+
+      {/* Desktop-only hero visual (hidden on mobile). To use a real photo of a
+          hand holding the card, drop it in public/images/hero-hand.jpg and
+          replace <Pass/> below with:
+          <img src="/images/hero-hand.jpg" width="640" height="440" alt="A hand holding the Brentford Card" /> */}
+      <div class="hero__figure" aria-hidden="true">
+        <Pass name="A. Resident" />
       </div>
     </div>
   </section>

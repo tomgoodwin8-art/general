@@ -6,6 +6,21 @@ interface Props { name?: string; id?: string; }
 const { name = 'Member Name', id = 'BFC-0001' } = Astro.props;
 ---
 <div class="pass" role="img" aria-label="The Brentford Card — member pass">
+  <!-- Stylised river meander (Thames · Brent · Grand Union) in brand gold. -->
+  <svg class="pass__river" viewBox="0 0 340 214" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="pass-river-gold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8a6f30" />
+        <stop offset="0.5" stop-color="#cbab5c" />
+        <stop offset="1" stop-color="#b08d3e" />
+      </linearGradient>
+    </defs>
+    <path d="M-30 96 C 55 58, 82 132, 158 116 C 238 99, 214 48, 302 68 C 348 78, 352 116, 392 126"
+      fill="none" stroke="url(#pass-river-gold)" stroke-width="16" stroke-linecap="round" opacity="0.78" />
+    <path d="M-30 128 C 60 104, 90 156, 170 142 C 250 128, 236 92, 320 106"
+      fill="none" stroke="#cbab5c" stroke-width="3" stroke-linecap="round" opacity="0.3" />
+  </svg>
+
   <div class="pass__top">
     <div class="pass__brand">
       <Logo variant="ghost" />

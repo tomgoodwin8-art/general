@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import BizImage from '../../../components/BizImage.astro';
-import ConfluenceMark from '../../../components/ConfluenceMark.astro';
+import Logo from '../../../components/Logo.astro';
 import { categoryName } from '../../../data/site';
 import { breadcrumbList, localBusiness } from '../../../lib/schema';
 
@@ -111,7 +111,7 @@ const mapHref = data.geo
 
         {related.length > 0 && (
           <div>
-            <div class="confluence-divider"><ConfluenceMark /></div>
+            <div class="confluence-divider"><Logo /></div>
             <p class="eyebrow">In the news</p>
             <ul class="stack" style="margin-top:0.75rem; list-style:none; padding:0;">
               {related.map((a) => (

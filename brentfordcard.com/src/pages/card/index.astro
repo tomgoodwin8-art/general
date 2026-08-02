@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Pass from '../../components/Pass.astro';
-import ConfluenceMark from '../../components/ConfluenceMark.astro';
+import Logo from '../../components/Logo.astro';
 import { SITE, CARD, categoryName } from '../../data/site';
 import { CARD_FAQ } from '../../data/faq';
 import { breadcrumbList, cardProduct, faqPage } from '../../lib/schema';
@@ -60,9 +60,9 @@ const schema = [cardProduct(), faqPage(CARD_FAQ.map((f) => ({ q: f.q, a: f.a }))
   <!-- What you get -->
   <section class="section wrap">
     <div class="grid grid--3">
-      <div class="value-card"><ConfluenceMark class="value-card__mark" /><h3>Real discounts</h3><p class="muted">Discounts rolling out across {totalBiz} Brentford independents — food, shops, health, fitness, services and culture.</p></div>
-      <div class="value-card"><ConfluenceMark class="value-card__mark" /><h3>In your wallet</h3><p class="muted">Delivered as an Apple or Google Wallet pass. Nothing to download, nothing to carry, nothing to lose.</p></div>
-      <div class="value-card"><ConfluenceMark class="value-card__mark" /><h3>Backs Brentford</h3><p class="muted">{CARD.charityPct}% of every membership goes to {CARD.charityName}. The rest keeps the directory independent.</p></div>
+      <div class="value-card"><Logo class="value-card__mark" /><h3>Real discounts</h3><p class="muted">Discounts rolling out across {totalBiz} Brentford independents — food, shops, health, fitness, services and culture.</p></div>
+      <div class="value-card"><Logo class="value-card__mark" /><h3>In your wallet</h3><p class="muted">Delivered as an Apple or Google Wallet pass. Nothing to download, nothing to carry, nothing to lose.</p></div>
+      <div class="value-card"><Logo class="value-card__mark" /><h3>Backs Brentford</h3><p class="muted">{CARD.charityPct}% of every membership goes to {CARD.charityName}. The rest keeps the directory independent.</p></div>
     </div>
   </section>
 

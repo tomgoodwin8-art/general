@@ -338,7 +338,7 @@ details.mobile-nav[open] .mobile-nav__sheet {
   background: linear-gradient(90deg, transparent, var(--hairline));
 }
 .confluence-divider::after { transform: scaleX(-1); }
-.confluence-divider svg { width: 46px; height: 46px; color: var(--brass); }
+.confluence-divider svg { width: auto; height: 34px; }
 
 /* Hero draw-on animation for the mark (CSS only) */
 .mark-draw path { stroke-dasharray: 60; stroke-dashoffset: 60; animation: draw 1.6s ease forwards; }
@@ -358,7 +358,7 @@ details.mobile-nav[open] .mobile-nav__sheet {
   height: 100%;
 }
 .value-card h3 { margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; }
-.value-card__mark { width: 30px; height: 30px; color: var(--brass); margin-bottom: 1rem; }
+.value-card__mark { width: auto; height: 28px; margin-bottom: 1rem; }
 
 /* --- Business image (category panel + emblem sprite) ------------------- */
 .bizimg {
@@ -522,7 +522,7 @@ details.mobile-nav[open] .mobile-nav__sheet {
 }
 .pass__top { display: flex; align-items: center; justify-content: space-between; }
 .pass__brand { display: flex; align-items: center; gap: 0.5rem; }
-.pass__brand svg { width: 26px; height: 26px; color: var(--brass); }
+.pass__brand svg { width: auto; height: 22px; }
 .pass__brand span { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; font-weight: 700; }
 .pass__tier { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--brass); text-transform: uppercase; }
 .pass__name { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.15rem; align-self: end; }

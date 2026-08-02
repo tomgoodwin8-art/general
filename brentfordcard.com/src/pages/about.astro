@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import ConfluenceMark from '../components/ConfluenceMark.astro';
+import Logo from '../components/Logo.astro';
 import { SITE, CARD } from '../data/site';
 import { breadcrumbList } from '../lib/schema';
 const crumbs = [{ label: 'Home', path: '/' }, { label: 'About', path: '/about/' }];
@@ -31,7 +31,7 @@ const crumbs = [{ label: 'Home', path: '/' }, { label: 'About', path: '/about/' 
       <p>Our news is written to be useful and honest. We are not the council's newsletter and we are not paid by developers to say nice things about regeneration. When a scheme is good for the high street we'll say so; when it is disruptive, we'll say that too. Businesses pay nothing to be listed during launch, and a listing is never coverage for sale.</p>
     </div>
 
-    <div class="confluence-divider"><ConfluenceMark /></div>
+    <div class="confluence-divider"><Logo /></div>
     <p><a class="btn btn--river" href="/card/">Get the card</a> <a class="btn btn--ghost" href="/contact/" style="margin-left:0.5rem;">Get in touch</a></p>
   </section>
 </BaseLayout>

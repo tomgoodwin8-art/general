@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Poster from '../../components/Poster.astro';
-import ConfluenceMark from '../../components/ConfluenceMark.astro';
+import Logo from '../../components/Logo.astro';
 import Newsletter from '../../components/Newsletter.astro';
 import { categoryName } from '../../data/site';
 import { breadcrumbList, newsArticle } from '../../lib/schema';
@@ -59,7 +59,7 @@ const schema = [newsArticle({ slug: entry.id, data }), breadcrumbList(crumbs)];
 
     {related.length > 0 && (
       <section style="margin-top:3rem; max-width:720px;">
-        <div class="confluence-divider" style="justify-content:flex-start;"><ConfluenceMark /></div>
+        <div class="confluence-divider" style="justify-content:flex-start;"><Logo /></div>
         <p class="eyebrow">Mentioned in this article</p>
         <ul class="cards" style="margin-top:1rem; grid-template-columns:1fr;">
           {related.map((d) => (

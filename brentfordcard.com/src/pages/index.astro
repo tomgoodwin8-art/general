@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ConfluenceMark from '../components/ConfluenceMark.astro';
+import Logo from '../components/Logo.astro';
 import DirectoryCard from '../components/DirectoryCard.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import Newsletter from '../components/Newsletter.astro';
@@ -60,23 +60,23 @@ const schema = cardProduct();
     </div>
   </section>
 
-  <div class="wrap"><div class="confluence-divider"><ConfluenceMark draw={true} title="The Confluence Mark" /></div></div>
+  <div class="wrap"><div class="confluence-divider"><Logo title="Brentford Card" /></div></div>
 
   <!-- Three-up value section -->
   <section class="section--tight wrap">
     <div class="grid grid--3">
       <a class="value-card" href="/news/" style="text-decoration:none; color:inherit;">
-        <ConfluenceMark class="value-card__mark" />
+        <Logo class="value-card__mark" />
         <h3>News</h3>
         <p class="muted">What's happening in Brentford — regeneration, the market, the independents. Fact first, no fluff.</p>
       </a>
       <a class="value-card" href="/directory/" style="text-decoration:none; color:inherit;">
-        <ConfluenceMark class="value-card__mark" />
+        <Logo class="value-card__mark" />
         <h3>Directory</h3>
         <p class="muted">{dirCount} independent Brentford businesses across food, shops, health, fitness, services and culture.</p>
       </a>
       <a class="value-card" href="/card/" style="text-decoration:none; color:inherit;">
-        <ConfluenceMark class="value-card__mark" />
+        <Logo class="value-card__mark" />
         <h3>The Card</h3>
         <p class="muted">{CARD.priceDisplay} a year for discounts across town, in your Apple or Google Wallet. {CARD.charityPct}% goes to a local cause.</p>
       </a>

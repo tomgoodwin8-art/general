@@ -1,0 +1,41 @@
+---
+import { trustMarkers } from '../../data/site';
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+const icons: Record<string, string> = {
+  'CQC registered': 'M9 12l2 2 4-4',
+  'No GP referral needed': 'M5 12h14',
+  'Same-day appointments often available': 'M12 6v6l4 2',
+  'Report within 24 hours': 'M12 6v6l4 2',
+};
+---
+
+<ul
+  class:list={[
+    'flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-brand-muted',
+    cls,
+  ]}
+  aria-label="Why patients choose us"
+>
+  {
+    trustMarkers.map((marker) => (
+      <li class="flex items-center gap-1.5">
+        <svg
+          class="h-4 w-4 flex-none text-brand-accent"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d={icons[marker] ?? 'M9 12l2 2 4-4'} />
+        </svg>
+        <span>{marker}</span>
+      </li>
+    ))
+  }
+</ul>

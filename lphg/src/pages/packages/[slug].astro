@@ -1,0 +1,120 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import PriceTag from '../../components/ui/PriceTag.astro';
+import BookCTA from '../../components/ui/BookCTA.astro';
+import TrustBar from '../../components/ui/TrustBar.astro';
+import StepTimeline from '../../components/ui/StepTimeline.astro';
+import SpecialistCard from '../../components/ui/SpecialistCard.astro';
+import FAQAccordion from '../../components/ui/FAQAccordion.astro';
+import StickyMobileCTA from '../../components/StickyMobileCTA.astro';
+import { graph, organisationSchema, breadcrumbSchema, faqSchema, productSchema } from '../../lib/schema';
+import { gbp, sumIncludes } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const packages = await getCollection('packages');
+  return packages.map((pkg) => ({ params: { slug: pkg.id }, props: { pkg } }));
+}
+
+const { pkg } = Astro.props;
+const d = pkg.data;
+const { Content } = await render(pkg);
+
+const centre = d.centre ? await getEntry(d.centre) : null;
+const team = (await Promise.all(d.team.map((r) => getEntry(r)))).filter(Boolean);
+const alaCarte = sumIncludes(d.includes);
+const saving = alaCarte - d.price;
+
+const path = `/packages/${pkg.id}/`;
+const trail = [
+  { name: 'Home', url: '/' },
+  { name: 'Packages', url: '/packages/' },
+  { name: d.title, url: path },
+];
+
+const jsonLd = graph(
+  organisationSchema(),
+  breadcrumbSchema(trail),
+  productSchema({ name: d.title, description: d.metaDescription, url: path, price: d.price }),
+  ...(d.faqs.length ? [faqSchema(d.faqs)] : [])
+);
+---
+
+<Base title={d.metaTitle} description={d.metaDescription} canonical={path} ogImage={d.ogImage} jsonLd={jsonLd}>
+  <section data-hero class="border-b border-brand-line bg-brand-surface">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <Breadcrumb {trail} emitSchema={false} />
+      <p class="mt-4 text-sm font-semibold uppercase tracking-wide text-brand-accent-600">Package</p>
+      <h1 class="mt-1 text-3xl md:text-4xl">{d.title}</h1>
+      <p class="mt-3 max-w-prose text-lg text-brand-muted">{d.promise}</p>
+      <div class="mt-5"><PriceTag price={d.price} struck={alaCarte > d.price ? alaCarte : undefined} size="lg" /></div>
+      {saving > 0 && <p class="mt-1 text-sm text-brand-accent-600">Saves {gbp(saving)} against booking separately.</p>}
+      <div class="mt-6"><BookCTA sembleBookingTypeId={d.sembleBookingTypeId} price={d.price} /></div>
+    </div>
+  </section>
+
+  <div class="border-b border-brand-line bg-white py-4"><TrustBar /></div>
+
+  <div class="mx-auto max-w-3xl px-4 py-10">
+    <!-- What's included, itemised -->
+    <section aria-labelledby="included-heading">
+      <h2 id="included-heading" class="text-2xl">What's included</h2>
+      <ul class="mt-4 divide-y divide-brand-line border-y border-brand-line">
+        {
+          d.includes.map((item) => (
+            <li class="flex items-center justify-between py-3">
+              <span>{item.label}</span>
+              <span class="text-brand-muted line-through">{gbp(item.value)}</span>
+            </li>
+          ))
+        }
+        <li class="flex items-center justify-between py-3 font-semibold">
+          <span>All-inclusive package price</span>
+          <span class="text-brand-primary">{gbp(d.price)}</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Who it's for -->
+    <section class="mt-10" aria-labelledby="who-heading">
+      <h2 id="who-heading" class="text-2xl">Who it's for</h2>
+      <ul class="mt-3 list-disc space-y-1 pl-5 text-brand-ink">
+        {d.whoFor.map((w) => <li>{w}</li>)}
+      </ul>
+    </section>
+
+    <!-- What happens on the day -->
+    <section class="mt-10" aria-labelledby="day-heading">
+      <h2 id="day-heading" class="text-2xl">What happens on the day</h2>
+      <div class="mt-4">
+        <StepTimeline steps={d.onTheDay.map((s) => ({ time: s.time, label: s.label }))} />
+      </div>
+    </section>
+
+    {
+      team.length > 0 && (
+        <section class="mt-10" aria-labelledby="team-heading">
+          <h2 id="team-heading" class="text-2xl">The team</h2>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            {team.map((sp) => (
+              <SpecialistCard name={sp!.data.name} role={sp!.data.role} slug={sp!.id} credentials={sp!.data.credentials} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <div class="prose-lphg mt-10"><Content /></div>
+
+    {d.faqs.length > 0 && <div class="mt-12"><FAQAccordion faqs={d.faqs} emitSchema={false} /></div>}
+
+    <section class="mt-14 rounded-card bg-brand-primary px-6 py-10 text-center text-white">
+      <h2 class="text-2xl text-white">{d.title}</h2>
+      <p class="mx-auto mt-2 max-w-xl text-brand-surface/80">{gbp(d.price)}, all-inclusive. {centre && `Part of our ${centre.data.title} centre.`}</p>
+      <div class="mt-6 flex justify-center"><BookCTA sembleBookingTypeId={d.sembleBookingTypeId} label="Book this package" /></div>
+    </section>
+  </div>
+
+  <StickyMobileCTA slot="sticky" bookHref={`/book/?service=${encodeURIComponent(d.sembleBookingTypeId)}`} label="Book package" />
+</Base>

@@ -1,0 +1,61 @@
+---
+import { site, primaryNav } from '../data/site';
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="border-b border-brand-line bg-brand-surface-2/95 sticky top-0 z-40 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href="/" class="flex flex-col leading-tight" aria-label={`${site.name} home`}>
+      <span class="font-display text-base font-semibold tracking-tight text-brand-primary sm:text-lg"
+        >LONDON PRIVATE HEALTHCARE GROUP</span
+      >
+      <span class="text-[11px] uppercase tracking-wide text-brand-muted">{site.strapline}</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-5 lg:flex">
+      {
+        primaryNav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'text-sm font-medium transition-colors hover:text-brand-accent-600',
+              isActive(item.href) ? 'text-brand-accent-600' : 'text-brand-ink',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href="/book/"
+        class="rounded-full bg-brand-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-600"
+        >Book</a
+      >
+    </nav>
+
+    <details class="relative lg:hidden">
+      <summary
+        class="flex cursor-pointer items-center gap-2 rounded-md border border-brand-line px-3 py-2 text-sm font-medium marker:content-none"
+        aria-label="Open menu">Menu</summary
+      >
+      <div
+        class="absolute right-0 mt-2 w-56 rounded-lg border border-brand-line bg-white p-2 shadow-lg"
+      >
+        {
+          primaryNav.map((item) => (
+            <a href={item.href} class="block rounded px-3 py-2 text-sm hover:bg-brand-surface">
+              {item.label}
+            </a>
+          ))
+        }
+        <a
+          href="/book/"
+          class="mt-1 block rounded bg-brand-primary px-3 py-2 text-center text-sm font-semibold text-white"
+          >Book an appointment</a
+        >
+      </div>
+    </details>
+  </div>
+</header>

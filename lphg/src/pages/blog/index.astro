@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { formatDate } from '../../lib/format';
+import { graph, organisationSchema, breadcrumbSchema } from '../../lib/schema';
+
+// Only approved posts appear in the index (brief §8: no post live without a
+// named reviewer).
+const posts = (await getCollection('blog'))
+  .filter((p) => p.data.reviewStatus === 'approved' && !p.data.draft)
+  .sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+
+const categories = [...new Set(posts.map((p) => p.data.category))].sort();
+
+const trail = [
+  { name: 'Home', url: '/' },
+  { name: 'Blog', url: '/blog/' },
+];
+const jsonLd = graph(organisationSchema(), breadcrumbSchema(trail));
+---
+
+<Base
+  title="Patient Education & Guides | LPHG Blog"
+  description="Plain-English, clinically reviewed guides to scans, tests and conditions — with honest prices and what to expect. From London Private Healthcare Group."
+  canonical="/blog/"
+  jsonLd={jsonLd}
+>
+  <section data-hero class="border-b border-brand-line bg-brand-surface">
+    <div class="mx-auto max-w-5xl px-4 py-12">
+      <Breadcrumb {trail} emitSchema={false} />
+      <h1 class="mt-4 text-3xl md:text-4xl">Patient education</h1>
+      <p class="mt-3 max-w-2xl text-lg text-brand-muted">
+        Clear, clinically reviewed guides to the scans and tests we offer — what they show, how to
+        prepare, and what they cost.
+      </p>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-4 py-12">
+    {
+      categories.length > 0 && (
+        <div class="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+          <button data-cat="all" class="cat-btn rounded-full border border-brand-primary bg-brand-primary px-4 py-1.5 text-sm font-medium text-white" aria-pressed="true">All</button>
+          {categories.map((c) => (
+            <button data-cat={c} class="cat-btn rounded-full border border-brand-line px-4 py-1.5 text-sm font-medium text-brand-ink hover:border-brand-primary" aria-pressed="false">
+              {c}
+            </button>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      posts.length > 0 ? (
+        <div id="post-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((p) => (
+            <article class="post-card flex flex-col rounded-card border border-brand-line bg-white p-5 transition-shadow hover:shadow-md" data-cat={p.data.category}>
+              <p class="text-xs font-semibold uppercase tracking-wide text-brand-accent-600">{p.data.category}</p>
+              <h2 class="mt-1 font-display text-lg font-semibold">
+                <a href={`/blog/${p.id}/`} class="hover:text-brand-accent-600">{p.data.title}</a>
+              </h2>
+              <p class="mt-2 flex-1 text-sm text-brand-muted">{p.data.metaDescription}</p>
+              <p class="mt-3 text-xs text-brand-muted">Reviewed {formatDate(p.data.lastReviewed)} · {p.data.reviewer.name}</p>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p class="rounded-card border border-brand-line bg-brand-surface p-6 text-brand-muted">
+          Our launch guides are in clinical review and will publish here shortly. Every article is
+          checked by a named consultant or prescriber before it goes live.
+        </p>
+      )
+    }
+  </div>
+
+  <script is:inline>
+    (() => {
+      const buttons = document.querySelectorAll('.cat-btn');
+      const cards = document.querySelectorAll('.post-card');
+      buttons.forEach((btn) => btn.addEventListener('click', () => {
+        const c = btn.getAttribute('data-cat');
+        buttons.forEach((b) => {
+          const on = b === btn;
+          b.setAttribute('aria-pressed', String(on));
+          b.classList.toggle('bg-brand-primary', on);
+          b.classList.toggle('text-white', on);
+          b.classList.toggle('border-brand-primary', on);
+        });
+        cards.forEach((card) => {
+          card.style.display = c === 'all' || card.getAttribute('data-cat') === c ? '' : 'none';
+        });
+      }));
+    })();
+  </script>
+</Base>

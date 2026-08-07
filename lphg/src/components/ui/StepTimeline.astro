@@ -1,0 +1,26 @@
+---
+// "What happens on the day" / "how it works" timeline (brief §4.1, §4.2).
+interface Props {
+  steps: { time?: string; label: string; detail?: string }[];
+  variant?: 'timeline' | 'steps';
+}
+const { steps, variant = 'timeline' } = Astro.props;
+---
+
+<ol class="relative space-y-6 border-l border-brand-line pl-6">
+  {
+    steps.map((step, i) => (
+      <li class="relative">
+        <span
+          class="absolute -left-[31px] flex h-6 w-6 items-center justify-center rounded-full bg-brand-primary text-xs font-semibold text-white"
+          aria-hidden="true"
+        >
+          {i + 1}
+        </span>
+        {step.time && <p class="text-xs font-semibold uppercase tracking-wide text-brand-accent-600">{step.time}</p>}
+        <p class="font-medium text-brand-ink">{step.label}</p>
+        {step.detail && <p class="text-sm text-brand-muted">{step.detail}</p>}
+      </li>
+    ))
+  }
+</ol>

@@ -1,0 +1,39 @@
+---
+// Generic comparison table (e.g. ultrasound vs CT vs MRI), brief §5/§8.
+interface Props {
+  columns: string[]; // first column is the row-label column header
+  rows: (string | boolean)[][]; // each row: [label, ...cells]
+  caption?: string;
+}
+const { columns, rows, caption } = Astro.props;
+const cell = (v: string | boolean) =>
+  typeof v === 'boolean' ? (v ? 'Yes' : 'No') : v;
+---
+
+<div class="my-6 overflow-x-auto">
+  <table class="w-full border-collapse text-left text-sm">
+    {caption && <caption class="mb-2 text-left text-brand-muted">{caption}</caption>}
+    <thead>
+      <tr class="border-b-2 border-brand-line">
+        {columns.map((c, i) => (
+          <th scope="col" class:list={['py-2 pr-4 font-semibold', i === 0 ? 'text-brand-ink' : 'text-brand-primary']}>
+            {c}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr class="border-b border-brand-line/70">
+            {row.map((v, i) => (
+              <td class:list={['py-2 pr-4', i === 0 ? 'font-medium text-brand-ink' : 'text-brand-muted']}>
+                {cell(v)}
+              </td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

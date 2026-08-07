@@ -1,0 +1,46 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  slug: string;
+  credentials?: string[];
+  specialties?: string[];
+  image?: string;
+  imageAlt?: string;
+}
+const { name, role, slug, credentials = [], specialties = [], image, imageAlt } = Astro.props;
+const initials = name
+  .split(' ')
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((n) => n[0])
+  .join('');
+---
+
+<a
+  href={`/specialists/${slug}/`}
+  class="group flex gap-4 rounded-card border border-brand-line bg-white p-4 transition-shadow hover:shadow-md"
+>
+  {
+    image ? (
+      <img src={image} alt={imageAlt ?? name} width="72" height="72" loading="lazy" class="h-16 w-16 flex-none rounded-full object-cover" />
+    ) : (
+      <span
+        class="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-brand-primary/10 font-display text-lg font-semibold text-brand-primary"
+        aria-hidden="true"
+      >
+        {initials}
+      </span>
+    )
+  }
+  <div class="min-w-0">
+    <p class="font-display font-semibold text-brand-ink group-hover:text-brand-accent-600">{name}</p>
+    <p class="text-sm text-brand-muted">{role}</p>
+    {credentials.length > 0 && <p class="mt-0.5 text-xs text-brand-muted">{credentials.join(', ')}</p>}
+    {
+      specialties.length > 0 && (
+        <p class="mt-1 truncate text-xs text-brand-primary-400">{specialties.slice(0, 3).join(' · ')}</p>
+      )
+    }
+  </div>
+</a>

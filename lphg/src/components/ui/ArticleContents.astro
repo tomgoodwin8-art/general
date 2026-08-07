@@ -1,0 +1,24 @@
+---
+// Numbered, anchor-linked article contents (brief §8.7).
+interface Props {
+  sections: { label: string; id: string }[];
+}
+const { sections } = Astro.props;
+---
+
+{
+  sections.length > 0 && (
+    <nav aria-label="Contents" class="my-6 rounded-card border border-brand-line bg-brand-surface p-5">
+      <p class="mb-2 font-display text-sm font-semibold uppercase tracking-wide text-brand-ink">On this page</p>
+      <ol class="list-decimal space-y-1 pl-5 text-sm marker:text-brand-muted">
+        {sections.map((s) => (
+          <li>
+            <a href={`#${s.id}`} class="text-brand-primary hover:underline">
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

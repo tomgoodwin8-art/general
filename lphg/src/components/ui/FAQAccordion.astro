@@ -1,0 +1,34 @@
+---
+// Renders FAQs as native <details> (no JS) and emits FAQPage JSON-LD (brief §5/§7).
+import { faqSchema, graph } from '../../lib/schema';
+interface Props {
+  faqs: { q: string; a: string }[];
+  heading?: string;
+  emitSchema?: boolean; // set false if the page already emits FAQPage in its graph
+}
+const { faqs, heading = 'Frequently asked questions', emitSchema = true } = Astro.props;
+---
+
+{
+  faqs.length > 0 && (
+    <section class="mx-auto max-w-3xl" aria-labelledby="faq-heading">
+      <h2 id="faq-heading" class="mb-4 text-2xl">{heading}</h2>
+      <div class="divide-y divide-brand-line border-y border-brand-line">
+        {faqs.map((f) => (
+          <details class="group py-1">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 py-3 font-medium marker:content-none">
+              <span>{f.q}</span>
+              <span class="text-brand-accent transition-transform group-open:rotate-45" aria-hidden="true">
+                +
+              </span>
+            </summary>
+            <p class="pb-4 text-brand-muted">{f.a}</p>
+          </details>
+        ))}
+      </div>
+      {emitSchema && (
+        <script type="application/ld+json" set:html={JSON.stringify(graph(faqSchema(faqs)))} is:inline />
+      )}
+    </section>
+  )
+}

@@ -1,0 +1,26 @@
+---
+import PriceTag from './PriceTag.astro';
+interface Props {
+  title: string;
+  slug: string;
+  promise: string;
+  price: number;
+  struck?: number;
+}
+const { title, slug, promise, price, struck } = Astro.props;
+---
+
+<article class="flex flex-col rounded-card border border-brand-line bg-white p-5 transition-shadow hover:shadow-md">
+  <h3 class="font-display text-lg font-semibold text-brand-ink">
+    <a href={`/packages/${slug}/`} class="hover:text-brand-accent-600">{title}</a>
+  </h3>
+  <p class="mt-1 flex-1 text-sm text-brand-muted">{promise}</p>
+  <div class="mt-4 flex items-center justify-between">
+    <PriceTag {price} {struck} size="md" />
+    <a
+      href={`/packages/${slug}/`}
+      class="text-sm font-semibold text-brand-primary hover:underline"
+      aria-label={`View the ${title} package`}>View package →</a
+    >
+  </div>
+</article>

@@ -1,0 +1,25 @@
+# Cloudflare Pages project for the LPHG website.
+#
+# Static Astro output (dist/) + Pages Functions (functions/) for all
+# server-side work (Semble booking API, Stripe). No API keys reach the client.
+#
+# Deploy:  npm run build && npx wrangler pages deploy dist --project-name lphg
+# (needs `wrangler login`, or CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID in
+# the environment — see .github/workflows/deploy-lphg.yml).
+name = "lphg"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./dist"
+
+# --- Runtime secrets (set with `wrangler pages secret put <NAME>`, never here) ---
+#   SEMBLE_API_KEY, SEMBLE_API_URL, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY,
+#   STRIPE_WEBHOOK_SECRET, RESEND_API_KEY, GA4_ID
+# Public build-time vars (safe to expose) go in astro / import.meta.env.
+
+# --- KV: 60s availability cache per service/week (brief §6.2) ---
+# Create once:  wrangler kv namespace create AVAILABILITY_CACHE
+# then paste the id below and uncomment. The availability function degrades
+# gracefully (no cache) when this binding is absent.
+# [[kv_namespaces]]
+# binding = "AVAILABILITY_CACHE"
+# id = "REPLACE_WITH_NAMESPACE_ID"

@@ -1,0 +1,49 @@
+---
+import { site, footerNav, trustMarkers } from '../data/site';
+const year = 2026; // build-time constant; bump at content load if needed
+---
+
+<footer class="mt-24 border-t border-brand-line bg-brand-primary text-brand-surface">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+    <div>
+      <p class="font-display text-lg font-semibold">London Private Healthcare Group</p>
+      <p class="mt-2 text-sm text-brand-surface/70">{site.strapline}</p>
+      <address class="mt-4 not-italic text-sm text-brand-surface/80">
+        {site.address.street}<br />
+        {site.address.locality}, {site.address.region} {site.address.postalCode}<br />
+        <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="underline">{site.phoneDisplay}</a
+        ><br />
+        <a href={`mailto:${site.email}`} class="underline">{site.email}</a>
+      </address>
+      <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-brand-surface/70">
+        {trustMarkers.map((marker) => <li>{marker}</li>)}
+      </ul>
+    </div>
+    {
+      footerNav.map((col) => (
+        <nav aria-label={col.title}>
+          <p class="text-xs font-semibold uppercase tracking-wide text-brand-surface/60">
+            {col.title}
+          </p>
+          <ul class="mt-3 space-y-2 text-sm">
+            {col.items.map((item) => (
+              <li>
+                <a href={item.href} class="text-brand-surface/85 hover:text-white hover:underline">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+  <div class="border-t border-white/10">
+    <div
+      class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 text-xs text-brand-surface/60 sm:flex-row sm:justify-between"
+    >
+      <p>© {year} {site.legalName}. Registered with the Care Quality Commission.</p>
+      <p>Prices shown are all-inclusive and published in full on our <a href="/prices/" class="underline">price list</a>.</p>
+    </div>
+  </div>
+</footer>

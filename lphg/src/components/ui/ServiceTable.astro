@@ -1,0 +1,51 @@
+---
+import { gbp } from '../../lib/format';
+interface Row {
+  title: string;
+  slug: string;
+  duration: string;
+  price: number;
+}
+interface Props {
+  rows: Row[];
+  caption?: string;
+}
+const { rows, caption } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse text-left text-sm">
+    {caption && <caption class="mb-2 text-left text-brand-muted">{caption}</caption>}
+    <thead>
+      <tr class="border-b border-brand-line text-xs uppercase tracking-wide text-brand-muted">
+        <th scope="col" class="py-3 pr-4 font-semibold">Service</th>
+        <th scope="col" class="py-3 pr-4 font-semibold">Duration</th>
+        <th scope="col" class="py-3 pr-4 text-right font-semibold">Price</th>
+        <th scope="col" class="py-3 text-right font-semibold"><span class="sr-only">Book</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr class="border-b border-brand-line/70 align-middle">
+            <td class="py-3 pr-4">
+              <a href={`/services/${row.slug}/`} class="font-medium text-brand-primary hover:underline">
+                {row.title}
+              </a>
+            </td>
+            <td class="py-3 pr-4 text-brand-muted">{row.duration}</td>
+            <td class="py-3 pr-4 text-right font-semibold">{gbp(row.price)}</td>
+            <td class="py-3 text-right">
+              <a
+                href={`/book/?service=${encodeURIComponent(row.slug)}`}
+                class="text-xs font-semibold text-brand-accent-600 hover:underline"
+              >
+                Book
+              </a>
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

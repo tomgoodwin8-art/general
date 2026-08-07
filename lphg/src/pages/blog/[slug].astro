@@ -1,0 +1,152 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import ShareLinks from '../../components/ui/ShareLinks.astro';
+import AnswerLead from '../../components/ui/AnswerLead.astro';
+import ArticleContents from '../../components/ui/ArticleContents.astro';
+import BioCard from '../../components/ui/BioCard.astro';
+import FAQAccordion from '../../components/ui/FAQAccordion.astro';
+import RelatedReading from '../../components/ui/RelatedReading.astro';
+import BookCTA from '../../components/ui/BookCTA.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import StickyMobileCTA from '../../components/StickyMobileCTA.astro';
+import { readingTime, formatDate } from '../../lib/format';
+import { graph, organisationSchema, breadcrumbSchema, faqSchema, articleSchema } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const d = post.data;
+const { Content, headings } = await render(post);
+
+const approved = d.reviewStatus === 'approved' && !d.draft;
+const related = (await Promise.all(d.relatedServices.map((r) => getEntry(r)))).filter(Boolean);
+const pkg = await getEntry(d.relatedPackage);
+const primaryService = related[0];
+
+const path = `/blog/${post.id}/`;
+const trail = [
+  { name: 'Home', url: '/' },
+  { name: 'Blog', url: '/blog/' },
+  { name: d.title, url: path },
+];
+
+const readTime = d.readTime ?? readingTime(post.body?.split(/\s+/).length ?? 400);
+const sections = headings.filter((h) => h.depth === 2).map((h) => ({ label: h.text, id: h.slug }));
+
+const relatedCards = [
+  ...related.slice(0, 2).map((s) => ({ kicker: 'Service', title: s!.data.title, href: `/services/${s!.id}/` })),
+  { kicker: 'Package', title: pkg.data.title, href: `/packages/${pkg.id}/` },
+];
+
+const jsonLd = graph(
+  organisationSchema(),
+  breadcrumbSchema(trail),
+  articleSchema({
+    headline: d.title,
+    description: d.metaDescription,
+    url: path,
+    image: d.hero.src,
+    datePublished: d.published.toISOString(),
+    dateModified: d.lastReviewed.toISOString(),
+    author: d.author,
+    reviewer: d.reviewer,
+  }),
+  faqSchema(d.faqs)
+);
+---
+
+<Base
+  title={d.metaTitle}
+  description={d.metaDescription}
+  canonical={path}
+  ogImage={d.ogImage ?? d.hero.src}
+  ogType="article"
+  noindex={!approved}
+  jsonLd={jsonLd}
+>
+  <article class="mx-auto max-w-3xl px-4 py-8">
+    {
+      !approved && (
+        <div class="mb-6 rounded-card border border-amber-500 bg-amber-50 p-3 text-sm text-amber-900">
+          Draft — pending clinical sign-off. This page is not indexed and is excluded from the blog
+          index until a named reviewer approves it (brief §8).
+        </div>
+      )
+    }
+    <Breadcrumb trail={[{ name: 'Patient Education', url: '/blog/' }, { name: d.topic, url: path }]} emitSchema={false} />
+    <h1 class="mt-4 text-3xl md:text-4xl">{d.title}</h1>
+
+    <div class="mt-5">
+      <AuthorByline author={d.author} reviewer={d.reviewer} published={d.published} lastReviewed={d.lastReviewed} readTime={readTime} />
+    </div>
+    <div class="mt-3"><ShareLinks path={path} title={d.title} /></div>
+
+    <!-- Hero: annotated diagram, italic caption -->
+    <figure class="mt-6">
+      {
+        d.hero.src ? (
+          <img src={d.hero.src} alt={d.hero.alt} width="768" height="432" class="w-full rounded-card border border-brand-line" />
+        ) : (
+          <div class="flex aspect-video w-full items-center justify-center rounded-card border border-dashed border-brand-line bg-brand-surface text-sm text-brand-muted">
+            Annotated diagram to be supplied — {d.hero.alt}
+          </div>
+        )
+      }
+      <figcaption class="mt-2 text-sm italic text-brand-muted">{d.hero.caption}</figcaption>
+    </figure>
+
+    <div class="mt-6"><AnswerLead>{d.answer}</AnswerLead></div>
+
+    <ArticleContents {sections} />
+
+    <div class="prose-lphg mt-6 max-w-none"><Content /></div>
+
+    <!-- Mid/late-article Book CTA with price -->
+    {
+      primaryService && (
+        <div class="my-10 rounded-card border border-brand-line bg-brand-surface p-6">
+          <p class="font-display text-lg font-semibold">Book a {primaryService.data.title.toLowerCase()}</p>
+          <p class="mt-1 text-sm text-brand-muted">From £{primaryService.data.price}. Report within 24 hours. No GP referral needed.</p>
+          <div class="mt-4"><BookCTA sembleBookingTypeId={primaryService.data.sembleBookingTypeId} price={primaryService.data.price} /></div>
+        </div>
+      )
+    }
+
+    <div class="mt-10"><FAQAccordion faqs={d.faqs} emitSchema={false} /></div>
+
+    <!-- References + disclaimer -->
+    <section class="mt-12" aria-labelledby="refs-heading">
+      <h2 id="refs-heading" class="text-2xl">References</h2>
+      <ol class="mt-3 list-decimal space-y-1 pl-5 text-sm text-brand-muted">
+        {d.references.map((r) => <li><a href={r.url} rel="noopener nofollow" target="_blank" class="text-brand-primary underline">{r.label}</a></li>)}
+      </ol>
+      <CalloutBox variant="info" title="Medical information disclaimer">
+        This article is for general information and does not replace personalised medical advice.
+        Always discuss your symptoms and results with a qualified clinician.
+      </CalloutBox>
+    </section>
+
+    <!-- Author + reviewer bios -->
+    <section class="mt-10 grid gap-4 sm:grid-cols-2">
+      <BioCard label="Author" name={d.author.name} role={d.author.role} credentials={d.author.credentials} bio={d.author.bio} profileUrl={d.author.profileUrl} />
+      <BioCard label="Clinical reviewer" name={d.reviewer.name} role={d.reviewer.role} credentials={d.reviewer.credentials} bio={d.reviewer.bio} profileUrl={d.reviewer.profileUrl} />
+    </section>
+
+    <RelatedReading cards={relatedCards} />
+
+    <!-- Final CTA banner -->
+    <section class="mt-12 rounded-card bg-brand-primary px-6 py-10 text-center text-white">
+      <h2 class="text-2xl text-white">{pkg.data.title}</h2>
+      <p class="mx-auto mt-2 max-w-xl text-brand-surface/80">£{pkg.data.price} all-inclusive. Same-day appointments often available. No GP referral needed.</p>
+      <div class="mt-6 flex justify-center"><BookCTA sembleBookingTypeId={pkg.data.sembleBookingTypeId} label="Book now" /></div>
+    </section>
+  </article>
+
+  <StickyMobileCTA slot="sticky" />
+</Base>

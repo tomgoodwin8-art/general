@@ -1,0 +1,23 @@
+---
+// Google / Doctify aggregate strip. Brief §7: DO NOT fabricate ratings —
+// renders nothing until real figures are supplied in data/site.ts.
+import { reviews } from '../../data/site';
+const items = [
+  reviews.google && { source: 'Google', ...reviews.google },
+  reviews.doctify && { source: 'Doctify', ...reviews.doctify },
+].filter(Boolean) as { source: string; rating: number; count: number; url: string }[];
+---
+
+{
+  items.length > 0 && (
+    <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
+      {items.map((r) => (
+        <a href={r.url} rel="noopener" class="flex items-center gap-2 text-brand-ink hover:text-brand-accent-600">
+          <span class="font-semibold">{r.rating.toFixed(1)}</span>
+          <span aria-hidden="true" class="text-brand-accent">★★★★★</span>
+          <span class="text-brand-muted">{r.count} {r.source} reviews</span>
+        </a>
+      ))}
+    </div>
+  )
+}

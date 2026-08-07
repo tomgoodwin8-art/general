@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import { site } from '../data/site';
+const trail = [{ name: 'Home', url: '/' }, { name: 'Privacy', url: '/privacy/' }];
+---
+<Base
+  title="Privacy Policy | LPHG"
+  description="How London Private Healthcare Group processes your personal and health data, including our processors Semble and Stripe."
+  canonical="/privacy/"
+  noindex={false}
+>
+  <div class="prose-lphg mx-auto max-w-3xl px-4 py-10">
+    <Breadcrumb {trail} emitSchema={false} />
+    <h1 class="mt-4">Privacy policy</h1>
+    <p class="text-sm text-brand-muted">This is a draft policy for build and review. Final wording is
+      subject to sign-off by LPHG's data protection lead before launch.</p>
+
+    <h2>Who we are</h2>
+    <p>{site.legalName} ("we") is the data controller for personal data processed through this
+      website and our clinical service at {site.address.street}, {site.address.region}
+      {site.address.postalCode}.</p>
+
+    <h2>What we collect and why</h2>
+    <p>To arrange an appointment we collect your name, date of birth, sex, email, mobile number and
+      an optional reason for your visit. Health data is special category data and is processed for
+      the provision of healthcare. We practise data minimisation and collect only what we need.</p>
+
+    <h2>Our processors</h2>
+    <ul>
+      <li><strong>Semble</strong> — our clinical records and booking system. Your patient record and
+        appointment data are held in Semble, not on this website.</li>
+      <li><strong>Stripe</strong> — payment processing. Card details are entered directly with Stripe
+        and are never seen or stored by us.</li>
+      <li><strong>Resend</strong> — transactional email (appointment confirmations).</li>
+    </ul>
+
+    <h2>Booking without consenting to analytics</h2>
+    <p>Booking works whether or not you accept analytics cookies. We do not place non-essential
+      cookies until you consent, and we never put your personal or health data in URLs, logs or
+      analytics.</p>
+
+    <h2>Your rights</h2>
+    <p>You have rights of access, rectification, erasure and objection. Clinical records retention is
+      handled in Semble in line with healthcare record-keeping requirements. Contact
+      <a href={`mailto:${site.email}`}>{site.email}</a> to exercise your rights.</p>
+  </div>
+</Base>

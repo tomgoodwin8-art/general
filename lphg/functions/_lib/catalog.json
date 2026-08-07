@@ -1,0 +1,176 @@
+{
+  "LPHG-ABDO-US": {
+    "title": "Abdominal Ultrasound",
+    "price": 280,
+    "kind": "service",
+    "slug": "abdominal-ultrasound"
+  },
+  "LPHG-DATING": {
+    "title": "Dating Scan",
+    "price": 180,
+    "kind": "service",
+    "slug": "dating-scan"
+  },
+  "LPHG-DVT": {
+    "title": "DVT Doppler Scan",
+    "price": 320,
+    "kind": "service",
+    "slug": "dvt-doppler"
+  },
+  "LPHG-EARLYPREG": {
+    "title": "Early Pregnancy Scan",
+    "price": 180,
+    "kind": "service",
+    "slug": "early-pregnancy-scan"
+  },
+  "LPHG-ECG": {
+    "title": "ECG (Electrocardiogram)",
+    "price": 120,
+    "kind": "service",
+    "slug": "ecg"
+  },
+  "LPHG-ECHO": {
+    "title": "Echocardiogram",
+    "price": 395,
+    "kind": "service",
+    "slug": "echocardiogram"
+  },
+  "LPHG-FIBROID-US": {
+    "title": "Fibroid Ultrasound",
+    "price": 250,
+    "kind": "service",
+    "slug": "fibroid-ultrasound"
+  },
+  "LPHG-FIBROSCAN": {
+    "title": "FibroScan (Liver Elastography)",
+    "price": 250,
+    "kind": "service",
+    "slug": "fibroscan"
+  },
+  "LPHG-GUIDED-INJ": {
+    "title": "Ultrasound-Guided Injection",
+    "price": 450,
+    "kind": "service",
+    "slug": "guided-injections"
+  },
+  "LPHG-KNEE-US": {
+    "title": "Knee Ultrasound",
+    "price": 280,
+    "kind": "service",
+    "slug": "knee-ultrasound"
+  },
+  "LPHG-LIVER-US": {
+    "title": "Liver Ultrasound",
+    "price": 250,
+    "kind": "service",
+    "slug": "liver-ultrasound"
+  },
+  "LPHG-MENOPAUSE": {
+    "title": "Menopause Assessment",
+    "price": 280,
+    "kind": "service",
+    "slug": "menopause-clinic"
+  },
+  "LPHG-MSK-US": {
+    "title": "MSK Ultrasound",
+    "price": 280,
+    "kind": "service",
+    "slug": "msk-ultrasound"
+  },
+  "LPHG-ORTHO-CONSULT": {
+    "title": "Orthopaedic Consultation",
+    "price": 250,
+    "kind": "service",
+    "slug": "orthopaedic-consultation"
+  },
+  "LPHG-PCOS-US": {
+    "title": "PCOS Ultrasound",
+    "price": 250,
+    "kind": "service",
+    "slug": "pcos-scan"
+  },
+  "LPHG-PELVIC-US": {
+    "title": "Pelvic Ultrasound",
+    "price": 220,
+    "kind": "service",
+    "slug": "pelvic-ultrasound"
+  },
+  "LPHG-GP": {
+    "title": "Private GP Appointment",
+    "price": 180,
+    "kind": "service",
+    "slug": "private-gp"
+  },
+  "LPHG-PROSTATE": {
+    "title": "Prostate Assessment",
+    "price": 350,
+    "kind": "service",
+    "slug": "prostate-assessment"
+  },
+  "LPHG-SHOULDER-US": {
+    "title": "Shoulder Ultrasound",
+    "price": 280,
+    "kind": "service",
+    "slug": "shoulder-ultrasound"
+  },
+  "LPHG-TESTIS-US": {
+    "title": "Testicular Ultrasound",
+    "price": 220,
+    "kind": "service",
+    "slug": "testicular-ultrasound"
+  },
+  "LPHG-VARICOSE": {
+    "title": "Varicose Vein Duplex Scan",
+    "price": 320,
+    "kind": "service",
+    "slug": "varicose-vein-scan"
+  },
+  "LPHG-WEIGHT": {
+    "title": "Weight Management Consultation",
+    "price": 195,
+    "kind": "service",
+    "slug": "weight-management-clinic"
+  },
+  "LPHG-WELLWOMAN": {
+    "title": "Well Woman Screen",
+    "price": 350,
+    "kind": "service",
+    "slug": "well-woman-screen"
+  },
+  "LPHG-PKG-EARLYPREG": {
+    "title": "Early Pregnancy Reassurance",
+    "price": 295,
+    "kind": "package",
+    "slug": "early-pregnancy"
+  },
+  "LPHG-PKG-HEART": {
+    "title": "Heart Check",
+    "price": 745,
+    "kind": "package",
+    "slug": "heart-check"
+  },
+  "LPHG-PKG-LIVER": {
+    "title": "Liver Check",
+    "price": 395,
+    "kind": "package",
+    "slug": "liver-check"
+  },
+  "LPHG-PKG-MENSMOT": {
+    "title": "Men's Health MOT",
+    "price": 445,
+    "kind": "package",
+    "slug": "mens-health-mot"
+  },
+  "LPHG-PKG-MSK": {
+    "title": "MSK Same-Day",
+    "price": 495,
+    "kind": "package",
+    "slug": "msk-same-day"
+  },
+  "LPHG-PKG-WOMENS": {
+    "title": "Women's Health Assessment",
+    "price": 545,
+    "kind": "package",
+    "slug": "womens-health-assess"
+  }
+}

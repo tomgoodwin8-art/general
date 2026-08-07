@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+const trail = [{ name: 'Home', url: '/' }, { name: 'Terms', url: '/terms/' }];
+---
+<Base
+  title="Terms & Conditions | LPHG"
+  description="Terms of use and appointment terms for London Private Healthcare Group, including the 48-hour cancellation policy."
+  canonical="/terms/"
+>
+  <div class="prose-lphg mx-auto max-w-3xl px-4 py-10">
+    <Breadcrumb {trail} emitSchema={false} />
+    <h1 class="mt-4">Terms and conditions</h1>
+    <p class="text-sm text-brand-muted">Draft terms for build and review, subject to sign-off before launch.</p>
+
+    <h2>Appointments and payment</h2>
+    <p>The full price of your appointment is collected at the time of booking. All prices are shown
+      inclusive of the scan or consultation, the clinician's time and your report.</p>
+
+    <h2>Cancellation and refunds</h2>
+    <p>You may cancel or reschedule up to 48 hours before your appointment for a full refund. Within
+      48 hours, the fee may be retained. <span class="text-brand-muted">[Final cancellation wording to
+      be confirmed by Tom — open item.]</span></p>
+
+    <h2>Medical disclaimer</h2>
+    <p>Information on this website is general and does not replace personalised medical advice. Always
+      discuss your symptoms and results with a qualified clinician.</p>
+  </div>
+</Base>

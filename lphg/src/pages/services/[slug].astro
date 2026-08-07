@@ -1,0 +1,116 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import PriceTag from '../../components/ui/PriceTag.astro';
+import BookCTA from '../../components/ui/BookCTA.astro';
+import TrustBar from '../../components/ui/TrustBar.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import FAQAccordion from '../../components/ui/FAQAccordion.astro';
+import StickyMobileCTA from '../../components/StickyMobileCTA.astro';
+import { graph, organisationSchema, breadcrumbSchema, faqSchema, serviceSchema } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((service) => ({ params: { slug: service.id }, props: { service } }));
+}
+
+const { service } = Astro.props;
+const d = service.data;
+const { Content } = await render(service);
+
+const centre = await getEntry(d.centre);
+const pkg = d.relatedPackage ? await getEntry(d.relatedPackage) : null;
+const related = (await Promise.all(d.relatedServices.map((r) => getEntry(r)))).filter(Boolean);
+
+const path = `/services/${service.id}/`;
+const trail = [
+  { name: 'Home', url: '/' },
+  { name: 'Centres', url: '/centres/' },
+  { name: centre!.data.title, url: `/centres/${centre!.id}/` },
+  { name: d.title, url: path },
+];
+
+const jsonLd = graph(
+  organisationSchema(),
+  breadcrumbSchema(trail),
+  serviceSchema({ name: d.title, description: d.metaDescription, url: path, price: d.price }),
+  ...(d.faqs.length ? [faqSchema(d.faqs)] : [])
+);
+---
+
+<Base title={d.metaTitle} description={d.metaDescription} canonical={path} ogImage={d.ogImage} jsonLd={jsonLd}>
+  <section data-hero class="border-b border-brand-line bg-brand-surface">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <Breadcrumb {trail} emitSchema={false} />
+      <h1 class="mt-4 text-3xl md:text-4xl">{d.title}</h1>
+      <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-brand-muted">
+        <span><span class="font-semibold text-brand-ink">{d.duration}</span> appointment</span>
+        <a href={`/centres/${centre!.id}/`} class="text-brand-primary hover:underline">{centre!.data.title}</a>
+      </div>
+      <div class="mt-5"><PriceTag price={d.price} size="lg" /></div>
+      <div class="mt-6"><BookCTA sembleBookingTypeId={d.sembleBookingTypeId} price={d.price} /></div>
+    </div>
+  </section>
+
+  <div class="border-b border-brand-line bg-white py-4"><TrustBar /></div>
+
+  <article class="mx-auto max-w-3xl px-4 py-10">
+    <!-- AEO answer -->
+    <p class="font-medium text-lg leading-relaxed text-brand-ink"><strong>{d.aeoAnswer}</strong></p>
+
+    <section class="mt-10" aria-labelledby="shows-heading">
+      <h2 id="shows-heading" class="text-2xl">What this scan shows</h2>
+      <ul class="mt-3 list-disc space-y-1 pl-5 text-brand-ink">
+        {d.whatItShows.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="mt-8" aria-labelledby="cannot-heading">
+      <h2 id="cannot-heading" class="text-2xl">What it cannot show</h2>
+      <ul class="mt-3 list-disc space-y-1 pl-5 text-brand-muted">
+        {d.whatItCannotShow.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <CalloutBox variant="info" title="How to prepare">
+      {d.preparation}
+    </CalloutBox>
+
+    <div class="prose-lphg mt-6"><Content /></div>
+
+    <!-- Mid-page book CTA with price -->
+    <div class="my-10 rounded-card border border-brand-line bg-brand-surface p-6">
+      <p class="font-display text-lg font-semibold">Book your {d.title.toLowerCase()}</p>
+      <p class="mt-1 text-sm text-brand-muted">Report within 24 hours. No GP referral needed.</p>
+      <div class="mt-4"><BookCTA sembleBookingTypeId={d.sembleBookingTypeId} price={d.price} /></div>
+    </div>
+
+    {d.faqs.length > 0 && <div class="mt-12"><FAQAccordion faqs={d.faqs} emitSchema={false} /></div>}
+
+    {
+      (related.length > 0 || pkg) && (
+        <section class="mt-12" aria-labelledby="related-heading">
+          <h2 id="related-heading" class="text-2xl">Related</h2>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            {related.map((r) => (
+              <a href={`/services/${r!.id}/`} class="rounded-card border border-brand-line bg-white p-4 hover:shadow-md">
+                <p class="font-medium text-brand-ink">{r!.data.title}</p>
+                <p class="text-sm text-brand-muted">{r!.data.duration} · from £{r!.data.price}</p>
+              </a>
+            ))}
+            {pkg && (
+              <a href={`/packages/${pkg.id}/`} class="rounded-card border border-brand-accent bg-brand-accent/5 p-4 hover:shadow-md">
+                <p class="text-xs font-semibold uppercase tracking-wide text-brand-accent-600">Package</p>
+                <p class="font-medium text-brand-ink">{pkg.data.title}</p>
+                <p class="text-sm text-brand-muted">£{pkg.data.price} all-inclusive</p>
+              </a>
+            )}
+          </div>
+        </section>
+      )
+    }
+  </article>
+
+  <StickyMobileCTA slot="sticky" bookHref={`/book/?service=${encodeURIComponent(d.sembleBookingTypeId)}`} />
+</Base>

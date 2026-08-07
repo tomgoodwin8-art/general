@@ -1,0 +1,61 @@
+---
+// Deep-links into the booking wizard with the service preselected (brief §5/§6).
+import { gbp } from '../../lib/format';
+import { isPlaceholderBookingId } from '../../data/booking';
+import { site } from '../../data/site';
+
+interface Props {
+  sembleBookingTypeId?: string;
+  price?: number;
+  label?: string;
+  variant?: 'primary' | 'inline';
+  class?: string;
+}
+const {
+  sembleBookingTypeId,
+  price,
+  label = 'Book online',
+  variant = 'primary',
+  class: cls = '',
+} = Astro.props;
+
+// Until the Semble id map is live, deep-link still works but the wizard shows
+// a call-to-book fallback for unmapped services (never a dead end, §6.2).
+const href = sembleBookingTypeId
+  ? `/book/?service=${encodeURIComponent(sembleBookingTypeId)}`
+  : '/book/';
+const bookable = !isPlaceholderBookingId(sembleBookingTypeId);
+const tel = site.phone.replace(/\s/g, '');
+---
+
+{
+  variant === 'primary' ? (
+    <div class:list={['flex flex-wrap items-center gap-3', cls]}>
+      <a
+        href={href}
+        data-analytics="begin_booking"
+        class="rounded-full bg-brand-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-600"
+      >
+        {label}
+        {price ? ` · ${gbp(price)}` : ''}
+      </a>
+      {!bookable && (
+        <a href={`tel:${tel}`} data-analytics="call_click" class="text-sm font-medium text-brand-primary underline">
+          or call to book
+        </a>
+      )}
+    </div>
+  ) : (
+    <a
+      href={href}
+      data-analytics="begin_booking"
+      class:list={[
+        'inline-flex items-center gap-1 font-semibold text-brand-primary underline underline-offset-2 hover:text-brand-accent-600',
+        cls,
+      ]}
+    >
+      {label}
+      {price ? ` — ${gbp(price)}` : ''}
+    </a>
+  )
+}

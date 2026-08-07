@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import SpecialistCard from '../../components/ui/SpecialistCard.astro';
+import { graph, organisationSchema, breadcrumbSchema } from '../../lib/schema';
+
+const specialists = (await getCollection('specialists')).sort((a, b) => a.data.order - b.data.order);
+const centres = (await getCollection('centres')).sort((a, b) => a.data.order - b.data.order);
+
+const trail = [
+  { name: 'Home', url: '/' },
+  { name: 'Specialists', url: '/specialists/' },
+];
+const jsonLd = graph(organisationSchema(), breadcrumbSchema(trail));
+---
+
+<Base
+  title="Find a Specialist | Consultants & Clinicians | LPHG"
+  description="Meet the consultants, sonographers and clinicians at London Private Healthcare Group, 11 Devonshire Place. Filter by centre."
+  canonical="/specialists/"
+  jsonLd={jsonLd}
+>
+  <section data-hero class="border-b border-brand-line bg-brand-surface">
+    <div class="mx-auto max-w-6xl px-4 py-12">
+      <Breadcrumb {trail} emitSchema={false} />
+      <h1 class="mt-4 text-3xl md:text-4xl">Find a specialist</h1>
+      <p class="mt-3 max-w-2xl text-lg text-brand-muted">
+        Our clinicians hold substantive NHS and academic appointments. Filter by centre to find
+        the right specialist for your scan or consultation.
+      </p>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-6xl px-4 py-12">
+    <!-- Filter by centre: progressive-enhancement, no framework. -->
+    <div class="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter specialists by centre">
+      <button data-filter="all" class="filter-btn rounded-full border border-brand-primary bg-brand-primary px-4 py-1.5 text-sm font-medium text-white" aria-pressed="true">All</button>
+      {
+        centres.map((c) => (
+          <button
+            data-filter={c.id}
+            class="filter-btn rounded-full border border-brand-line px-4 py-1.5 text-sm font-medium text-brand-ink hover:border-brand-primary"
+            aria-pressed="false"
+          >
+            {c.data.title}
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      specialists.length > 0 ? (
+        <div id="specialist-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {specialists.map((sp) => (
+            <div class="specialist-item" data-centres={sp.data.centres.map((c) => c.id).join(' ')}>
+              <SpecialistCard
+                name={sp.data.name}
+                role={sp.data.role}
+                slug={sp.id}
+                credentials={sp.data.credentials}
+                specialties={sp.data.specialties}
+                image={sp.data.image}
+                imageAlt={sp.data.imageAlt}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="text-brand-muted">Consultant profiles are publishing soon.</p>
+      )
+    }
+
+    <p class="mt-8 rounded-card border border-brand-line bg-brand-surface p-4 text-sm text-brand-muted">
+      Our full consultant roster is being published ahead of launch. Profiles, credentials and
+      GMC numbers are added as each clinician is confirmed.
+    </p>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const buttons = document.querySelectorAll('.filter-btn');
+      const items = document.querySelectorAll('.specialist-item');
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const f = btn.getAttribute('data-filter');
+          buttons.forEach((b) => {
+            const on = b === btn;
+            b.setAttribute('aria-pressed', String(on));
+            b.classList.toggle('bg-brand-primary', on);
+            b.classList.toggle('text-white', on);
+            b.classList.toggle('border-brand-primary', on);
+          });
+          items.forEach((it) => {
+            const centres = (it.getAttribute('data-centres') || '').split(' ');
+            it.style.display = f === 'all' || centres.includes(f) ? '' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
+</Base>

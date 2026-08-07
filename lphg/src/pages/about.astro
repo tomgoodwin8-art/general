@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import TrustBar from '../components/ui/TrustBar.astro';
+import BookCTA from '../components/ui/BookCTA.astro';
+import { site } from '../data/site';
+import { graph, organisationSchema, breadcrumbSchema } from '../lib/schema';
+const trail = [{ name: 'Home', url: '/' }, { name: 'About', url: '/about/' }];
+const jsonLd = graph(organisationSchema(), breadcrumbSchema(trail));
+---
+<Base
+  title="About Us | London Private Healthcare Group"
+  description="London Private Healthcare Group is a private clinic at 11 Devonshire Place in the Harley Street Medical District. Same-week diagnostics, every price published."
+  canonical="/about/"
+  jsonLd={jsonLd}
+>
+  <section data-hero class="border-b border-brand-line bg-brand-surface">
+    <div class="mx-auto max-w-3xl px-4 py-10">
+      <Breadcrumb {trail} emitSchema={false} />
+      <h1 class="mt-4 text-3xl md:text-4xl">About us</h1>
+      <p class="mt-3 text-lg text-brand-muted">
+        London Private Healthcare Group brings consultant-led diagnostics and specialist care
+        together at {site.address.street}, in the Harley Street Medical District.
+      </p>
+    </div>
+  </section>
+  <div class="border-b border-brand-line bg-white py-4"><TrustBar /></div>
+  <div class="prose-lphg mx-auto max-w-3xl px-4 py-10">
+    <h2>Our approach</h2>
+    <p>
+      We built LPHG around three commitments: publish every price, remove the referral barrier, and
+      turn a scan or test into answers within 24 hours. No hustle, no hidden fees — just careful,
+      clinically-led care close to Harley Street.
+    </p>
+    <h2>Where to find us</h2>
+    <p>{site.address.street}, {site.address.locality}, {site.address.region} {site.address.postalCode}. The nearest
+      Underground stations are Regent's Park and Baker Street.</p>
+    <p>Registered with the Care Quality Commission. Our full consultant roster and CQC registration
+      details are published ahead of launch.</p>
+    <div class="mt-8"><BookCTA label="Book an appointment" /></div>
+  </div>
+</Base>

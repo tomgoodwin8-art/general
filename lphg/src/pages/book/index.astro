@@ -1,0 +1,144 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
+
+// Build the client catalog (bookingTypeId → title/price/duration/centre) so the
+// wizard's Service step works without a round-trip. No PII here.
+const centres = new Map((await getCollection('centres')).map((c) => [c.id, c.data.title]));
+const services = (await getCollection('services')).map((s) => ({
+  id: s.data.sembleBookingTypeId,
+  slug: s.id,
+  title: s.data.title,
+  price: s.data.price,
+  duration: s.data.duration,
+  centre: centres.get(s.data.centre.id) ?? 'Other',
+  preparation: s.data.preparation,
+}));
+const packages = (await getCollection('packages')).map((p) => ({
+  id: p.data.sembleBookingTypeId,
+  slug: p.id,
+  title: p.data.title,
+  price: p.data.price,
+  duration: 'Package',
+  centre: 'Packages',
+  preparation: 'Please arrive 10 minutes early. Bring a list of any medicines you take.',
+}));
+const catalog = [...services, ...packages];
+
+const address = `${site.address.street}, ${site.address.locality}, ${site.address.region} ${site.address.postalCode}`;
+---
+
+<Base
+  title="Book an Appointment | LPHG"
+  description="Book a private scan, test or consultation at 11 Devonshire Place. Choose a time, confirm your details and pay securely. Full refund up to 48 hours before."
+  canonical="/book/"
+  noindex={true}
+>
+  <div class="mx-auto max-w-2xl px-4 py-8">
+    <h1 class="text-2xl md:text-3xl">Book an appointment</h1>
+
+    <!-- Progress bar -->
+    <ol id="wiz-progress" class="mt-6 flex items-center gap-2 text-xs font-medium" aria-label="Booking steps">
+      {
+        ['Service', 'Time', 'Details', 'Payment', 'Done'].map((label, i) => (
+          <li class="flex flex-1 items-center gap-2" data-step-label={i + 1}>
+            <span class="step-dot flex h-6 w-6 items-center justify-center rounded-full border border-brand-line bg-white text-brand-muted">
+              {i + 1}
+            </span>
+            <span class="hidden text-brand-muted sm:inline">{label}</span>
+          </li>
+        ))
+      }
+    </ol>
+
+    <noscript>
+      <p class="mt-6 rounded-card border border-brand-line bg-brand-surface p-4 text-sm">
+        Online booking needs JavaScript. Please call <a class="underline" href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phoneDisplay}</a> to book.
+      </p>
+    </noscript>
+
+    <div id="wiz-error" class="mt-4 hidden rounded-card border border-amber-500 bg-amber-50 p-3 text-sm text-amber-900" role="alert"></div>
+
+    <!-- Step 1: Service -->
+    <section data-step="1" class="wiz-step mt-6 hidden">
+      <h2 class="text-xl">Choose a service</h2>
+      <label class="mt-3 block">
+        <span class="sr-only">Search services</span>
+        <input id="svc-search" type="search" placeholder="Search scans, tests, consultations…" class="w-full rounded-md border border-brand-line px-3 py-2 text-sm" />
+      </label>
+      <div id="svc-list" class="mt-4 space-y-6"></div>
+    </section>
+
+    <!-- Step 2: Time -->
+    <section data-step="2" class="wiz-step mt-6 hidden">
+      <h2 class="text-xl">Choose a time</h2>
+      <p id="svc-summary" class="mt-1 text-sm text-brand-muted"></p>
+      <div class="mt-4 flex items-center justify-between">
+        <button type="button" id="week-prev" class="rounded-md border border-brand-line px-3 py-1.5 text-sm disabled:opacity-40">← Earlier</button>
+        <span id="week-label" class="text-sm font-medium"></span>
+        <button type="button" id="week-next" class="rounded-md border border-brand-line px-3 py-1.5 text-sm">Later →</button>
+      </div>
+      <div id="slot-grid" class="mt-4 grid gap-3" aria-live="polite"></div>
+    </section>
+
+    <!-- Step 3: Details -->
+    <section data-step="3" class="wiz-step mt-6 hidden">
+      <h2 class="text-xl">Your details</h2>
+      <p class="mt-1 text-sm text-brand-muted">We collect only what we need. Your data is held in Semble, our clinical records processor, not on this website.</p>
+      <form id="details-form" class="mt-4 grid gap-3 sm:grid-cols-2" novalidate>
+        <label class="text-sm">First name<input name="firstName" required class="mt-1 w-full rounded-md border border-brand-line px-3 py-2" /></label>
+        <label class="text-sm">Last name<input name="lastName" required class="mt-1 w-full rounded-md border border-brand-line px-3 py-2" /></label>
+        <label class="text-sm">Date of birth<input name="dob" type="date" required class="mt-1 w-full rounded-md border border-brand-line px-3 py-2" /></label>
+        <label class="text-sm">Sex
+          <select name="sex" required class="mt-1 w-full rounded-md border border-brand-line px-3 py-2">
+            <option value="">Select…</option>
+            <option>Female</option>
+            <option>Male</option>
+            <option>Prefer not to say</option>
+          </select>
+        </label>
+        <label class="text-sm">Email<input name="email" type="email" required class="mt-1 w-full rounded-md border border-brand-line px-3 py-2" /></label>
+        <label class="text-sm">Mobile<input name="phone" type="tel" required class="mt-1 w-full rounded-md border border-brand-line px-3 py-2" /></label>
+        <label class="text-sm sm:col-span-2">Reason for visit (optional)<textarea name="reason" rows="2" class="mt-1 w-full rounded-md border border-brand-line px-3 py-2"></textarea></label>
+        <label class="flex items-start gap-2 text-sm sm:col-span-2"><input name="privacy" type="checkbox" required class="mt-1" /> <span>I have read the <a href="/privacy/" class="underline" target="_blank">privacy policy</a> and consent to my data being processed to provide my appointment.</span></label>
+        <label class="flex items-start gap-2 text-sm sm:col-span-2"><input name="comms" type="checkbox" class="mt-1" /> <span>I agree to receive appointment reminders and my report by email and SMS.</span></label>
+      </form>
+    </section>
+
+    <!-- Step 4: Payment -->
+    <section data-step="4" class="wiz-step mt-6 hidden">
+      <h2 class="text-xl">Payment</h2>
+      <div id="order-summary" class="mt-3 rounded-card border border-brand-line bg-brand-surface p-4 text-sm"></div>
+      <p class="mt-3 text-xs text-brand-muted">Cancellation policy: full refund up to 48 hours before your appointment.</p>
+      <div id="payment-element" class="mt-4"></div>
+      <div id="sandbox-note" class="mt-4 hidden rounded-card border border-brand-line bg-white p-3 text-sm text-brand-muted"></div>
+    </section>
+
+    <!-- Step 5: Confirmation -->
+    <section data-step="5" class="wiz-step mt-6 hidden">
+      <div class="rounded-card border border-brand-primary-400 bg-brand-primary/5 p-6">
+        <h2 class="text-xl">Appointment booked</h2>
+        <p id="confirm-ref" class="mt-2 font-medium"></p>
+        <p id="confirm-when" class="mt-1 text-sm text-brand-muted"></p>
+        <div id="confirm-prep" class="mt-4 text-sm"></div>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a id="cal-google" href="#" target="_blank" rel="noopener" class="rounded-full border border-brand-primary px-4 py-2 text-sm font-semibold text-brand-primary">Add to Google Calendar</a>
+          <a id="cal-ics" href="#" download="lphg-appointment.ics" class="rounded-full border border-brand-primary px-4 py-2 text-sm font-semibold text-brand-primary">Download .ics</a>
+        </div>
+        <p class="mt-4 text-sm text-brand-muted">{address}</p>
+        <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`} target="_blank" rel="noopener" class="text-sm text-brand-primary underline">Open in maps</a>
+      </div>
+    </section>
+
+    <!-- Nav -->
+    <div class="mt-8 flex items-center justify-between">
+      <button type="button" id="wiz-back" class="rounded-full border border-brand-line px-5 py-2.5 text-sm font-semibold text-brand-ink disabled:opacity-40">Back</button>
+      <button type="button" id="wiz-next" class="rounded-full bg-brand-primary px-6 py-2.5 text-sm font-semibold text-white disabled:opacity-40">Continue</button>
+    </div>
+  </div>
+
+  <script type="application/json" id="wiz-catalog" set:html={JSON.stringify(catalog)} is:inline></script>
+  <script type="application/json" id="wiz-prep" set:html={JSON.stringify(Object.fromEntries(catalog.map((c) => [c.id, c.preparation])))} is:inline></script>
+  <script src="../../scripts/booking-wizard.ts"></script>
+</Base>

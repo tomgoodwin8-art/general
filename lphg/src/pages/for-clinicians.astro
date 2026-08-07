@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import { site } from '../data/site';
+import { graph, organisationSchema, breadcrumbSchema } from '../lib/schema';
+const trail = [{ name: 'Home', url: '/' }, { name: 'For clinicians', url: '/for-clinicians/' }];
+const jsonLd = graph(organisationSchema(), breadcrumbSchema(trail));
+---
+<Base
+  title="For Clinicians & Referrers | LPHG"
+  description="Refer a patient for fast private imaging, testing or a specialist opinion at LPHG, 11 Devonshire Place. Reports within 24 hours."
+  canonical="/for-clinicians/"
+  jsonLd={jsonLd}
+>
+  <div class="prose-lphg mx-auto max-w-3xl px-4 py-10">
+    <Breadcrumb {trail} emitSchema={false} />
+    <h1 class="mt-4">For clinicians</h1>
+    <p>
+      We welcome referrals from GPs, consultants, physiotherapists and other healthcare
+      professionals. Patients can also self-refer — no referral letter is required.
+    </p>
+    <h2>How to refer</h2>
+    <p>Email a referral to <a href={`mailto:${site.email}`}>{site.email}</a> or call
+      <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phoneDisplay}</a>. We aim to see urgent
+      cases the same week and issue a written report within 24 hours of the appointment.</p>
+    <h2>What we offer</h2>
+    <ul>
+      <li>Consultant-led ultrasound and diagnostic imaging</li>
+      <li>Cardiology, MSK, women's and men's health pathways</li>
+      <li>Ultrasound-guided procedures</li>
+      <li>Direct-access testing with transparent, published pricing</li>
+    </ul>
+    <p>All prices are published on our <a href="/prices/">price list</a>.</p>
+  </div>
+</Base>

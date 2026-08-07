@@ -1,0 +1,30 @@
+---
+import { breadcrumbSchema, graph } from '../../lib/schema';
+interface Props {
+  trail: { name: string; url: string }[];
+  emitSchema?: boolean;
+}
+const { trail, emitSchema = true } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="text-sm text-brand-muted">
+  <ol class="flex flex-wrap items-center gap-1">
+    {
+      trail.map((crumb, i) => (
+        <li class="flex items-center gap-1">
+          {i > 0 && <span aria-hidden="true">/</span>}
+          {i < trail.length - 1 ? (
+            <a href={crumb.url} class="hover:text-brand-accent-600 hover:underline">
+              {crumb.name}
+            </a>
+          ) : (
+            <span aria-current="page" class="text-brand-ink">
+              {crumb.name}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+{emitSchema && <script type="application/ld+json" set:html={JSON.stringify(graph(breadcrumbSchema(trail)))} is:inline />}

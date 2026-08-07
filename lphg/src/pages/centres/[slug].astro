@@ -1,0 +1,191 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/ui/Hero.astro';
+import TrustBar from '../../components/ui/TrustBar.astro';
+import ServiceTable from '../../components/ui/ServiceTable.astro';
+import SpecialistCard from '../../components/ui/SpecialistCard.astro';
+import StepTimeline from '../../components/ui/StepTimeline.astro';
+import PackageCard from '../../components/ui/PackageCard.astro';
+import FAQAccordion from '../../components/ui/FAQAccordion.astro';
+import BookCTA from '../../components/ui/BookCTA.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import StickyMobileCTA from '../../components/StickyMobileCTA.astro';
+import { site } from '../../data/site';
+import { graph, organisationSchema, breadcrumbSchema, faqSchema } from '../../lib/schema';
+import { gbp, sumIncludes } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const centres = await getCollection('centres');
+  return centres.map((centre) => ({ params: { slug: centre.id }, props: { centre } }));
+}
+
+const { centre } = Astro.props;
+const d = centre.data;
+const { Content } = await render(centre);
+
+// Services in this centre, cheapest first.
+const services = (await getCollection('services'))
+  .filter((s) => s.data.centre.id === centre.id)
+  .sort((a, b) => a.data.price - b.data.price);
+
+const specialists = (
+  await Promise.all(d.specialists.map((ref) => getEntry(ref)))
+).filter(Boolean);
+
+const pkg = d.relatedPackage ? await getEntry(d.relatedPackage) : null;
+
+const path = `/centres/${centre.id}/`;
+const trail = [
+  { name: 'Home', url: '/' },
+  { name: 'Centres', url: '/centres/' },
+  { name: d.title, url: path },
+];
+
+const jsonLd = graph(
+  organisationSchema(),
+  breadcrumbSchema(trail),
+  ...(d.faqs.length ? [faqSchema(d.faqs)] : [])
+);
+
+const howItWorks = [
+  { label: 'Book online', detail: 'Choose a scan or assessment and a time that suits you. No GP referral needed.' },
+  { label: 'Same-week visit', detail: `Come to ${site.address.street} in the Harley Street Medical District.` },
+  { label: 'Report in 24 hours', detail: 'A written report is issued within 24 hours, with onward referral if needed.' },
+];
+---
+
+<Base
+  title={d.metaTitle}
+  description={d.metaDescription}
+  canonical={path}
+  ogImage={d.ogImage}
+  jsonLd={jsonLd}
+>
+  <Hero
+    kicker="Centre"
+    title={d.title}
+    promise={d.promise}
+    price={d.priceFrom}
+    priceFrom
+    image={d.heroImage}
+    imageAlt={d.heroAlt}
+  />
+
+  <div class="border-b border-brand-line bg-white py-4"><TrustBar /></div>
+
+  <div class="mx-auto max-w-6xl px-4 py-10">
+    <Breadcrumb {trail} emitSchema={false} />
+
+    <p class="mt-6 max-w-3xl font-medium text-lg leading-relaxed text-brand-ink">
+      <strong>{d.intro}</strong>
+    </p>
+
+    <!-- What we treat -->
+    <section class="mt-12" aria-labelledby="treat-heading">
+      <h2 id="treat-heading" class="text-2xl">What we treat</h2>
+      <ul class="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          d.whatWeTreat.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="flex items-center justify-between rounded-card border border-brand-line bg-white px-4 py-3 text-sm font-medium text-brand-ink transition-colors hover:border-brand-accent hover:text-brand-accent-600"
+              >
+                {item.label}
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- Services + prices -->
+    {
+      services.length > 0 && (
+        <section class="mt-12" aria-labelledby="services-heading">
+          <h2 id="services-heading" class="text-2xl">Scans, tests and consultations</h2>
+          <p class="mt-1 text-brand-muted">Every price is published. Book any service online.</p>
+          <div class="mt-4">
+            <ServiceTable
+              rows={services.map((s) => ({
+                title: s.data.title,
+                slug: s.id,
+                duration: s.data.duration,
+                price: s.data.price,
+              }))}
+            />
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Specialists strip -->
+    <section class="mt-12" aria-labelledby="team-heading">
+      <h2 id="team-heading" class="text-2xl">Your team</h2>
+      {
+        specialists.length > 0 ? (
+          <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {specialists.map((sp) => (
+              <SpecialistCard
+                name={sp!.data.name}
+                role={sp!.data.role}
+                slug={sp!.id}
+                credentials={sp!.data.credentials}
+                specialties={sp!.data.specialties}
+                image={sp!.data.image}
+                imageAlt={sp!.data.imageAlt}
+              />
+            ))}
+          </div>
+        ) : (
+          <p class="mt-3 text-brand-muted">
+            Consultant profiles for this centre are publishing soon.{' '}
+            <a href="/specialists/" class="text-brand-primary underline">See all specialists</a>.
+          </p>
+        )
+      }
+    </section>
+
+    <!-- How it works -->
+    <section class="mt-12 grid gap-8 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl">How it works</h2>
+        <div class="mt-4"><StepTimeline steps={howItWorks} /></div>
+      </div>
+      {
+        pkg && (
+          <div>
+            <h2 class="text-2xl">One-stop package</h2>
+            <p class="mt-1 text-brand-muted">Bundle the consult and scan in a single visit.</p>
+            <div class="mt-4">
+              <PackageCard
+                title={pkg.data.title}
+                slug={pkg.id}
+                promise={pkg.data.promise}
+                price={pkg.data.price}
+                struck={sumIncludes(pkg.data.includes)}
+              />
+            </div>
+          </div>
+        )
+      }
+    </section>
+
+    <div class="prose-lphg mt-12"><Content /></div>
+
+    {d.faqs.length > 0 && <div class="mt-14"><FAQAccordion faqs={d.faqs} emitSchema={false} /></div>}
+
+    <!-- Final CTA -->
+    <section class="mt-16 rounded-card bg-brand-primary px-6 py-10 text-center text-white">
+      <h2 class="text-2xl text-white">Book your {d.title.toLowerCase()} appointment</h2>
+      <p class="mx-auto mt-2 max-w-xl text-brand-surface/80">
+        From {gbp(d.priceFrom)}. Same-day appointments often available. No GP referral needed.
+      </p>
+      <div class="mt-6 flex justify-center"><BookCTA label="Book online" /></div>
+    </section>
+  </div>
+
+  <StickyMobileCTA slot="sticky" />
+</Base>

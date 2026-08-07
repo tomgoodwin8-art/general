@@ -1,0 +1,18 @@
+---
+// The bolded 40–60 word direct-answer paragraph — the AEO snippet target
+// (brief §7, §8.6). Rendered in plain text near the top of the page.
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+
+<p
+  class:list={[
+    'font-medium text-lg leading-relaxed text-brand-ink [&>strong]:font-semibold',
+    cls,
+  ]}
+  data-aeo-answer
+>
+  <strong><slot /></strong>
+</p>

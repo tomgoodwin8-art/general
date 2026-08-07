@@ -1,0 +1,70 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/fraunces';
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: object;
+}
+
+const { title, description, canonical, ogImage, ogType, noindex, jsonLd } = Astro.props;
+
+// Analytics is consent-gated (brief §10, Consent Mode v2). Only wired when a
+// GA4 id is provided as a public build var; loads in "denied" default state.
+const ga4 = import.meta.env.PUBLIC_GA4_ID;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#103a3a" />
+    <Seo {title} {description} {canonical} {ogImage} {ogType} {noindex} {jsonLd} />
+    {
+      ga4 && (
+        <>
+          <script
+            type="text/plain"
+            data-consent="analytics"
+            src={`https://www.googletagmanager.com/gtag/js?id=${ga4}`}
+            async
+            is:inline
+          />
+          <script is:inline define:vars={{ ga4 }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              analytics_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+            });
+            window.__ga4 = ga4;
+          </script>
+        </>
+      )
+    }
+  </head>
+  <body class="min-h-screen bg-brand-surface-2 text-brand-ink antialiased">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <slot name="sticky" />
+  </body>
+</html>

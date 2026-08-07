@@ -1,0 +1,51 @@
+---
+import { formatDate } from '../../lib/format';
+interface Person {
+  name: string;
+  role: string;
+  credentials?: string;
+  profileUrl?: string;
+}
+interface Props {
+  author: Person;
+  reviewer: Person;
+  published: Date;
+  lastReviewed: Date;
+  readTime: number;
+}
+const { author, reviewer, published, lastReviewed, readTime } = Astro.props;
+---
+
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-brand-line py-4 text-sm">
+  <div>
+    <span class="text-brand-muted">Written by </span>
+    {
+      author.profileUrl ? (
+        <a href={author.profileUrl} class="font-medium text-brand-primary hover:underline">
+          {author.name}
+        </a>
+      ) : (
+        <span class="font-medium text-brand-ink">{author.name}</span>
+      )
+    }
+    {author.credentials && <span class="text-brand-muted"> · {author.credentials}</span>}
+  </div>
+  <div>
+    <span class="text-brand-muted">Clinically reviewed by </span>
+    {
+      reviewer.profileUrl ? (
+        <a href={reviewer.profileUrl} class="font-medium text-brand-primary hover:underline">
+          {reviewer.name}
+        </a>
+      ) : (
+        <span class="font-medium text-brand-ink">{reviewer.name}</span>
+      )
+    }
+    <span class="text-brand-muted"> · {reviewer.role}</span>
+  </div>
+  <div class="text-brand-muted">
+    <time datetime={published.toISOString()}>{formatDate(published)}</time>
+    <span> · Reviewed {formatDate(lastReviewed)}</span>
+    <span> · {readTime} min read</span>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+---
+// Generic page hero for centre / service / package pages (brief §4.1).
+import PriceTag from './PriceTag.astro';
+import BookCTA from './BookCTA.astro';
+interface Props {
+  kicker?: string;
+  title: string;
+  promise: string;
+  price?: number;
+  priceFrom?: boolean;
+  sembleBookingTypeId?: string;
+  image?: string;
+  imageAlt?: string;
+}
+const { kicker, title, promise, price, priceFrom = false, sembleBookingTypeId, image, imageAlt } =
+  Astro.props;
+---
+
+<section data-hero class="border-b border-brand-line bg-brand-surface">
+  <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 md:grid-cols-2 md:py-16">
+    <div>
+      {kicker && <p class="text-sm font-semibold uppercase tracking-wide text-brand-accent-600">{kicker}</p>}
+      <h1 class="mt-2 text-3xl md:text-4xl">{title}</h1>
+      <p class="mt-3 max-w-prose text-lg text-brand-muted">{promise}</p>
+      {price !== undefined && <div class="mt-5"><PriceTag {price} from={priceFrom} size="lg" /></div>}
+      <div class="mt-6">
+        <BookCTA {sembleBookingTypeId} label="Book online" />
+      </div>
+    </div>
+    {
+      image && (
+        <img
+          src={image}
+          alt={imageAlt ?? ''}
+          width="640"
+          height="480"
+          class="w-full rounded-card border border-brand-line object-cover"
+        />
+      )
+    }
+  </div>
+</section>

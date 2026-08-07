@@ -1,0 +1,32 @@
+---
+// 3 cards to service/package pages (brief §8.13).
+interface Card {
+  title: string;
+  href: string;
+  kicker?: string;
+}
+interface Props {
+  cards: Card[];
+  heading?: string;
+}
+const { cards, heading = 'Related reading' } = Astro.props;
+---
+
+{
+  cards.length > 0 && (
+    <section aria-labelledby="related-heading" class="mt-12">
+      <h2 id="related-heading" class="mb-4 text-2xl">{heading}</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {cards.slice(0, 3).map((c) => (
+          <a
+            href={c.href}
+            class="rounded-card border border-brand-line bg-white p-4 transition-shadow hover:shadow-md"
+          >
+            {c.kicker && <p class="text-xs font-semibold uppercase tracking-wide text-brand-accent-600">{c.kicker}</p>}
+            <p class="mt-1 font-display font-medium text-brand-ink">{c.title}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,23 @@
+---
+import { gbp } from '../../lib/format';
+interface Props {
+  price: number;
+  from?: boolean;
+  struck?: number; // à la carte total to strike through (packages)
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+const { price, from = false, struck, size = 'md', class: cls = '' } = Astro.props;
+const sizes = { sm: 'text-lg', md: 'text-2xl', lg: 'text-4xl' };
+---
+
+<p class:list={['font-display font-semibold text-brand-primary', sizes[size], cls]}>
+  {from && <span class="text-sm font-normal text-brand-muted">from </span>}
+  {
+    struck && struck > price && (
+      <span class="mr-2 align-middle text-base font-normal text-brand-muted line-through">
+        {gbp(struck)}
+      </span>
+    )
+  }<span>{gbp(price)}</span>
+</p>

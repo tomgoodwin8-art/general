@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+
+/*
+  BRAND TOKENS — LPHG
+  -------------------------------------------------------------------------
+  Brief §3 requires these be EXTRACTED from londonsono.com's live stylesheet
+  and signed off by Tom before site-wide use. The values below are a
+  clinical-calm DEFAULT placeholder (deep teal primary, warm brass accent,
+  soft bone neutrals) so the build is coherent now. Replace with the extracted
+  LPU hexes and record them in README.md → "Brand tokens (pending sign-off)".
+  -------------------------------------------------------------------------
+*/
+@theme {
+  --color-brand-primary: #103a3a; /* deep clinical teal */
+  --color-brand-primary-600: #17504f;
+  --color-brand-primary-400: #3d7a78;
+  --color-brand-accent: #a9743b; /* warm brass */
+  --color-brand-accent-600: #8c5f30;
+  --color-brand-surface: #f6f3ec; /* bone */
+  --color-brand-surface-2: #fbfaf6;
+  --color-brand-ink: #1b2321; /* near-black ink */
+  --color-brand-muted: #5a6a66;
+  --color-brand-line: #e3ddd0;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+
+  --radius-card: 0.75rem;
+}
+
+/* Base element defaults, British-plain, calm. */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--color-brand-ink);
+  background: var(--color-brand-surface-2);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 560;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+p { text-wrap: pretty; }
+
+/* Visible, accessible focus for WCAG 2.2 AA (brief §2). */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-brand-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-brand-primary);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+/* Shared prose sizing for MDX blog bodies */
+.prose-lphg { max-width: 42rem; }
+.prose-lphg :where(h2) { margin-top: 2.5rem; margin-bottom: 0.75rem; font-size: 1.6rem; }
+.prose-lphg :where(h3) { margin-top: 1.75rem; margin-bottom: 0.5rem; font-size: 1.2rem; }
+.prose-lphg :where(p, ul, ol) { margin-bottom: 1rem; line-height: 1.7; }
+.prose-lphg :where(ul) { list-style: disc; padding-left: 1.25rem; }
+.prose-lphg :where(ol) { list-style: decimal; padding-left: 1.25rem; }
+.prose-lphg :where(a) { color: var(--color-brand-primary); text-decoration: underline; text-underline-offset: 2px; }
+.prose-lphg :where(a:hover) { color: var(--color-brand-accent-600); }

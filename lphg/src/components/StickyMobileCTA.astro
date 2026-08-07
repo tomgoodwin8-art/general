@@ -1,0 +1,50 @@
+---
+// Book + Call bar; reveals after scrolling past the hero. Mobile only.
+// Brief §5. ~0.4KB JS, no framework.
+import { site } from '../data/site';
+interface Props {
+  bookHref?: string;
+  label?: string;
+}
+const { bookHref = '/book/', label = 'Book appointment' } = Astro.props;
+const tel = site.phone.replace(/\s/g, '');
+---
+
+<div
+  id="sticky-cta"
+  data-book={bookHref}
+  class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-brand-line bg-white/95 p-2 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur transition-transform duration-200 lg:hidden"
+>
+  <div class="mx-auto flex max-w-md gap-2">
+    <a
+      href={tel ? `tel:${tel}` : '/contact/'}
+      data-analytics="call_click"
+      class="flex-1 rounded-full border border-brand-primary px-4 py-3 text-center text-sm font-semibold text-brand-primary"
+      >Call</a
+    >
+    <a
+      href={bookHref}
+      class="flex-[2] rounded-full bg-brand-primary px-4 py-3 text-center text-sm font-semibold text-white"
+      >{label}</a
+    >
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const bar = document.getElementById('sticky-cta');
+    if (!bar) return;
+    const hero = document.querySelector('[data-hero]');
+    const show = () => bar.classList.remove('translate-y-full');
+    const hide = () => bar.classList.add('translate-y-full');
+    if (!hero) {
+      show();
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? hide() : show()),
+      { threshold: 0 }
+    );
+    io.observe(hero);
+  })();
+</script>

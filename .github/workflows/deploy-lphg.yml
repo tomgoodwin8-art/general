@@ -1,0 +1,63 @@
+name: Deploy LPHG
+
+# Builds the LPHG Astro site and deploys it to Cloudflare Pages (static assets
+# + Pages Functions in lphg/functions). One-time setup: add repo secrets
+# CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID (Settings -> Secrets and
+# variables -> Actions). Runtime secrets (SEMBLE_API_KEY, STRIPE_*, etc.) are
+# set on the Pages project itself, not here — see lphg/README.md.
+
+on:
+  push:
+    branches:
+      - claude/cloudflare-build-deploy-5zitis
+    paths:
+      - 'lphg/**'
+      - '.github/workflows/deploy-lphg.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lphg-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lphg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run build
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Validate JSON-LD schema
+        run: npm run lint:schema
+
+      - name: Internal-link + orphan check
+        run: npm run lint:links
+
+      - name: Ensure Pages project exists
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: lphg
+          command: pages project create lphg --production-branch=main
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: lphg
+          command: pages deploy dist --project-name lphg --branch=main --commit-dirty=true

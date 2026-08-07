@@ -1,0 +1,11 @@
+# 301 map (brief §7). Cloudflare Pages _redirects. Maintain as URLs change.
+# Common legacy / vanity paths -> canonical trailing-slash URLs.
+/book-now/            /book/               301
+/booking/            /book/               301
+/pricing/            /prices/             301
+/price-list/         /prices/             301
+/consultants/*       /specialists/:splat  301
+/find-a-specialist/  /specialists/        301
+/womens-health/      /centres/womens-health/  301
+/mens-health/        /centres/mens-health/    301
+/heart/              /centres/heart-health/   301

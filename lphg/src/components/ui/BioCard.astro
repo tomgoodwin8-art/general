@@ -1,0 +1,26 @@
+---
+// Author / reviewer bio card with credentials + profile link (brief §8.12).
+interface Props {
+  label: string; // "Author" | "Clinical reviewer"
+  name: string;
+  role: string;
+  credentials?: string;
+  bio?: string;
+  profileUrl?: string;
+}
+const { label, name, role, credentials, bio, profileUrl } = Astro.props;
+---
+
+<div class="rounded-card border border-brand-line bg-white p-5">
+  <p class="text-xs font-semibold uppercase tracking-wide text-brand-accent-600">{label}</p>
+  <p class="mt-1 font-display text-lg font-semibold text-brand-ink">{name}</p>
+  <p class="text-sm text-brand-muted">{role}{credentials ? ` · ${credentials}` : ''}</p>
+  {bio && <p class="mt-2 text-sm leading-relaxed text-brand-muted">{bio}</p>}
+  {
+    profileUrl && (
+      <a href={profileUrl} class="mt-2 inline-block text-sm font-semibold text-brand-primary hover:underline">
+        View profile →
+      </a>
+    )
+  }
+</div>

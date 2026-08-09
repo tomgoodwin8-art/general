@@ -70,7 +70,7 @@ without it.
 
 | Collection | Folder | Notes |
 |---|---|---|
-| `centres` | `src/content/centres` | Welbeck-modelled centre pages (§4.1) |
+| `centres` | `src/content/centres` | Welbeck-modelled centre pages (§4.1). 11 centres: women's health, pregnancy, men's health, urology, orthopaedics & MSK, rheumatology, heart, endocrinology, imaging, weight management, private GP |
 | `services` | `src/content/services` | One per scan/test/consult (§4.3 schema) |
 | `packages` | `src/content/packages` | 6 hero products (§4.2) |
 | `specialists` | `src/content/specialists` | Physician schema (SEO asset) |
@@ -143,11 +143,22 @@ tokens, and confirm here before launch.
 
 ## What is built vs. staged
 
-**Built and working:** full architecture, 7 centres, 23 service pages, 6
+**Built and working:** full architecture, 11 centres, ~56 service pages, 6
 packages, transparent filterable price list, specialists framework, the complete
 booking wizard + Semble/Stripe functions (sandbox-ready), SEO/AEO layer,
 `llms.txt`/`robots.txt`/sitemap/RSS/redirects, and the blog component system with
 exemplar posts.
+
+**Pricing:** new-specialism service prices follow the business plan v2 §4 tariff
+(initial specialist consultation £250, follow-up £150, scans £150–£350,
+procedures higher). Phase-1 prices from the original build (e.g. some
+consultations at £280–£350, well-woman screen £350) predate that tariff and can
+be reconciled to it on request.
+
+**Specialisms:** the six Phase-1 centres plus the plan's Phase-2/3 additions —
+Endocrinology & Metabolic, Rheumatology, Urology, an expanded Orthopaedics & MSK
+(surgeon, sports medicine, sub-specialty clinics, physiotherapy), and Private GP
+as its own front-door centre.
 
 **Blog posts:** the reference anatomy (§8) is implemented as a component system.
 The weight-management post (post 20, authored + reviewed by Ali Aghaei) is

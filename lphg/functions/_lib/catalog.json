@@ -5,11 +5,47 @@
     "kind": "service",
     "slug": "abdominal-ultrasound"
   },
+  "LPHG-ADRENAL": {
+    "title": "Adrenal Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "adrenal-assessment"
+  },
+  "LPHG-BLADDER-US": {
+    "title": "Bladder Ultrasound",
+    "price": 250,
+    "kind": "service",
+    "slug": "bladder-ultrasound"
+  },
+  "LPHG-GP-BLOODS": {
+    "title": "Blood Test & Review",
+    "price": 150,
+    "kind": "service",
+    "slug": "blood-test-and-review"
+  },
+  "LPHG-CTD": {
+    "title": "Connective Tissue Disease Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "connective-tissue-assessment"
+  },
   "LPHG-DATING": {
     "title": "Dating Scan",
     "price": 180,
     "kind": "service",
     "slug": "dating-scan"
+  },
+  "LPHG-DEXA": {
+    "title": "DEXA Bone Density Scan",
+    "price": 250,
+    "kind": "service",
+    "slug": "dexa-bone-density-scan"
+  },
+  "LPHG-DIABETES": {
+    "title": "Diabetes Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "diabetes-assessment"
   },
   "LPHG-DVT": {
     "title": "DVT Doppler Scan",
@@ -35,6 +71,18 @@
     "kind": "service",
     "slug": "echocardiogram"
   },
+  "LPHG-ENDO-CONSULT": {
+    "title": "Endocrinology Consultation",
+    "price": 250,
+    "kind": "service",
+    "slug": "endocrinology-consultation"
+  },
+  "LPHG-ED": {
+    "title": "Erectile Dysfunction Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "erectile-dysfunction-assessment"
+  },
   "LPHG-FIBROID-US": {
     "title": "Fibroid Ultrasound",
     "price": 250,
@@ -47,11 +95,59 @@
     "kind": "service",
     "slug": "fibroscan"
   },
+  "LPHG-CYSTOSCOPY": {
+    "title": "Flexible Cystoscopy",
+    "price": 450,
+    "kind": "service",
+    "slug": "flexible-cystoscopy"
+  },
+  "LPHG-FOOT-ANKLE": {
+    "title": "Foot & Ankle Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "foot-ankle-assessment"
+  },
+  "LPHG-GOUT": {
+    "title": "Gout Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "gout-assessment"
+  },
+  "LPHG-GP-VIDEO": {
+    "title": "GP Video Consultation",
+    "price": 120,
+    "kind": "service",
+    "slug": "gp-video-consultation"
+  },
   "LPHG-GUIDED-INJ": {
     "title": "Ultrasound-Guided Injection",
     "price": 450,
     "kind": "service",
     "slug": "guided-injections"
+  },
+  "LPHG-HAND-WRIST": {
+    "title": "Hand & Wrist Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "hand-wrist-assessment"
+  },
+  "LPHG-HIP": {
+    "title": "Hip Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "hip-assessment"
+  },
+  "LPHG-INFLAM-ARTH": {
+    "title": "Inflammatory Arthritis Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "inflammatory-arthritis-assessment"
+  },
+  "LPHG-KIDNEY-STONE": {
+    "title": "Kidney Stone Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "kidney-stone-assessment"
   },
   "LPHG-KNEE-US": {
     "title": "Knee Ultrasound",
@@ -83,6 +179,18 @@
     "kind": "service",
     "slug": "orthopaedic-consultation"
   },
+  "LPHG-ORTHO-SURGEON": {
+    "title": "Orthopaedic Surgeon Consultation",
+    "price": 250,
+    "kind": "service",
+    "slug": "orthopaedic-surgeon-consultation"
+  },
+  "LPHG-PCOS-ENDO": {
+    "title": "PCOS Endocrine Review",
+    "price": 250,
+    "kind": "service",
+    "slug": "pcos-endocrine-review"
+  },
   "LPHG-PCOS-US": {
     "title": "PCOS Ultrasound",
     "price": 250,
@@ -95,11 +203,35 @@
     "kind": "service",
     "slug": "pelvic-ultrasound"
   },
+  "LPHG-PHYSIO": {
+    "title": "Physiotherapy Assessment",
+    "price": 95,
+    "kind": "service",
+    "slug": "physiotherapy-assessment"
+  },
+  "LPHG-PHYSIO-FU": {
+    "title": "Physiotherapy Follow-up",
+    "price": 75,
+    "kind": "service",
+    "slug": "physiotherapy-followup"
+  },
   "LPHG-GP": {
     "title": "Private GP Appointment",
     "price": 180,
     "kind": "service",
     "slug": "private-gp"
+  },
+  "LPHG-HEALTH-CHECK": {
+    "title": "Private Health Check",
+    "price": 445,
+    "kind": "service",
+    "slug": "private-health-check"
+  },
+  "LPHG-GP-RX": {
+    "title": "Private Prescription Service",
+    "price": 90,
+    "kind": "service",
+    "slug": "private-prescription"
   },
   "LPHG-PROSTATE": {
     "title": "Prostate Assessment",
@@ -107,11 +239,47 @@
     "kind": "service",
     "slug": "prostate-assessment"
   },
+  "LPHG-PSA": {
+    "title": "PSA Blood Test",
+    "price": 150,
+    "kind": "service",
+    "slug": "psa-blood-test"
+  },
+  "LPHG-RENAL-US": {
+    "title": "Renal (Kidney) Ultrasound",
+    "price": 250,
+    "kind": "service",
+    "slug": "renal-ultrasound"
+  },
+  "LPHG-RHEUM-CONSULT": {
+    "title": "Rheumatology Consultation",
+    "price": 250,
+    "kind": "service",
+    "slug": "rheumatology-consultation"
+  },
   "LPHG-SHOULDER-US": {
     "title": "Shoulder Ultrasound",
     "price": 280,
     "kind": "service",
     "slug": "shoulder-ultrasound"
+  },
+  "LPHG-GP-REFERRAL": {
+    "title": "Specialist Referral Appointment",
+    "price": 120,
+    "kind": "service",
+    "slug": "specialist-referral"
+  },
+  "LPHG-SPINE": {
+    "title": "Spine & Back Pain Assessment",
+    "price": 250,
+    "kind": "service",
+    "slug": "spine-assessment"
+  },
+  "LPHG-SPORTS": {
+    "title": "Sports Medicine Consultation",
+    "price": 250,
+    "kind": "service",
+    "slug": "sports-medicine-consultation"
   },
   "LPHG-TESTIS-US": {
     "title": "Testicular Ultrasound",
@@ -119,11 +287,41 @@
     "kind": "service",
     "slug": "testicular-ultrasound"
   },
+  "LPHG-THYROID-BLOOD": {
+    "title": "Thyroid Function Blood Test",
+    "price": 150,
+    "kind": "service",
+    "slug": "thyroid-function-test"
+  },
+  "LPHG-THYROID-US": {
+    "title": "Thyroid Ultrasound",
+    "price": 250,
+    "kind": "service",
+    "slug": "thyroid-ultrasound"
+  },
+  "LPHG-GP-TRAVEL": {
+    "title": "Travel Health & Vaccination",
+    "price": 90,
+    "kind": "service",
+    "slug": "travel-health-consultation"
+  },
+  "LPHG-URO-CONSULT": {
+    "title": "Urology Consultation",
+    "price": 250,
+    "kind": "service",
+    "slug": "urology-consultation"
+  },
   "LPHG-VARICOSE": {
     "title": "Varicose Vein Duplex Scan",
     "price": 320,
     "kind": "service",
     "slug": "varicose-vein-scan"
+  },
+  "LPHG-VASECTOMY": {
+    "title": "Vasectomy Consultation",
+    "price": 250,
+    "kind": "service",
+    "slug": "vasectomy-consultation"
   },
   "LPHG-WEIGHT": {
     "title": "Weight Management Consultation",

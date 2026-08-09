@@ -1,6 +1,6 @@
 ---
 title: Private GP Appointment
-centre: weight-management
+centre: private-gp
 price: 180
 duration: 30 minutes
 preparation: No preparation is needed; bring a list of your symptoms and any current medications.
@@ -33,10 +33,10 @@ faqs:
   - q: When will I get a summary?
     a: A written summary of your consultation and plan is issued within 24 hours, and everything is discussed with you during the appointment.
 relatedServices:
-  - weight-management-clinic
-  - abdominal-ultrasound
-  - ecg
-order: 20
+  - blood-test-and-review
+  - private-prescription
+  - specialist-referral
+order: 10
 metaTitle: "Private GP Appointment London | £180 | LPHG"
 metaDescription: "Private GP appointment in Marylebone, £180 for 30 minutes. No referral needed. Same-week consultations, written summary within 24 hours."
 ---
